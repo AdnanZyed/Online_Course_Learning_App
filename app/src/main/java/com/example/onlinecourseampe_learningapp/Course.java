@@ -78,6 +78,8 @@ public class Course {
         Price = price;
     }
 
+
+
     public String getCategorie() {
         return Categorie;
     }
