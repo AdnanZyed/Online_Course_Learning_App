@@ -24,25 +24,6 @@ public class ActivityMainSignIn extends AppCompatActivity {
         EUserIn=binding.eUserIn.getText().toString();
         EPasswordIn=binding.ePasswordIn.getText().toString();
 
-//        if (EUserIn.length()<8){
-//
-//
-//
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
