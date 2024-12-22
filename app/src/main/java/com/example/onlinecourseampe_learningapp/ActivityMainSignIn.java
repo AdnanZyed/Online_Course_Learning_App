@@ -24,9 +24,6 @@ public class ActivityMainSignIn extends AppCompatActivity {
         EUserIn=binding.eUserIn.getText().toString();
         EPasswordIn=binding.ePasswordIn.getText().toString();
 
-
-
-
         binding.Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +73,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
             }
         });
     }
+    //adnan
 }
 
 

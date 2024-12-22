@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 //@TypeConverters(Converter.class)
 //@Entity(tableName = "Teacher")
-@Entity(foreignKeys = @ForeignKey(entity = Course.class, parentColumns = {"Course_ID"}, childColumns = {"Teatur_USER_Name"}))
+@Entity(tableName = "Teacher")
 public class Teacher {
     @PrimaryKey
     @NonNull

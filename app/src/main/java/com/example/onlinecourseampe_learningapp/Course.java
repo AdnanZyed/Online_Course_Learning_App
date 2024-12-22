@@ -1,8 +1,6 @@
 package com.example.onlinecourseampe_learningapp;
 
 
-
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -12,15 +10,14 @@ import java.util.Arrays;
 
 
 //@Entity(tableName = "Course")
-@Entity(foreignKeys = @ForeignKey(entity = Student.class, parentColumns = {"Student_user_name"}, childColumns = {"Course_ID"}))
+@Entity(tableName = "Course")
 
 public class Course {
     @PrimaryKey(autoGenerate = true)
     int Course_ID;
-
     @NonNull
-    private String Course_NAME;
 
+    private String Course_NAME;
 
 
     private byte[] Image;
@@ -29,7 +26,7 @@ public class Course {
     private String Description;
     private String Teacher_name;
     private byte[] profilePicture;
-     private String Student_user_name;
+    //private String Student_user_name;
 
     public Course(int course_ID, @NonNull String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture) {
         Course_ID = course_ID;
@@ -79,7 +76,6 @@ public class Course {
     }
 
 
-
     public String getCategorie() {
         return Categorie;
     }
@@ -112,13 +108,14 @@ public class Course {
         this.profilePicture = profilePicture;
     }
 
-    public String getStudent_user_name() {
-        return Student_user_name;
-    }
+//    public String getStudent_user_name() {
+//        return Student_user_name;
+//    }
+//
+//    public void setStudent_user_name(String student_user_name) {
+//        Student_user_name = student_user_name;
+//    }
 
-    public void setStudent_user_name(String student_user_name) {
-        Student_user_name = student_user_name;
-    }
 
     @Override
     public String toString() {
@@ -131,7 +128,6 @@ public class Course {
                 ", Description='" + Description + '\'' +
                 ", Teacher_name='" + Teacher_name + '\'' +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
-                ", Student_user_name='" + Student_user_name + '\'' +
                 '}';
     }
 }

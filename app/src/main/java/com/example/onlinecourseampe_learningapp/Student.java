@@ -8,9 +8,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Arrays;
-//@Entity(tableName = "Student")
 
-@Entity(foreignKeys = @ForeignKey(entity = Course.class, parentColumns = {"Course_ID"}, childColumns = {"Student_user_name"}))
+@Entity(tableName = "Student")
 public class Student {
     @PrimaryKey
     @NonNull
