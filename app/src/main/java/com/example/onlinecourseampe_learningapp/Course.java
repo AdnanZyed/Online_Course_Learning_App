@@ -14,19 +14,19 @@ import java.util.Arrays;
 
 public class Course {
     @PrimaryKey(autoGenerate = true)
-    int Course_ID;
+    private int Course_ID;
+    //هذه البيانات يتم ادخالها من حساب الادمن بحيث يستطيع ايضا عندا يقوم بالتسجيل كادمن ان يحذف كورسات او يضيف او يعدل من خلال الاي دي كما يتم عرض جميع الكورسات للطلاب او مجموعة معينة من الكورسات بناءا على التصنيف وهنا كل كورس يدرسه مدرس معين يعني اريد ربط الكورس بمدرس بناءا على انه كل كورس له تصنيف معين مثلا ديزاين برمجة وكل مدرس له تصنيف معين ايضا
     @NonNull
+    private String Course_NAME;//اسم الكورس
+    private byte[] Image; //صورة شهادة الكورس
+    private int Price;//سعر الكورس
+    private String Categorie; //الكورس ينضم لاي تصنيف عند العرض
+    private String Description;//وصف الكورس
+    private String Teacher_name; //اسم مدرس الكورس
+    private byte[] profilePicture; //صورة الكورس
 
-    private String Course_NAME;
-
-
-    private byte[] Image;
-    private int Price;
-    private String Categorie;
-    private String Description;
-    private String Teacher_name;
-    private byte[] profilePicture;
     //private String Student_user_name;
+
 
     public Course(int course_ID, @NonNull String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture) {
         Course_ID = course_ID;

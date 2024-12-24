@@ -2,6 +2,8 @@ package com.example.onlinecourseampe_learningapp;
 
 
 
+
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -12,8 +14,19 @@ import java.util.Arrays;
 
 //@TypeConverters(Converter.class)
 //@Entity(tableName = "Teacher")
-@Entity(tableName = "Teacher")
+//@Entity(tableName = "Teacher")
+@Entity(
+        tableName = "Teacher",
+        foreignKeys = @ForeignKey(
+                entity = Course.class,
+                parentColumns = "Course_ID",
+                childColumns = "Course_ID",
+                onDelete = ForeignKey.CASCADE
+        )
+)
 public class Teacher {
+
+//هنا يتم اضافة المدرسين بشكل يدوي وثابت من قبل المبرمج يعني على شكل اراي وتبقى البيانات ثابتة بدون تعديل اوحذف ولكن كل مدرس يدرس كورسا معينا يعني اريد ربط المدرس بكورس من خلال الاي دي
     @PrimaryKey
     @NonNull
     private String Teatur_USER_Name;

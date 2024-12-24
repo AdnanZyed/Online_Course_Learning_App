@@ -21,6 +21,20 @@ public class ActivityMainSignIn extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.SignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                if (binding.eUserIn.getText().toString()=="adnan"&&binding.ePasswordIn.getText().toString()=="adnan123") {
+                  Intent intent=new Intent(ActivityMainSignIn.this,MainActivity_Main.class);
+                  startActivity(intent);
+//
+//                }
+
+
+            }
+        });
+
         EUserIn=binding.eUserIn.getText().toString();
         EPasswordIn=binding.ePasswordIn.getText().toString();
 
@@ -73,7 +87,6 @@ public class ActivityMainSignIn extends AppCompatActivity {
             }
         });
     }
-    //adnan
 }
 
 

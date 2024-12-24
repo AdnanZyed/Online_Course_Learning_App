@@ -7,28 +7,242 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity_Main">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/containerMain"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <ImageView
+        android:id="@+id/iv_s"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/unnamed"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        />
+
+    <TextView
+
+        android:id="@+id/tv_welcom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="welcome_text"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/iv_s"
+        app:layout_constraintTop_toTopOf="@+id/iv_s" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="name_text"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_s"
+        app:layout_constraintStart_toEndOf="@id/iv_s"
+
+        app:layout_constraintTop_toBottomOf="@id/tv_welcom" />
+
+    <ImageView
+        android:id="@+id/iv_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/baseline_bookmark_24"
+        app:layout_constraintEnd_toStartOf="@id/iv_Bookmark"
         app:layout_constraintTop_toTopOf="parent"
 
         />
 
+    <ImageView
+        android:id="@+id/iv_Bookmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="@drawable/baseline_notifications_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
+        />
+
+    <EditText
+
+        android:id="@+id/et_searsh"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:drawableEnd="@drawable/baseline_display_settings_24"
+        android:background="@drawable/shape_password"
+        android:hint="Searsh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_s"
+
+        >
+
+
+    </EditText>
+
+    <View
+        android:id="@+id/v"
+        android:layout_width="390dp"
+        android:layout_height="200dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/shape_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_searsh" />
+
+    <TextView
+        android:id="@+id/tv_topmentors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Top Mentors"
+
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_seeall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="See All"
+
+        android:textColor="@color/black"
+
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v" />
 
     <androidx.recyclerview.widget.RecyclerView
 
-        android:id="@+id/rvMain"
+        android:id="@+id/rv_t"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_topmentors" />
 
-        />
+    <TextView
+        android:id="@+id/tv_mostpopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Top Mentors"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_t" />
+
+    <TextView
+        android:id="@+id/tv_seeall2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="See All"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_t" />
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mostpopular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/black"
+                android:text="All"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_3d_design"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/black"
+                android:text="3D Design"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_business"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/black"
+                android:text="Business"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_art"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/black"
+                android:text="Art"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_programming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/black"
+                android:text="Programming"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_scroll" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
