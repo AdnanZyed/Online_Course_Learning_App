@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity_Main">
 
 
-    <ImageView
+
+
+<ImageView
         android:id="@+id/iv_s"
         android:layout_width="wrap_content"
 
@@ -73,9 +74,10 @@
         android:id="@+id/et_searsh"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+
         android:layout_margin="15dp"
-        android:drawableEnd="@drawable/baseline_display_settings_24"
         android:background="@drawable/shape_password"
+        android:drawableEnd="@drawable/baseline_display_settings_24"
         android:hint="Searsh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,16 +124,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/v" />
 
-    <androidx.recyclerview.widget.RecyclerView
 
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_t"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_topmentors" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_topmentors">
+
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 
     <TextView
         android:id="@+id/tv_mostpopular"
@@ -165,9 +173,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mostpopular"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_mostpopular">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -179,45 +187,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
+
+                android:background="@drawable/catigories_btn"
                 android:text="All"
-                android:textColor="@color/white" />
+
+                android:textColor="#335ef7" />
 
             <Button
                 android:id="@+id/btn_3d_design"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
+                android:background="@drawable/catigories_btn"
+
                 android:text="3D Design"
-                android:textColor="@color/white" />
+
+                android:textColor="#335ef7" />
 
             <Button
                 android:id="@+id/btn_business"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
+
+                android:background="@drawable/catigories_btn"
                 android:text="Business"
-                android:textColor="@color/white" />
+
+                android:textColor="#335ef7" />
 
             <Button
                 android:id="@+id/btn_art"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
+                android:background="@drawable/catigories_btn"
+
                 android:text="Art"
-                android:textColor="@color/white" />
+                android:textColor="#335ef7" />
 
             <Button
                 android:id="@+id/btn_programming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
+                android:background="@drawable/catigories_btn"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
                 android:text="Programming"
-                android:textColor="@color/white" />
+                android:textColor="#335ef7" />
 
         </LinearLayout>
     </HorizontalScrollView>
