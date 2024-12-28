@@ -45,7 +45,7 @@ public class MainActivity_Main extends AppCompatActivity
         // إعداد ViewModel
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
-
+     //A
 
 
 //adnan
