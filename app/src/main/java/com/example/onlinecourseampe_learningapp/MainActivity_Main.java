@@ -48,7 +48,9 @@ public class MainActivity_Main extends AppCompatActivity
 
 
 
-        addSampleTeacher();
+//adnan
+
+      //  addSampleTeacher();
         // إضافة بيانات أولية (إذا أردت)
      //   addSampleCourses();
 
