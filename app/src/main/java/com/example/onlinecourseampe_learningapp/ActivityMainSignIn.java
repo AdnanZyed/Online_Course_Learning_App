@@ -25,11 +25,11 @@ public class ActivityMainSignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                if (binding.eUserIn.getText().toString()=="adnan"&&binding.ePasswordIn.getText().toString()=="adnan123") {
+       //     if (binding.eUserIn.getText().toString()=="adnan"&&binding.ePasswordIn.getText().toString()=="adnan123") {
                   Intent intent=new Intent(ActivityMainSignIn.this,MainActivity_Main.class);
                   startActivity(intent);
 //
-//                }
+      //        }
 
 
             }

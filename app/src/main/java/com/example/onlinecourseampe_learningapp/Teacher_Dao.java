@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 
 public interface Teacher_Dao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     Void insertTeacher(Teacher teacher);
 
     @Update

@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 
 public interface Course_Dao {
-    @Insert (onConflict = OnConflictStrategy.IGNORE)
+    @Insert (onConflict = OnConflictStrategy.ABORT)
     Void insertCourse(Course course);
 
     @Update

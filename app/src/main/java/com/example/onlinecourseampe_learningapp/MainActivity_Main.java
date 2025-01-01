@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity_Main extends AppCompatActivity
+
         implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
     private List<Button> buttons = new ArrayList<>();
@@ -44,25 +45,18 @@ public class MainActivity_Main extends AppCompatActivity
         setContentView(R.layout.activity_main_main);
         // إعداد ViewModel
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
-
-     //A
-
-
+        //A
 //adnan
 
-      //  addSampleTeacher();
+        Course course=new Course();
+        My_Database.databaseWriteExecutor.execute(() -> {
+
+        myViewModel.insertCourse(course);
+        });
+        //  addSampleTeacher();
         // إضافة بيانات أولية (إذا أردت)
-     //   addSampleCourses();
-
-
-
-
+        //   addSampleCourses();
         initializeButtons();
-
-
-
-
-
         // إضافة مستمع النقر لكل زر
         for (Button button : buttons) {
             button.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +90,7 @@ public class MainActivity_Main extends AppCompatActivity
             }
         });
     }
+
     private void initializeButtons() {
         // زر عرض الكورسات
 
@@ -130,14 +125,16 @@ public class MainActivity_Main extends AppCompatActivity
 
     private void addSampleTeacher() {
         try {
-        Teacher teacher = new Teacher("Adnan", null);
-        Teacher teacher1 = new Teacher("Adnan", null);
-        Teacher teacher2 = new Teacher("Adnan", null);
+//            Teacher teacher = new Teacher("Adnan", null);
+//            Teacher teacher1 = new Teacher("Adnan", null);
+//            Teacher teacher2 = new Teacher("Adnan", null);
+            Teacher teacher2 = new Teacher("Adnan");
+
             My_Database.databaseWriteExecutor.execute(() -> {
 
-        myViewModel.insertTeacher(teacher);
-        myViewModel.insertTeacher(teacher1);
-        myViewModel.insertTeacher(teacher2);
+//                myViewModel.insertTeacher(teacher);
+//                myViewModel.insertTeacher(teacher1);
+                myViewModel.insertTeacher(teacher2);
 
 
             });

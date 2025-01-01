@@ -43,9 +43,9 @@ public class Teacher {
         Course_ID = course_ID;
     }
 
-    public Teacher(String teatur_name, byte[] image_teatcher) {
+    public Teacher(String teatur_name) {
         Teatur_name = teatur_name;
-        Image_teatcher = image_teatcher;
+
     }
 
     public Teacher() {
