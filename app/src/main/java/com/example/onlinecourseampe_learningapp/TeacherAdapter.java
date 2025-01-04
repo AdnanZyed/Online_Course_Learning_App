@@ -10,12 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherViewHolder> {
     private Context context;
     private List<Teacher> teachersList;
 
+    public void setTeacherList(List<Teacher> teachers) {
+        this.teachersList = teachers;
+        notifyDataSetChanged();
+    }
     public TeacherAdapter(Context context, List<Teacher> teachersList) {
         this.context = context;
         this.teachersList = teachersList;

@@ -13,8 +13,9 @@ import com.example.onlinecourseampe_learningapp.databinding.ActivityMainBinding;
 
 public class ActivityMainSignIn extends AppCompatActivity {
     private ActivityMainBinding binding;
-    private String EUserIn;
-    private String EPasswordIn;
+    String EUserIn;
+    String EPasswordIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,18 +26,20 @@ public class ActivityMainSignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-       //     if (binding.eUserIn.getText().toString()=="adnan"&&binding.ePasswordIn.getText().toString()=="adnan123") {
-                  Intent intent=new Intent(ActivityMainSignIn.this,MainActivity_Main.class);
-                  startActivity(intent);
-//
-      //        }
+                if (binding.eUserIn.getText().toString().equals("admin") && binding.ePasswordIn.getText().toString().equals("admin")){
+                    Intent intent = new Intent(ActivityMainSignIn.this, MainActivity_Admin.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(ActivityMainSignIn.this, MainActivity_Main.class);
+                    startActivity(intent);
+                }
 
 
             }
         });
 
-        EUserIn=binding.eUserIn.getText().toString();
-        EPasswordIn=binding.ePasswordIn.getText().toString();
+        EUserIn = binding.eUserIn.getText().toString();
+        EPasswordIn = binding.ePasswordIn.getText().toString();
 
         binding.Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         binding.SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

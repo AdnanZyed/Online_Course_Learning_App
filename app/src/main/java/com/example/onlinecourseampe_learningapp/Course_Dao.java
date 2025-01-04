@@ -14,11 +14,14 @@ import java.util.List;
 @Dao
 
 public interface Course_Dao {
-    @Insert (onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     Void insertCourse(Course course);
 
     @Update
     Void updateCourse(Course course);
+
+
+
 
     @Delete
     Void deleteCourse(Course course);
@@ -28,7 +31,6 @@ public interface Course_Dao {
 
     @Query("SELECT * FROM Course WHERE Course_ID=:course_Id")
     LiveData<List<Course>> getAllCoursesById(int course_Id);
-
 
 
 }

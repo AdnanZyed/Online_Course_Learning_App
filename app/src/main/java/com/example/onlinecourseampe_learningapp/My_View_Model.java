@@ -18,6 +18,7 @@ public class My_View_Model extends AndroidViewModel {
         repository = new My_Repository(application);
 
     }
+    // دالة لحذف جميع الكورسات
 
     void insertCourse(Course course) {
         repository.insertCourse(course);

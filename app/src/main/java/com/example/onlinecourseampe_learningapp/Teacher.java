@@ -35,6 +35,7 @@ public class Teacher {
     private byte[] Image_teatcher;
     private int Course_ID;
 
+
     public Teacher(@NonNull String teatur_USER_Name, String teatur_name, String teatur_PASSWORD, byte[] image_teatcher, int course_ID) {
         Teatur_USER_Name = teatur_USER_Name;
         Teatur_name = teatur_name;
@@ -43,10 +44,7 @@ public class Teacher {
         Course_ID = course_ID;
     }
 
-    public Teacher(String teatur_name) {
-        Teatur_name = teatur_name;
 
-    }
 
     public Teacher() {
     }

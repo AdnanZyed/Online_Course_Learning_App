@@ -61,6 +61,7 @@ public class My_Repository {
     LiveData<List<Course>> getAllCourse() {
         return courseDao.getAllCourse();
     }
+    // دالة لحذف جميع الكورسات
 
     LiveData<List<Course>> getAllCoursesById(int id) {
 

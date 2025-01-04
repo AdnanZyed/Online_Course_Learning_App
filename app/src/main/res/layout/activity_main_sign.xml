@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape_next"
-        android:backgroundTint="#335EF7"
+        android:backgroundTint="@color/blue"
         android:elevation="20dp"
         android:text="Sign in with password"
         android:textColor="#FFFFFF"
@@ -210,7 +210,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
         android:text="Sign up"
-        android:textColor="#335EF7"
+        android:textColor="@color/blue"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/have_account" />

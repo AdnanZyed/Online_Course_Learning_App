@@ -48,8 +48,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     static class CourseViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCourseName, tvTeacherName, tvPrice,tvCategorie;
-        ImageView ivCourseImage;
+        TextView tvCourseName, tvPrice,tvCategorie;
+        ImageView ivCourseImage ,cartIcon;
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +57,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             tvCategorie = itemView.findViewById(R.id.tv_categorie);
             tvPrice = itemView.findViewById(R.id.tv_price);
             ivCourseImage = itemView.findViewById(R.id.iv_course_image);
+            cartIcon = itemView.findViewById(R.id.iv_course_image);
         }
     }
 }

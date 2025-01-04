@@ -2,7 +2,7 @@
     <!-- حالة عندما يكون الـ CheckBox محددًا -->
     <item android:state_checked="true">
         <shape>
-            <solid android:color="#335ef7" />  <!-- لون الصندوق عند التحديد -->
+            <solid android:color="@color/blue" />  <!-- لون الصندوق عند التحديد -->
             <corners android:radius="10dp" /> <!-- الزوايا مستديرة -->
             <size android:width="30dp" android:height="30dp" /> <!-- حجم الصندوق -->
         </shape>
