@@ -40,11 +40,11 @@ public class HomeFragment extends Fragment {
 
         // إعداد ViewModel
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
-       // addSampleStudent();
+        // addSampleStudent();
         // زر عرض الكورسات
 
-       // addSampleCourses();
-      //  addSampleTeacher();
+        //addSampleCourses();
+        //  addSampleTeacher();
         btnAll = rootView.findViewById(R.id.btn_all);
         // ربط الأزرار
 
@@ -157,8 +157,9 @@ public class HomeFragment extends Fragment {
         // myViewModel.deleteCourse(course1);
 
     }
+
     private void addSampleStudent() {
-        Student student = new Student("adnan","adnan123",5108708,"Adnan",null,123);
+        Student student = new Student("adnan", "adnan123", 5108708, "Adnan", null, 123);
         myViewModel.insertStudent(student);
 
     }

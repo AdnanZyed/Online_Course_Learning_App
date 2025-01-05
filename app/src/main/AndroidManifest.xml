@@ -24,12 +24,7 @@
         <activity
             android:name=".MainActivity_Main"
             android:exported="false" />
-        <activity
-            android:name=".MainActivityVerifyCodeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Validation_Phone"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity_Forgot"
             android:exported="false" /> <!-- شاشة الترحيب هي أول شاشة -->
