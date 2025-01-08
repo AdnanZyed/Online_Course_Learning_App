@@ -7,8 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlinecourseampe_learningapp.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ActivityMainSignIn extends AppCompatActivity {
@@ -16,11 +21,15 @@ public class ActivityMainSignIn extends AppCompatActivity {
     String EUserIn;
     String EPasswordIn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
 
         binding.SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +41,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(ActivityMainSignIn.this, MainActivity_Main.class);
                     startActivity(intent);
+
                 }
 
 
@@ -48,6 +58,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+
         binding.backIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +102,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
             }
         });
     }
+
 }
 
 

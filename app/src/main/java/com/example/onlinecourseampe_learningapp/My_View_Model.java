@@ -38,13 +38,19 @@ public class My_View_Model extends AndroidViewModel {
 
     }
 
+
     LiveData<List<Course>> getAllCourse() {
         return repository.getAllCourse();
     }
+    // دالة لجلب الكورسات المفضلة باستخدام LiveData
+    public LiveData<List<Course>> getBookmarkedCourses() {
+        return repository.getBookmarkedCourses();  // إرجاع LiveData
+    }
+    public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
+        return repository.updateBookmarkStatusAndGetCourses(courseId, isBookmarked);
+    }
 
     LiveData<List<Course>> getAllCoursesById(int id) {
-
-
         return repository.getAllCoursesById(id);
     }
 
@@ -106,6 +112,11 @@ public class My_View_Model extends AndroidViewModel {
         return repository.getAllTeacher();
     }
 
+
+    // دالة للبحث عن المعلمين بناءً على الاسم
+    public LiveData<List<Teacher>> searchTeachers(String teacherName) {
+        return repository.searchTeachers(teacherName);
+    }
     LiveData<List<Teacher>> getAllTeacherByUser(String Teatur_USER_Name) {
 
         return repository.getAllTeacherByUser(Teatur_USER_Name);

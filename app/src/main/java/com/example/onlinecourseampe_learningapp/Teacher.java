@@ -1,17 +1,9 @@
 package com.example.onlinecourseampe_learningapp;
-
-
-
-
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
 import java.util.Arrays;
-
-
 //@TypeConverters(Converter.class)
 //@Entity(tableName = "Teacher")
 //@Entity(tableName = "Teacher")
@@ -26,25 +18,25 @@ import java.util.Arrays;
 )
 public class Teacher {
 
-//هنا يتم اضافة المدرسين بشكل يدوي وثابت من قبل المبرمج يعني على شكل اراي وتبقى البيانات ثابتة بدون تعديل اوحذف ولكن كل مدرس يدرس كورسا معينا يعني اريد ربط المدرس بكورس من خلال الاي دي
+    //هنا يتم اضافة المدرسين بشكل يدوي وثابت من قبل المبرمج يعني على شكل اراي وتبقى البيانات ثابتة بدون تعديل اوحذف ولكن كل مدرس يدرس كورسا معينا يعني اريد ربط المدرس بكورس من خلال الاي دي
     @PrimaryKey
     @NonNull
     private String Teatur_USER_Name;
     private String Teatur_name;
+    private String Education;
     private String Teatur_PASSWORD;
     private byte[] Image_teatcher;
     private int Course_ID;
 
 
-    public Teacher(@NonNull String teatur_USER_Name, String teatur_name, String teatur_PASSWORD, byte[] image_teatcher, int course_ID) {
+    public Teacher(@NonNull String teatur_USER_Name, String teatur_name, String education, String teatur_PASSWORD, byte[] image_teatcher, int course_ID) {
         Teatur_USER_Name = teatur_USER_Name;
         Teatur_name = teatur_name;
+        Education = education;
         Teatur_PASSWORD = teatur_PASSWORD;
         Image_teatcher = image_teatcher;
         Course_ID = course_ID;
     }
-
-
 
     public Teacher() {
     }
@@ -64,6 +56,14 @@ public class Teacher {
 
     public void setTeatur_name(String teatur_name) {
         Teatur_name = teatur_name;
+    }
+
+    public String getEducation() {
+        return Education;
+    }
+
+    public void setEducation(String education) {
+        Education = education;
     }
 
     public String getTeatur_PASSWORD() {
@@ -95,6 +95,7 @@ public class Teacher {
         return "Teacher{" +
                 "Teatur_USER_Name='" + Teatur_USER_Name + '\'' +
                 ", Teatur_name='" + Teatur_name + '\'' +
+                ", Education='" + Education + '\'' +
                 ", Teatur_PASSWORD='" + Teatur_PASSWORD + '\'' +
                 ", Image_teatcher=" + Arrays.toString(Image_teatcher) +
                 ", Course_ID=" + Course_ID +

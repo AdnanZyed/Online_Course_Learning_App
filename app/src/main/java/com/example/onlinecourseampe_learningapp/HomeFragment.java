@@ -1,6 +1,7 @@
 package com.example.onlinecourseampe_learningapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,10 +9,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,12 +32,16 @@ public class HomeFragment extends Fragment {
     Button btnBusiness;
     Button btnArt;
     TextView tv_seeall;
+     RecyclerView recyclerView;
+    ImageView Iv_notification;
+    ImageView Iv_Bookmark;
     private My_View_Model myViewModel;
 
     @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // قم بتحميل واجهة المستخدم الخاصة بالـ Fragment (layout)
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -43,11 +50,13 @@ public class HomeFragment extends Fragment {
         // addSampleStudent();
         // زر عرض الكورسات
 
-        //addSampleCourses();
-        //  addSampleTeacher();
-        btnAll = rootView.findViewById(R.id.btn_all);
-        // ربط الأزرار
 
+        //addSampleCourses();
+        btnAll = rootView.findViewById(R.id.btn_all);
+        Iv_notification = rootView.findViewById(R.id.iv_notification);
+        Iv_Bookmark = rootView.findViewById(R.id.iv_Bookmark);
+        // ربط الأزرار
+        // addSampleTeacher();
         tv_seeall = rootView.findViewById(R.id.tv_seeall);
         btn3DDesign = rootView.findViewById(R.id.btn_3d_design);
         btnProgramming = rootView.findViewById(R.id.btn_programming);
@@ -68,7 +77,21 @@ public class HomeFragment extends Fragment {
         for (Button button : buttons) {
             button.setOnClickListener(v -> onButtonClicked(button));
         }
+        Iv_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        Iv_Bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
         // استدعاء دالة حذف الكورسات من ViewModel
         // myViewModel.deleteAllCourses();
         // myViewModel.deleteAllCourses();
@@ -112,23 +135,53 @@ public class HomeFragment extends Fragment {
                 if (fragment != null) {
                     fragment.loadCourses(); // استدعاء الدالة داخل الفراجمنت
                     onButtonClicked(btnAll);
+
+
+                 //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
+
+
+
+
+
                 }
             }
         });
 
+        // تحديث حالة المفضلة عند الضغط على زر
+        Iv_Bookmark.setOnClickListener(v -> {
+            int courseId = 1;  // استخدم الـ courseId المناسب هنا
+            boolean isBookmarked = true;  // يمكنك التبديل بين true و false حسب الحالة
+            myViewModel.updateBookmarkStatusAndGetCourses(courseId, isBookmarked).observe(getViewLifecycleOwner(), updatedCourses -> {
+                if (updatedCourses != null) {
+                    // تحديث الـ RecyclerView بعد التعديل
+                    CourseAdapter adapter = new CourseAdapter(getContext(), updatedCourses);
+                    recyclerView.setAdapter(adapter);
+                }
+            });
+        });
 
-//        teacherRecyclerView = rootView.findViewById(R.id.rv_t);
-//        teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>());
-//
-//        teacherRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        teacherRecyclerView.setAdapter(teacherAdapter);
-//        tv_seeall.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loadTeacher();
-//
-//            }
-//        });
+
+
+// استخدام LinearLayoutManager مع التمرير الأفقي
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+
+
+        teacherRecyclerView = rootView.findViewById(R.id.rv_t);
+        teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>());
+
+        teacherRecyclerView.setLayoutManager(layoutManager);
+
+        teacherRecyclerView.setAdapter(teacherAdapter);
+
+        tv_seeall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadTeacher();
+//                Intent intent = new Intent(requireContext(), TopMentors.class);
+//                startActivity(intent);
+            }
+        });
+      //  loadTeacher();
 
 
         return rootView;
@@ -144,10 +197,11 @@ public class HomeFragment extends Fragment {
 
 
     private void addSampleCourses() {
-        Course course1 = new Course(0, "Programming Basics", null, 100, "Programming", "Learn the basics of programming", "John Doe", null);
-        Course course2 = new Course(0, "3D Design", null, 150, "3D Design", "Create amazing 3D models", "Jane Smith", null);
+        Course course1 = new Course(0, "Programming Basics",null,100,"Programming", "Learn the basics of programming", "John Doe",null,false);
+       // Course course2 = new Course(0, "3D Design", 150, "3D Design", "Create amazing 3D models", "Jane Smith");
 //        Course course3 = new Course(0, "3D Design", null, 150, "3D Design", "Create amazing 3D models", "Jane Smith", null);
 //        Course course4 = new Course(0, "3D Design", null, 150, "3D Design", "Create amazing 3D models", "Jane Smith", null);
+
 
         myViewModel.insertCourse(course1);
 //        myViewModel.insertCourse(course2);
@@ -166,17 +220,23 @@ public class HomeFragment extends Fragment {
     // }
 
     private void addSampleTeacher() {
+        try {
+            Teacher teacher = new Teacher("ADNAN1", "Adnan1", "adnan1234", "programing", null, 1234);
+            myViewModel.insertTeacher(teacher);
+            Log.d("Teacher", "Teacher added successfully");
+        } catch (Exception e) {
+            Log.e("Teacher", "Error adding teacher: " + e.getMessage());
+        }
+
 //        try {
 //            Teacher teacher = new Teacher("Adnan", null);
 //            Teacher teacher1 = new Teacher("Adnan", null);
 //            Teacher teacher2 = new Teacher("Adnan", null);
-        Teacher teacher2 = new Teacher("AdnanZayed", "Adnan", "adnan123", null, 123);
-
         // My_Database.databaseWriteExecutor.execute(() -> {
 
 //                myViewModel.insertTeacher(teacher);
 //                myViewModel.insertTeacher(teacher1);
-        myViewModel.insertTeacher(teacher2);
+        //  myViewModel.insertTeacher(teacher2);
 
 
         //   });

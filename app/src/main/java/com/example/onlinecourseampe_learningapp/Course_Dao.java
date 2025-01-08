@@ -12,7 +12,6 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-
 public interface Course_Dao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     Void insertCourse(Course course);
@@ -20,9 +19,15 @@ public interface Course_Dao {
     @Update
     Void updateCourse(Course course);
 
+    @Query("SELECT * FROM Course WHERE isBookmarked = 1")
+    LiveData<List<Course>> getBookmarkedCourses();
 
 
-
+    @Query("UPDATE Course SET isBookmarked = :isBookmarked WHERE Course_ID = :courseId")
+    void updateBookmarkStatus(int courseId, boolean isBookmarked);
+    // الاستعلام الجديد للبحث عن الكورس بناءً على الاسم
+    @Query("SELECT * FROM Course WHERE Course_NAME LIKE :courseName")
+    LiveData<List<Course>> getCourseByName(String courseName);
     @Delete
     Void deleteCourse(Course course);
 
@@ -31,6 +36,5 @@ public interface Course_Dao {
 
     @Query("SELECT * FROM Course WHERE Course_ID=:course_Id")
     LiveData<List<Course>> getAllCoursesById(int course_Id);
-
-
 }
+

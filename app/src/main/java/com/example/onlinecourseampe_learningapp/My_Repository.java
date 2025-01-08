@@ -58,6 +58,17 @@ public class My_Repository {
 
     }
 
+    // دالة لجلب الكورسات المفضلة
+    public LiveData<List<Course>> getBookmarkedCourses() {
+        return courseDao.getBookmarkedCourses();  // ترجع LiveData بدلاً من List
+    }
+
+    public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
+        courseDao.updateBookmarkStatus(courseId, isBookmarked);  // تنفيذ التحديث أولاً
+        return courseDao.getAllCourse();  // جلب الكورسات بعد التحديث
+    }
+
+
     LiveData<List<Course>> getAllCourse() {
         return courseDao.getAllCourse();
     }
@@ -135,6 +146,11 @@ public class My_Repository {
     LiveData<List<Teacher>> getAllTeacher() {
 
         return teacherDao.getAllTeachers();
+    }
+
+    // دالة للبحث عن المعلمين
+    public LiveData<List<Teacher>> searchTeachers(String teacherName) {
+        return teacherDao.getTeacherByName("%" + teacherName + "%");
     }
 
     LiveData<List<Teacher>> getAllTeacherByUser(String Teatur_USER_Name) {

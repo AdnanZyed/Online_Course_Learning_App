@@ -11,32 +11,27 @@ import java.util.Arrays;
 
 //@Entity(tableName = "Course")
 @Entity(tableName = "Course")
-
 public class Course {
     @PrimaryKey(autoGenerate = true)
     private int Course_ID;
     //هذه البيانات يتم ادخالها من حساب الادمن بحيث يستطيع ايضا عندا يقوم بالتسجيل كادمن ان يحذف كورسات او يضيف او يعدل من خلال الاي دي كما يتم عرض جميع الكورسات للطلاب او مجموعة معينة من الكورسات بناءا على التصنيف وهنا كل كورس يدرسه مدرس معين يعني اريد ربط الكورس بمدرس بناءا على انه كل كورس له تصنيف معين مثلا ديزاين برمجة وكل مدرس له تصنيف معين ايضا
     private String Course_NAME;//اسم الكورس
+
     private byte[] Image; //صورة شهادة الكورس
     private int Price;//سعر الكورس
     private String Categorie; //الكورس ينضم لاي تصنيف عند العرض
     private String Description;//وصف الكورس
     private String Teacher_name; //اسم مدرس الكورس
     private byte[] profilePicture; //صورة الكورس
+    private boolean isBookmarked; // متغير الإشارة المرجعية
 
     //private String Student_user_name;
 
 
-    public Course(int course_ID, @NonNull String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture) {
-        Course_ID = course_ID;
-        Course_NAME = course_NAME;
-        Image = image;
-        Price = price;
-        Categorie = categorie;
-        Description = description;
-        Teacher_name = teacher_name;
-        this.profilePicture = profilePicture;
-    }
+
+
+
+
 
     public Course() {
     }
@@ -49,12 +44,11 @@ public class Course {
         Course_ID = course_ID;
     }
 
-    @NonNull
     public String getCourse_NAME() {
         return Course_NAME;
     }
 
-    public void setCourse_NAME(@NonNull String course_NAME) {
+    public void setCourse_NAME( String course_NAME) {
         Course_NAME = course_NAME;
     }
 
@@ -107,6 +101,15 @@ public class Course {
         this.profilePicture = profilePicture;
     }
 
+    // Getters and setters
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
+    }
+
 //    public String getStudent_user_name() {
 //        return Student_user_name;
 //    }
@@ -115,6 +118,18 @@ public class Course {
 //        Student_user_name = student_user_name;
 //    }
 
+
+    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked) {
+        Course_ID = course_ID;
+        Course_NAME = course_NAME;
+        Image = image;
+        Price = price;
+        Categorie = categorie;
+        Description = description;
+        Teacher_name = teacher_name;
+        this.profilePicture = profilePicture;
+        this.isBookmarked = isBookmarked;
+    }
 
     @Override
     public String toString() {
@@ -127,6 +142,7 @@ public class Course {
                 ", Description='" + Description + '\'' +
                 ", Teacher_name='" + Teacher_name + '\'' +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
+                ", isBookmarked=" + isBookmarked +
                 '}';
     }
 }
