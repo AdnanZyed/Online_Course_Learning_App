@@ -32,22 +32,23 @@ public class TeacherAdapterMentors extends RecyclerView.Adapter<TeacherAdapterMe
     @NonNull
     @Override
     public TeacherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_teacher, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.mentores_teacher_item, parent, false);
         return new TeacherViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TeacherViewHolder holder, int position) {
         Teacher teacher = teachersMonetorsList.get(position);
-        holder.tvTeacherName.setText(teacher.getTeatur_name());
-        holder.tvTeacherEducation.setText(teacher.getEducation());
+        holder.tvTeacherNameAll.setText(teacher.getTeatur_name());
+        holder.tvTeacherEducationAll.setText(teacher.getEducation());
+        holder.chatAll.setImageResource(R.drawable.chat);
 
         // تحويل الصورة المخزنة في قاعدة البيانات (byte[]) إلى Bitmap
         if (teacher.getImage_teatcher() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(teacher.getImage_teatcher(), 0, teacher.getImage_teatcher().length);
-            holder.imgTeacher.setImageBitmap(bitmap);
+            holder.imgTeacherAll.setImageBitmap(bitmap);
         } else {
-            holder.imgTeacher.setImageResource(R.drawable.unnamed); // صورة افتراضية
+            holder.imgTeacherAll.setImageResource(R.drawable.unnamed); // صورة افتراضية
         }
     }
 
@@ -58,14 +59,15 @@ public class TeacherAdapterMentors extends RecyclerView.Adapter<TeacherAdapterMe
 
     static class TeacherViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgTeacher;
-        TextView tvTeacherName, tvTeacherEducation;
+        ImageView imgTeacherAll,chatAll;
+        TextView tvTeacherNameAll, tvTeacherEducationAll;
 
         public TeacherViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgTeacher = itemView.findViewById(R.id.img_teacher);
-            tvTeacherName = itemView.findViewById(R.id.tv_teacher_name);
-            tvTeacherEducation = itemView.findViewById(R.id.tv_teacher_education);
+            imgTeacherAll = itemView.findViewById(R.id.iv_teacher_image_all);
+            tvTeacherNameAll = itemView.findViewById(R.id.tv_teacher_name_all);
+            tvTeacherEducationAll = itemView.findViewById(R.id.tv_major_all);
+            chatAll = itemView.findViewById(R.id.chat_all);
         }
     }
 }

@@ -10,7 +10,13 @@ import java.util.Arrays;
 
 
 //@Entity(tableName = "Course")
-@Entity(tableName = "Course")
+@Entity(tableName = "Course", foreignKeys = @ForeignKey(
+        entity = Teacher.class,
+        parentColumns = "Teatur_USER_Name",
+        childColumns = "Teacher_USER_Name",
+        onDelete = ForeignKey.CASCADE
+))
+
 public class Course {
     @PrimaryKey(autoGenerate = true)
     private int Course_ID;
@@ -24,16 +30,34 @@ public class Course {
     private String Teacher_name; //اسم مدرس الكورس
     private byte[] profilePicture; //صورة الكورس
     private boolean isBookmarked; // متغير الإشارة المرجعية
+    private String Teacher_USER_Name;  // الإشارة إلى المدرس عن طريق اسم المستخدم
+
 
     //private String Student_user_name;
 
 
-
-
-
-
+    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, String teacher_USER_Name) {
+        Course_ID = course_ID;
+        Course_NAME = course_NAME;
+        Image = image;
+        Price = price;
+        Categorie = categorie;
+        Description = description;
+        Teacher_name = teacher_name;
+        this.profilePicture = profilePicture;
+        this.isBookmarked = isBookmarked;
+        Teacher_USER_Name = teacher_USER_Name;
+    }
 
     public Course() {
+    }
+
+    public String getTeacher_USER_Name() {
+        return Teacher_USER_Name;
+    }
+
+    public void setTeacher_USER_Name(String teacher_USER_Name) {
+        Teacher_USER_Name = teacher_USER_Name;
     }
 
     public int getCourse_ID() {
@@ -119,18 +143,6 @@ public class Course {
 //    }
 
 
-    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked) {
-        Course_ID = course_ID;
-        Course_NAME = course_NAME;
-        Image = image;
-        Price = price;
-        Categorie = categorie;
-        Description = description;
-        Teacher_name = teacher_name;
-        this.profilePicture = profilePicture;
-        this.isBookmarked = isBookmarked;
-    }
-
     @Override
     public String toString() {
         return "Course{" +
@@ -143,6 +155,7 @@ public class Course {
                 ", Teacher_name='" + Teacher_name + '\'' +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", isBookmarked=" + isBookmarked +
+                ", Teacher_USER_Name='" + Teacher_USER_Name + '\'' +
                 '}';
     }
 }

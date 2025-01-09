@@ -28,12 +28,11 @@ public class BookmarkActivity extends AppCompatActivity {
         // ملاحظة LiveData لمتابعة التغييرات
         myViewModel.getBookmarkedCourses().observe(this, bookmarkedCourses -> {
             if (bookmarkedCourses != null) {
-                // إعداد الـ Adapter بعد الحصول على البيانات
-                CourseAdapter adapter = new CourseAdapter(this, bookmarkedCourses);
-                recyclerView.setAdapter(adapter);
-            }
+            // إعداد الـ Adapter بعد الحصول على البيانات
+            CourseAdapter adapter = new CourseAdapter(this, bookmarkedCourses);
+            recyclerView.setAdapter(adapter);
+              }
         });
-
 
 
     }

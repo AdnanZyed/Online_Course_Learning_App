@@ -2,6 +2,7 @@ package com.example.onlinecourseampe_learningapp;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,13 +47,18 @@ public class TopMentors extends AppCompatActivity {
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 //      Teacher_Dao.getTeacherByName("%" + searchQuery + "%");  // باستخدام الـ "%" للبحث الجزئي
 //      // جلب المدرسين من ViewModel
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+      //  loadTeacher1();
+
         recyclerView.setLayoutManager(layoutManager);
 
         // قائمة المدرسين (بيانات افتراضية)
 
         recyclerView.setAdapter(teacherAdapter);
+
+
+
 
         searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +67,15 @@ public class TopMentors extends AppCompatActivity {
                 textMentor.setVisibility(View.GONE);
                 backIcon.setVisibility(View.GONE);
                 eSearsh.setVisibility(View.VISIBLE);
-                 searchQuery = eSearsh.getText().toString().trim();
-                if (!searchQuery.isEmpty()) {
-                    searchTeachers(searchQuery);
-                }
+
 
             }
         });
 
+        searchQuery = eSearsh.getText().toString().trim();
+        if (!searchQuery.isEmpty()) {
+            searchTeachers(searchQuery);
+        }
 
 
     }
@@ -78,7 +85,7 @@ public class TopMentors extends AppCompatActivity {
                 teacherAdapter.setTeacher_MonetorsList(teachers);  // تحديث الـ RecyclerView
             }
         });
-        loadTeacher1();
+       // loadTeacher1();
     }
     public void loadTeacher1() {
         // جلب المدرسين من ViewModel

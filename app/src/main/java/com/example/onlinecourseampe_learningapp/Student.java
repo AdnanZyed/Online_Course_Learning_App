@@ -20,16 +20,14 @@ public class Student {
     private int phone_nomber;
     private String S_name;
     private byte[] s_Image;
-    private int Course_ID;
 
 
-    public Student(@NonNull String student_user_name, String student_Password, int phone_nomber, String s_name, byte[] s_Image, int course_ID) {
+    public Student(@NonNull String student_user_name, String student_Password, int phone_nomber, String s_name, byte[] s_Image) {
         Student_user_name = student_user_name;
         Student_Password = student_Password;
         this.phone_nomber = phone_nomber;
         S_name = s_name;
         this.s_Image = s_Image;
-        Course_ID = course_ID;
     }
 
     public Student() {
@@ -77,13 +75,7 @@ public class Student {
     }
 
 
-    public int getCourse_ID() {
-        return Course_ID;
-    }
 
-    public void setCourse_ID(int course_ID) {
-        Course_ID = course_ID;
-    }
 
     @Override
     public String toString() {
@@ -93,7 +85,6 @@ public class Student {
                 ", phone_nomber=" + phone_nomber +
                 ", S_name='" + S_name + '\'' +
                 ", s_Image=" + Arrays.toString(s_Image) +
-                ", Course_ID=" + Course_ID +
                 '}';
     }
 }

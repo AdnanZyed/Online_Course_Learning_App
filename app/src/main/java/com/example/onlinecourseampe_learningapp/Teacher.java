@@ -7,15 +7,7 @@ import java.util.Arrays;
 //@TypeConverters(Converter.class)
 //@Entity(tableName = "Teacher")
 //@Entity(tableName = "Teacher")
-@Entity(
-        tableName = "Teacher",
-        foreignKeys = @ForeignKey(
-                entity = Course.class,
-                parentColumns = "Course_ID",
-                childColumns = "Course_ID",
-                onDelete = ForeignKey.CASCADE
-        )
-)
+@Entity(tableName = "Teacher")
 public class Teacher {
 
     //هنا يتم اضافة المدرسين بشكل يدوي وثابت من قبل المبرمج يعني على شكل اراي وتبقى البيانات ثابتة بدون تعديل اوحذف ولكن كل مدرس يدرس كورسا معينا يعني اريد ربط المدرس بكورس من خلال الاي دي
@@ -26,16 +18,14 @@ public class Teacher {
     private String Education;
     private String Teatur_PASSWORD;
     private byte[] Image_teatcher;
-    private int Course_ID;
 
 
-    public Teacher(@NonNull String teatur_USER_Name, String teatur_name, String education, String teatur_PASSWORD, byte[] image_teatcher, int course_ID) {
+    public Teacher(@NonNull String teatur_USER_Name, String teatur_name, String education, String teatur_PASSWORD, byte[] image_teatcher) {
         Teatur_USER_Name = teatur_USER_Name;
         Teatur_name = teatur_name;
         Education = education;
         Teatur_PASSWORD = teatur_PASSWORD;
         Image_teatcher = image_teatcher;
-        Course_ID = course_ID;
     }
 
     public Teacher() {
@@ -82,13 +72,7 @@ public class Teacher {
         Image_teatcher = image_teatcher;
     }
 
-    public int getCourse_ID() {
-        return Course_ID;
-    }
 
-    public void setCourse_ID(int course_ID) {
-        Course_ID = course_ID;
-    }
 
     @Override
     public String toString() {
@@ -98,7 +82,6 @@ public class Teacher {
                 ", Education='" + Education + '\'' +
                 ", Teatur_PASSWORD='" + Teatur_PASSWORD + '\'' +
                 ", Image_teatcher=" + Arrays.toString(Image_teatcher) +
-                ", Course_ID=" + Course_ID +
                 '}';
     }
 }
