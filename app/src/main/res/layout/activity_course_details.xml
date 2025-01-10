@@ -7,12 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".CourseDetailsActivity">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/img_course"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:background="@drawable/sample_course_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -136,12 +141,27 @@
         />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+        android:id="@+id/viewPager1"
         android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
         />
 
+            <Button
+                android:id="@+id/bt_buy"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="30dp"
+                android:background="@drawable/catigories_btn_selected"
+                android:elevation="30dp"
+                android:text="Enroll Course-$"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager1" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

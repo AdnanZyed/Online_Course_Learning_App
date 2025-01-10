@@ -7,8 +7,95 @@
     android:layout_height="match_parent"
     tools:context=".Add_New_Course">
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <!-- اسم الكورس -->
+            <EditText
+                android:id="@+id/et_course_nameA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="اسم الكورس" />
 
+            <!-- وصف الكورس -->
+            <EditText
+                android:id="@+id/et_course_descriptionA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="وصف الكورس"
+                android:lines="3"
+                android:inputType="textMultiLine" />
 
+            <!-- التصنيف -->
+            <Spinner
+                android:id="@+id/sp_categoryA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/categories_array" />
+
+            <!-- سعر الكورس -->
+            <EditText
+                android:id="@+id/et_priceA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="سعر الكورس"
+                android:inputType="number" />
+
+            <!-- اسم المستخدم للمدرس -->
+            <EditText
+                android:id="@+id/et_teacher_usernameA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="اسم المستخدم للمدرس" />
+
+            <!-- رابط صورة الكورس -->
+            <EditText
+                android:id="@+id/et_image_urlA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="رابط صورة الكورس"
+                android:inputType="textUri" />
+
+            <!-- زر تحميل الصورة من الإنترنت -->
+            <Button
+                android:id="@+id/btn_load_image_from_urlA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="تحميل صورة من الإنترنت"
+                android:layout_marginTop="8dp" />
+
+            <!-- صورة الكورس -->
+            <ImageView
+                android:id="@+id/iv_course_imageA"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/darker_gray"
+                android:contentDescription="صورة الكورس"
+                android:scaleType="centerCrop" />
+
+            <!-- اختيار صورة من المعرض -->
+            <Button
+                android:id="@+id/btn_select_imageA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="اختيار صورة من المعرض"
+                android:layout_marginTop="8dp" />
+
+            <!-- زر الحفظ -->
+            <Button
+                android:id="@+id/btn_save_courseA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="حفظ الكورس"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

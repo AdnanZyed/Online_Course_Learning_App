@@ -53,6 +53,17 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Course>> getAllCoursesById(int id) {
         return repository.getAllCoursesById(id);
     }
+    public void insertStudentCourse(Student_Course studentCourse) {
+        repository.insertStudentCourse(studentCourse);
+    }
+
+    public LiveData<List<Student_Course>> getCoursesByStudent(String studentUsername) {
+        return repository.getCoursesByStudent(studentUsername);
+    }
+
+    public LiveData<List<Student_Course>> getStudentsByCourse(int courseId) {
+        return repository.getStudentsByCourse(courseId);
+    }
 
     void insertStudent(Student student) {
 
@@ -121,6 +132,16 @@ public class My_View_Model extends AndroidViewModel {
 
         return repository.getAllTeacherByUser(Teatur_USER_Name);
     }
+    public void insertStudentTeacher(Student_Teacher studentTeacher) {
+        repository.insertStudentTeacher(studentTeacher);
+    }
 
+    public LiveData<List<Student_Teacher>> getTeachersByStudent(String studentUsername) {
+        return repository.getTeachersByStudent(studentUsername);
+    }
+
+    public LiveData<List<Student_Teacher>> getStudentsByTeacher(String teacherUsername) {
+        return repository.getStudentsByTeacher(teacherUsername);
+    }
 
 }

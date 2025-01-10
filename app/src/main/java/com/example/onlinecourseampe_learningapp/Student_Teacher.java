@@ -1,58 +1,72 @@
 package com.example.onlinecourseampe_learningapp;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
+import androidx.room.Index;
 
-@Entity(tableName = "StudentTeacher",
+import com.example.onlinecourseampe_learningapp.Student;
+import com.example.onlinecourseampe_learningapp.Teacher;
+
+@Entity(
+        tableName = "Student_Teacher",
         foreignKeys = {
-                @ForeignKey(entity = Student.class, parentColumns = "Student_user_name", childColumns = "Student_user_name", onDelete = ForeignKey.CASCADE),
-                @ForeignKey(entity = Teacher.class, parentColumns = "Teatur_USER_Name", childColumns = "Teacher_USER_Name", onDelete = ForeignKey.CASCADE)
-        })
+                @ForeignKey(
+                        entity = Teacher.class,
+                        parentColumns = "USER_Name",
+                        childColumns = "Teacher_USER_Name",
+                        onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = Student.class,
+                        parentColumns = "USER_Name",
+                        childColumns = "Student_USER_Name",
+                        onDelete = ForeignKey.CASCADE
+                )
+        },
+        indices = {
+                @Index(value = "Teacher_USER_Name"), // إضافة فهرس هنا
+                @Index(value = "Student_USER_Name") // إضافة فهرس آخر
+        }
+)
 public class Student_Teacher {
+    @NonNull
+    @ColumnInfo(name = "Student_USER_Name")
+    public String studentUserName;
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String Student_user_name;
-    private String Teacher_USER_Name;
+    @NonNull
+    @ColumnInfo(name = "Teacher_USER_Name")
+    public String teacherUserName;
 
-    public Student_Teacher(String student_user_name, String teacher_USER_Name) {
-        Student_user_name = student_user_name;
-        Teacher_USER_Name = teacher_USER_Name;
+    public Student_Teacher(@NonNull String studentUserName, @NonNull String teacherUserName) {
+        this.studentUserName = studentUserName;
+        this.teacherUserName = teacherUserName;
     }
 
-    public int getId() {
-        return id;
+    @NonNull
+    public String getStudentUserName() {
+        return studentUserName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStudentUserName(@NonNull String studentUserName) {
+        this.studentUserName = studentUserName;
     }
 
-    public String getStudent_user_name() {
-        return Student_user_name;
+    @NonNull
+    public String getTeacherUserName() {
+        return teacherUserName;
     }
 
-    public void setStudent_user_name(String student_user_name) {
-        Student_user_name = student_user_name;
-    }
-
-    public String getTeacher_USER_Name() {
-        return Teacher_USER_Name;
-    }
-
-    public void setTeacher_USER_Name(String teacher_USER_Name) {
-        Teacher_USER_Name = teacher_USER_Name;
+    public void setTeacherUserName(@NonNull String teacherUserName) {
+        this.teacherUserName = teacherUserName;
     }
 
     @Override
     public String toString() {
         return "Student_Teacher{" +
-                "id=" + id +
-                ", Student_user_name='" + Student_user_name + '\'' +
-                ", Teacher_USER_Name='" + Teacher_USER_Name + '\'' +
+                "studentUserName='" + studentUserName + '\'' +
+                ", teacherUserName='" + teacherUserName + '\'' +
                 '}';
     }
 }
-

@@ -10,7 +10,8 @@ import java.util.List;
 public class My_Repository {
 
 
-
+private Student_Course_Dao studentCourseDao;
+private Student_Teacher_Dao studentTeacherDao;
     private Teacher_Dao teacherDao;
     private Student_Dao studentDao;
     private Course_Dao courseDao;
@@ -80,6 +81,19 @@ public class My_Repository {
         return courseDao.getAllCoursesById(id);
     }
 
+    public void insertStudentCourse(Student_Course studentCourse) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            studentCourseDao.insertStudentCourse(studentCourse);
+        });
+    }
+
+    public LiveData<List<Student_Course>> getCoursesByStudent(String studentUsername) {
+        return studentCourseDao.getCoursesByStudent(studentUsername);
+    }
+
+    public LiveData<List<Student_Course>> getStudentsByCourse(int courseId) {
+        return studentCourseDao.getStudentsByCourse(courseId);
+    }
 
     void insertStudent(Student student) {
         My_Database.databaseWriteExecutor.execute(() -> {
@@ -157,6 +171,18 @@ public class My_Repository {
 
         return teacherDao.getAllTeachersByUser(Teatur_USER_Name);
     }
+    public void insertStudentTeacher(Student_Teacher studentTeacher) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            studentTeacherDao.insertStudentTeacher(studentTeacher);
+        });
+    }
 
+    public LiveData<List<Student_Teacher>> getTeachersByStudent(String studentUsername) {
+        return studentTeacherDao.getTeachersByStudent(studentUsername);
+    }
+
+    public LiveData<List<Student_Teacher>> getStudentsByTeacher(String teacherUsername) {
+        return studentTeacherDao.getStudentsByTeacher(teacherUsername);
+    }
 
 }
