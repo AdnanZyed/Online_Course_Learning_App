@@ -50,6 +50,12 @@ public class My_View_Model extends AndroidViewModel {
         return repository.updateBookmarkStatusAndGetCourses(courseId, isBookmarked);
     }
 
+
+    // دالة لجلب الكورسات بناءً على التصنيف
+    public LiveData<List<Course>> getCoursesByCategory(String category) {
+        return repository.getCoursesByCategory(category);
+    }
+
     LiveData<List<Course>> getAllCoursesById(int id) {
         return repository.getAllCoursesById(id);
     }

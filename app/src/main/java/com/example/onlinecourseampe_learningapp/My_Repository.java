@@ -81,6 +81,19 @@ private Student_Teacher_Dao studentTeacherDao;
         return courseDao.getAllCoursesById(id);
     }
 
+
+
+    // دالة لجلب الكورسات بناءً على التصنيف
+    public LiveData<List<Course>> getCoursesByCategory(String category) {
+        return courseDao.getCoursesByCategory(category);
+    }
+
+
+
+
+
+
+
     public void insertStudentCourse(Student_Course studentCourse) {
         My_Database.databaseWriteExecutor.execute(() -> {
             studentCourseDao.insertStudentCourse(studentCourse);

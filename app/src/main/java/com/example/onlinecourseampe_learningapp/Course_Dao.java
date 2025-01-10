@@ -30,6 +30,9 @@ public interface Course_Dao {
     LiveData<List<Course>> getCourseByName(String courseName);
     @Delete
     Void deleteCourse(Course course);
+    // إضافة استعلام جديد لعرض الكورسات بناءً على التصنيف
+    @Query("SELECT * FROM Course WHERE Categorie = :categorie")
+    LiveData<List<Course>> getCoursesByCategory(String categorie);
 
     @Query("SELECT * FROM Course")
     LiveData<List<Course>> getAllCourse();
