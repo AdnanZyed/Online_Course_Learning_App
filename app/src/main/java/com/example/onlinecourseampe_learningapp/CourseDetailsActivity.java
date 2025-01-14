@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -34,11 +35,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
         TextView Dollar_dep = findViewById(R.id.dollar_dep);
         Price_dep.setPaintFlags(Price_dep.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         Dollar_dep.setPaintFlags(Dollar_dep.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        
+
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager2 viewPager = findViewById(R.id.viewPager1);
-
-
 
 
         // استرجاع البيانات
@@ -51,17 +50,30 @@ public class CourseDetailsActivity extends AppCompatActivity {
         byte[] courseImage = getIntent().getByteArrayExtra("COURSE_IMAGE");
         String teacherName = getIntent().getStringExtra("TEACHER_NAME");
 
+        Bundle bundle = new Bundle();
+        bundle.putInt("COURSE_ID1", courseId);
+
+
+// إنشاؤ Fragment الجديد
+        Fragment targetFragment = new ReviewsFragment();
+
+// ضبط البيانات المرسلة على الـ Fragment
+        targetFragment.setArguments(bundle);
+
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("USER_NAME12");
+
+
+//        String userName = getIntent().getStringExtra("USER_NAME12");
+        Log.d("MainActivity_Main", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
 
         // إعداد الـ ViewPager مع الـ Adapter
-        TabPagerAdapter adapter = new TabPagerAdapter(this,courseUserName);
+        TabPagerAdapter adapter = new TabPagerAdapter(this, courseUserName, courseId,userName );
         viewPager.setAdapter(adapter);
 
 
 
-
-
-      //  Log.d("CourseDetailsActivity", "VVVVVVVVVVVVVVVVVVVVVVVVVVV" + courseUserName);
-
+        Log.d("CourseDetailsActivity", "VVVVVVVVVVVVVVVVVVVVVVVVVVV" + courseId + userName);
 
 
         // تعيين البيانات في الواجهة
@@ -78,9 +90,6 @@ public class CourseDetailsActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(courseImage, 0, courseImage.length);
             courseImageView.setImageBitmap(bitmap);
         }
-
-
-
 
 
         // ربط TabLayout مع ViewPager2

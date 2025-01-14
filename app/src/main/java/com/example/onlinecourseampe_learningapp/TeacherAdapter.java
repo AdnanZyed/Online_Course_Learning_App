@@ -1,6 +1,8 @@
 package com.example.onlinecourseampe_learningapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,15 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         Teacher teacher = teachersList.get(position);
 
 
+        holder.tvTeatur_name.setText(teacher.getTeatur_name().toString());
+        byte[] imageBytes = teacher.getImage_teatcher();
+
+        if (imageBytes != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            holder.imageView.setImageBitmap(bitmap);
+        } else {
+            holder.imageView.setImageResource(R.drawable.unnamed1);
+        }
     }
 
     @Override

@@ -17,10 +17,10 @@ public interface Student_Teacher_Dao {
         @Delete
         void deleteStudentTeacher(Student_Teacher studentTeacher);
 
-        @Query("SELECT * FROM Student_Teacher WHERE Student_user_name = :studentUsername")
+        @Query("SELECT * FROM Student_Teacher WHERE studentUserName = :studentUsername")
         LiveData<List<Student_Teacher>> getTeachersByStudent(String studentUsername);
 
-        @Query("SELECT * FROM Student_Teacher WHERE Teacher_USER_Name = :teacherUsername")
+        @Query("SELECT * FROM Student_Teacher WHERE teacherUserName = :teacherUsername")
         LiveData<List<Student_Teacher>> getStudentsByTeacher(String teacherUsername);
     }
 

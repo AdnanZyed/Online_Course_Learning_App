@@ -27,6 +27,7 @@ public class CourseFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_courses);
 
+      //  loadCoursesByUserTeatcher("bob_white");
         // إعداد RecyclerView
         courseAdapter = new CourseAdapter(requireContext(), new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -43,6 +44,30 @@ public class CourseFragment extends Fragment {
 
         // تحميل جميع الكورسات من قاعدة البيانات
         myViewModel.getAllCourse().observe(getViewLifecycleOwner(), courses -> {
+            courseAdapter.setCourseList(courses);
+            courseAdapter.setOnCourseClickListener(course -> {
+
+                Intent intent = new Intent(requireContext(), CourseDetailsActivity.class);
+
+                intent.putExtra("COURSE_ID", course.getCourse_ID());
+                intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
+                intent.putExtra("COURSE_NAME", course.getCourse_NAME());
+                intent.putExtra("COURSE_PRICE", course.getPrice());
+                intent.putExtra("COURSE_IMAGE", course.getImage());
+                intent.putExtra("TEACHER_NAME", course.getTeacher_name());
+
+
+                startActivity(intent);
+            });
+
+        });
+    }
+
+    public void loadCoursesByUserTeatcher(String string) {
+
+
+        // تحميل جميع الكورسات من قاعدة البيانات
+        myViewModel.getAllCoursesByTeacher_USER_Name(string).observe(getViewLifecycleOwner(), courses -> {
             courseAdapter.setCourseList(courses);
             courseAdapter.setOnCourseClickListener(course -> {
 
@@ -122,6 +147,32 @@ public class CourseFragment extends Fragment {
         // تحميل جميع الكورسات من قاعدة البيانات
         // استدعاء الدالة مع التصنيف المطلوب
         myViewModel.getCoursesByCategory("Business").observe(getViewLifecycleOwner(), courses -> {
+            // تحديث RecyclerView أو أي عنصر واجهة مستخدم
+
+            courseAdapter.setCourseList(courses);
+
+            courseAdapter.setOnCourseClickListener(course -> {
+
+                Intent intent = new Intent(requireContext(), CourseDetailsActivity.class);
+
+                intent.putExtra("COURSE_ID", course.getCourse_ID());
+                intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
+                intent.putExtra("COURSE_NAME", course.getCourse_NAME());
+                intent.putExtra("COURSE_PRICE", course.getPrice());
+                intent.putExtra("COURSE_IMAGE", course.getImage());
+                intent.putExtra("TEACHER_NAME", course.getTeacher_name());
+
+
+                startActivity(intent);
+            });
+
+        });
+    }    public void loadCourses_Categorie_3D_Design() {
+
+
+        // تحميل جميع الكورسات من قاعدة البيانات
+        // استدعاء الدالة مع التصنيف المطلوب
+        myViewModel.getCoursesByCategory("3D Design").observe(getViewLifecycleOwner(), courses -> {
             // تحديث RecyclerView أو أي عنصر واجهة مستخدم
 
             courseAdapter.setCourseList(courses);

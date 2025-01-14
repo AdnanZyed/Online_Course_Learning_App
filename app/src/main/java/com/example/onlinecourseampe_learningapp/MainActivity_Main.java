@@ -1,7 +1,9 @@
 package com.example.onlinecourseampe_learningapp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,17 +44,70 @@ public class MainActivity_Main extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_main);
 
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("USER_NAME1");
+        Log.d("MainActivity_Main", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
+
+        HomeFragment homeFragment = new HomeFragment();
+
+
+        Bundle bundle = new Bundle();
+
+        bundle.putString("USER_NAME", userName);
+
+// إنشاء كائن Fragment
+
+// تمرير البيانات إلى الـ Fragment
+        homeFragment.setArguments(bundle);
+
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flFragment, homeFragment)
+                .commit();
+        Intent intent1 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
+        intent1.putExtra("USER_NAME12", userName);
+
+      //  ReviewsFragment reviewsFragment = new ReviewsFragment();
+
+//        Bundle bundle1 = new Bundle();
+//
+//        bundle1.putString("USER_NAME12", userName);
+//        CourseDetailsActivity courseDetailsActivity=new CourseDetailsActivity();
+//        courseDetailsActivity.setArguments(bundle1);
+
+// إنشاء كائن Fragment
+
+// تمرير البيانات إلى الـ Fragment
+        //reviewsFragment.setArguments(bundle1);
+
+        Intent intent2 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
+        intent2.putExtra("USER_NAME14", userName);
+
+        Log.d("AAAAA", "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUMain" + userName);
+
+        // استبدال أو إضافة الـ Fragment إلى الـ Layout
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.flFragment, fragment) // تأكد أن ID الحاوية صحيح
+//                .commit();
+
+// استبدال أو إضافة الـ Fragment إلى الـ Layout
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.flFragment, fragment) // استبدل `fragment_container` بـ ID الحاوية
+//                .commit();
+
+
+//        Log.d("AAAAA", "USER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAME" + userName);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
-        // تعيين الفراجمنت الافتراضي عند البداية
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flFragment, homeFragment) // عرض HomeFragment بشكل افتراضي
-                    .commit();
-        }
+//        // تعيين الفراجمنت الافتراضي عند البداية
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.flFragment, homeFragment) // عرض HomeFragment بشكل افتراضي
+//                    .commit();
+//        }
 
     }
 
@@ -93,12 +148,13 @@ public class MainActivity_Main extends AppCompatActivity
         if (selectedFragment != activeFragment) {
 
             getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flFragment, selectedFragment)
-                .commit();
+                    .replace(R.id.flFragment, selectedFragment)
+                    .commit();
             activeFragment = selectedFragment;  // تحديث الفراجمنت النشط
         }
         return true;
     }
+
     @Override
     public void onBackPressed() {
         // إذا كان الفراجمنت النشط هو غير HomeFragment، عد إلى HomeFragment

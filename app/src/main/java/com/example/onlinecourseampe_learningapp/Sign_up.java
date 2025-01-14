@@ -6,6 +6,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.onlinecourseampe_learningapp.databinding.ActivitySignUpBinding;
 import com.google.firebase.FirebaseException;
@@ -21,6 +24,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Sign_up extends AppCompatActivity {
@@ -29,7 +33,15 @@ public class Sign_up extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String mVerificationId;
+    private String student_name_user;
+    Student student;
+    String ePasswordIn;
+    String PhoneIn;
+    LiveData<List<Student>> studentU;
     private ActivitySignUpBinding activitySignUpBinding;
+    private My_View_Model myViewModel;
+    String nameIn;
+    String eUserIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,27 +50,31 @@ public class Sign_up extends AppCompatActivity {
         activitySignUpBinding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(activitySignUpBinding.getRoot());
 
+        myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
 
-        mAuth = FirebaseAuth.getInstance();
-        phoneEditText = findViewById(R.id.Phone);
-        btnSignUp = findViewById(R.id.Sign_up);
+//        mAuth = FirebaseAuth.getInstance();
+//        phoneEditText = findViewById(R.id.Phone);
+//        btnSignUp = findViewById(R.id.Sign_up);
 
 
-
-
-
-        My_Database db = My_Database.getDatabase(this);
-        Student_Dao student_dao = db.studentDao();
+//        My_Database db = My_Database.getDatabase(this);
+//        Student_Dao student_dao = db.studentDao();
 
         // زر التسجيل
         activitySignUpBinding.SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String eUserIn = activitySignUpBinding.eUser.getText().toString().trim();
-                String ePasswordIn = activitySignUpBinding.ePassword.getText().toString().trim();
-                String PhoneIn = activitySignUpBinding.Phone.getText().toString().trim();
-                String nameIn = activitySignUpBinding.name.getText().toString().trim();
+                eUserIn = activitySignUpBinding.eUser.getText().toString().trim();
+                ePasswordIn = activitySignUpBinding.ePassword.getText().toString().trim();
+                PhoneIn = activitySignUpBinding.Phone.getText().toString().trim();
+                nameIn = activitySignUpBinding.name.getText().toString().trim();
+                studentU = myViewModel.getAllStudentByUser(eUserIn);
+//
+//                if (studentU!=null) {
+//                    activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه بالفعل");
+//                    return;
+//                }
 
                 // التحقق من الحقول الفارغة
                 if (eUserIn.isEmpty()) {
@@ -111,8 +127,6 @@ public class Sign_up extends AppCompatActivity {
                 // التحقق من أن الرقم يحتوي على أرقام فقط
 
 
-
-
                 if (!PhoneIn.matches("^[0-9]+$")) {
                     activitySignUpBinding.Phone.setError("الرجاء إدخال رقم هاتف صحيح");
                     return;
@@ -123,22 +137,29 @@ public class Sign_up extends AppCompatActivity {
                     activitySignUpBinding.Phone.setError("رقم الهاتف يجب أن يتكون من 10 أرقام");
                     return;
                 }
+                // التحقق من عدم وجود مستخدم بنفس اسم المستخدم
+                myViewModel.getAllStudentByUser(eUserIn).observe(Sign_up.this, students -> {
+                    if (students == null || students.isEmpty()) {
+                        // إنشاء كائن طالب جديد وإضافته إلى قاعدة البيانات
+                        int phoneIn = Integer.parseInt(PhoneIn);
+                        student = new Student(eUserIn, ePasswordIn, phoneIn, nameIn, null);
+                        myViewModel.insertStudent(student);
 
-                // إضافة الطالب إلى قاعدة البيانات
-                new Thread(() -> {
-                    // إنشاء كائن طالب باستخدام الـ Setters
-                    Student student = new Student();
-                    student.setS_name(nameIn);
-                    student.setStudent_user_name(eUserIn);
-                    student.setStudent_Password(ePasswordIn);
-                    student.setPhone_nomber(Integer.parseInt(PhoneIn));
+                        Log.d("CourseDetailsActivity", "لقد حصلت على اشتراك جديد");
 
-                    // إدخال الطالب إلى قاعدة البيانات
-                    student_dao.insertStudent(student);
-                }).start();
-                sendVerificationCode(PhoneIn);
+                        // الانتقال إلى MainActivity_Main
+                        Intent intent = new Intent(Sign_up.this, MainActivity_Main.class);
+                        intent.putExtra("USER_NAME1", eUserIn);
+                        startActivity(intent);
+                    } else {
+                        // إذا كان اسم المستخدم موجودًا مسبقًا
+                        activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقا");
+                    }
+                });
 
             }
+
+
         });
 
         // زر الرجوع
@@ -157,6 +178,7 @@ public class Sign_up extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         activitySignUpBinding.icEyeOff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +232,7 @@ public class Sign_up extends AppCompatActivity {
 //
 //        }
     }
+
     private void sendVerificationCode(String phoneNumber) {
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
                 .setPhoneNumber(phoneNumber) // رقم الهاتف
@@ -233,7 +256,7 @@ public class Sign_up extends AppCompatActivity {
                         mResendToken = token;
 
                         // الانتقال إلى واجهة إدخال الرمز
-                        Intent intent = new Intent(Sign_up.this,VerifyCodeActivity.class);
+                        Intent intent = new Intent(Sign_up.this, VerifyCodeActivity.class);
                         intent.putExtra("verificationId", verificationId);
                         startActivity(intent);
                     }

@@ -6,15 +6,19 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class My_Repository {
 
 
-private Student_Course_Dao studentCourseDao;
-private Student_Teacher_Dao studentTeacherDao;
+    private Student_Course_Dao studentCourseDao;
+    private Student_Teacher_Dao studentTeacherDao;
     private Teacher_Dao teacherDao;
     private Student_Dao studentDao;
     private Course_Dao courseDao;
+    private CourseReviewsDao courseReviewsDao;
+
 
     private LiveData<List<Teacher>> AllTeacher;
     private LiveData<List<Student>> AllStudents;
@@ -26,18 +30,43 @@ private Student_Teacher_Dao studentTeacherDao;
         studentDao = db.studentDao();
         courseDao = db.courseDao();
         teacherDao = db.teacherDao();
+        courseReviewsDao = db.courseReviewsDao();
+        studentCourseDao = db.studentCourseDao();
+        studentTeacherDao = db.studentTeacherDao();
+        // courseReviewsDao = db.courseReviewsDao();
+        //  executorService = Executors.newFixedThreadPool(2); // تنفيذ العمليات في خلفية
+
 
         //mAllWords = mWordDao.getAlphabetizedWords();
     }
 
-    void insertCourse(Course course) {
+    // إضافة مراجعة
+    void insertReview(Course_Reviews review) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            courseDao.insertCourse(course);
-
-
+            courseReviewsDao.insertReview(review);
         });
+    }
+    // حذف مراجعة بناءً على اسم المستخدم
 
 
+    // تحديث مراجعة بناءً على اسم المستخدم
+
+    void updateReviewByStudent(String studentUserName, String newComment, float newRating) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            courseReviewsDao.updateReviewByStudent(studentUserName, newComment, newRating);
+        });
+    }
+
+    void deleteReviewByStudent(String studentUserName) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+
+            courseReviewsDao.deleteReviewByStudent(studentUserName);
+        });
+    }
+
+    // جلب جميع المراجعات بناءً على معرف الدورة
+    public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
+        return courseReviewsDao.getAllReviewsByCourseId(courseId);
     }
 
     void updateCourse(Course course) {
@@ -49,6 +78,16 @@ private Student_Teacher_Dao studentTeacherDao;
 
 
     }
+
+    void insertCourse(Course course) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            courseDao.insertCourse(course);
+
+
+        });
+
+    }
+
 
     void deleteCourse(Course course) {
         My_Database.databaseWriteExecutor.execute(() -> {
@@ -81,17 +120,17 @@ private Student_Teacher_Dao studentTeacherDao;
         return courseDao.getAllCoursesById(id);
     }
 
+    LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
+
+
+        return courseDao.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
+    }
 
 
     // دالة لجلب الكورسات بناءً على التصنيف
     public LiveData<List<Course>> getCoursesByCategory(String category) {
         return courseDao.getCoursesByCategory(category);
     }
-
-
-
-
-
 
 
     public void insertStudentCourse(Student_Course studentCourse) {
@@ -138,11 +177,14 @@ private Student_Teacher_Dao studentTeacherDao;
         return studentDao.getAllStudents();
     }
 
+    LiveData<List<Student>> getStudentByUsernameAndPassword(String username, String password) {
+        return studentDao.getStudentByUsernameAndPassword(username, password);
+    }
+
     LiveData<List<Student>> getAllStudentByUser(String student_user_name) {
 
         return studentDao.getAllStudentsByUser(student_user_name);
     }
-
 
 
     void insertTeacher(Teacher teacher) {
@@ -184,6 +226,7 @@ private Student_Teacher_Dao studentTeacherDao;
 
         return teacherDao.getAllTeachersByUser(Teatur_USER_Name);
     }
+
     public void insertStudentTeacher(Student_Teacher studentTeacher) {
         My_Database.databaseWriteExecutor.execute(() -> {
             studentTeacherDao.insertStudentTeacher(studentTeacher);

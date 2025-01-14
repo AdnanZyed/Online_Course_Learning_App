@@ -30,5 +30,8 @@ public interface Student_Dao {
     LiveData<List<Student>> getAllStudentsByUser(String student_user_name);
 
 
+    // الدالة الجديدة للتحقق من اسم المستخدم وكلمة المرور
+    @Query("SELECT * FROM Student WHERE Student_user_name = :username AND Student_password = :password")
+    LiveData<List<Student>> getStudentByUsernameAndPassword(String username, String password);
 
 }

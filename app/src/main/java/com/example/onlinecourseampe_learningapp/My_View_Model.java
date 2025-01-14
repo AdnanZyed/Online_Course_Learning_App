@@ -12,12 +12,34 @@ import java.util.List;
 public class My_View_Model extends AndroidViewModel {
 
     private My_Repository repository;
+    private final LiveData<List<Course_Reviews>> allReviews;
 
     public My_View_Model(@NonNull Application application) {
         super(application);
         repository = new My_Repository(application);
+        allReviews = null; // سيتم تخصيصها عند استدعاء طريقة الجلب
 
     }
+    // إضافة مراجعة
+    public void insertReview(Course_Reviews review) {
+        repository.insertReview(review);
+    }
+
+    // حذف مراجعة بناءً على اسم المستخدم
+    public void deleteReviewByStudent(String studentUserName) {
+        repository.deleteReviewByStudent(studentUserName);
+    }
+
+    // تحديث مراجعة بناءً على اسم المستخدم
+    public void updateReviewByStudent(String studentUserName, String newComment, float newRating) {
+        repository.updateReviewByStudent(studentUserName, newComment, newRating);
+    }
+
+    // جلب جميع المراجعات بناءً على معرف الدورة
+    public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
+        return repository.getAllReviewsByCourseId(courseId);
+    }
+
     // دالة لحذف جميع الكورسات
 
     void insertCourse(Course course) {
@@ -59,6 +81,9 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Course>> getAllCoursesById(int id) {
         return repository.getAllCoursesById(id);
     }
+    LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
+        return repository.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
+    }
     public void insertStudentCourse(Student_Course studentCourse) {
         repository.insertStudentCourse(studentCourse);
     }
@@ -95,6 +120,9 @@ public class My_View_Model extends AndroidViewModel {
         return repository.getAllStudent();
     }
 
+    LiveData<List<Student>> getStudentByUsernameAndPassword(String username, String password) {
+        return repository.getStudentByUsernameAndPassword(username, password);
+    }
     LiveData<List<Student>> getAllStudentByUser(String student_user_name) {
 
         return repository.getAllStudentByUser(student_user_name);
