@@ -27,27 +27,27 @@ public class MainActivity_sign extends AppCompatActivity {
 
 //        addSampleTeachers();
 //        addSampleCourses();
-
-        myViewModel.getAllTeacher().observe(this, teachers -> {
-            if (teachers == null || teachers.isEmpty()) {
-                addSampleTeachers();
-            }
-        });
-        myViewModel.getAllCourse().observe(this, courses -> {
-            if (courses == null || courses.isEmpty()) {
-                addSampleCourses();
-            }
-        });
-       addSampleLessones();
-
 //
+//        myViewModel.getAllTeacher().observe(this, teachers -> {
+//            if (teachers == null || teachers.isEmpty()) {
+//                addSampleTeachers();
+//            }
+//        });
+//        myViewModel.getAllCourse().observe(this, courses -> {
+//            if (courses == null || courses.isEmpty()) {
+//                addSampleCourses();
+//            }
+//        });
 //
+////
+////
+   //addSampleStudents();
 //        myViewModel.getAllStudent().observe(this, students -> {
 //            if (students == null || students.isEmpty()) {
 //                addSampleStudents();
 //            }
 //        });
-
+// addSampleLessones();
         binding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -333,13 +333,26 @@ public class MainActivity_sign extends AppCompatActivity {
 
         Student student = new Student("userName", "Password", 1234, 1231231212, "ahmad", null);
         myViewModel.insertStudent(student);
+        for (int i = 1; i <= 50; i++) {
+            String userName = "user_" + i; // اسم مستخدم فريد
+            String password = "password_" + i; // كلمة مرور فريدة
+            int phoneNumber = 1000000000 + i; // رقم هاتف فريد
+            int cardNumber = 123 + i; // رقم بطاقة فريد
+            String studentName = "Student " + i; // اسم الطالب
+            byte[] image = null; // صورة افتراضية (يمكنك تحديثها لاحقًا)
 
-        // ربط الطالب بالكورسات
-        Student_Course studentCourse = new Student_Course(0, "userName", 0);
-        myViewModel.insertStudentCourse(studentCourse);
+            // إنشاء الطالب
+            Student student2 = new Student(userName, password, phoneNumber, cardNumber, studentName, image);
 
-        // ربط الطالب بالمدرس
-        Student_Teacher studentTeacher = new Student_Teacher(0, "userName", "teacherUsername");
-        myViewModel.insertStudentTeacher(studentTeacher);
-    }
-}
+            // إدراج الطالب باستخدام ViewModel
+            myViewModel.insertStudent(student2);
+
+//        // ربط الطالب بالكورسات
+//        Student_Course studentCourse = new Student_Course(0, "userName", 0);
+//        myViewModel.insertStudentCourse(studentCourse);
+//
+//        // ربط الطالب بالمدرس
+//        Student_Teacher studentTeacher = new Student_Teacher(0, "userName", "teacherUsername");
+//        myViewModel.insertStudentTeacher(studentTeacher);
+        }
+    }}

@@ -61,7 +61,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         byte[] courseImage = getIntent().getByteArrayExtra("COURSE_IMAGE");
         String teacherName = getIntent().getStringExtra("TEACHER_NAME");
 
-         userName ="aDNAN@123";
+         userName ="aDNAN@1234";
 
 
         Bundle bundle = new Bundle();

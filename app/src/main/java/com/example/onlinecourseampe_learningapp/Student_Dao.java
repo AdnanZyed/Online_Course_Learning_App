@@ -19,6 +19,8 @@ public interface Student_Dao {
 
     @Update
     Void updateStudent(Student student);
+    @Query("SELECT * FROM Student WHERE Student_user_name != :currentUsername")
+    LiveData<List<Student>> getAllStudentsExcept(String currentUsername);
 
     @Delete
     Void deleteStudent(Student student);

@@ -21,6 +21,21 @@ public class My_View_Model extends AndroidViewModel {
 
     }
 
+    public void insertMessage(Message message) {
+        repository.insertMessage(message);
+    }
+
+    public LiveData<List<Message>> getMessagesBetweenUsers(String currentUser, String otherUser) {
+        return repository.getMessagesBetweenUsers(currentUser, otherUser);
+    }
+
+    public LiveData<List<Student>> getAllStudentsExceptCurrent(String currentUsername) {
+        return repository.getAllStudentsExceptCurrent(currentUsername);
+    }
+
+    public LiveData<Message> getLastMessageForUser(String username) {
+        return repository.getLastMessageForUser(username);
+    }
     public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
         return repository.getCourseLessonStats(courseId);
     }

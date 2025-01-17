@@ -21,6 +21,7 @@ public class My_Repository {
     private CourseReviewsDao courseReviewsDao;
     private CourseLessonsDao courseLessonsDao;
 
+    private final MessageDao messageDao;
 
     private LiveData<List<Teacher>> AllTeacher;
     private LiveData<List<Student>> AllStudents;
@@ -36,6 +37,8 @@ public class My_Repository {
         studentCourseDao = db.studentCourseDao();
         studentTeacherDao = db.studentTeacherDao();
         courseLessonsDao = db.courseLessonsDao();
+        messageDao = db.messageDao();
+
 
         // courseReviewsDao = db.courseReviewsDao();
         //  executorService = Executors.newFixedThreadPool(2); // تنفيذ العمليات في خلفية
@@ -44,6 +47,22 @@ public class My_Repository {
         //mAllWords = mWordDao.getAlphabetizedWords();
     }
 
+
+    public void insertMessage(Message message) {
+        My_Database.databaseWriteExecutor.execute(() -> messageDao.insertMessage(message));
+    }
+
+    public LiveData<List<Message>> getMessagesBetweenUsers(String currentUser, String otherUser) {
+        return messageDao.getMessagesBetweenUsers(currentUser, otherUser);
+    }
+
+    public LiveData<Message> getLastMessageForUser(String username) {
+        return messageDao.getLastMessageForUser(username);
+    }
+
+    public LiveData<List<Student>> getAllStudentsExceptCurrent(String currentUsername) {
+        return studentDao.getAllStudentsExcept(currentUsername);
+    }
     public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
         MutableLiveData<CourseLessonStats> statsLiveData = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
