@@ -18,14 +18,15 @@ public class Student {
     private String Student_user_name;
     private String Student_Password;
     private int phone_nomber;
+    private int Card_Number;
     private String S_name;
     private byte[] s_Image;
 
-
-    public Student(@NonNull String student_user_name, String student_Password, int phone_nomber, String s_name, byte[] s_Image) {
+    public Student(@NonNull String student_user_name, String student_Password, int phone_nomber, int card_Number, String s_name, byte[] s_Image) {
         Student_user_name = student_user_name;
         Student_Password = student_Password;
         this.phone_nomber = phone_nomber;
+        Card_Number = card_Number;
         S_name = s_name;
         this.s_Image = s_Image;
     }
@@ -58,6 +59,14 @@ public class Student {
         this.phone_nomber = phone_nomber;
     }
 
+    public int getCard_Number() {
+        return Card_Number;
+    }
+
+    public void setCard_Number(int card_Number) {
+        Card_Number = card_Number;
+    }
+
     public String getS_name() {
         return S_name;
     }
@@ -74,15 +83,13 @@ public class Student {
         this.s_Image = s_Image;
     }
 
-
-
-
     @Override
     public String toString() {
         return "Student{" +
                 "Student_user_name='" + Student_user_name + '\'' +
                 ", Student_Password='" + Student_Password + '\'' +
                 ", phone_nomber=" + phone_nomber +
+                ", Card_Number=" + Card_Number +
                 ", S_name='" + S_name + '\'' +
                 ", s_Image=" + Arrays.toString(s_Image) +
                 '}';

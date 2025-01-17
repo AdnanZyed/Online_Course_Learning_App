@@ -20,6 +20,45 @@ public class My_View_Model extends AndroidViewModel {
         allReviews = null; // سيتم تخصيصها عند استدعاء طريقة الجلب
 
     }
+
+    public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
+        return repository.getCourseLessonStats(courseId);
+    }
+
+    public void insertCourseLesson(CourseLessons courseLesson) {
+        repository.insertCourseLesson(courseLesson);
+    }
+
+    // الحصول على العدد الكلي للدروس
+    public LiveData<Integer> getTotalLessonsCount() {
+        return repository.getTotalLessonsCount();
+    }
+
+    // الحصول على عدد الدروس المكتملة
+    public LiveData<Integer> getCompletedLessonsCount() {
+        return repository.getCompletedLessonsCount();
+    }
+
+    // الحصول على مجموع الدقائق
+    public LiveData<Integer> getTotalLessonsTime() {
+        return repository.getTotalLessonsTime();
+    }
+
+    public void updateCourseLesson(CourseLessons courseLesson) {
+        repository.updateCourseLesson(courseLesson);
+    }
+
+    public void deleteCourseLesson(CourseLessons courseLesson) {
+        repository.deleteCourseLesson(courseLesson);
+    }
+
+    public LiveData<List<CourseLessons>> getLessonsByCourseId(int courseId) {
+        return repository.getLessonsByCourseId(courseId);
+    }
+
+    public void updateLessonCompletionStatus(int lessonId, boolean isCompleted) {
+        repository.updateLessonCompletionStatus(lessonId, isCompleted);
+    }
     // إضافة مراجعة
     public void insertReview(Course_Reviews review) {
         repository.insertReview(review);
@@ -81,6 +120,10 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Course>> getAllCoursesById(int id) {
         return repository.getAllCoursesById(id);
     }
+    public LiveData<List<Course>> getAllCoursesByIds(List<Integer> courseIds) {
+        return repository.getCoursesByIds(courseIds); // DAO يقوم بجلب الكورسات
+    }
+
     LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
         return repository.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
     }

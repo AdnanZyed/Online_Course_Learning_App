@@ -1,6 +1,7 @@
 package com.example.onlinecourseampe_learningapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -142,15 +143,21 @@ public class Sign_up extends AppCompatActivity {
                     if (students == null || students.isEmpty()) {
                         // إنشاء كائن طالب جديد وإضافته إلى قاعدة البيانات
                         int phoneIn = Integer.parseInt(PhoneIn);
-                        student = new Student(eUserIn, ePasswordIn, phoneIn, nameIn, null);
+                        student = new Student(eUserIn, ePasswordIn,phoneIn, 1234, nameIn, null);
                         myViewModel.insertStudent(student);
 
-                        Log.d("CourseDetailsActivity", "لقد حصلت على اشتراك جديد");
+
+                       // editor.apply(); // حفظ التعديلات
 
                         // الانتقال إلى MainActivity_Main
                         Intent intent = new Intent(Sign_up.this, MainActivity_Main.class);
-                        intent.putExtra("USER_NAME1", eUserIn);
+                        intent.putExtra("USER_NAME2", eUserIn);
                         startActivity(intent);
+
+//                      Intent intent1 = new Intent(Sign_up.this, EnrollCodeActivity.class);
+//                      intent1.putExtra("USER_NAME1", eUserIn);
+
+
                     } else {
                         // إذا كان اسم المستخدم موجودًا مسبقًا
                         activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقا");

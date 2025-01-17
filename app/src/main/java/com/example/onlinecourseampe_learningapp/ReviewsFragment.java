@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,14 +28,17 @@ import java.util.List;
 
 public class ReviewsFragment extends Fragment {
     private My_View_Model myViewModel;
-    List<Course_Reviews> reviewsList;
+    //    List<Course_Reviews> reviewsList;
     String student_name;
     byte[] bytes;
     ImageView imageView;
     RecyclerView recyclerView;
     Spinner ratingSpinner;
+
     Bundle args;
     String userString;
+    TextView total_Comments;
+    TextView total_Rating;
     EditText edit_Comment;
     ImageView imageSend;
     //  String coursest;
@@ -51,11 +56,12 @@ public class ReviewsFragment extends Fragment {
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
         imageView = view.findViewById(R.id.image_student);
         edit_Comment = view.findViewById(R.id.edit_comment);
+        total_Comments = view.findViewById(R.id.total_comments);
+        total_Rating = view.findViewById(R.id.total_rating);
         ratingSpinner = view.findViewById(R.id.rating);
         imageSend = view.findViewById(R.id.send);
 
         recyclerView = view.findViewById(R.id.rv_review);
-
 //        args = getArguments();
 //        if (args != null) {
 //            userString = args.getString("USER_NAME");
@@ -73,6 +79,7 @@ public class ReviewsFragment extends Fragment {
 //
 //
 //        }
+
         Log.d("CourseDetailsActivity", "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" + courseInt);
 
 
@@ -93,7 +100,6 @@ public class ReviewsFragment extends Fragment {
 
 
         });
-
         myViewModel.getAllReviewsByCourseId(courseInt).observe(requireActivity(), reviews -> {
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -103,6 +109,15 @@ public class ReviewsFragment extends Fragment {
             // إنشاء Adapter وتعيينه إلى RecyclerView
             ReviewsAdapter adapter = new ReviewsAdapter(getContext(), reviews);
             recyclerView.setAdapter(adapter);
+             int count = reviews.size();
+            int f=0;
+
+            for (int i = 0; i <= reviews.size()-1; i++) {
+              f  =+reviews.get(i).getRating();
+            }
+
+            total_Comments.setText("" + count);
+            total_Rating.setText("" + f );
         });
 
 //
@@ -153,13 +168,14 @@ public class ReviewsFragment extends Fragment {
                 // إنشاء تعليق جديد وإضافته إلى قاعدة البيانات
                 Course_Reviews review = new Course_Reviews(0, bytes, student_name, userString,
                         edit_Comment.getText().toString(),
-                        formattedDate, 0, courseInt, rating_spinner,false);
+                        formattedDate, 0, courseInt, rating_spinner, false);
                 myViewModel.insertReview(review);
 
                 // إعادة تعيين حقل النص
                 edit_Comment.setText(null);
             }
         });
+
 
         // استكمال الكود لمراقبة البيانات وربط RecyclerView...
 

@@ -38,6 +38,8 @@ public class MainActivity_sign extends AppCompatActivity {
                 addSampleCourses();
             }
         });
+       addSampleLessones();
+
 //
 //
 //        myViewModel.getAllStudent().observe(this, students -> {
@@ -86,6 +88,31 @@ public class MainActivity_sign extends AppCompatActivity {
     }
 
     // إنشاء البيانات التجريبية وإدخالها
+    private void addSampleLessones() {
+        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم ثلاثي الأبعاد باستخدام Blender", "https://www.youtube.com/watch?v=VG8R7QGdGp8", 10, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تعلم أساسيات النمذجة في 3D Max", "https://www.youtube.com/watch?v=3Ic4kF3rdzQ", 12, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "كيفية إنشاء مشاهد واقعية في Maya", "https://www.youtube.com/watch?v=FvBqDqsmHzI", 8, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "إضاءة المشاهد ثلاثية الأبعاد في Cinema 4D", "https://www.youtube.com/watch?v=fsAxSxp88ZQ", 15, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الشخصيات في Blender", "https://www.youtube.com/watch?v=6dXM8Gocv6k", 13, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات ثلاثية الأبعاد في 3D Max", "https://www.youtube.com/watch?v=2U5M6vI6xzY", 14, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة مؤثرات خاصة في Maya", "https://www.youtube.com/watch?v=kYgYbEo7HTo", 11, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تصدير النماذج ثلاثية الأبعاد للألعاب", "https://www.youtube.com/watch?v=6MQyZyQDRh4", 9, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم الشخصيات ثلاثية الأبعاد", "https://www.youtube.com/watch?v=k1pS5lfH2kc", 12, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء في Cinema 4D", "https://www.youtube.com/watch?v=nl5mcYIu7Fk", 16, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الكاميرا في مشاهد 3D Max", "https://www.youtube.com/watch?v=6dFtkdZTkmE", 17, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة إضاءة واقعية في Blender", "https://www.youtube.com/watch?v=0RPylvtaHhE", 10, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم مواد واقعية في Maya", "https://www.youtube.com/watch?v=mrctuUwEryo", 8, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم المشاهد الداخلية في 3D Max", "https://www.youtube.com/watch?v=JlxWqg7xeQU", 14, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الشخصيات في Cinema 4D", "https://www.youtube.com/watch?v=0VZqzxbzXYY", 10, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة مؤثرات خاصة في Blender", "https://www.youtube.com/watch?v=a4kDk1s5de4", 13, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات طبيعية في Maya", "https://www.youtube.com/watch?v=pBiv8nq-XGA", 12, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء المتقدمة في 3D Max", "https://www.youtube.com/watch?v=HkVgOlgw9yA", 11, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الكائنات في Blender", "https://www.youtube.com/watch?v=c56y_AiEcrE", 10, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة لتقنيات الـ 3D في الألعاب", "https://www.youtube.com/watch?v=c7Bx6m0bxg8", 9, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "إضاءة الأجسام في Maya", "https://www.youtube.com/watch?v=VK9wZG_7L6s", 15, false, 2));
+        myViewModel.insertCourseLesson(new CourseLessons(0, "تعلم استخدام الـ UV Mapping في Blender", "https://www.youtube.com/watch?v=FFG5nCUu3tk", 12, false, 2));
+    }
+
     private void addSampleCourses() {
         // تحويل الصورة من الموارد إلى Bitmap
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
@@ -176,44 +203,44 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes37 = convertImageToByteArray(bitmap37); // تحويل الصورة إلى Byte Array
 
 
-        Course course1 = new Course(0, "3D Design", imageBytes, 100, "3D Design", "Learn the basics of programming", "John Doe", null, false, "john_doe");
-        Course course2 = new Course(0, "3D Design", imageBytes1, 150, "3D Design", "Master Java programming", "Jane Smith", null, false, "john_doe");
-        Course course3 = new Course(0, "Web Development", imageBytes2, 200, "3D Design", "Learn to build websites", "Alice Brown", null, false, "john_doe");
-        Course course4 = new Course(0, "Mobile Development", imageBytes3, 180, "3D Design", "Create mobile applications", "Bob White", null, false, "john_doe");
-        Course course5 = new Course(0, "Data Science", imageBytes4, 250, "3D Design", "Learn data science", "Charlie Green", null, false, "john_doe");
-        Course course6 = new Course(0, "Machine Learning", imageBytes5, 220, "3D Design", "Introduction to machine learning", "Dave Black", null, false, "jane_smith");
-        Course course7 = new Course(0, "Blockchain Basics", imageBytes6, 300, "3D Design", "Learn about blockchain", "Eve Blue", null, false, "jane_smith");
-        Course course8 = new Course(0, "UI/UX Design", imageBytes7, 120, "3D Design", "Master UI/UX design", "Frank Pink", null, false, "jane_smith");
-        Course course9 = new Course(0, "Cybersecurity", imageBytes8, 350, "3D Design", "Learn about cybersecurity", "Grace Yellow", null, false, "jane_smith");
-        Course course10 = new Course(0, "Cloud Computing", imageBytes9, 280, "3D Design", "Understand cloud computing", "Harry Red", null, false, "jane_smith");
-        Course course11 = new Course(0, "AI Fundamentals", imageBytes10, 230, "3D Design", "Learn the basics of artificial intelligence", "Ivy Green", null, false, "alice_brown");
-        Course course12 = new Course(0, "App Development", imageBytes11, 170, "3D Design", "Develop apps for Android and iOS", "Jack White", null, false, "alice_brown");
-        Course course13 = new Course(0, "Game Development", imageBytes12, 210, "3D Design", "Learn how to create games", "Kylie Blue", null, false, "alice_brown");
-        Course course14 = new Course(0, "Database Design", imageBytes13, 240, "3D Design", "Understand database design", "Leo Brown", null, false, "alice_brown");
-        Course course15 = new Course(0, "Digital Marketing", imageBytes14, 160, "Business", "Learn the basics of digital marketing", "Mia Green", null, false, "alice_brown");
-        Course course16 = new Course(0, "Cloud Security", imageBytes15, 300, "Business", "Learn about cloud security", "Nathan Yellow", null, false, "bob_white");
-        Course course17 = new Course(0, "Network Fundamentals", imageBytes16, 130, "Business", "Learn the basics of networking", "Olivia White", null, false, "bob_white");
-        Course course18 = new Course(0, "Robotics", imageBytes17, 330, "Business", "Learn robotics and automation", "Paul Black", null, false, "bob_white");
-        Course course19 = new Course(0, "Full Stack Development", imageBytes18, 260, "Business", "Master full-stack web development", "Quinn Blue", null, false, "bob_white");
-        Course course20 = new Course(0, "Data Analytics", imageBytes19, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, "bob_white");
-        Course course21 = new Course(0, "Data Analytics", imageBytes20, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, "bob_white");
-        Course course22 = new Course(0, "Data Analytics", imageBytes21, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, "bob_white");
-        Course course23 = new Course(0, "Data Analytics", imageBytes22, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, "bob_white");
-        Course course24 = new Course(0, "Data Analytics", imageBytes23, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, "alice_brown");
-        Course course25 = new Course(0, "Data Analytics", imageBytes24, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "alice_brown");
-        Course course26 = new Course(0, "Data Analytics", imageBytes25, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "alice_brown");
-        Course course27 = new Course(0, "Data Analytics", imageBytes26, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "alice_brown");
-        Course course28 = new Course(0, "Data Analytics", imageBytes27, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "alice_brown");
-        Course course29 = new Course(0, "Data Analytics", imageBytes28, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "jane_smith");
-        Course course30 = new Course(0, "Data Analytics", imageBytes29, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "jane_smith");
-        Course course31 = new Course(0, "Data Analytics", imageBytes30, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, "jane_smith");
-        Course course32 = new Course(0, "Data Analytics", imageBytes31, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "jane_smith");
-        Course course33 = new Course(0, "Data Analytics", imageBytes32, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "jane_smith");
-        Course course34 = new Course(0, "Data Analytics", imageBytes33, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "jane_smith");
-        Course course35 = new Course(0, "Data Analytics", imageBytes34, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "john_doe");
-        Course course36 = new Course(0, "Data Analytics", imageBytes35, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "john_doe");
-        Course course37 = new Course(0, "Data Analytics", imageBytes36, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "john_doe");
-        Course course38 = new Course(0, "Data Analytics", imageBytes37, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, "john_doe");
+        Course course1 = new Course(0, "3D Design", imageBytes, 100, "3D Design", "Learn the basics of programming", "John Doe", null, false, false, "john_doe");
+        Course course2 = new Course(0, "3D Design", imageBytes1, 150, "3D Design", "Master Java programming", "Jane Smith", null, false, false, "john_doe");
+        Course course3 = new Course(0, "Web Development", imageBytes2, 200, "3D Design", "Learn to build websites", "Alice Brown", null, false, false, "john_doe");
+        Course course4 = new Course(0, "Mobile Development", imageBytes3, 180, "3D Design", "Create mobile applications", "Bob White", null, false, false, "john_doe");
+        Course course5 = new Course(0, "Data Science", imageBytes4, 250, "3D Design", "Learn data science", "Charlie Green", null, false, false, "john_doe");
+        Course course6 = new Course(0, "Machine Learning", imageBytes5, 220, "3D Design", "Introduction to machine learning", "Dave Black", null, false, false, "jane_smith");
+        Course course7 = new Course(0, "Blockchain Basics", imageBytes6, 300, "3D Design", "Learn about blockchain", "Eve Blue", null, false, false, "jane_smith");
+        Course course8 = new Course(0, "UI/UX Design", imageBytes7, 120, "3D Design", "Master UI/UX design", "Frank Pink", null, false, false, "jane_smith");
+        Course course9 = new Course(0, "Cybersecurity", imageBytes8, 350, "3D Design", "Learn about cybersecurity", "Grace Yellow", null, false, false, "jane_smith");
+        Course course10 = new Course(0, "Cloud Computing", imageBytes9, 280, "3D Design", "Understand cloud computing", "Harry Red", null, false, false, "jane_smith");
+        Course course11 = new Course(0, "AI Fundamentals", imageBytes10, 230, "3D Design", "Learn the basics of artificial intelligence", "Ivy Green", null, false, false, "alice_brown");
+        Course course12 = new Course(0, "App Development", imageBytes11, 170, "3D Design", "Develop apps for Android and iOS", "Jack White", null, false, false, "alice_brown");
+        Course course13 = new Course(0, "Game Development", imageBytes12, 210, "3D Design", "Learn how to create games", "Kylie Blue", null, false, false, "alice_brown");
+        Course course14 = new Course(0, "Database Design", imageBytes13, 240, "3D Design", "Understand database design", "Leo Brown", null, false, false, "alice_brown");
+        Course course15 = new Course(0, "Digital Marketing", imageBytes14, 160, "Business", "Learn the basics of digital marketing", "Mia Green", null, false, false, "alice_brown");
+        Course course16 = new Course(0, "Cloud Security", imageBytes15, 300, "Business", "Learn about cloud security", "Nathan Yellow", null, false, false, "bob_white");
+        Course course17 = new Course(0, "Network Fundamentals", imageBytes16, 130, "Business", "Learn the basics of networking", "Olivia White", null, false, false, "bob_white");
+        Course course18 = new Course(0, "Robotics", imageBytes17, 330, "Business", "Learn robotics and automation", "Paul Black", null, false, false, "bob_white");
+        Course course19 = new Course(0, "Full Stack Development", imageBytes18, 260, "Business", "Master full-stack web development", "Quinn Blue", null, false, false, "bob_white");
+        Course course20 = new Course(0, "Data Analytics", imageBytes19, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, false, "bob_white");
+        Course course21 = new Course(0, "Data Analytics", imageBytes20, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, false, "bob_white");
+        Course course22 = new Course(0, "Data Analytics", imageBytes21, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, false, "bob_white");
+        Course course23 = new Course(0, "Data Analytics", imageBytes22, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, false, "bob_white");
+        Course course24 = new Course(0, "Data Analytics", imageBytes23, 220, "Business", "Learn how to analyze data", "Rachel Green", null, false, false, "alice_brown");
+        Course course25 = new Course(0, "Data Analytics", imageBytes24, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "alice_brown");
+        Course course26 = new Course(0, "Data Analytics", imageBytes25, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "alice_brown");
+        Course course27 = new Course(0, "Data Analytics", imageBytes26, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "alice_brown");
+        Course course28 = new Course(0, "Data Analytics", imageBytes27, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "alice_brown");
+        Course course29 = new Course(0, "Data Analytics", imageBytes28, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "jane_smith");
+        Course course30 = new Course(0, "Data Analytics", imageBytes29, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "jane_smith");
+        Course course31 = new Course(0, "Data Analytics", imageBytes30, 220, "Art", "Learn how to analyze data", "Rachel Green", null, false, false, "jane_smith");
+        Course course32 = new Course(0, "Data Analytics", imageBytes31, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "jane_smith");
+        Course course33 = new Course(0, "Data Analytics", imageBytes32, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "jane_smith");
+        Course course34 = new Course(0, "Data Analytics", imageBytes33, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "jane_smith");
+        Course course35 = new Course(0, "Data Analytics", imageBytes34, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "john_doe");
+        Course course36 = new Course(0, "Data Analytics", imageBytes35, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "john_doe");
+        Course course37 = new Course(0, "Data Analytics", imageBytes36, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "john_doe");
+        Course course38 = new Course(0, "Data Analytics", imageBytes37, 220, "Programming", "Learn how to analyze data", "Rachel Green", null, false, false, "john_doe");
 
         myViewModel.insertCourse(course1);
         myViewModel.insertCourse(course2);
@@ -304,7 +331,7 @@ public class MainActivity_sign extends AppCompatActivity {
 
     private void addSampleStudents() {
 
-        Student student = new Student("userName", "Password", 1231231212, "ahmad", null);
+        Student student = new Student("userName", "Password", 1234, 1231231212, "ahmad", null);
         myViewModel.insertStudent(student);
 
         // ربط الطالب بالكورسات

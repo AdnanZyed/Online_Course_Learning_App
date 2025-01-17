@@ -95,8 +95,13 @@ public class ActivityMainSignIn extends AppCompatActivity {
                             Log.d("ActivityMainSignIn", "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII " + EUserIn);
 
                             // الانتقال إلى شاشة المستخدم
+//                            Intent intent1 = new Intent(ActivityMainSignIn.this, EnrollCodeActivity.class);
+//                            intent1.putExtra("USER_NAME1", EUserIn);
+
+                            Log.d("CourseDetailsActivity", "لقد حصلت على اشتراك جديد");
+
                             Intent intent = new Intent(ActivityMainSignIn.this, MainActivity_Main.class);
-                            intent.putExtra("USER_NAME1", EUserIn);
+                            intent.putExtra("USER_NAME2", EUserIn);
 
                             startActivity(intent);
                         } else {

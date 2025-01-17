@@ -75,14 +75,14 @@
             android:layout_marginStart="50dp"
             android:padding="4dp"
 
-            android:src="@drawable/google" />
+            android:src="@drawable/paypal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="100dp"
-            android:text="Google Pay"
+            android:text="Paypal"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
@@ -107,14 +107,14 @@
             android:layout_marginStart="50dp"
             android:padding="4dp"
 
-            android:src="@drawable/apple" />
+            android:src="@drawable/google" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="100dp"
-            android:text="Cotinue with Apple"
+            android:text="Google Pay"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="100dp"
-            android:text="Cotinue with Apple"
+            android:text="Apple Pay"
             android:textColor="@color/black"
             android:textSize="22dp" />
     </androidx.cardview.widget.CardView>
@@ -172,14 +172,14 @@
             android:layout_marginStart="50dp"
             android:padding="4dp"
 
-            android:src="@drawable/apple" />
+            android:src="@drawable/card" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="100dp"
-            android:text="Cotinue with Apple"
+            android:text="... ...4679"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
@@ -250,7 +250,7 @@
         android:layout_margin="30dp"
         android:background="@drawable/btn_cart"
         android:elevation="0dp"
-        android:text="sdddddddddddddd"
+        android:text="Add New Card"
         android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

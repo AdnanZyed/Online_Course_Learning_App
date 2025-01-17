@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,8 +32,9 @@ public class CourseDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
 
-
+        String userName;
         TextView Price_dep = findViewById(R.id.price_dep);
+        Button bt_Buy = findViewById(R.id.bt_buy);
         TextView Dollar_dep = findViewById(R.id.dollar_dep);
         Price_dep.setPaintFlags(Price_dep.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         Dollar_dep.setPaintFlags(Dollar_dep.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -39,7 +42,15 @@ public class CourseDetailsActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager2 viewPager = findViewById(R.id.viewPager1);
 
+        bt_Buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                Intent intent = new Intent(CourseDetailsActivity.this, EnrollCourseActivity.class);
+                startActivity(intent);
+            }
+        });
         // استرجاع البيانات
         int courseId = getIntent().getIntExtra("COURSE_ID", -1);
         String courseUserName = getIntent().getStringExtra("TEACHER_USER_NAME");
@@ -50,9 +61,14 @@ public class CourseDetailsActivity extends AppCompatActivity {
         byte[] courseImage = getIntent().getByteArrayExtra("COURSE_IMAGE");
         String teacherName = getIntent().getStringExtra("TEACHER_NAME");
 
+         userName ="aDNAN@123";
+
+
         Bundle bundle = new Bundle();
         bundle.putInt("COURSE_ID1", courseId);
 
+//        Intent intent1 = new Intent(CourseDetailsActivity.this, EnrollCodeActivity.class);
+//        intent1.putExtra("COURSE_ID1", courseId);
 
 // إنشاؤ Fragment الجديد
         Fragment targetFragment = new ReviewsFragment();
@@ -60,17 +76,16 @@ public class CourseDetailsActivity extends AppCompatActivity {
 // ضبط البيانات المرسلة على الـ Fragment
         targetFragment.setArguments(bundle);
 
-        Intent intent = getIntent();
-        String userName = intent.getStringExtra("USER_NAME12");
+
+        //  Intent intent = getIntent();
 
 
 //        String userName = getIntent().getStringExtra("USER_NAME12");
-        Log.d("MainActivity_Main", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
+        Log.d("CourseDetailsActivity", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
 
         // إعداد الـ ViewPager مع الـ Adapter
-        TabPagerAdapter adapter = new TabPagerAdapter(this, courseUserName, courseId,userName );
+        TabPagerAdapter adapter = new TabPagerAdapter(this, courseUserName, courseId, userName);
         viewPager.setAdapter(adapter);
-
 
 
         Log.d("CourseDetailsActivity", "VVVVVVVVVVVVVVVVVVVVVVVVVVV" + courseId + userName);

@@ -131,7 +131,7 @@ public class Add_New_Course extends AppCompatActivity {
 //        }
 
         // إنشاء كائن الكورس
-        Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, null, false, teacherUsername);
+        Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, null, false,false, teacherUsername);
 
         // إدخال الكورس في قاعدة البيانات
         myViewModel.insertCourse(course);

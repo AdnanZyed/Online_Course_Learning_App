@@ -30,13 +30,14 @@ public class Course {
     private String Teacher_name; //اسم مدرس الكورس
     private byte[] profilePicture; //صورة الكورس
     private boolean isBookmarked; // متغير الإشارة المرجعية
+    private boolean isCompleted; // متغير الإشارة المرجعية
     private String Teacher_USER_Name;  // الإشارة إلى المدرس عن طريق اسم المستخدم
 
 
     //private String Student_user_name;
 
 
-    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, String teacher_USER_Name) {
+    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isCompleted, String teacher_USER_Name) {
         Course_ID = course_ID;
         Course_NAME = course_NAME;
         Image = image;
@@ -46,10 +47,19 @@ public class Course {
         Teacher_name = teacher_name;
         this.profilePicture = profilePicture;
         this.isBookmarked = isBookmarked;
+        this.isCompleted = isCompleted;
         Teacher_USER_Name = teacher_USER_Name;
     }
 
     public Course() {
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     public String getTeacher_USER_Name() {
@@ -142,7 +152,6 @@ public class Course {
 //        Student_user_name = student_user_name;
 //    }
 
-
     @Override
     public String toString() {
         return "Course{" +
@@ -155,6 +164,7 @@ public class Course {
                 ", Teacher_name='" + Teacher_name + '\'' +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", isBookmarked=" + isBookmarked +
+                ", isCompleted=" + isCompleted +
                 ", Teacher_USER_Name='" + Teacher_USER_Name + '\'' +
                 '}';
     }

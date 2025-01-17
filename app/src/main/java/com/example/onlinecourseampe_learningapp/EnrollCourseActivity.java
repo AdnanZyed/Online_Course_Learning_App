@@ -18,7 +18,16 @@ public class EnrollCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enroll_course);
         Button button = findViewById(R.id.bt_buy1);
+        Button button1 = findViewById(R.id.bt_buy);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
+
+
 
             @Override
             public void onClick(View v) {

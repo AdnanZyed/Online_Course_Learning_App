@@ -36,11 +36,12 @@
     <!-- تعليمات إدخال الكود -->
 
     <!-- حقول إدخال كود التحقق -->
+
     <TextView
         android:id="@+id/text_enroll2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="144dp"
         android:fontFamily="serif"
         android:text="Select the payment method you want to use"
         android:textAlignment="center"
@@ -54,11 +55,11 @@
         android:id="@+id/otp_digit_1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
         android:background="@drawable/otp_background"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:layout_marginTop="200dp"
         android:textSize="18sp"
         android:imeOptions="actionNext"
         app:layout_constraintEnd_toStartOf="@id/otp_digit_2"
@@ -70,10 +71,11 @@
         android:id="@+id/otp_digit_2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
         android:background="@drawable/otp_background"
         android:gravity="center"
         android:inputType="number"
+        android:layout_marginTop="200dp"
+
         android:maxLength="1"
         android:textSize="18sp"
         android:imeOptions="actionNext"
@@ -85,9 +87,10 @@
         android:id="@+id/otp_digit_3"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
         android:background="@drawable/otp_background"
         android:gravity="center"
+        android:layout_marginTop="200dp"
+
         android:inputType="number"
         android:maxLength="1"
         android:textSize="18sp"
@@ -100,11 +103,12 @@
         android:id="@+id/otp_digit_4"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
         android:background="@drawable/otp_background"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:layout_marginTop="200dp"
+
         android:textSize="18sp"
         android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,12 +118,11 @@
     <!-- زر تأكيد التسجيل -->
     <Button
         android:id="@+id/bt_buy1"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_margin="30dp"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
         android:background="@drawable/catigories_btn_selected"
         android:elevation="30dp"
-        android:text="Enroll Course-$"
+        android:text="Continue"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

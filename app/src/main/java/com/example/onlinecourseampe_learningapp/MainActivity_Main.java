@@ -29,6 +29,7 @@ public class MainActivity_Main extends AppCompatActivity
     BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment = new HomeFragment();
+    boolean showCustomNav;
     Prophile_Fragment prophileFragment = new Prophile_Fragment();
     CoursesFragment coursesFragment = new CoursesFragment();
     CartFragment cartFragment = new CartFragment();
@@ -45,11 +46,11 @@ public class MainActivity_Main extends AppCompatActivity
         setContentView(R.layout.activity_main_main);
 
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("USER_NAME1");
+        String userName = intent.getStringExtra("USER_NAME2");
         Log.d("MainActivity_Main", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
 
         HomeFragment homeFragment = new HomeFragment();
-
+        CoursesFragment coursesFragment1 = new CoursesFragment();
 
         Bundle bundle = new Bundle();
 
@@ -58,16 +59,35 @@ public class MainActivity_Main extends AppCompatActivity
 // إنشاء كائن Fragment
 
 // تمرير البيانات إلى الـ Fragment
-        homeFragment.setArguments(bundle);
+
+        // إذا كانت الرسالة المرسلة تطلب إخفاء الـ Bottom Navigation الافتراضي
+         showCustomNav = getIntent().getBooleanExtra("SHOW_CUSTOM_NAVIGATION", false);
+        if (showCustomNav) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.flFragment, coursesFragment1)
+                    .commit();
+            bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            bottomNavigationView.setOnNavigationItemSelectedListener(this);
+            bottomNavigationView.setSelectedItemId(R.id.courses1);
+        } else {
+            homeFragment.setArguments(bundle);
 
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flFragment, homeFragment)
-                .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.flFragment, homeFragment)
+                    .commit();
+
+            bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            bottomNavigationView.setOnNavigationItemSelectedListener(this);
+            bottomNavigationView.setSelectedItemId(R.id.home1);
+
+        }
+
         Intent intent1 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
         intent1.putExtra("USER_NAME12", userName);
 
-      //  ReviewsFragment reviewsFragment = new ReviewsFragment();
+        //  ReviewsFragment reviewsFragment = new ReviewsFragment();
 
 //        Bundle bundle1 = new Bundle();
 //
@@ -98,9 +118,6 @@ public class MainActivity_Main extends AppCompatActivity
 
 //        Log.d("AAAAA", "USER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAMEUSER_NAME" + userName);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.home);
 
 //        // تعيين الفراجمنت الافتراضي عند البداية
 //        if (savedInstanceState == null) {
@@ -125,12 +142,12 @@ public class MainActivity_Main extends AppCompatActivity
 
                 break;
 
-            case R.id.home:
+            case R.id.home1:
                 selectedFragment = homeFragment;
 
                 break;
 
-            case R.id.courses:
+            case R.id.courses1:
                 selectedFragment = coursesFragment;
 
                 break;
@@ -164,8 +181,13 @@ public class MainActivity_Main extends AppCompatActivity
                     .commit();
             activeFragment = homeFragment;  // تحديث الفراجمنت النشط إلى Home
             // تحديث التحديد في BottomNavigationView إلى زر الهوم
-            bottomNavigationView.setSelectedItemId(R.id.home);
+            if (showCustomNav) {
+                bottomNavigationView.setSelectedItemId(R.id.courses1);
+            }else {
 
+                bottomNavigationView.setSelectedItemId(R.id.home1);
+
+            }
         } else {
             super.onBackPressed(); // إذا كان بالفعل في HomeFragment، تابع تنفيذ الزر الرجوع المعتاد
         }

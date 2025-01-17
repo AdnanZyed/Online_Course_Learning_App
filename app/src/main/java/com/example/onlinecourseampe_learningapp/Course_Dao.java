@@ -41,6 +41,9 @@ public interface Course_Dao {
     LiveData<List<Course>> getAllCoursesById(int course_Id);
     @Query("SELECT * FROM Course WHERE Teacher_USER_Name =:teacher_USER_Name")
     LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String teacher_USER_Name);
+    @Query("SELECT * FROM Course WHERE Course_ID IN (:courseIds)")
+    LiveData<List<Course>> getCoursesByIds(List<Integer> courseIds);
+
 }
 
 
