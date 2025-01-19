@@ -25,7 +25,7 @@ public class Tab_profile_Adapter
             case 0:
                 return new CoursesProfileFragment();
             case 1:
-                return new StudentsProfileFragment();
+                return new StudentsFragment();
             case 2:
                 return new ReviewsTeacherFragment();
             default:

@@ -1,6 +1,9 @@
 package com.example.onlinecourseampe_learningapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,21 +46,47 @@ public class TopMentors extends AppCompatActivity {
         textMentor = findViewById(R.id.text_mentor);
 
 
+
+        eSearsh.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // لا حاجة لتنفيذ أي شيء هنا
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchQuery = eSearsh.getText().toString().trim();
+                if (!searchQuery.isEmpty() || !searchQuery.equals("") || searchQuery == null) {
+                    searchTeachers(searchQuery);
+                } else {
+                    loadTeacher1();
+                    // النص موجود: تمكين زر الإرسال وتغيير لونه إلى الأزرق
+
+
+                }
+            }
+
+
+                @Override
+            public void afterTextChanged(Editable s) {
+                // لا حاجة لتنفيذ أي شيء هنا
+            }
+        });
+
         teacherAdapter = new TeacherAdapterMentors(this, new ArrayList<>());
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 //      Teacher_Dao.getTeacherByName("%" + searchQuery + "%");  // باستخدام الـ "%" للبحث الجزئي
 //      // جلب المدرسين من ViewModel
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-      //  loadTeacher1();
+        //  loadTeacher1();
 
         recyclerView.setLayoutManager(layoutManager);
 
         // قائمة المدرسين (بيانات افتراضية)
 
         recyclerView.setAdapter(teacherAdapter);
-
-
+        loadTeacher1();
 
 
         searchIcon.setOnClickListener(new View.OnClickListener() {
@@ -72,21 +101,21 @@ public class TopMentors extends AppCompatActivity {
             }
         });
 
-        searchQuery = eSearsh.getText().toString().trim();
-        if (!searchQuery.isEmpty()) {
-            searchTeachers(searchQuery);
-        }
+
+
 
 
     }
-    private void searchTeachers (String query){
+
+    private void searchTeachers(String query) {
         myViewModel.searchTeachers(query).observe(this, teachers -> {
             if (teachers != null) {
                 teacherAdapter.setTeacher_MonetorsList(teachers);  // تحديث الـ RecyclerView
             }
         });
-       // loadTeacher1();
+        // loadTeacher1();
     }
+
     public void loadTeacher1() {
         // جلب المدرسين من ViewModel
         myViewModel.getAllTeacher().observe(this, teachers -> {

@@ -38,12 +38,14 @@ public class HomeFragment extends Fragment {
     Button btnArt;
     TextView tv_Seeall;
     TextView tv_Seeall2;
+    TextView tv_Welcom;
     TextView tv_Name;
     RecyclerView recyclerView;
     ImageView Iv_notification;
     ImageView Iv_Bookmark;
     String students_u;
     ImageView iv_S;
+    String bio;
     private My_View_Model myViewModel;
 
     @SuppressLint("ResourceAsColor")
@@ -56,15 +58,6 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
-
-
-        // تحميل الفراجمنت داخل FrameLayout
-        if (savedInstanceState == null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fram_corse, new CourseFragment())
-                    .commit();
-        }
 
 
         args = getArguments();
@@ -89,12 +82,22 @@ public class HomeFragment extends Fragment {
         tv_Seeall = rootView.findViewById(R.id.tv_seeall);
         tv_Seeall2 = rootView.findViewById(R.id.tv_seeall2);
         tv_Name = rootView.findViewById(R.id.tv_name);
+        tv_Welcom = rootView.findViewById(R.id.tv_welcom);
         btn3DDesign = rootView.findViewById(R.id.btn_3d_design);
         btnProgramming = rootView.findViewById(R.id.btn_programming);
         teacherRecyclerView = rootView.findViewById(R.id.rv_t);
 
         btnBusiness = rootView.findViewById(R.id.btn_business);
         btnArt = rootView.findViewById(R.id.btn_art);
+        // استدعاء CourseFragment وتحميل الدورات عند تحميل الفراجمنت
+        CourseFragment fragment = (CourseFragment) getParentFragmentManager()
+                .findFragmentById(R.id.fram_corse);
+
+        if (fragment != null) {
+            fragment.loadCourses(); // استدعاء الدالة داخل الفراجمنت
+            onButtonClicked(btnAll);  // تفعيل الزر الافتراضي
+        }
+
         // إضافة الأزرار إلى القائمة
 
         buttons.add(btnAll);
@@ -123,7 +126,8 @@ public class HomeFragment extends Fragment {
 
                 Student student = students.get(0);
                 String student_name = student.getS_name().toString();
-
+                 bio=student.getBio().toString();
+                 tv_Welcom.setText(bio);
                 byte[] bytes = student.getS_Image();
                 if (bytes != null) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -153,7 +157,7 @@ public class HomeFragment extends Fragment {
         Iv_Bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireContext(), TeacherProfileActivity.class);
+                Intent intent = new Intent(requireContext(), BookmarkActivity.class);
                 startActivity(intent);
             }
         });
@@ -183,6 +187,33 @@ public class HomeFragment extends Fragment {
 
         //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
 
+
+        // تحميل الفراجمنت داخل FrameLayout
+        if (savedInstanceState == null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fram_corse, new CourseFragment())
+                    .commit();
+            onButtonClicked(btnAll);
+
+
+            //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
+
+
+        }
+
+//        CourseFragment fragment = (CourseFragment) getFragmentManager()
+//                .findFragmentById(R.id.fram_corse);
+//
+//        if (fragment != null) {
+//            fragment.loadCourses(); // استدعاء الدالة داخل الفراجمنت
+//            onButtonClicked(btnAll);
+//
+//
+//            //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
+//
+//
+//        }
 
         // استدعاء الكورسات عند الضغط على الزر
         btnAll.setOnClickListener(new View.OnClickListener() {
@@ -310,13 +341,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        tv_Seeall2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(requireContext(), CourseDetailsActivity.class);
-                startActivity(intent);
-            }
-        });
+
         loadTeacher();
 
         return rootView;
@@ -339,9 +364,6 @@ public class HomeFragment extends Fragment {
 
         });
     }
-
-
-
 
 
 //    private void addSampleTeacher() {

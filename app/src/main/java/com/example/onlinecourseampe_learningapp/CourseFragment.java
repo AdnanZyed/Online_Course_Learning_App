@@ -26,6 +26,7 @@ public class CourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_courses);
+       // loadCourses();
 
       //  loadCoursesByUserTeatcher("bob_white");
         // إعداد RecyclerView

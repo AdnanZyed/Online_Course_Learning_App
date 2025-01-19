@@ -30,6 +30,7 @@ public class Course {
     private String Teacher_name; //اسم مدرس الكورس
     private byte[] profilePicture; //صورة الكورس
     private boolean isBookmarked; // متغير الإشارة المرجعية
+    private boolean isAddCart;
     private boolean isCompleted; // متغير الإشارة المرجعية
     private String Teacher_USER_Name;  // الإشارة إلى المدرس عن طريق اسم المستخدم
 
@@ -37,7 +38,7 @@ public class Course {
     //private String Student_user_name;
 
 
-    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isCompleted, String teacher_USER_Name) {
+    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isAddCart, boolean isCompleted, String teacher_USER_Name) {
         Course_ID = course_ID;
         Course_NAME = course_NAME;
         Image = image;
@@ -47,11 +48,20 @@ public class Course {
         Teacher_name = teacher_name;
         this.profilePicture = profilePicture;
         this.isBookmarked = isBookmarked;
+        this.isAddCart = isAddCart;
         this.isCompleted = isCompleted;
         Teacher_USER_Name = teacher_USER_Name;
     }
 
     public Course() {
+    }
+
+    public boolean isAddCart() {
+        return isAddCart;
+    }
+
+    public void setAddCart(boolean addCart) {
+        isAddCart = addCart;
     }
 
     public boolean isCompleted() {
@@ -152,6 +162,7 @@ public class Course {
 //        Student_user_name = student_user_name;
 //    }
 
+
     @Override
     public String toString() {
         return "Course{" +
@@ -164,6 +175,7 @@ public class Course {
                 ", Teacher_name='" + Teacher_name + '\'' +
                 ", profilePicture=" + Arrays.toString(profilePicture) +
                 ", isBookmarked=" + isBookmarked +
+                ", isAddCart=" + isAddCart +
                 ", isCompleted=" + isCompleted +
                 ", Teacher_USER_Name='" + Teacher_USER_Name + '\'' +
                 '}';

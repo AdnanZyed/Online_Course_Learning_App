@@ -2,7 +2,10 @@ package com.example.onlinecourseampe_learningapp;
 
 
 import android.app.Application;
+import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -19,6 +22,7 @@ public class My_Repository {
     private Student_Dao studentDao;
     private Course_Dao courseDao;
     private CourseReviewsDao courseReviewsDao;
+    private TeacherReviewsDao teacherReviewsDao;
     private CourseLessonsDao courseLessonsDao;
 
     private final MessageDao messageDao;
@@ -34,6 +38,7 @@ public class My_Repository {
         courseDao = db.courseDao();
         teacherDao = db.teacherDao();
         courseReviewsDao = db.courseReviewsDao();
+        teacherReviewsDao = db.teacherReviewsDao();
         studentCourseDao = db.studentCourseDao();
         studentTeacherDao = db.studentTeacherDao();
         courseLessonsDao = db.courseLessonsDao();
@@ -63,25 +68,61 @@ public class My_Repository {
     public LiveData<List<Student>> getAllStudentsExceptCurrent(String currentUsername) {
         return studentDao.getAllStudentsExcept(currentUsername);
     }
-    public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
-        MutableLiveData<CourseLessonStats> statsLiveData = new MutableLiveData<>();
-        My_Database.databaseWriteExecutor.execute(() -> {
-            int totalLessons = courseLessonsDao.getTotalLessonsCountByCourseId(courseId);
-            int completedLessons = courseLessonsDao.getCompletedLessonsCountByCourseId(courseId);
-            int totalTime = courseLessonsDao.getTotalLessonsTimeByCourseId(courseId);
-            statsLiveData.postValue(new CourseLessonStats(totalLessons, completedLessons, totalTime));
+//    public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
+//        MutableLiveData<CourseLessonStats> statsLiveData = new MutableLiveData<>();
+//
+//        My_Database.databaseWriteExecutor.execute(() -> {
+//            int totalLessons = courseLessonsDao.getTotalLessonsCountByCourseId(courseId);
+//            int completedLessons = courseLessonsDao.getCompletedLessonsCountByCourseId(courseId);
+//            int totalTime = courseLessonsDao.getTotalLessonsTimeByCourseId(courseId);
+//            statsLiveData.postValue(new CourseLessonStats(totalLessons, completedLessons, totalTime));
+//        });
+//        return statsLiveData;
+//    }
+//public int getCompletedLessonsCountByCourseId(int courseId) {
+//    return courseLessonsDao.getCompletedLessonsCountByCourseId(courseId);
+//}
+
+    // دالة للحصول على عدد الدروس الكلي
+    public LiveData<Integer> getTotalLessonsCountByCourseId(int courseId) {
+        MutableLiveData<Integer> result = new MutableLiveData<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            // تنفيذ الاستعلام في الخيط الخلفي
+            int count = courseLessonsDao.getTotalLessonsCountByCourseId(courseId);
+            result.postValue(count);  // نشر القيمة في LiveData
         });
-        return statsLiveData;
+        return result;
     }
 
+    // دالة للحصول على عدد الدروس المكتملة
+    public LiveData<Integer> getCompletedLessonsCountByCourseId(int courseId) {
+        MutableLiveData<Integer> result = new MutableLiveData<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            int count = courseLessonsDao.getCompletedLessonsCountByCourseId(courseId);
+            result.postValue(count);
+        });
+        return result;
+    }
 
+    // دالة للحصول على الوقت الكلي للدروس
+    public LiveData<Integer> getTotalLessonsTimeByCourseId(int courseId) {
+        MutableLiveData<Integer> result = new MutableLiveData<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            int totalTime = courseLessonsDao.getTotalLessonsTimeByCourseId(courseId);
+            result.postValue(totalTime);
+        });
+        return result;
+    }
     public void insertCourseLesson(CourseLessons courseLesson) {
         My_Database.databaseWriteExecutor.execute(() ->{
 
             courseLessonsDao.insert(courseLesson);
 
         });
+
     }
+
+
     // الحصول على العدد الكلي للدروس
 
     public void updateCourseLesson(CourseLessons courseLesson) {
@@ -165,6 +206,37 @@ public class My_Repository {
     // جلب جميع المراجعات بناءً على معرف الدورة
     public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
         return courseReviewsDao.getAllReviewsByCourseId(courseId);
+    }
+
+
+
+
+    void insertReviewT(Teacher_Reviews review) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            teacherReviewsDao.insertReviewT(review);
+        });
+    }
+    // حذف مراجعة بناءً على اسم المستخدم
+
+
+    // تحديث مراجعة بناءً على اسم المستخدم
+
+    void updateReviewByStudentT(String studentUserName, String newComment, float newRating) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            teacherReviewsDao.updateReviewByStudentT(studentUserName, newComment, newRating);
+        });
+    }
+
+    void deleteReviewByStudentT(String studentUserName) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+
+            teacherReviewsDao.deleteReviewByStudentT(studentUserName);
+        });
+    }
+
+    // جلب جميع المراجعات بناءً على معرف الدورة
+    public LiveData<List<Teacher_Reviews>> getAllReviewsByCourseIdT(String teacher) {
+        return teacherReviewsDao.getAllReviewsByCourseIdT(teacher);
     }
 
     void updateCourse(Course course) {

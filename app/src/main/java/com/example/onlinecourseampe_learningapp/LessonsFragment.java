@@ -37,6 +37,9 @@ public class LessonsFragment extends Fragment {
         // قم بجلب البيانات من ViewModel
         myViewModel.getLessonsByCourseId(2).observe(getViewLifecycleOwner(), lessons -> {
             // إعداد Adapter
+
+          //  int lcount=lessons.size();
+
             CourseLessonsAdapter adapter = new CourseLessonsAdapter(myViewModel,lessons);
             recyclerView.setAdapter(adapter);
 

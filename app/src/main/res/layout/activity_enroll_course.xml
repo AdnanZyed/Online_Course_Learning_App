@@ -229,7 +229,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/bt_buy1"
+        android:id="@+id/bt_buy2"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="30dp"
@@ -244,7 +244,7 @@
         />
 
     <Button
-        android:id="@+id/bt_buy"
+        android:id="@+id/add_cart"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="30dp"

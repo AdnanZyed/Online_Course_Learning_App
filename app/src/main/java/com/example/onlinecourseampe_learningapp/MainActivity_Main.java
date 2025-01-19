@@ -30,7 +30,9 @@ public class MainActivity_Main extends AppCompatActivity
 
     HomeFragment homeFragment = new HomeFragment();
     boolean showCustomNav;
-    Prophile_Fragment prophileFragment = new Prophile_Fragment();
+    private My_View_Model myViewModel;
+
+    StudentsProfileFragment prophileFragment = new StudentsProfileFragment();
     CoursesFragment coursesFragment = new CoursesFragment();
     CartFragment cartFragment = new CartFragment();
     CourseFragment fragment = (CourseFragment) getSupportFragmentManager()
@@ -44,6 +46,7 @@ public class MainActivity_Main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_main);
+        myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
         Intent intent = getIntent();
         String userName = intent.getStringExtra("USER_NAME2");
@@ -56,6 +59,17 @@ public class MainActivity_Main extends AppCompatActivity
 
         bundle.putString("USER_NAME", userName);
 
+        myViewModel.getAllStudentByUser(userName).observe(this, students -> {
+
+            StudentsProfileFragment fragment = StudentsProfileFragment.newInstance(
+                    students.get(0).getS_name(),
+                   students.get(0).getBio(),
+                  students.get(0).getS_Image()
+            );
+
+        });
+
+
 // إنشاء كائن Fragment
 
 // تمرير البيانات إلى الـ Fragment
@@ -67,6 +81,7 @@ public class MainActivity_Main extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.flFragment, coursesFragment1)
                     .commit();
+
             bottomNavigationView = findViewById(R.id.bottomNavigationView);
             bottomNavigationView.setOnNavigationItemSelectedListener(this);
             bottomNavigationView.setSelectedItemId(R.id.courses1);
@@ -167,6 +182,7 @@ public class MainActivity_Main extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.flFragment, selectedFragment)
                     .commit();
+
             activeFragment = selectedFragment;  // تحديث الفراجمنت النشط
         }
         return true;
@@ -198,5 +214,6 @@ public class MainActivity_Main extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
     }
+
 
 }

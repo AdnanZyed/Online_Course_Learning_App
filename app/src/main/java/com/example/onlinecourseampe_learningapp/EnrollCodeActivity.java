@@ -126,14 +126,14 @@ public class EnrollCodeActivity extends AppCompatActivity {
         // إعداد الأزرار
         viewCourseButton.setOnClickListener(v -> {
             // الانتقال إلى شاشة الدورة
-            Intent intent = new Intent(EnrollCodeActivity.this, MainActivity_Main.class);
-            intent.putExtra("SHOW_CUSTOM_NAVIGATION", true);  // أضف هذا المتغير ليتم الكشف عنه في الـ MainActivity
+
 
             Student_Course studentCourse = new Student_Course(0, userName, course_Id);
             myViewModel.insertStudentCourse(studentCourse);
             Student_Teacher studentTeacher = new Student_Teacher(0, userName, teacher_USER_Name);
             myViewModel.insertStudentTeacher(studentTeacher);
-
+            Intent intent = new Intent(EnrollCodeActivity.this, MainActivity_Main.class);
+            intent.putExtra("SHOW_CUSTOM_NAVIGATION", true);  // أضف هذا المتغير ليتم الكشف عنه في الـ MainActivity
             startActivity(intent);
 
             dialog.dismiss();

@@ -1,5 +1,6 @@
 package com.example.onlinecourseampe_learningapp;
 
+
 public class CourseLessonStats {
     public int totalLessons;
     public int completedLessons;

@@ -143,7 +143,7 @@ public class Sign_up extends AppCompatActivity {
                     if (students == null || students.isEmpty()) {
                         // إنشاء كائن طالب جديد وإضافته إلى قاعدة البيانات
                         int phoneIn = Integer.parseInt(PhoneIn);
-                        student = new Student(eUserIn, ePasswordIn,phoneIn, 1234, nameIn, null);
+                        student = new Student(eUserIn, ePasswordIn,phoneIn, 1234, nameIn, null,"");
                         myViewModel.insertStudent(student);
 
 

@@ -13,11 +13,13 @@ public class My_View_Model extends AndroidViewModel {
 
     private My_Repository repository;
     private final LiveData<List<Course_Reviews>> allReviews;
+    private final LiveData<List<Teacher_Reviews>> allReviewsT;
 
     public My_View_Model(@NonNull Application application) {
         super(application);
         repository = new My_Repository(application);
         allReviews = null; // سيتم تخصيصها عند استدعاء طريقة الجلب
+        allReviewsT = null; // سيتم تخصيصها عند استدعاء طريقة الجلب
 
     }
 
@@ -36,9 +38,9 @@ public class My_View_Model extends AndroidViewModel {
     public LiveData<Message> getLastMessageForUser(String username) {
         return repository.getLastMessageForUser(username);
     }
-    public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
-        return repository.getCourseLessonStats(courseId);
-    }
+//    public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
+//        return repository.getCourseLessonStats(courseId);
+//    }
 
     public void insertCourseLesson(CourseLessons courseLesson) {
         repository.insertCourseLesson(courseLesson);
@@ -66,7 +68,19 @@ public class My_View_Model extends AndroidViewModel {
     public void deleteCourseLesson(CourseLessons courseLesson) {
         repository.deleteCourseLesson(courseLesson);
     }
+    public LiveData<Integer> getTotalLessonsCountByCourseId(int courseId) {
+        return repository.getTotalLessonsCountByCourseId(courseId);
+    }
 
+    // دالة للحصول على عدد الدروس المكتملة
+    public LiveData<Integer> getCompletedLessonsCountByCourseId(int courseId) {
+        return repository.getCompletedLessonsCountByCourseId(courseId);
+    }
+
+    // دالة للحصول على الوقت الكلي للدروس
+    public LiveData<Integer> getTotalLessonsTimeByCourseId(int courseId) {
+        return repository.getTotalLessonsTimeByCourseId(courseId);
+    }
     public LiveData<List<CourseLessons>> getLessonsByCourseId(int courseId) {
         return repository.getLessonsByCourseId(courseId);
     }
@@ -92,6 +106,26 @@ public class My_View_Model extends AndroidViewModel {
     // جلب جميع المراجعات بناءً على معرف الدورة
     public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
         return repository.getAllReviewsByCourseId(courseId);
+    }
+
+
+    public void insertReviewT(Teacher_Reviews review) {
+        repository.insertReviewT(review);
+    }
+
+    // حذف مراجعة بناءً على اسم المستخدم
+    public void deleteReviewByStudentT(String studentUserName) {
+        repository.deleteReviewByStudentT(studentUserName);
+    }
+
+    // تحديث مراجعة بناءً على اسم المستخدم
+    public void updateReviewByStudentT(String studentUserName, String newComment, float newRating) {
+        repository.updateReviewByStudentT(studentUserName, newComment, newRating);
+    }
+
+    // جلب جميع المراجعات بناءً على معرف الدورة
+    public LiveData<List<Teacher_Reviews>> getAllReviewsByCourseIdT(String teacher) {
+        return repository.getAllReviewsByCourseIdT(teacher);
     }
 
     // دالة لحذف جميع الكورسات

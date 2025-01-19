@@ -7,10 +7,12 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.IntFunction;
 
 @Entity(tableName = "Student")
-public class Student {
+public class Student{
     //انا لست متأكدا مما اذا كان من الصحيح اضافة المفتاح الاساس لجدول الكورسات هنا كاجنبي للربط اذا كان هناك اي تعديل فعدله
    // كل هذه البيانات يتم اضافتها عند الاشتراك ما عدا الصورة من البروفايل
     @PrimaryKey
@@ -21,14 +23,24 @@ public class Student {
     private int Card_Number;
     private String S_name;
     private byte[] s_Image;
+    private String bio;
 
-    public Student(@NonNull String student_user_name, String student_Password, int phone_nomber, int card_Number, String s_name, byte[] s_Image) {
+    public Student(@NonNull String student_user_name, String student_Password, int phone_nomber, int card_Number, String s_name, byte[] s_Image, String bio) {
         Student_user_name = student_user_name;
         Student_Password = student_Password;
         this.phone_nomber = phone_nomber;
         Card_Number = card_Number;
         S_name = s_name;
         this.s_Image = s_Image;
+        this.bio = bio;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public Student() {
@@ -92,6 +104,9 @@ public class Student {
                 ", Card_Number=" + Card_Number +
                 ", S_name='" + S_name + '\'' +
                 ", s_Image=" + Arrays.toString(s_Image) +
+                ", bio='" + bio + '\'' +
                 '}';
     }
+
+
 }

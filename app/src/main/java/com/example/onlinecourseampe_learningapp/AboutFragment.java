@@ -73,6 +73,7 @@ public class AboutFragment extends Fragment {
               //  }
 
                 bundle.putString("TEACHER_NAME_TEXT_VIEW",teacherdata.getTeatur_name());
+                bundle.putString("TEACHER_USER_NAME_TEXT_VIEW",teacherdata.getTeatur_USER_Name());
                 bundle.putString("EDUCATION_TEXT_VIEW",teacherdata.getEducation());
                 bundle.putByteArray("BITMAP",teacherdata.getImage_teatcher());
             }

@@ -1,0 +1,59 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <!-- صورة الطالب -->
+    <ImageView
+        android:id="@+id/ivStudentImageS"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- اسم الطالب -->
+    <TextView
+        android:id="@+id/tvStudentNameS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Name"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivStudentImageS"
+        app:layout_constraintTop_toTopOf="@id/ivStudentImageS"
+        />
+
+    <!-- آخر رسالة -->
+    <TextView
+        android:id="@+id/tvLastMessageS"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Last message here"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/ivStudentImageS"
+        app:layout_constraintTop_toBottomOf="@id/tvStudentNameS"
+
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/chat"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLastMessageS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvStudentNameS" />
+    <!-- وقت آخر رسالة -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
