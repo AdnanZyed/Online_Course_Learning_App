@@ -36,7 +36,6 @@ public class ReviewsTeacherFragment extends Fragment {
     Spinner ratingSpinner;
 
     Bundle args;
-    String userString;
     TextView total_Comments;
     TextView total_Rating;
     EditText edit_Comment;
@@ -62,6 +61,10 @@ public class ReviewsTeacherFragment extends Fragment {
         imageSend = view.findViewById(R.id.send);
 
         recyclerView = view.findViewById(R.id.rv_review);
+        String teacherUserName = getArguments().getString("TEACHER_USER_NAME1");
+        String user = getArguments().getString("STUDENT_USER_NAME1");
+
+
 //        args = getArguments();
 //        if (args != null) {
 //            userString = args.getString("USER_NAME");
@@ -82,8 +85,9 @@ public class ReviewsTeacherFragment extends Fragment {
 
     //    Log.d("CourseDetailsActivity", "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" + courseInt);
 
+        Log.d("ReviewsTeacherFragment", "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR " + user+teacherUserName);
 
-        myViewModel.getAllStudentByUser("aDNAN@123").observe(getViewLifecycleOwner(), students -> {
+        myViewModel.getAllStudentByUser(user).observe(getViewLifecycleOwner(), students -> {
             // استخدام LinearLayoutManager مع التمرير الأفقي
 
             Student student = students.get(0);
@@ -100,7 +104,7 @@ public class ReviewsTeacherFragment extends Fragment {
 
 
         });
-        myViewModel.getAllReviewsByCourseIdT("john_doe").observe(requireActivity(), reviews -> {
+        myViewModel.getAllReviewsByCourseIdT(teacherUserName).observe(requireActivity(), reviews -> {
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -113,7 +117,7 @@ public class ReviewsTeacherFragment extends Fragment {
             int f=0;
 
             for (int i = 0; i <= reviews.size()-1; i++) {
-                f  =+reviews.get(i).getRating();
+                f+=reviews.get(i).getRating();
             }
 
             total_Comments.setText("" + count);
@@ -166,9 +170,9 @@ public class ReviewsTeacherFragment extends Fragment {
                 Log.d("ReviewsFragment", "Sending review at: " + formattedDate);
 
                 // إنشاء تعليق جديد وإضافته إلى قاعدة البيانات
-                Teacher_Reviews review = new Teacher_Reviews(0, bytes, student_name, userString,
+                Teacher_Reviews review = new Teacher_Reviews(0, bytes, student_name, user,
                         edit_Comment.getText().toString(),
-                        formattedDate, 0, "john_doe", rating_spinner, false);
+                        formattedDate, 0, teacherUserName, rating_spinner, false);
                 myViewModel.insertReviewT(review);
 
                 // إعادة تعيين حقل النص

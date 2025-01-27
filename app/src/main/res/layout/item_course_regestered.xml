@@ -50,10 +50,9 @@
         android:text="0"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBarR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/progressBarR"
-        app:layout_constraintTop_toTopOf="@+id/progressBarR" />
+        app:layout_constraintBottom_toBottomOf="@+id/slashR"
+        app:layout_constraintEnd_toStartOf="@+id/slashR"
+        app:layout_constraintTop_toTopOf="@+id/slashR" />
 
     <TextView
         android:id="@+id/slashR"
@@ -62,11 +61,9 @@
         android:text="/"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBarR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lessons_numR"
-        app:layout_constraintTop_toTopOf="@+id/progressBarR"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintBottom_toBottomOf="@+id/numlessonR"
+        app:layout_constraintEnd_toStartOf="@+id/numlessonR"
+        app:layout_constraintTop_toTopOf="@+id/numlessonR" />
 
     <TextView
         android:id="@+id/numlessonR"
@@ -77,7 +74,6 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBarR"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/slashR"
         app:layout_constraintTop_toTopOf="@+id/progressBarR" />
 
     <!-- شريط التقدم -->

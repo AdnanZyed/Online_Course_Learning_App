@@ -19,6 +19,7 @@ public class CourseFragment extends Fragment {
 
     private My_View_Model myViewModel;
     private CourseAdapter courseAdapter;
+    private String user;
 
     @Nullable
     @Override
@@ -26,16 +27,18 @@ public class CourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_courses);
-       // loadCourses();
+        // loadCourses();
 
-      //  loadCoursesByUserTeatcher("bob_white");
+        user = getArguments().getString("USER_NAME_R");
+        //  loadCoursesByUserTeatcher("bob_white");
         // إعداد RecyclerView
-        courseAdapter = new CourseAdapter(requireContext(), new ArrayList<>());
+        courseAdapter = new CourseAdapter(requireContext(), new ArrayList<>(), user);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(courseAdapter);
 
         // إعداد ViewModel
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
+        loadCourses();
 
         return view;
     }
@@ -51,8 +54,11 @@ public class CourseFragment extends Fragment {
                 Intent intent = new Intent(requireContext(), CourseDetailsActivity.class);
 
                 intent.putExtra("COURSE_ID", course.getCourse_ID());
+                intent.putExtra("USER", user);
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
+                intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
+
                 intent.putExtra("COURSE_PRICE", course.getPrice());
                 intent.putExtra("COURSE_IMAGE", course.getImage());
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
@@ -77,6 +83,9 @@ public class CourseFragment extends Fragment {
                 intent.putExtra("COURSE_ID", course.getCourse_ID());
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
+                intent.putExtra("USER", user);
+                intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
+
                 intent.putExtra("COURSE_PRICE", course.getPrice());
                 intent.putExtra("COURSE_IMAGE", course.getImage());
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
@@ -105,8 +114,11 @@ public class CourseFragment extends Fragment {
                 intent.putExtra("COURSE_ID", course.getCourse_ID());
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
+                intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
                 intent.putExtra("COURSE_PRICE", course.getPrice());
                 intent.putExtra("COURSE_IMAGE", course.getImage());
+                intent.putExtra("USER", user);
+
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
 
 
@@ -114,7 +126,9 @@ public class CourseFragment extends Fragment {
             });
 
         });
-    }   public void loadCourses_Categorie_Programming() {
+    }
+
+    public void loadCourses_Categorie_Programming() {
 
 
         // تحميل جميع الكورسات من قاعدة البيانات
@@ -132,6 +146,8 @@ public class CourseFragment extends Fragment {
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
                 intent.putExtra("COURSE_PRICE", course.getPrice());
+                intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
+                intent.putExtra("USER", user);
                 intent.putExtra("COURSE_IMAGE", course.getImage());
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
 
@@ -160,6 +176,8 @@ public class CourseFragment extends Fragment {
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
                 intent.putExtra("COURSE_PRICE", course.getPrice());
+                intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
+
                 intent.putExtra("COURSE_IMAGE", course.getImage());
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
 
@@ -168,7 +186,9 @@ public class CourseFragment extends Fragment {
             });
 
         });
-    }    public void loadCourses_Categorie_3D_Design() {
+    }
+
+    public void loadCourses_Categorie_3D_Design() {
 
 
         // تحميل جميع الكورسات من قاعدة البيانات
@@ -186,6 +206,8 @@ public class CourseFragment extends Fragment {
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
                 intent.putExtra("COURSE_PRICE", course.getPrice());
+                intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
+
                 intent.putExtra("COURSE_IMAGE", course.getImage());
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
 

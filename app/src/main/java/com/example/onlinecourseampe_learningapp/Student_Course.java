@@ -16,13 +16,42 @@ public class Student_Course {
     private int id_sc;
     private String Student_user_name;
     private int Course_ID;
+    private boolean isBookmark;
+    private boolean isRegister;
+    private boolean isAddCart;
 
-    public Student_Course(int id_sc, String student_user_name, int course_ID) {
+    public Student_Course(int id_sc, String student_user_name, int course_ID, boolean isBookmark, boolean isAddCart,boolean isRegister) {
         this.id_sc = id_sc;
         Student_user_name = student_user_name;
         Course_ID = course_ID;
+        this.isBookmark = isBookmark;
+        this.isAddCart = isAddCart;
+        this.isRegister = isRegister;
     }
 
+    public boolean isBookmark() {
+        return isBookmark;
+    }
+
+    public boolean isRegister() {
+        return isRegister;
+    }
+
+    public void setRegister(boolean register) {
+        isRegister = register;
+    }
+
+    public boolean isAddCart() {
+        return isAddCart;
+    }
+
+    public void setAddCart(boolean addCart) {
+        isAddCart = addCart;
+    }
+
+    public void setBookmark(boolean bookmark) {
+        isBookmark = bookmark;
+    }
 
     public Student_Course() {
     }
@@ -57,6 +86,9 @@ public class Student_Course {
                 "id_sc=" + id_sc +
                 ", Student_user_name='" + Student_user_name + '\'' +
                 ", Course_ID=" + Course_ID +
+                ", isBookmark=" + isBookmark +
+                ", isRegister=" + isRegister +
+                ", isAddCart=" + isAddCart +
                 '}';
     }
 }

@@ -31,8 +31,10 @@ public class MainActivity_Main extends AppCompatActivity
     HomeFragment homeFragment = new HomeFragment();
     boolean showCustomNav;
     private My_View_Model myViewModel;
+    //StudentsProfileFragment fragment1;
+    String userName;
 
-    StudentsProfileFragment prophileFragment = new StudentsProfileFragment();
+        StudentsProfileFragment prophileFragment = new StudentsProfileFragment();
     CoursesFragment coursesFragment = new CoursesFragment();
     CartFragment cartFragment = new CartFragment();
     CourseFragment fragment = (CourseFragment) getSupportFragmentManager()
@@ -48,8 +50,10 @@ public class MainActivity_Main extends AppCompatActivity
         setContentView(R.layout.activity_main_main);
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
+        showCustomNav = getIntent().getBooleanExtra("SHOW_CUSTOM_NAVIGATION", false);
+
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("USER_NAME2");
+        userName = intent.getStringExtra("USER_NAME2");
         Log.d("MainActivity_Main", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
 
         HomeFragment homeFragment = new HomeFragment();
@@ -57,17 +61,18 @@ public class MainActivity_Main extends AppCompatActivity
 
         Bundle bundle = new Bundle();
 
+        //   fragment.setArguments(bundle);
         bundle.putString("USER_NAME", userName);
 
-        myViewModel.getAllStudentByUser(userName).observe(this, students -> {
-
-            StudentsProfileFragment fragment = StudentsProfileFragment.newInstance(
-                    students.get(0).getS_name(),
-                   students.get(0).getBio(),
-                  students.get(0).getS_Image()
-            );
-
-        });
+//        myViewModel.getAllStudentByUser(userName).observe(this, students -> {
+//
+//            fragment1 = StudentsProfileFragment.newInstance(
+//                    students.get(0).getS_name(),
+//                    students.get(0).getBio(),
+//                    students.get(0).getS_Image()
+//            );
+//
+//        });
 
 
 // إنشاء كائن Fragment
@@ -75,7 +80,6 @@ public class MainActivity_Main extends AppCompatActivity
 // تمرير البيانات إلى الـ Fragment
 
         // إذا كانت الرسالة المرسلة تطلب إخفاء الـ Bottom Navigation الافتراضي
-         showCustomNav = getIntent().getBooleanExtra("SHOW_CUSTOM_NAVIGATION", false);
         if (showCustomNav) {
 
             getSupportFragmentManager().beginTransaction()
@@ -152,25 +156,45 @@ public class MainActivity_Main extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.prophile:
+                Bundle bundle4 = new Bundle();
 
+                bundle4.putString("USER_NAME", userName);
+                prophileFragment.setArguments(bundle4);
                 selectedFragment = prophileFragment;
 
                 break;
 
             case R.id.home1:
+                Bundle bundle = new Bundle();
+
+                bundle.putString("USER_NAME", userName);
+                homeFragment.setArguments(bundle);
+
                 selectedFragment = homeFragment;
 
                 break;
 
             case R.id.courses1:
+                Bundle bundle1 = new Bundle();
+
+                bundle1.putString("USER_NAME", userName);
+                coursesFragment.setArguments(bundle1);
                 selectedFragment = coursesFragment;
 
                 break;
             case R.id.cart:
+                Bundle bundle2 = new Bundle();
+
+                bundle2.putString("USER_NAME", userName);
+                cartFragment.setArguments(bundle2);
                 selectedFragment = cartFragment;
 
                 break;
             case R.id.inbox:
+                Bundle bundle3 = new Bundle();
+
+                bundle3.putString("USER_NAME", userName);
+                inboxFragment.setArguments(bundle3);
                 selectedFragment = inboxFragment;
 
                 break;
@@ -183,29 +207,27 @@ public class MainActivity_Main extends AppCompatActivity
                     .replace(R.id.flFragment, selectedFragment)
                     .commit();
 
-            activeFragment = selectedFragment;  // تحديث الفراجمنت النشط
+            activeFragment = selectedFragment;
         }
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        // إذا كان الفراجمنت النشط هو غير HomeFragment، عد إلى HomeFragment
         if (!(activeFragment instanceof HomeFragment)) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.flFragment, homeFragment)
                     .commit();
-            activeFragment = homeFragment;  // تحديث الفراجمنت النشط إلى Home
-            // تحديث التحديد في BottomNavigationView إلى زر الهوم
+            activeFragment = homeFragment;
             if (showCustomNav) {
                 bottomNavigationView.setSelectedItemId(R.id.courses1);
-            }else {
+            } else {
 
                 bottomNavigationView.setSelectedItemId(R.id.home1);
 
             }
         } else {
-            super.onBackPressed(); // إذا كان بالفعل في HomeFragment، تابع تنفيذ الزر الرجوع المعتاد
+            super.onBackPressed();
         }
     }
 

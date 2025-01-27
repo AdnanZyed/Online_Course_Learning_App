@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,8 @@ public class HomeFragment extends Fragment {
     Button btnBusiness;
     Button btnArt;
     TextView tv_Seeall;
+
+
     TextView tv_Seeall2;
     TextView tv_Welcom;
     TextView tv_Name;
@@ -66,12 +69,15 @@ public class HomeFragment extends Fragment {
 
 
         }
+        Log.d("MainActivity_Main", "MMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMM " + students_u);
+
         bundle = new Bundle();
         bundle.putString("USER_NAME_R", students_u);
 
 // إنشاؤ Fragment الجديد
         Fragment targetFragment = new ReviewsFragment();
-
+        Fragment fragment2 = new CourseFragment();
+        fragment2.setArguments(bundle);
 // ضبط البيانات المرسلة على الـ Fragment
         targetFragment.setArguments(bundle);
 
@@ -86,7 +92,6 @@ public class HomeFragment extends Fragment {
         btn3DDesign = rootView.findViewById(R.id.btn_3d_design);
         btnProgramming = rootView.findViewById(R.id.btn_programming);
         teacherRecyclerView = rootView.findViewById(R.id.rv_t);
-
         btnBusiness = rootView.findViewById(R.id.btn_business);
         btnArt = rootView.findViewById(R.id.btn_art);
         // استدعاء CourseFragment وتحميل الدورات عند تحميل الفراجمنت
@@ -126,8 +131,14 @@ public class HomeFragment extends Fragment {
 
                 Student student = students.get(0);
                 String student_name = student.getS_name().toString();
-                 bio=student.getBio().toString();
-                 tv_Welcom.setText(bio);
+                bio = student.getBio().toString();
+                if (bio.isEmpty()){
+                    tv_Welcom.setText("Welcom");
+
+
+                }else {
+                    tv_Welcom.setText(bio);
+                }
                 byte[] bytes = student.getS_Image();
                 if (bytes != null) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -157,7 +168,11 @@ public class HomeFragment extends Fragment {
         Iv_Bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(requireContext(), BookmarkActivity.class);
+                intent.putExtra("USER", students_u);
+                Log.d("MainActivity_Main", "/////////////////////////////////////////////////////////// " + students_u);
+
                 startActivity(intent);
             }
         });
@@ -186,21 +201,25 @@ public class HomeFragment extends Fragment {
 
 
         //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
-
-
-        // تحميل الفراجمنت داخل FrameLayout
         if (savedInstanceState == null) {
-            getFragmentManager()
+            CourseFragment courseFragment = new CourseFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("USER_NAME_R", students_u);
+            courseFragment.setArguments(bundle);
+
+// استبدل R.id.frame_container بالـ ID الخاص بـ FrameLayout
+            getParentFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fram_corse, new CourseFragment())
+                    .replace(R.id.fram_corse, courseFragment)
                     .commit();
             onButtonClicked(btnAll);
 
-
-            //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
-
-
         }
+        // تحميل الفراجمنت داخل FrameLayout
+
+
+        //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
+
 
 //        CourseFragment fragment = (CourseFragment) getFragmentManager()
 //                .findFragmentById(R.id.fram_corse);
@@ -296,6 +315,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
         btn3DDesign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -337,12 +357,25 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 //      loadTeacher();
                 Intent intent = new Intent(requireContext(), TopMentors.class);
+                intent.putExtra("STUDENT_USER",students_u);
+                startActivity(intent);
+            }
+        });
+        tv_Seeall2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //      loadTeacher();
+                Intent intent = new Intent(requireContext(), BookmarkActivity.class);
+                intent.putExtra("USER", students_u);
+                Log.d("MainActivity_Main", "/////////////////////////////////////////////////////////// " + students_u);
+
                 startActivity(intent);
             }
         });
 
 
         loadTeacher();
+
 
         return rootView;
     }
@@ -354,7 +387,7 @@ public class HomeFragment extends Fragment {
             LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-            teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>());
+            teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>(),students_u);
 
             teacherRecyclerView.setLayoutManager(layoutManager);
 

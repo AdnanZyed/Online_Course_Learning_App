@@ -37,6 +37,12 @@ public class InboxFragment extends Fragment {
         // ربط العناصر
         TabLayout tabLayout = view.findViewById(R.id.tabLayout_chat);
         ViewPager2 viewPager = view.findViewById(R.id.viewPager_chat);
+        Bundle args = getArguments();
+        if (args != null) {
+          String  students_u = args.getString("USER_NAME");
+
+
+        }
 
         // إعداد الـAdapter
         ViewPagerAdapterChat adapter = new ViewPagerAdapterChat(requireActivity());

@@ -29,6 +29,7 @@ public class CoursesFragment extends Fragment {
     private My_View_Model viewModel;
 
     private My_Database myDatabase;
+    String  students_u;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +37,12 @@ public class CoursesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_courses, container, false);
 
+        Bundle args = getArguments();
+        if (args != null) {
+              students_u = args.getString("USER_NAME");
 
+
+        }
         // استرجاع اسم الطالب
 
         // مراقبة البيانات من ViewModel
@@ -46,7 +52,7 @@ public class CoursesFragment extends Fragment {
         ViewPager2 viewPager = view.findViewById(R.id.view_pager);
 
         // إعداد ViewPager مع Adapter
-        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity(),1,students_u);
         viewPager.setAdapter(adapter);
 
         // توصيل TabLayout مع ViewPager2

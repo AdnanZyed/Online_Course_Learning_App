@@ -1,15 +1,9 @@
 package com.example.onlinecourseampe_learningapp;
-
-
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
 import java.util.Arrays;
 
-
-//@Entity(tableName = "Course")
 @Entity(tableName = "Course", foreignKeys = @ForeignKey(
         entity = Teacher.class,
         parentColumns = "Teatur_USER_Name",
@@ -33,12 +27,13 @@ public class Course {
     private boolean isAddCart;
     private boolean isCompleted; // متغير الإشارة المرجعية
     private String Teacher_USER_Name;  // الإشارة إلى المدرس عن طريق اسم المستخدم
+    private byte[] bookmarkIcon; //صورة الكورس
 
 
     //private String Student_user_name;
 
 
-    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isAddCart, boolean isCompleted, String teacher_USER_Name) {
+    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isAddCart, boolean isCompleted, String teacher_USER_Name, byte[] bookmarkIcon) {
         Course_ID = course_ID;
         Course_NAME = course_NAME;
         Image = image;
@@ -51,9 +46,18 @@ public class Course {
         this.isAddCart = isAddCart;
         this.isCompleted = isCompleted;
         Teacher_USER_Name = teacher_USER_Name;
+        this.bookmarkIcon = bookmarkIcon;
     }
 
     public Course() {
+    }
+
+    public byte[] getBookmarkIcon() {
+        return bookmarkIcon;
+    }
+
+    public void setBookmarkIcon(byte[] bookmarkIcon) {
+        this.bookmarkIcon = bookmarkIcon;
     }
 
     public boolean isAddCart() {
@@ -178,6 +182,7 @@ public class Course {
                 ", isAddCart=" + isAddCart +
                 ", isCompleted=" + isCompleted +
                 ", Teacher_USER_Name='" + Teacher_USER_Name + '\'' +
+                ", bookmarkIcon=" + Arrays.toString(bookmarkIcon) +
                 '}';
     }
 }

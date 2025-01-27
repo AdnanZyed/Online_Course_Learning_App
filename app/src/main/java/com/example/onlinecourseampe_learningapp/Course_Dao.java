@@ -23,13 +23,19 @@ public interface Course_Dao {
     LiveData<List<Course>> getBookmarkedCourses();
 
 
+    @Query("UPDATE Course SET isAddCart = :isAddCart WHERE Course_ID = :courseId")
+    void updateAddStatus(int courseId, boolean isAddCart);
+
     @Query("UPDATE Course SET isBookmarked = :isBookmarked WHERE Course_ID = :courseId")
     void updateBookmarkStatus(int courseId, boolean isBookmarked);
+
     // الاستعلام الجديد للبحث عن الكورس بناءً على الاسم
     @Query("SELECT * FROM Course WHERE Course_NAME LIKE :courseName")
     LiveData<List<Course>> getCourseByName(String courseName);
+
     @Delete
     Void deleteCourse(Course course);
+
     // إضافة استعلام جديد لعرض الكورسات بناءً على التصنيف
     @Query("SELECT * FROM Course WHERE Categorie = :categorie")
     LiveData<List<Course>> getCoursesByCategory(String categorie);
@@ -39,10 +45,13 @@ public interface Course_Dao {
 
     @Query("SELECT * FROM Course WHERE Course_ID=:course_Id")
     LiveData<List<Course>> getAllCoursesById(int course_Id);
+
     @Query("SELECT * FROM Course WHERE Teacher_USER_Name =:teacher_USER_Name")
     LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String teacher_USER_Name);
+
     @Query("SELECT * FROM Course WHERE Course_ID IN (:courseIds)")
     LiveData<List<Course>> getCoursesByIds(List<Integer> courseIds);
+
 
 }
 

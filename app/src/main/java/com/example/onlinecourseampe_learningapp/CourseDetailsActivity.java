@@ -26,21 +26,79 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class CourseDetailsActivity extends AppCompatActivity {
+    String userName;
+    TabPagerAdapter adapter;
+    int courseId;
+    ImageView courseImageView;
+    TextView Price_dep;
+    Button bt_Buy;
+    TextView courseNameTextView;
+    TextView courseNameTextView1;
+    TabLayout tabLayout;
+    ViewPager2 viewPager;
+    String courseName;
+    TextView priceTextView;
+    String courseDescription;
+    String courseUserName;
+    String courseName1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
 
-        String userName;
-        TextView Price_dep = findViewById(R.id.price_dep);
-        Button bt_Buy = findViewById(R.id.bt_buy);
-        TextView Dollar_dep = findViewById(R.id.dollar_dep);
+        Price_dep = findViewById(R.id.price_dep);
+        bt_Buy = findViewById(R.id.bt_buy);
+        courseNameTextView = findViewById(R.id.course_name);
+         priceTextView = findViewById(R.id.price);
+        courseNameTextView1 = findViewById(R.id.course_name1);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager1);
         Price_dep.setPaintFlags(Price_dep.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        Dollar_dep.setPaintFlags(Dollar_dep.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager2 viewPager = findViewById(R.id.viewPager1);
+
+        // استرجاع البيانات
+        courseId = getIntent().getIntExtra("COURSE_ID", -1);
+        courseUserName = getIntent().getStringExtra("TEACHER_USER_NAME");
+
+        courseName = getIntent().getStringExtra("COURSE_NAME");
+        courseDescription = getIntent().getStringExtra("COURSE_DESCRIPTION");
+        userName = getIntent().getStringExtra("USER");
+        courseName1 = getIntent().getStringExtra("COURSE_NAME1");
+        int coursePrice = getIntent().getIntExtra("COURSE_PRICE", 0);
+        byte[] courseImage = getIntent().getByteArrayExtra("COURSE_IMAGE");
+        String teacherName = getIntent().getStringExtra("TEACHER_NAME");
+
+        Log.d("CourseDetailsActivity", "/////////////////////////////////////////////////////////// " + courseDescription);
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("COURSE_ID1", courseId);
+
+        Fragment targetFragment = new ReviewsFragment();
+        targetFragment.setArguments(bundle);
+        courseNameTextView.setText(courseName);
+        courseNameTextView1.setText(courseName);
+
+
+          Log.d("CourseDetailsActivity", "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD " + userName);
+
+        adapter = new TabPagerAdapter(this, courseUserName, courseId, userName,courseDescription);
+        viewPager.setAdapter(adapter);
+        courseImageView = findViewById(R.id.img_course);
+
+
+//        Log.d("CourseDetailsActivity", "VVVVVVVVVVVVVVVVVVVVVVVVVVV" + courseId + userName);
+
+        int rival= coursePrice+coursePrice/4;
+        priceTextView.setText(String.format("$%d", coursePrice));
+        Price_dep.setText(String.format("$%d",rival));
+
+
+        if (courseImage != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(courseImage, 0, courseImage.length);
+            courseImageView.setImageBitmap(bitmap);
+        }
+
 
         bt_Buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,65 +106,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(CourseDetailsActivity.this, EnrollCourseActivity.class);
+                intent.putExtra("USER", userName);
+                intent.putExtra("COURSE_ID", courseId);
                 startActivity(intent);
             }
         });
-        // استرجاع البيانات
-        int courseId = getIntent().getIntExtra("COURSE_ID", -1);
-        String courseUserName = getIntent().getStringExtra("TEACHER_USER_NAME");
-
-        String courseName = getIntent().getStringExtra("COURSE_NAME");
-        String courseName1 = getIntent().getStringExtra("COURSE_NAME1");
-        int coursePrice = getIntent().getIntExtra("COURSE_PRICE", 0);
-        byte[] courseImage = getIntent().getByteArrayExtra("COURSE_IMAGE");
-        String teacherName = getIntent().getStringExtra("TEACHER_NAME");
-
-         userName ="aDNAN@1234";
-
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("COURSE_ID1", courseId);
-
-//        Intent intent1 = new Intent(CourseDetailsActivity.this, EnrollCodeActivity.class);
-//        intent1.putExtra("COURSE_ID1", courseId);
-
-// إنشاؤ Fragment الجديد
-        Fragment targetFragment = new ReviewsFragment();
-
-// ضبط البيانات المرسلة على الـ Fragment
-        targetFragment.setArguments(bundle);
-
-
-        //  Intent intent = getIntent();
-
-
-//        String userName = getIntent().getStringExtra("USER_NAME12");
-        Log.d("CourseDetailsActivity", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + userName);
-
-        // إعداد الـ ViewPager مع الـ Adapter
-        TabPagerAdapter adapter = new TabPagerAdapter(this, courseUserName, courseId, userName);
-        viewPager.setAdapter(adapter);
-
-
-        Log.d("CourseDetailsActivity", "VVVVVVVVVVVVVVVVVVVVVVVVVVV" + courseId + userName);
-
-
-        // تعيين البيانات في الواجهة
-        TextView courseNameTextView = findViewById(R.id.course_name);
-        TextView courseNameTextView1 = findViewById(R.id.course_name1);
-        courseNameTextView.setText(courseName);
-        courseNameTextView1.setText(courseName1);
-
-        TextView priceTextView = findViewById(R.id.price);
-        priceTextView.setText(String.format("$%d", coursePrice));
-
-        ImageView courseImageView = findViewById(R.id.img_course);
-        if (courseImage != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(courseImage, 0, courseImage.length);
-            courseImageView.setImageBitmap(bitmap);
-        }
-
-
         // ربط TabLayout مع ViewPager2
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {

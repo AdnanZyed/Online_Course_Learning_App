@@ -26,6 +26,7 @@ public class My_Repository {
     private CourseLessonsDao courseLessonsDao;
 
     private final MessageDao messageDao;
+    private final ExecutorService executorService; // تعريف executorService
 
     private LiveData<List<Teacher>> AllTeacher;
     private LiveData<List<Student>> AllStudents;
@@ -43,6 +44,7 @@ public class My_Repository {
         studentTeacherDao = db.studentTeacherDao();
         courseLessonsDao = db.courseLessonsDao();
         messageDao = db.messageDao();
+        executorService = Executors.newSingleThreadExecutor(); // تهيئة executorService
 
 
         // courseReviewsDao = db.courseReviewsDao();
@@ -113,8 +115,9 @@ public class My_Repository {
         });
         return result;
     }
+
     public void insertCourseLesson(CourseLessons courseLesson) {
-        My_Database.databaseWriteExecutor.execute(() ->{
+        My_Database.databaseWriteExecutor.execute(() -> {
 
             courseLessonsDao.insert(courseLesson);
 
@@ -133,6 +136,7 @@ public class My_Repository {
 
 
     }
+
     // الحصول على العدد الكلي للدروس
     public LiveData<Integer> getTotalLessonsCount() {
         MutableLiveData<Integer> totalLessonsCount = new MutableLiveData<>();
@@ -162,7 +166,7 @@ public class My_Repository {
 
 
     public void deleteCourseLesson(CourseLessons courseLesson) {
-        My_Database.databaseWriteExecutor.execute(() ->{
+        My_Database.databaseWriteExecutor.execute(() -> {
 
             courseLessonsDao.delete(courseLesson);
         });
@@ -173,12 +177,13 @@ public class My_Repository {
     }
 
     public void updateLessonCompletionStatus(int lessonId, boolean isCompleted) {
-        My_Database.databaseWriteExecutor.execute(() ->{
+        My_Database.databaseWriteExecutor.execute(() -> {
 
             courseLessonsDao.updateLessonCompletionStatus(lessonId, isCompleted);
         });
 
     }
+
     // إضافة مراجعة
     void insertReview(Course_Reviews review) {
         My_Database.databaseWriteExecutor.execute(() -> {
@@ -207,8 +212,6 @@ public class My_Repository {
     public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
         return courseReviewsDao.getAllReviewsByCourseId(courseId);
     }
-
-
 
 
     void insertReviewT(Teacher_Reviews review) {
@@ -273,8 +276,31 @@ public class My_Repository {
         return courseDao.getBookmarkedCourses();  // ترجع LiveData بدلاً من List
     }
 
+    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent(String studentUsername) {
+        return studentCourseDao.getBookmarkedCoursesByStudent(studentUsername);
+    }
+    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent1(String studentUsername,int courseId) {
+        return studentCourseDao.getBookmarkedCoursesByStudent1(studentUsername,courseId);
+
+    }
+    public LiveData<List<Student_Course>> getAddCartCoursesByStudent1(String studentUsername,int courseId) {
+        return studentCourseDao.getisAddCartCoursesByStudent1(studentUsername,courseId);
+    }
+    public LiveData<List<Student_Course>> getisRegisterCoursesByStudent1(String studentUsername) {
+        return studentCourseDao.getisRegisterCoursesByStudent1(studentUsername);
+    }
+
+    public LiveData<List<Student_Course>> getisAddCartCoursesByStudent(String studentUsername) {
+        return studentCourseDao.getisAddCartCoursesByStudent(studentUsername);
+    }
+
     public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
         courseDao.updateBookmarkStatus(courseId, isBookmarked);  // تنفيذ التحديث أولاً
+        return courseDao.getAllCourse();  // جلب الكورسات بعد التحديث
+    }
+
+    public LiveData<List<Course>> updateisAddCartStatusAndGetCourses(int courseId, boolean isAddCart) {
+        courseDao.updateBookmarkStatus(courseId, isAddCart);  // تنفيذ التحديث أولاً
         return courseDao.getAllCourse();  // جلب الكورسات بعد التحديث
     }
 
@@ -302,11 +328,27 @@ public class My_Repository {
         return courseDao.getCoursesByCategory(category);
     }
 
-
+    // التحقق من وجود كائن مطابق
+    public boolean isStudentCourseExists(String studentUsername, int courseId, boolean isBookmark, boolean isAddCart, boolean isRegister) {
+        return studentCourseDao.isStudentCourseExists(studentUsername, courseId, isBookmark, isAddCart, isRegister) > 0;
+    }
     public void insertStudentCourse(Student_Course studentCourse) {
         My_Database.databaseWriteExecutor.execute(() -> {
             studentCourseDao.insertStudentCourse(studentCourse);
         });
+    }
+
+    // دالة لحذف سجل بناءً على الـ user و courseId و isBookmark و isAddCart
+    public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId, boolean isBookmark, boolean isAddCart) {
+        MutableLiveData<Void> result = new MutableLiveData<>();
+
+        executorService.execute(() -> {
+            studentCourseDao.deleteStudentCourseByUserAndCourse(studentUsername, courseId, isBookmark, isAddCart);
+            // بعد تنفيذ الحذف بنجاح، نقوم بتحديث LiveData للإشارة إلى أن العملية اكتملت
+            result.postValue(null);
+        });
+        return result;
+
     }
 
     public LiveData<List<Student_Course>> getCoursesByStudent(String studentUsername) {
@@ -316,10 +358,12 @@ public class My_Repository {
     public LiveData<List<Student_Course>> getStudentsByCourse(int courseId) {
         return studentCourseDao.getStudentsByCourse(courseId);
     }
+
     // دالة لاسترجاع الكورسات بناءً على قائمة من Course_ID
     public LiveData<List<Course>> getCoursesByIds(List<Integer> courseIds) {
         return courseDao.getCoursesByIds(courseIds);
     }
+
     void insertStudent(Student student) {
         My_Database.databaseWriteExecutor.execute(() -> {
 

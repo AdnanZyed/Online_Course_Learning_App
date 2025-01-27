@@ -18,11 +18,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class EnrollCodeActivity extends AppCompatActivity {
     EditText otpDigit1, otpDigit2, otpDigit3, otpDigit4;
-    int course_Id = 3;
-    String userName = "aDNAN@123";
+    String userName;
     int card_num;
     String teacher_USER_Name;
-//    int courseId;
+    int courseId;
     int otpCodeInt;
     private My_View_Model myViewModel;
 
@@ -45,6 +44,8 @@ public class EnrollCodeActivity extends AppCompatActivity {
         otpDigit4.addTextChangedListener(new OTPTextWatcher(otpDigit4, null));
 
         Button continueButton = findViewById(R.id.bt_buy1);
+        userName = getIntent().getStringExtra("USER");
+        courseId = getIntent().getIntExtra("COURSE_ID", -1);
 
 
 //        Intent intent = getIntent();
@@ -105,6 +106,7 @@ public class EnrollCodeActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
         dialog.setCancelable(true);
+        
 
         // إعداد عناصر الـ Dialog
         ImageView dialogImage = dialog.findViewById(R.id.dialog_image);
@@ -114,11 +116,11 @@ public class EnrollCodeActivity extends AppCompatActivity {
         Button cancelButton = dialog.findViewById(R.id.btn_cancel);
 
         // تخصيص النصوص والصورة
-        mainText.setText("Enroll in the Course");
-        secondaryText.setText("Would you like to enroll in this course?");
-        dialogImage.setImageResource(R.drawable.unnamed1);
+        mainText.setText("Enroll Course Successful!");
+        secondaryText.setText("You have successfully made payment and enrolled the course");
+        dialogImage.setImageResource(R.drawable.img_2);
 
-        myViewModel.getAllCoursesById(1).observe(this, courses -> {
+        myViewModel.getAllCoursesById(courseId).observe(this, courses -> {
             teacher_USER_Name = courses.get(0).getTeacher_USER_Name();
 
 
@@ -127,15 +129,23 @@ public class EnrollCodeActivity extends AppCompatActivity {
         viewCourseButton.setOnClickListener(v -> {
             // الانتقال إلى شاشة الدورة
 
+            Toast.makeText(this, "تم التسجيل بنجاح .", Toast.LENGTH_SHORT).show();
+            myViewModel.isStudentCourseExists(userName,courseId,false,false,true).observe((this), isHad -> {
+                        if (!isHad) {
+                            Student_Course studentCourse = new Student_Course(0, userName, courseId, false, false, true);
+                            myViewModel.insertStudentCourse(studentCourse);
+                            Student_Teacher studentTeacher = new Student_Teacher(0, userName, teacher_USER_Name);
+                            myViewModel.insertStudentTeacher(studentTeacher);
+                        }
+                    });
+//            Intent intent = new Intent(EnrollCodeActivity.this, MainActivity_Main.class);
+//            intent.putExtra("SHOW_CUSTOM_NAVIGATION", true);  // أضف هذا المتغير ليتم الكشف عنه في الـ MainActivity
+//            startActivity(intent);
 
-            Student_Course studentCourse = new Student_Course(0, userName, course_Id);
-            myViewModel.insertStudentCourse(studentCourse);
-            Student_Teacher studentTeacher = new Student_Teacher(0, userName, teacher_USER_Name);
-            myViewModel.insertStudentTeacher(studentTeacher);
-            Intent intent = new Intent(EnrollCodeActivity.this, MainActivity_Main.class);
-            intent.putExtra("SHOW_CUSTOM_NAVIGATION", true);  // أضف هذا المتغير ليتم الكشف عنه في الـ MainActivity
-            startActivity(intent);
-
+            otpDigit1.setText("");
+            otpDigit2.setText("");
+            otpDigit3.setText("");
+            otpDigit4.setText("");
             dialog.dismiss();
         });
 

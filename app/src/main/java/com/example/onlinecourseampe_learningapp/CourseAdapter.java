@@ -3,7 +3,6 @@ package com.example.onlinecourseampe_learningapp;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +10,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
     private Context context;
+    private String user;
     private List<Course> courseList;
-    boolean isBook;
+    private final My_View_Model viewModel;
     private OnCourseClickListener listener;
 
     public void setOnCourseClickListener(OnCourseClickListener listener) {
         this.listener = listener;
     }
 
-    public CourseAdapter(Context context, List<Course> courseList) {
+    public CourseAdapter(Context context, List<Course> courseList, String user) {
         this.context = context;
         this.courseList = courseList;
+        this.user = user;
+        this.viewModel = new ViewModelProvider((AppCompatActivity) context).get(My_View_Model.class);
     }
-
 
     @NonNull
     @Override
@@ -41,53 +44,77 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Course course = courseList.get(position);
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onCourseClick(course);
-            }
-        });
-
         holder.tvCourseName.setText(course.getCourse_NAME());
-        //holder.ivCourseImage.setImageResource(course.getImage());
         holder.tvCategorie.setText(course.getTeacher_name());
         holder.tvPrice.setText(String.format("$%d", course.getPrice()));
 
+        // تحميل الصورة
         byte[] imageBytes = course.getImage();
-
         if (imageBytes != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             holder.ivCourseImage.setImageBitmap(bitmap);
         } else {
             holder.ivCourseImage.setImageResource(R.drawable.sample_course_image);
         }
-        // عرض صورة الكورس إذا كانت موجودة
 
-        // تغيير لون الأيقونة بناءً على حالة isBookmarked
-//        holder.bookmarkIcon.setColorFilter(course.isBookmarked() ? Color.BLUE : Color.BLACK);
-        // حدث الضغط على أيقونة الإشارة المرجعية
-
-        holder.bookmarkIcon.setOnClickListener(v -> {
-            holder.bookmarkIcon.setVisibility(course.isBookmarked() ? View.VISIBLE : View.INVISIBLE);
+        viewModel.getisAddCartCoursesByStudent1(user, course.getCourse_ID()).observe((AppCompatActivity) context, studentCourses -> {
 
 
-//            int courseId = 1;  // استخدم الـ courseId المناسب هنا
-//            boolean isBookmarked = true;  // يمكنك التبديل بين true و false حسب الحالة
-//            myViewModel.updateBookmarkStatusAndGetCourses(courseId, isBookmarked).observe(getViewLifecycleOwner(), updatedCourses -> {
-//                if (updatedCourses != null) {
-//                    // تحديث الـ RecyclerView بعد التعديل
-//                    CourseAdapter adapter = new CourseAdapter(getContext(), updatedCourses);
-//                    recyclerView.setAdapter(adapter);
-//                }
-//            });
+            if (studentCourses.isEmpty()||studentCourses==null) {
+                holder.BookmarkIcon.setImageResource(R.drawable.bookmark);
+            } else {
+                holder.BookmarkIcon.setImageResource(R.drawable.bookmarked);
+            }
+        });
+
+        // تحديث حالة الإشارة المرجعية
+
+
+        // التعامل مع الضغط على أيقونة الإشارة المرجعية
+        holder.BookmarkIcon.setOnClickListener(v -> {
+            // تحقق إذا كانت الدالة تبدأ بعملية استعلام
+            viewModel.getisAddCartCoursesByStudent1(user, course.getCourse_ID()).observe((AppCompatActivity) context, studentCourses -> {
+                viewModel.isStudentCourseExists(user,course.getCourse_ID(),true,false,false).observe((AppCompatActivity) context, isHad -> {
+                if (!isHad) {
+
+                    // إذا لم يتم العثور على الكورس في قاعدة البيانات (بمعنى أنه ليس مضافًا للمفضلة)
+                    if (studentCourses.isEmpty()) {
+                        // إضافة الكورس إلى المفضلة
+
+                        Student_Course studentCourse = new Student_Course(0, user, course.getCourse_ID(), true, false, false);
+                        viewModel.insertStudentCourse(studentCourse);
+                        holder.BookmarkIcon.setImageResource(R.drawable.bookmarked); // تحديث الأيقونة
+
+                        // تحديث حالة الكورس
+                        //course.setBookmarked(true);
+                        //   holder.BookmarkIcon.setImageResource(R.drawable.bookmarked); // تحديث الأيقونة
+                        // خروج من الدالة بعد إضافة الكورس
+                        return;
+                    }
+                }
+                // إذا كان الكورس موجودًا بالفعل في المفضلة
+                if (!studentCourses.isEmpty()) {
+                    // حذف الكورس من المفضلة
+                 //   viewModel.deleteStudentCourseByUserAndCourse(user, course.getCourse_ID(), true, false);
+
+                    // تحديث حالة الكورس
+                    //course.setBookmarked(false);
+                    holder.BookmarkIcon.setImageResource(R.drawable.bookmark); // تحديث الأيقونة
+                    // خروج من الدالة بعد حذف الكورس
+                    return;
+                }
+
+                // إذا لم يتحقق أي شرط، لا شيء يحدث.
+            });});
+        });
 
 
 
-
-
-         //   notifyDataSetChanged();
-
-           notifyItemChanged(position); // تحديث العنصر
-            // هنا يمكنك تحديث قاعدة البيانات أيضًا
+        // التعامل مع الضغط على العنصر بالكامل
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onCourseClick(course);
+            }
         });
     }
 
@@ -98,15 +125,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // تأكد من تحديث الـ RecyclerView عند تعديل البيانات
     }
+
     public interface OnCourseClickListener {
         void onCourseClick(Course course);
     }
 
     static class CourseViewHolder extends RecyclerView.ViewHolder {
         TextView tvCourseName, tvPrice, tvCategorie;
-        ImageView ivCourseImage, cartIcon, bookmarkIcon;
+        ImageView ivCourseImage, cartIcon, BookmarkIcon;
 
         public CourseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,7 +142,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             tvCategorie = itemView.findViewById(R.id.tv_categorie);
             tvPrice = itemView.findViewById(R.id.tv_price);
             ivCourseImage = itemView.findViewById(R.id.iv_course_image);
-            bookmarkIcon = itemView.findViewById(R.id.bookmarkIcon);
+            BookmarkIcon = itemView.findViewById(R.id.bookmarkIcon);
             cartIcon = itemView.findViewById(R.id.cart);
         }
     }

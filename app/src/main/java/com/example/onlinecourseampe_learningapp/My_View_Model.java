@@ -6,6 +6,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -156,8 +157,33 @@ public class My_View_Model extends AndroidViewModel {
     public LiveData<List<Course>> getBookmarkedCourses() {
         return repository.getBookmarkedCourses();  // إرجاع LiveData
     }
+    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent(String studentUsername) {
+        return repository.getBookmarkedCoursesByStudent(studentUsername);
+    }
+    public LiveData<List<Student_Course>> getisAddCartCoursesByStudent(String studentUsername) {
+        return repository.getisAddCartCoursesByStudent(studentUsername);
+    }
+    public LiveData<List<Student_Course>> getisAddCartCoursesByStudent1(String studentUsername,int courseId) {
+        return repository.getBookmarkedCoursesByStudent1(studentUsername,courseId);
+
+    }
+    public LiveData<List<Student_Course>> getAddCartCoursesByStudent1(String studentUsername,int courseId) {
+        return repository.getAddCartCoursesByStudent1(studentUsername,courseId);
+    }
+    public LiveData<List<Student_Course>> getisRegisterCoursesByStudent1(String studentUsername) {
+        return repository.getisRegisterCoursesByStudent1(studentUsername);
+    }
+
+    // دالة لحذف سجل بناءً على الـ user و courseId و isBookmark و isAddCart
+    public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId, boolean isBookmark, boolean isAddCart) {
+        return repository.deleteStudentCourseByUserAndCourse(studentUsername, courseId, isBookmark, isAddCart);
+    }
+
     public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
         return repository.updateBookmarkStatusAndGetCourses(courseId, isBookmarked);
+    }
+    public LiveData<List<Course>> updateisAddCartStatusAndGetCourses(int courseId, boolean isAddCart) {
+        return repository.updateisAddCartStatusAndGetCourses(courseId, isAddCart);
     }
 
 
@@ -176,6 +202,16 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
         return repository.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
     }
+    // التحقق من وجود كائن مطابق
+    public LiveData<Boolean> isStudentCourseExists(String studentUsername, int courseId, boolean isBookmark, boolean isAddCart, boolean isRegister) {
+        MutableLiveData<Boolean> result = new MutableLiveData<>();
+        My_Database.databaseWriteExecutor.execute(() -> {
+            boolean exists = repository.isStudentCourseExists(studentUsername, courseId, isBookmark, isAddCart, isRegister);
+            result.postValue(exists); // تحديث LiveData بالقيمة
+        });
+        return result;
+    }
+
     public void insertStudentCourse(Student_Course studentCourse) {
         repository.insertStudentCourse(studentCourse);
     }

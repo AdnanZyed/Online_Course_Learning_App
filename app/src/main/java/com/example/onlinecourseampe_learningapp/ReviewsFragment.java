@@ -73,6 +73,7 @@ public class ReviewsFragment extends Fragment {
 
         Bundle bundle1 = getArguments();
         int courseInt = bundle1.getInt("COURSE_ID1");
+        String user = bundle1.getString("USER_ST");
 
 //        if (edit_Comment.getText().equals(null)) {
 //            imageSend.setColorFilter(Color.BLUE);
@@ -83,7 +84,7 @@ public class ReviewsFragment extends Fragment {
         Log.d("CourseDetailsActivity", "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" + courseInt);
 
 
-        myViewModel.getAllStudentByUser("aDNAN@123").observe(getViewLifecycleOwner(), students -> {
+        myViewModel.getAllStudentByUser(user).observe(getViewLifecycleOwner(), students -> {
             // استخدام LinearLayoutManager مع التمرير الأفقي
 
             Student student = students.get(0);
@@ -166,7 +167,7 @@ public class ReviewsFragment extends Fragment {
                 Log.d("ReviewsFragment", "Sending review at: " + formattedDate);
 
                 // إنشاء تعليق جديد وإضافته إلى قاعدة البيانات
-                Course_Reviews review = new Course_Reviews(0, bytes, student_name, userString,
+                Course_Reviews review = new Course_Reviews(0, bytes, student_name, user,
                         edit_Comment.getText().toString(),
                         formattedDate, 0, courseInt, rating_spinner, false);
                 myViewModel.insertReview(review);

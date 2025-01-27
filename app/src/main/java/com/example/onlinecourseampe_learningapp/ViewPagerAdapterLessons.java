@@ -10,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 public class ViewPagerAdapterLessons extends FragmentStateAdapter {
 
     private final int courseId; // تعريف متغير courseId
+//    private final String user; // تعريف متغير courseId
 
     // تعديل المُنشئ لقبول courseId
     public ViewPagerAdapterLessons(@NonNull FragmentActivity fragmentActivity, int courseId) {
@@ -22,7 +23,11 @@ public class ViewPagerAdapterLessons extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new LessonsFragment(); // الصفحة الأولى
+                    LessonsFragment lessonsFragment = new LessonsFragment();
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("COURSE_ID", courseId); // إضافة الـ courseId إلى الـ Bundle
+                lessonsFragment.setArguments(bundle1); // تمرير الـ Bundle إلى الفراجمنت
+                return lessonsFragment;
             case 1:
                 // الصفحة الثانية مع إرسال courseId
                 CertificatesFragment certificatesFragment = new CertificatesFragment();

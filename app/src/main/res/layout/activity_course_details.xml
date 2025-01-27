@@ -8,8 +8,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bt_buy">
+        app:layout_constraintBottom_toTopOf="@id/bt_buy"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -79,38 +79,16 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="price"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/dollar"
-                app:layout_constraintTop_toBottomOf="@id/course_name1" />
-
-            <TextView
-                android:id="@+id/dollar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
-                android:text="$"
+                android:text="price"
                 android:textColor="@color/blue"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/course_name1" />
 
-            <TextView
-                android:id="@+id/dollar_dep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="$"
-                android:textColor="@color/gray"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/price_dep"
-                app:layout_constraintTop_toBottomOf="@id/course_name1" />
+
 
             <TextView
                 android:id="@+id/price_dep"
@@ -140,11 +118,11 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager1"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginBottom="20dp"
                 app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
 

@@ -59,6 +59,7 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:password="true"
         android:layout_marginTop="200dp"
         android:textSize="18sp"
         android:imeOptions="actionNext"
@@ -75,7 +76,7 @@
         android:gravity="center"
         android:inputType="number"
         android:layout_marginTop="200dp"
-
+        android:password="true"
         android:maxLength="1"
         android:textSize="18sp"
         android:imeOptions="actionNext"
@@ -90,6 +91,7 @@
         android:background="@drawable/otp_background"
         android:gravity="center"
         android:layout_marginTop="200dp"
+        android:password="true"
 
         android:inputType="number"
         android:maxLength="1"
@@ -108,7 +110,7 @@
         android:inputType="number"
         android:maxLength="1"
         android:layout_marginTop="200dp"
-
+        android:password="true"
         android:textSize="18sp"
         android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"

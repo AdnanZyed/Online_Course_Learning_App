@@ -21,7 +21,7 @@ public class LessonsFragment extends Fragment {
     }
 
     My_View_Model myViewModel;
-
+    int coursId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,16 +29,16 @@ public class LessonsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lessons, container, false);
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
+        if (getArguments() != null) {
 
+             coursId = getArguments().getInt("COURSE_ID");
+        }
         RecyclerView recyclerView = view.findViewById(R.id.rv_lessons);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
         // قم بجلب البيانات من ViewModel
-        myViewModel.getLessonsByCourseId(2).observe(getViewLifecycleOwner(), lessons -> {
-            // إعداد Adapter
-
-          //  int lcount=lessons.size();
+        myViewModel.getLessonsByCourseId(coursId).observe(getViewLifecycleOwner(), lessons -> {
 
             CourseLessonsAdapter adapter = new CourseLessonsAdapter(myViewModel,lessons);
             recyclerView.setAdapter(adapter);

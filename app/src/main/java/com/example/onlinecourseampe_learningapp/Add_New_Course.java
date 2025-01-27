@@ -24,13 +24,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 public class Add_New_Course extends AppCompatActivity {
-    private EditText etCourseName, etDescription, etPrice, etTeacherUsername, etImageUrl; // إضافة EditText لمدخل رابط الصورة
+    private static final int REQUEST_CODE_IMAGE_A = 1;
+    private static final int REQUEST_CODE_IMAGE_C = 2;
+
+    private EditText etCourseName, etDescription, etPrice, etTeacherUsername, etImageUrl, et_image_urlC;
     private Spinner spCategory;
-    private ImageView ivCourseImage;
-    private Button btnSelectImage, btnSaveCourse, btnLoadImageFromUrl; // إضافة زر لتحميل الصورة من الإنترنت
+    private ImageView ivCourseImage, iv_course_imageC;
+    private Button btnSelectImage, btn_select_imageC, btnSaveCourse, btnLoadImageFromUrl, btn_load_image_from_urlC;
     private byte[] courseImageBytes;
+    private byte[] courseImageBytesC;
     private My_View_Model myViewModel;
 
     @Override
@@ -44,34 +47,36 @@ public class Add_New_Course extends AppCompatActivity {
         etPrice = findViewById(R.id.et_priceA);
         etTeacherUsername = findViewById(R.id.et_teacher_usernameA);
         spCategory = findViewById(R.id.sp_categoryA);
+        btnSaveCourse = findViewById(R.id.btn_save_courseA);
+
+        btnLoadImageFromUrl = findViewById(R.id.btn_load_image_from_urlA);
+        etImageUrl = findViewById(R.id.et_image_urlA);
         ivCourseImage = findViewById(R.id.iv_course_imageA);
         btnSelectImage = findViewById(R.id.btn_select_imageA);
-        btnSaveCourse = findViewById(R.id.btn_save_courseA);
-        etImageUrl = findViewById(R.id.et_image_urlA); // حقل URL
-        btnLoadImageFromUrl = findViewById(R.id.btn_load_image_from_urlA); // زر تحميل الصورة من الإنترنت
+
+        btn_load_image_from_urlC = findViewById(R.id.btn_load_image_from_urlC);
+        et_image_urlC = findViewById(R.id.et_image_urlC);
+        iv_course_imageC = findViewById(R.id.iv_course_imageC);
+        btn_select_imageC = findViewById(R.id.btn_select_imageC);
 
         // إنشاء ViewModel
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
-        // اختيار الصورة من المعرض
-        btnSelectImage.setOnClickListener(v -> selectImage());
-
-        // تحميل الصورة من الإنترنت
-        btnLoadImageFromUrl.setOnClickListener(v -> loadImageFromUrl());
-
-        // حفظ الكورس
+        // مستمع الأحداث لكل زر
+        btnSelectImage.setOnClickListener(v -> selectImage(REQUEST_CODE_IMAGE_A));
+        btn_select_imageC.setOnClickListener(v -> selectImage(REQUEST_CODE_IMAGE_C));
+        btnLoadImageFromUrl.setOnClickListener(v -> loadImageFromUrl(etImageUrl, ivCourseImage, true));
+        btn_load_image_from_urlC.setOnClickListener(v -> loadImageFromUrl(et_image_urlC, iv_course_imageC, false));
         btnSaveCourse.setOnClickListener(v -> saveCourse());
     }
 
-    private void selectImage() {
-        // فتح معرض الصور
+    private void selectImage(int requestCode) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, requestCode);
     }
 
-    // تحميل الصورة من الإنترنت
-    private void loadImageFromUrl() {
-        String imageUrl = etImageUrl.getText().toString().trim();
+    private void loadImageFromUrl(EditText urlField, ImageView imageView, boolean isMainImage) {
+        String imageUrl = urlField.getText().toString().trim();
         if (imageUrl.isEmpty()) {
             Toast.makeText(this, "يرجى إدخال رابط الصورة", Toast.LENGTH_SHORT).show();
             return;
@@ -79,15 +84,18 @@ public class Add_New_Course extends AppCompatActivity {
 
         Picasso.get()
                 .load(imageUrl)
-                .into(ivCourseImage, new com.squareup.picasso.Callback() {
+                .into(imageView, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
-                        // تحويل الصورة إلى byte[] عند تحميلها بنجاح
-                        ivCourseImage.setDrawingCacheEnabled(true);
-                        Bitmap bitmap = ivCourseImage.getDrawingCache();
+                        imageView.setDrawingCacheEnabled(true);
+                        Bitmap bitmap = imageView.getDrawingCache();
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                        courseImageBytes = stream.toByteArray();
+                        if (isMainImage) {
+                            courseImageBytes = stream.toByteArray();
+                        } else {
+                            courseImageBytesC = stream.toByteArray();
+                        }
                     }
 
                     @Override
@@ -100,16 +108,20 @@ public class Add_New_Course extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+        if (resultCode == RESULT_OK && data != null) {
             Uri imageUri = data.getData();
-            ivCourseImage.setImageURI(imageUri);
-
             try {
-                // تحويل الصورة إلى byte[]
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                courseImageBytes = stream.toByteArray();
+
+                if (requestCode == REQUEST_CODE_IMAGE_A) {
+                    ivCourseImage.setImageURI(imageUri);
+                    courseImageBytes = stream.toByteArray();
+                } else if (requestCode == REQUEST_CODE_IMAGE_C) {
+                    iv_course_imageC.setImageURI(imageUri);
+                    courseImageBytesC = stream.toByteArray();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -117,27 +129,21 @@ public class Add_New_Course extends AppCompatActivity {
     }
 
     private void saveCourse() {
-        // جمع البيانات
         String courseName = etCourseName.getText().toString().trim();
         String description = etDescription.getText().toString().trim();
         int price = Integer.parseInt(etPrice.getText().toString().trim());
         String category = spCategory.getSelectedItem().toString();
         String teacherUsername = etTeacherUsername.getText().toString().trim();
 
-        // التحقق من المدخلات
-//        if (courseName.isEmpty() || description.isEmpty() || teacherUsername.isEmpty() || courseImageBytes == null) {
-//            Toast.makeText(this, "يرجى إدخال جميع الحقول", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        if (courseName.isEmpty() || description.isEmpty() || teacherUsername.isEmpty() || courseImageBytes == null) {
+            Toast.makeText(this, "يرجى إدخال جميع الحقول", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        // إنشاء كائن الكورس
-        Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, null,false, false,false, teacherUsername);
+        Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, courseImageBytesC, false, false, false, teacherUsername,null);
 
-        // إدخال الكورس في قاعدة البيانات
         myViewModel.insertCourse(course);
         Toast.makeText(this, "تم حفظ الكورس بنجاح", Toast.LENGTH_SHORT).show();
-
-        // إنهاء النشاط
         finish();
     }
 }

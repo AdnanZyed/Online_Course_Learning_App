@@ -44,8 +44,10 @@ public class StudentsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewStudents);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
+        String teacherUserName = getArguments().getString("TEACHER_USER_NAME1");
 
-        myViewModel.getStudentsByTeacher("john_doe").observe((LifecycleOwner) requireContext(), studentTeachers -> {
+
+        myViewModel.getStudentsByTeacher(teacherUserName).observe((LifecycleOwner) requireContext(), studentTeachers -> {
             if (studentTeachers != null && !studentTeachers.isEmpty()) {
                 // تنظيف القائمة القديمة قبل إضافة بيانات جديدة
                 studentsList1.clear();

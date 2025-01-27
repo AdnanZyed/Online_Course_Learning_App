@@ -11,8 +11,9 @@
     <!-- الصورة في الأعلى -->
     <ImageView
         android:id="@+id/dialog_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Main Title"
-        android:textColor="@color/black"
+
+        android:textColor="@color/blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/dialog_image"
@@ -39,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="15dp"
         android:text="Secondary description goes here."
         android:textColor="@color/gray"
         android:textSize="16sp"
@@ -49,11 +52,13 @@
     <!-- زر عرض الدورة -->
     <Button
         android:id="@+id/btn_view_course"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_primary"
         android:text="View Course"
+        android:layout_marginTop="30dp"
+
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/dialog_secondary_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +67,11 @@
     <!-- زر الإلغاء -->
     <Button
         android:id="@+id/btn_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
         android:background="@drawable/button_secondary"
-        android:text="Cancel"
+        android:text="View E-Receipt"
+        android:layout_marginTop="15dp"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/btn_view_course"
         app:layout_constraintStart_toStartOf="parent"

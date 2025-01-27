@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ public class TeacherProfileActivity extends AppCompatActivity {
     String name;
     String username;
     String reviews;
+    String studentUser;
+    String education;
     private My_View_Model myViewModel;
 
 
@@ -43,13 +46,15 @@ public class TeacherProfileActivity extends AppCompatActivity {
 
 
         if (bundle != null) {
-
-
             name = bundle.getString("TEACHER_NAME_TEXT_VIEW");
             username = bundle.getString("TEACHER_USER_NAME_TEXT_VIEW");
-            String education = bundle.getString("EDUCATION_TEXT_VIEW");
+             education = bundle.getString("EDUCATION_TEXT_VIEW");
+            studentUser = bundle.getString("STUDENT_USER");
+
+
             Name.setText(name);
             Magor.setText(education);
+
             byte[] bitmapBytes = bundle.getByteArray("BITMAP");
             if (bitmapBytes != null) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
@@ -82,7 +87,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
 
 
         // إعداد الـ ViewPager مع الـ Adapter
-        Tab_profile_Adapter adapter = new Tab_profile_Adapter(this);
+        Tab_profile_Adapter adapter = new Tab_profile_Adapter(this,username,studentUser);
         Pager.setAdapter(adapter);
 
         // ربط TabLayout مع ViewPager2

@@ -25,11 +25,11 @@ public class Delete_Course extends AppCompatActivity {
     RecyclerView recyclerView;
     CourseAdapter courseAdapter;
     My_View_Model myViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_course);
-
 
 
         // إعداد RecyclerView
@@ -37,7 +37,7 @@ public class Delete_Course extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // إعداد الـ Adapter
-        courseAdapter = new CourseAdapter(Delete_Course.this, new ArrayList<>());
+        courseAdapter = new CourseAdapter(Delete_Course.this, new ArrayList<>(), "");
         recyclerView.setAdapter(courseAdapter);
 
         // إعداد ViewModel
@@ -51,8 +51,6 @@ public class Delete_Course extends AppCompatActivity {
                 courseAdapter.setCourseList(courses);
             }
         });
-
-
 
 
 // إعداد ItemTouchHelper للسحب
@@ -83,24 +81,6 @@ public class Delete_Course extends AppCompatActivity {
 // إضافة ItemTouchHelper إلى RecyclerView
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

@@ -32,9 +32,10 @@ public class CoursesProfileFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_courses_profile, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_courses1);
+        String teacherUserName = getArguments().getString("TEACHER_USER_NAME1");
 
 
-        courseAdapter = new CourseAdapter(requireContext(), new ArrayList<>());
+        courseAdapter = new CourseAdapter(requireContext(), new ArrayList<>(),"");
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(courseAdapter);
 
@@ -44,7 +45,7 @@ public class CoursesProfileFragment extends Fragment {
 
 
             // تحميل جميع الكورسات من قاعدة البيانات
-            myViewModel.getAllCoursesByTeacher_USER_Name("john_doe").observe(getViewLifecycleOwner(), courses -> {
+            myViewModel.getAllCoursesByTeacher_USER_Name(teacherUserName).observe(getViewLifecycleOwner(), courses -> {
                 courseAdapter.setCourseList(courses);
                 courseAdapter.setOnCourseClickListener(course -> {
 

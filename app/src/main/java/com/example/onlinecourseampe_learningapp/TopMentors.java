@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,9 @@ public class TopMentors extends AppCompatActivity {
     private My_View_Model myViewModel;
     private ImageView searchIcon;
     private ImageView backIcon;
+    private ImageView imageFound;
+    private TextView t_sory;
+    private TextView t_found;
     private TextView textMentor;
     private EditText eSearsh;
     private String searchQuery;
@@ -38,89 +42,90 @@ public class TopMentors extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_mentors);
 
-
         recyclerView = findViewById(R.id.rv_teachers);
+        t_sory = findViewById(R.id.sorry);
+        t_found = findViewById(R.id.found);
+        imageFound = findViewById(R.id.imageView8);
         searchIcon = findViewById(R.id.search_icon);
         backIcon = findViewById(R.id.back_icon);
         eSearsh = findViewById(R.id.e_searsh);
         textMentor = findViewById(R.id.text_mentor);
 
-
+        String user = getIntent().getStringExtra("STUDENT_USER");
 
         eSearsh.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // لا حاجة لتنفيذ أي شيء هنا
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 searchQuery = eSearsh.getText().toString().trim();
-                if (!searchQuery.isEmpty() || !searchQuery.equals("") || searchQuery == null) {
+                if (searchQuery != null && !searchQuery.isEmpty()) {
                     searchTeachers(searchQuery);
                 } else {
                     loadTeacher1();
-                    // النص موجود: تمكين زر الإرسال وتغيير لونه إلى الأزرق
-
-
                 }
             }
 
-
-                @Override
-            public void afterTextChanged(Editable s) {
-                // لا حاجة لتنفيذ أي شيء هنا
-            }
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
 
-        teacherAdapter = new TeacherAdapterMentors(this, new ArrayList<>());
+        teacherAdapter = new TeacherAdapterMentors(this, new ArrayList<>(), user);
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
-//      Teacher_Dao.getTeacherByName("%" + searchQuery + "%");  // باستخدام الـ "%" للبحث الجزئي
-//      // جلب المدرسين من ViewModel
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        //  loadTeacher1();
-
         recyclerView.setLayoutManager(layoutManager);
-
-        // قائمة المدرسين (بيانات افتراضية)
-
         recyclerView.setAdapter(teacherAdapter);
+
         loadTeacher1();
 
-
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchIcon.setVisibility(View.GONE);
-                textMentor.setVisibility(View.GONE);
-                backIcon.setVisibility(View.GONE);
-                eSearsh.setVisibility(View.VISIBLE);
-
-
-            }
+        searchIcon.setOnClickListener(v -> {
+            searchIcon.setVisibility(View.GONE);
+            textMentor.setVisibility(View.GONE);
+            backIcon.setVisibility(View.VISIBLE);
+            eSearsh.setVisibility(View.VISIBLE);
         });
 
-
-
-
-
+        backIcon.setOnClickListener(v -> {
+            eSearsh.setVisibility(View.GONE);
+            searchIcon.setVisibility(View.VISIBLE);
+            textMentor.setVisibility(View.VISIBLE);
+            loadTeacher1();
+        });
     }
 
     private void searchTeachers(String query) {
         myViewModel.searchTeachers(query).observe(this, teachers -> {
-            if (teachers != null) {
-                teacherAdapter.setTeacher_MonetorsList(teachers);  // تحديث الـ RecyclerView
+            if (teachers != null && !teachers.isEmpty()) {
+                teacherAdapter.setTeacher_MonetorsList(teachers);
+                recyclerView.setVisibility(View.VISIBLE);
+                t_sory.setVisibility(View.GONE);
+                t_found.setVisibility(View.GONE);
+                imageFound.setVisibility(View.GONE);
+            } else {
+                recyclerView.setVisibility(View.GONE);
+                t_sory.setVisibility(View.VISIBLE);
+                t_found.setVisibility(View.VISIBLE);
+                imageFound.setVisibility(View.VISIBLE);
             }
         });
-        // loadTeacher1();
     }
 
     public void loadTeacher1() {
-        // جلب المدرسين من ViewModel
         myViewModel.getAllTeacher().observe(this, teachers -> {
-            teacherAdapter.setTeacher_MonetorsList(teachers);
-
+            if (teachers != null && !teachers.isEmpty()) {
+                teacherAdapter.setTeacher_MonetorsList(teachers);
+                recyclerView.setVisibility(View.VISIBLE);
+                t_sory.setVisibility(View.GONE);
+                t_found.setVisibility(View.GONE);
+                imageFound.setVisibility(View.GONE);
+            } else {
+                recyclerView.setVisibility(View.GONE);
+                t_sory.setVisibility(View.VISIBLE);
+                t_found.setVisibility(View.VISIBLE);
+                imageFound.setVisibility(View.VISIBLE);
+            }
         });
     }
 }

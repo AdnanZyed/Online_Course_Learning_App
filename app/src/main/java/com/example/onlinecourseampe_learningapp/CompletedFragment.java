@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 public class CompletedFragment extends Fragment {
 
-RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     public CompletedFragment() {
         // Required empty public constructor
@@ -22,11 +22,16 @@ RecyclerView recyclerView;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-     View view=inflater.inflate(R.layout.fragment_completed, container, false);
+        View view = inflater.inflate(R.layout.fragment_completed, container, false);
 
-     recyclerView=view.findViewById(R.id.rv_completed);
+        recyclerView = view.findViewById(R.id.rv_completed);
+        if (getArguments() != null) {
 
-         return view;
+            int coursId = getArguments().getInt("COURSE_ID");
+            String user = getArguments().getString("USER");
+        }
+
+        return view;
     }
 
 }

@@ -69,7 +69,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
             studentImage = itemView.findViewById(R.id.ivStudentImage);
-            studentName = itemView.findViewById(R.id.tvStudentName);
+            studentName = itemView.findViewById(R.id.tvStudentNameItemC);
             lastMessage = itemView.findViewById(R.id.tvLastMessage);
         }
     }

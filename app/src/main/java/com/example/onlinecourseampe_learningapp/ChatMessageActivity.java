@@ -38,7 +38,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         btnSendMessage = findViewById(R.id.btnSendMessage);
 
         otherUser = getIntent().getStringExtra("otherUser"); // اسم المستخدم الآخر
-        ((TextView) findViewById(R.id.tvStudentName)).setText("aDNAN@123");
+        ((TextView) findViewById(R.id.tvStudentNameC)).setText("aDNAN@123");
 
         // إعداد RecyclerView و Adapter
         chatAdapter = new ChatMessageAdapter(messages1, "aDNAN@1234");
