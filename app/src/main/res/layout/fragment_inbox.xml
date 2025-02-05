@@ -71,7 +71,6 @@
 
         />
 
-    <!-- الفيو بيجر -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager_chat"
         android:layout_width="match_parent"

@@ -33,6 +33,8 @@ public class ActivityMainSignIn extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+
+
         boolean isRemembered = sharedPreferences.getBoolean("rememberMe", false);
         if (isRemembered) {
             binding.eUserIn.setText(sharedPreferences.getString("username", ""));
@@ -51,6 +53,10 @@ public class ActivityMainSignIn extends AppCompatActivity {
                         intent.putExtra("USER", binding.eUserIn.getText().toString());
                         startActivity(intent);
 
+
+                    }
+                    else {
+                        Toast.makeText(ActivityMainSignIn.this, "هذا المستخدم غير موجود", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -92,7 +98,6 @@ public class ActivityMainSignIn extends AppCompatActivity {
 
 
                         if (EUserIn.equals(student_name_user) && EPasswordIn.equals(student_password)) {
-                            Toast.makeText(ActivityMainSignIn.this, "لقد حصلت على اشتراك جديد", Toast.LENGTH_SHORT).show();
 
 
                             Intent intent = new Intent(ActivityMainSignIn.this, MainActivity_Main.class);

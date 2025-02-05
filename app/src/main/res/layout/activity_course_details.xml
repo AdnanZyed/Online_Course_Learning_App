@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- صورة الدورة -->
             <ImageView
                 android:id="@+id/img_course"
                 android:layout_width="match_parent"
@@ -25,7 +24,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- اسم الدورة -->
             <TextView
                 android:id="@+id/intro_to"
                 android:layout_width="wrap_content"
@@ -129,7 +127,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- زر الشراء -->
     <Button
         android:id="@+id/bt_buy"
         android:layout_width="match_parent"

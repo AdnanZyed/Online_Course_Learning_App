@@ -137,11 +137,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.66" />
 
-    <!-- الصورة الأولى -->
-
-    <!-- الصورة الثانية -->
-
-    <!-- الصورة الثالثة -->
 
     <ImageView
         android:id="@+id/imageView1"

@@ -88,10 +88,9 @@ public class EnrollCodeActivity extends AppCompatActivity {
                     card_num = students.get(0).getCard_Number();
 
                     if (otpCodeInt == card_num) {
-                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
 
                             showCustomDialog();
-                        }, 2000);
+
 
                         myViewModel.addNotification("Credit Card Connected!", "Credit Card has been linked!", R.drawable.connected_card);
 

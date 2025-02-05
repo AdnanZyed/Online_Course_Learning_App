@@ -37,6 +37,13 @@ public class MainActivity_Admin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.Card3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity_Admin.this, UpdateCourse.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

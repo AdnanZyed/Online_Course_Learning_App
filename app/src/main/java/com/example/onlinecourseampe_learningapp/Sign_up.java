@@ -157,6 +157,10 @@ public class Sign_up extends AppCompatActivity {
                     return;
                 }
                 myViewModel.getAllStudentByUser(eUserIn).observe(Sign_up.this, students -> {
+
+                    if (students != null) {
+                        Log.d("DEBUG", "عدد المستخدمين بنفس الاسم: " + students.size()); // لمعرفة هل هناك بيانات أم لا
+                    }
                     if (students == null || students.isEmpty()) {
                         int phoneIn = Integer.parseInt(PhoneIn);
                         student = new Student(eUserIn, ePasswordIn, phoneIn, 1234, nameIn, null, "");
@@ -170,13 +174,11 @@ public class Sign_up extends AppCompatActivity {
                         myViewModel.addNotification("Account Setup Successful!", "Your account has been created!", R.drawable.created);
 
 
-
-
                     } else {
-                        activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقا");
+                        activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقام");
                     }
-                });
 
+                });
             }
 
 
@@ -197,7 +199,9 @@ public class Sign_up extends AppCompatActivity {
             }
         });
 
-        activitySignUpBinding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        activitySignUpBinding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) ->
+
+        {
             if (isChecked) {
                 String username2 = activitySignUpBinding.eUser.getText().toString();
                 String password2 = activitySignUpBinding.ePassword.getText().toString();

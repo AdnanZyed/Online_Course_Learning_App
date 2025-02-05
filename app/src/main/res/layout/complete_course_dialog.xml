@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- الصورة في الأعلى -->
     <ImageView
         android:id="@+id/dialog_image"
         android:layout_width="200dp"
@@ -20,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- النص الأساسي -->
     <TextView
         android:id="@+id/dialog_main_text"
         android:layout_width="wrap_content"
@@ -34,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dialog_image" />
 
-    <!-- النص الثانوي -->
     <TextView
         android:id="@+id/dialog_secondary_text"
         android:layout_width="wrap_content"
@@ -114,7 +111,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll" />
-    <!-- زر عرض الدورة -->
     <Button
         android:id="@+id/btn_view_course"
         android:layout_width="200dp"
@@ -130,7 +126,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/great" />
 
-    <!-- زر الإلغاء -->
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="200dp"

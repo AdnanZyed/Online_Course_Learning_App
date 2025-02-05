@@ -43,7 +43,6 @@
             app:layout_constraintStart_toEndOf="@id/back_icon_enrollC"
             app:layout_constraintTop_toTopOf="@+id/back_icon_enrollC" />
 
-        <!-- TabLayout -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
@@ -59,7 +58,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- ViewPager2 -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"

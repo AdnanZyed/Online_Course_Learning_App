@@ -35,7 +35,6 @@
     </androidx.cardview.widget.CardView>
 
 
-    <!-- اسم الطالب -->
     <TextView
         android:id="@+id/tvStudentNameS"
         android:layout_width="wrap_content"
@@ -50,7 +49,6 @@
         app:layout_constraintTop_toTopOf="@id/iv_teacher_image2"
         />
 
-    <!-- آخر رسالة -->
     <TextView
         android:id="@+id/tvLastMessageS"
         android:layout_width="0dp"

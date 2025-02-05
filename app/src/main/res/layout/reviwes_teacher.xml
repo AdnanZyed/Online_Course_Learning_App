@@ -3,36 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#EBEBEB"
     android:layout_height="match_parent"
+    android:background="#EBEBEB"
     tools:context=".ReviewsTeacherFragment">
+
     <androidx.cardview.widget.CardView
 
         android:id="@+id/iv_teacher_image71"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        app:cardCornerRadius="1000dp"
         android:layout_margin="20dp"
+        app:cardCornerRadius="1000dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <ImageView
             android:id="@+id/image_student1"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:shapeAppearanceOverlay="@style/RoundedImage"
-            app:strokeColor="@color/black"
-            app:strokeWidth="2dp"
             android:background="@drawable/profile"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImage"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
     </androidx.cardview.widget.CardView>
-
 
 
     <ImageView
@@ -75,25 +73,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_comment1" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/total_rating1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginEnd="100dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:text="0"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/rating1" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/total_comments1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:text="0"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/rating1" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/total_rating1"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_marginEnd="100dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        android:text="0"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/rating1" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/total_comments1"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        android:text="0"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/rating1" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_review1"

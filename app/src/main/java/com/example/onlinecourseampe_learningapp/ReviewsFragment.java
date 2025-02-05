@@ -33,7 +33,7 @@ public class ReviewsFragment extends Fragment {
     byte[] bytes;
     ImageView imageView;
     RecyclerView recyclerView;
-    Spinner ratingSpinner;
+
 
     Bundle args;
     int rating;
@@ -139,7 +139,6 @@ public class ReviewsFragment extends Fragment {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDate = now.format(formatter);
 
-                int rating_spinner = Integer.parseInt(ratingSpinner.getSelectedItem().toString());
 
                 Course_Reviews review = new Course_Reviews(0, bytes, student_name, user,
                         edit_Comment.getText().toString(),

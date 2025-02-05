@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".EnrollCodeActivity">
 
-    <!-- أيقونة الرجوع -->
     <ImageView
         android:id="@+id/back_icon_enrollCoude"
         android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- عنوان الصفحة -->
     <TextView
         android:id="@+id/text_enroll"
         android:layout_width="wrap_content"
@@ -33,9 +31,7 @@
         app:layout_constraintStart_toEndOf="@id/back_icon_enrollCoude"
         app:layout_constraintTop_toTopOf="@id/back_icon_enrollCoude" />
 
-    <!-- تعليمات إدخال الكود -->
 
-    <!-- حقول إدخال كود التحقق -->
 
     <TextView
         android:id="@+id/text_enroll2"
@@ -117,7 +113,6 @@
         app:layout_constraintStart_toEndOf="@id/otp_digit_3"
         app:layout_constraintTop_toBottomOf="@id/text_enroll2" />
 
-    <!-- زر تأكيد التسجيل -->
     <Button
         android:id="@+id/bt_buy1"
         android:layout_width="400dp"

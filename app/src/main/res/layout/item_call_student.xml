@@ -20,7 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- صورة الطالب -->
         <ImageView
             android:id="@+id/ivStudentImage1"
             android:layout_width="50dp"
@@ -39,7 +38,6 @@
     </androidx.cardview.widget.CardView>
 
 
-    <!-- اسم الطالب -->
     <TextView
         android:id="@+id/tvStudentNameItemC1"
         android:layout_width="0dp"
@@ -53,7 +51,6 @@
         app:layout_constraintStart_toEndOf="@id/iv_teacher_image71"
         app:layout_constraintTop_toTopOf="@id/iv_teacher_image71" />
 
-    <!-- آخر رسالة -->
     <TextView
         android:id="@+id/tvLastMessage1"
         android:layout_width="0dp"

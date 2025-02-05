@@ -25,40 +25,44 @@ public class MainActivity_sign extends AppCompatActivity {
         binding = ActivityMainSignBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
-
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        handler.postDelayed(() -> {
-            myViewModel.getAllTeacher().observe(this, teachers -> {
-                if (teachers == null || teachers.isEmpty()) {
-                    addSampleTeachers();
-                }
-            });
-        }, 0);
-
-        handler.postDelayed(() -> {
-            myViewModel.getAllCourse().observe(this, courses -> {
-                if (courses == null || courses.isEmpty()) {
-                    addSampleCourses();
-                }
-            });
-        }, 4000);
-
-        handler.postDelayed(() -> {
-            myViewModel.getTotalLessonsCount().observe(this, lessonCount -> {
-                if (lessonCount == null || lessonCount == 0) {
-                    addSampleLessones();
-                }
-            });
-        }, 6000);
-
-        handler.postDelayed(() -> {
-            myViewModel.getAllStudent().observe(this, students -> {
-                if (students == null || students.isEmpty()) {
-                    addSampleStudents();
-                }
-            });
-        }, 8000);
+//
+//        addSampleTeachers();
+//        addSampleCourses();
+//        addSampleStudents();
+//        addSampleLessones();
+//        Handler handler = new Handler(Looper.getMainLooper());
+//
+//      //  handler.postDelayed(() -> {
+//            myViewModel.getAllTeacher().observe(this, teachers -> {
+//                if (teachers == null || teachers.isEmpty()) {
+//                    addSampleTeachers();
+//                }
+//            });
+//     //   }, 0);
+//
+//     //   handler.postDelayed(() -> {
+//            myViewModel.getAllCourse().observe(this, courses -> {
+//                if (courses == null || courses.isEmpty()) {
+//                    addSampleCourses();
+//                }
+//            });
+//    //    }, 0);
+//
+//     //   handler.postDelayed(() -> {
+//            myViewModel.getTotalLessonsCount().observe(this, lessonCount -> {
+//                if (lessonCount == null || lessonCount == 0) {
+//                    addSampleLessones();
+//                }
+//            });
+//    //    }, 0);
+//
+//    //    handler.postDelayed(() -> {
+//            myViewModel.getAllStudent().observe(this, students -> {
+//                if (students == null || students.isEmpty()) {
+//                    addSampleStudents();
+//                }
+//            });
+//    //    }, 0);
 
         binding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +139,7 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes1 = convertImageToByteArray(bitmap1);
         Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
         byte[] imageBytes2 = convertImageToByteArray(bitmap2);
-        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i1);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i10);
         byte[] imageBytes3 = convertImageToByteArray(bitmap3);
         Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c1);
         byte[] imageBytes4 = convertImageToByteArray(bitmap4);

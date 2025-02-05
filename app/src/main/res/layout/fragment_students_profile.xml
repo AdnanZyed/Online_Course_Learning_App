@@ -19,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <!-- صورة الطالب -->
         <ImageView
             android:id="@+id/imgStudentProfile"
             android:layout_width="120dp"
@@ -33,10 +32,8 @@
 
             />
     </androidx.cardview.widget.CardView>
-    <!-- صورة الطالب -->
 
 
-    <!-- اسم الطالب مع أيقونة تعديل -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +59,6 @@
             android:src="@android:drawable/ic_menu_edit" />
     </LinearLayout>
 
-    <!-- EditText للاسم (مخفي مبدئيًا) -->
     <EditText
         android:id="@+id/etStudentName"
         android:layout_width="match_parent"
@@ -75,7 +71,6 @@
         android:textSize="20sp"
         android:visibility="gone" />
 
-    <!-- النص التعريفي مع أيقونة تعديل -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,7 +96,6 @@
             android:src="@android:drawable/ic_menu_edit" />
     </LinearLayout>
 
-    <!-- EditText للتعريف (مخفي مبدئيًا) -->
     <EditText
         android:id="@+id/etStudentBio"
         android:layout_width="match_parent"

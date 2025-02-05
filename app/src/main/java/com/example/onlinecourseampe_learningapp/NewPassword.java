@@ -22,6 +22,7 @@ public class NewPassword extends AppCompatActivity {
     EditText pass2;
     Button Sign_in1;
     String userName;
+    ImageView imageView;
     private My_View_Model myViewModel;
 
     @Override
@@ -37,6 +38,13 @@ public class NewPassword extends AppCompatActivity {
         ImageView eye = findViewById(R.id.ic_eye_off1);
         ImageView eye1 = findViewById(R.id.ic_eye_off11);
 
+        imageView=findViewById(R.id.back_in11);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

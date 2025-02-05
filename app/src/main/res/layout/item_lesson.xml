@@ -16,9 +16,6 @@
         android:layout_height="90dp"
         android:padding="16dp">
 
-        <!-- الأيقونة -->
-
-        <!-- الشكل الدائري الأزرق مع الرقم -->
 
         <ImageView
             android:id="@+id/iconPlay"
@@ -51,9 +48,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- النص الرئيسي -->
-
-        <!-- النص الثانوي -->
 
         <TextView
             android:id="@+id/mainText"
