@@ -9,6 +9,6 @@ public class ImageConverter {
         if (byteArray != null) {
             return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         }
-        return null; // تحقق من أن البيانات ليست null
+        return null;
     }
 }

@@ -20,11 +20,11 @@ import java.util.List;
 
 public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.StudentViewHolder> {
 
-    private final List<Student> studentList; // قائمة الكورسات
+    private final List<Student> studentList;
     private final Context context;
 
     public StudentsAdapter(List<Student> studentList, Context context) {
-        this.studentList = studentList; // تمرير قائمة الكورسات
+        this.studentList = studentList;
         this.context = context;
     }
 
@@ -48,9 +48,9 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
 
 
     class StudentViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView studentImage; // صورة الطالب
-        private final TextView studentName;   // اسم الطالب
-        private final TextView lastMessage;   // آخر رسالة
+        private final ImageView studentImage;
+        private final TextView studentName;
+        private final TextView lastMessage;
 
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,19 +59,16 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
             lastMessage = itemView.findViewById(R.id.tvLastMessageS);
 
 
-
         }
 
         public void bind(Student student) {
-            // تحويل صورة الطالب من Byte Array إلى Bitmap
             Bitmap bitmap = ImageConverter.byteArrayToBitmap(student.getS_Image());
             if (bitmap != null) {
-                studentImage.setImageBitmap(bitmap); // تعيين الصورة
+                studentImage.setImageBitmap(bitmap);
             } else {
-                studentImage.setImageResource(R.drawable.profile); // صورة افتراضية في حالة عدم وجود صورة
+                studentImage.setImageResource(R.drawable.profile);
             }
 
-            // تعيين اسم الطالب وآخر رسالة
             studentName.setText(student.getS_name());
             lastMessage.setText(student.getBio());
         }

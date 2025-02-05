@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,40 +18,31 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class InboxFragment extends Fragment {
 
-    private My_View_Model chatViewModel;
-    private ChatAdapter chatAdapter;
+
+    String students_u;
 
     public InboxFragment() {
-        // Required empty public constructor
     }
-
-
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_inbox, container, false);
+        View view = inflater.inflate(R.layout.fragment_inbox, container, false);
 
-        // ربط العناصر
         TabLayout tabLayout = view.findViewById(R.id.tabLayout_chat);
         ViewPager2 viewPager = view.findViewById(R.id.viewPager_chat);
         Bundle args = getArguments();
         if (args != null) {
-          String  students_u = args.getString("USER_NAME");
+            students_u = args.getString("USER_NAME");
 
 
         }
 
-        // إعداد الـAdapter
-        ViewPagerAdapterChat adapter = new ViewPagerAdapterChat(requireActivity());
+        ViewPagerAdapterChat adapter = new ViewPagerAdapterChat(requireActivity(), students_u);
         viewPager.setAdapter(adapter);
 
-        // إعداد التبويبات مع TabLayoutMediator
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            // تحديد عناوين التبويبات
             switch (position) {
                 case 0:
                     tab.setText("Chat");

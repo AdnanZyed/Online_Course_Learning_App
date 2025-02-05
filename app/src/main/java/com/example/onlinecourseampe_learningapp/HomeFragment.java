@@ -11,6 +11,8 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +22,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -29,6 +31,7 @@ public class HomeFragment extends Fragment {
     private List<Button> buttons = new ArrayList<>();
     private Button activeButton = null;
     Button btnAll;
+    ViewPager2 viewPager;
     Button btn3DDesign;
     Bundle args;
     Bundle bundle;
@@ -43,25 +46,22 @@ public class HomeFragment extends Fragment {
     TextView tv_Seeall2;
     TextView tv_Welcom;
     TextView tv_Name;
-    RecyclerView recyclerView;
     ImageView Iv_notification;
     ImageView Iv_Bookmark;
     String students_u;
     ImageView iv_S;
     String bio;
+
     private My_View_Model myViewModel;
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        // قم بتحميل واجهة المستخدم الخاصة بالـ Fragment (layout)
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
-
 
         args = getArguments();
         if (args != null) {
@@ -69,16 +69,24 @@ public class HomeFragment extends Fragment {
 
 
         }
-        Log.d("MainActivity_Main", "MMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMM " + students_u);
+
+
+        ViewPager2 viewPager2 = rootView.findViewById(R.id.viewPager2);
+        if (viewPager2 == null) {
+            Log.e("HomeFragment", "viewPager2 is null!");
+        }
+
+        List<Integer> images = Arrays.asList(R.drawable.ad1, R.drawable.ad2, R.drawable.ad3);
+        ImageAdapter adapter = new ImageAdapter(images);
+
+        viewPager2.setAdapter(adapter);
 
         bundle = new Bundle();
         bundle.putString("USER_NAME_R", students_u);
 
-// إنشاؤ Fragment الجديد
         Fragment targetFragment = new ReviewsFragment();
         Fragment fragment2 = new CourseFragment();
         fragment2.setArguments(bundle);
-// ضبط البيانات المرسلة على الـ Fragment
         targetFragment.setArguments(bundle);
 
         btnAll = rootView.findViewById(R.id.btn_all);
@@ -94,49 +102,39 @@ public class HomeFragment extends Fragment {
         teacherRecyclerView = rootView.findViewById(R.id.rv_t);
         btnBusiness = rootView.findViewById(R.id.btn_business);
         btnArt = rootView.findViewById(R.id.btn_art);
-        // استدعاء CourseFragment وتحميل الدورات عند تحميل الفراجمنت
         CourseFragment fragment = (CourseFragment) getParentFragmentManager()
                 .findFragmentById(R.id.fram_corse);
 
+
         if (fragment != null) {
-            fragment.loadCourses(); // استدعاء الدالة داخل الفراجمنت
-            onButtonClicked(btnAll);  // تفعيل الزر الافتراضي
+            fragment.loadCourses();
+            onButtonClicked(btnAll);
         }
 
-        // إضافة الأزرار إلى القائمة
 
         buttons.add(btnAll);
-        buttons.add(btn3DDesign);
         buttons.add(btnProgramming);
+        buttons.add(btn3DDesign);
         buttons.add(btnBusiness);
         buttons.add(btnArt);
-        // تحديد الزر الافتراضي (على سبيل المثال btnAll)
         Button defaultButton = btnAll;
         defaultButton.setBackgroundResource(R.drawable.catigories_btn_selected);
         defaultButton.setTextColor(R.color.white);
-        // ضبط الاستماع للنقر على كل زر
         for (Button button : buttons) {
             button.setOnClickListener(v -> onButtonClicked(button));
         }
 
-//        assert getArguments() != null;
-//        String user_student = getArguments().getString("USER_NAME");
-
-
-        Log.d("HomeFragment1111", "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" + students_u);
-
         myViewModel.getAllStudentByUser(students_u).observe(getViewLifecycleOwner(), students -> {
-            // استخدام LinearLayoutManager مع التمرير الأفقي
             if (students != null && !students.isEmpty()) {
 
                 Student student = students.get(0);
                 String student_name = student.getS_name().toString();
                 bio = student.getBio().toString();
-                if (bio.isEmpty()){
+                if (bio.isEmpty()) {
                     tv_Welcom.setText("Welcom");
 
 
-                }else {
+                } else {
                     tv_Welcom.setText(bio);
                 }
                 byte[] bytes = student.getS_Image();
@@ -151,10 +149,23 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //addSampleStudents();
-        // addSampleTeachers();
-        //  addSampleCourses();
 
+        iv_S.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentsProfileFragment fragment = new StudentsProfileFragment();
+                Bundle args = new Bundle();
+                args.putString("USER_NAME_R", students_u);
+                fragment.setArguments(args);
+
+
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragment, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         Iv_notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,43 +182,18 @@ public class HomeFragment extends Fragment {
 
                 Intent intent = new Intent(requireContext(), BookmarkActivity.class);
                 intent.putExtra("USER", students_u);
-                Log.d("MainActivity_Main", "/////////////////////////////////////////////////////////// " + students_u);
 
                 startActivity(intent);
             }
         });
-        // استدعاء دالة حذف الكورسات من ViewModel
-        // myViewModel.deleteAllCourses();
-        // myViewModel.deleteAllCourses();
-        //addSampleCourses();
-
-//        Course course=new Course();
-//        My_Database.databaseWriteExecutor.execute(() -> {
-//
-//        myViewModel.insertCourse(course);
-//        });
-        // addSampleTeacher();
-        // إضافة بيانات أولية (إذا أردت)
-        //   addSampleCourses();
-        // إضافة مستمع النقر لكل زر
-//        for (Button button : buttons) {
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onButtonClicked(button);
-//                }
-//            });
-//        }
 
 
-        //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
         if (savedInstanceState == null) {
             CourseFragment courseFragment = new CourseFragment();
             Bundle bundle = new Bundle();
             bundle.putString("USER_NAME_R", students_u);
             courseFragment.setArguments(bundle);
 
-// استبدل R.id.frame_container بالـ ID الخاص بـ FrameLayout
             getParentFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fram_corse, courseFragment)
@@ -215,26 +201,7 @@ public class HomeFragment extends Fragment {
             onButtonClicked(btnAll);
 
         }
-        // تحميل الفراجمنت داخل FrameLayout
 
-
-        //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
-
-
-//        CourseFragment fragment = (CourseFragment) getFragmentManager()
-//                .findFragmentById(R.id.fram_corse);
-//
-//        if (fragment != null) {
-//            fragment.loadCourses(); // استدعاء الدالة داخل الفراجمنت
-//            onButtonClicked(btnAll);
-//
-//
-//            //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
-//
-//
-//        }
-
-        // استدعاء الكورسات عند الضغط على الزر
         btnAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,11 +210,8 @@ public class HomeFragment extends Fragment {
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses(); // استدعاء الدالة داخل الفراجمنت
+                    fragment.loadCourses();
                     onButtonClicked(btnAll);
-
-
-                    //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
 
 
                 }
@@ -262,11 +226,8 @@ public class HomeFragment extends Fragment {
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_Art(); // استدعاء الدالة داخل الفراجمنت
+                    fragment.loadCourses_Categorie_Art();
                     onButtonClicked(btnArt);
-
-
-                    //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
 
 
                 }
@@ -283,11 +244,8 @@ public class HomeFragment extends Fragment {
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_Business(); // استدعاء الدالة داخل الفراجمنت
+                    fragment.loadCourses_Categorie_Business();
                     onButtonClicked(btnBusiness);
-
-
-                    //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
 
 
                 }
@@ -304,11 +262,8 @@ public class HomeFragment extends Fragment {
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_Programming(); // استدعاء الدالة داخل الفراجمنت
+                    fragment.loadCourses_Categorie_Programming();
                     onButtonClicked(btnProgramming);
-
-
-                    //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
 
 
                 }
@@ -325,11 +280,8 @@ public class HomeFragment extends Fragment {
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_3D_Design(); // استدعاء الدالة داخل الفراجمنت
+                    fragment.loadCourses_Categorie_3D_Design();
                     onButtonClicked(btn3DDesign);
-
-
-                    //   Course_Dao.updateBookmarkStatus(Course.getCourse_ID(), Course.isBookmarked());
 
 
                 }
@@ -338,36 +290,19 @@ public class HomeFragment extends Fragment {
         });
 
 
-        // تحديث حالة المفضلة عند الضغط على زر
-//        Iv_Bookmark.setOnClickListener(v -> {
-//            int courseId = 1;  // استخدم الـ courseId المناسب هنا
-//            boolean isBookmarked = true;  // يمكنك التبديل بين true و false حسب الحالة
-//            myViewModel.updateBookmarkStatusAndGetCourses(courseId, isBookmarked).observe(getViewLifecycleOwner(), updatedCourses -> {
-//                if (updatedCourses != null) {
-//                    // تحديث الـ RecyclerView بعد التعديل
-//                    CourseAdapter adapter = new CourseAdapter(getContext(), updatedCourses);
-//                    recyclerView.setAdapter(adapter);
-//                }
-//            });
-//        });
-
-
         tv_Seeall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //      loadTeacher();
                 Intent intent = new Intent(requireContext(), TopMentors.class);
-                intent.putExtra("STUDENT_USER",students_u);
+                intent.putExtra("STUDENT_USER", students_u);
                 startActivity(intent);
             }
         });
         tv_Seeall2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //      loadTeacher();
-                Intent intent = new Intent(requireContext(), BookmarkActivity.class);
+                Intent intent = new Intent(requireContext(), Most_Popular.class);
                 intent.putExtra("USER", students_u);
-                Log.d("MainActivity_Main", "/////////////////////////////////////////////////////////// " + students_u);
 
                 startActivity(intent);
             }
@@ -381,13 +316,11 @@ public class HomeFragment extends Fragment {
     }
 
     public void loadTeacher() {
-        // جلب المدرسين من ViewModel
         myViewModel.getAllTeacher().observe(getViewLifecycleOwner(), teachers -> {
-            // استخدام LinearLayoutManager مع التمرير الأفقي
             LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-            teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>(),students_u);
+            teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>(), students_u);
 
             teacherRecyclerView.setLayoutManager(layoutManager);
 
@@ -399,67 +332,17 @@ public class HomeFragment extends Fragment {
     }
 
 
-//    private void addSampleTeacher() {
-//
-////        Teacher teacher = new Teacher("adnan", "ahmad1", "programing", "ahmad123", null);
-//        Teacher teacher1 = new Teacher("ADNAN", "ADNAN", "programing", "ADNAN", null);
-////        myViewModel.insertTeacher(teacher);
-//        myViewModel.insertTeacher(teacher1);
-//
-//
-////        try {
-////            Teacher teacher = new Teacher("ADNAN12", "Adnan1", "adnan1234", "programing", null, 1234);
-////            myViewModel.insertTeacher(teacher);
-////            Log.d("Teacher", "Teacher added successfully");
-////        } catch (Exception e) {
-////            Log.e("Teacher", "Error adding teacher: " + e.getMessage());
-////        }
-//
-////        try {
-////            Teacher teacher = new Teacher("Adnan", null);
-////            Teacher teacher1 = new Teacher("Adnan", null);
-////            Teacher teacher2 = new Teacher("Adnan", null);
-//        // My_Database.databaseWriteExecutor.execute(() -> {
-//
-////                myViewModel.insertTeacher(teacher);
-////                myViewModel.insertTeacher(teacher1);
-//        //  myViewModel.insertTeacher(teacher2);
-//
-//
-//        //   });
-////        }
-//
-//
-////        catch (Exception e) {
-////            e.printStackTrace();
-////        }
-//    }
-//
-//
-////        if(savedInstanceState ==null)
-////
-////    {
-////        getSupportFragmentManager()
-////                .beginTransaction()
-////                .replace(R.id.flFragment, new CourseFragment())
-////                .commit();
-////    }
-
-
     @SuppressLint("ResourceAsColor")
     private void onButtonClicked(Button clickedButton) {
-        // إعادة جميع الأزرار إلى الشكل الافتراضي
         for (Button button : buttons) {
             button.setBackgroundResource(R.drawable.catigories_btn);
             button.setTextColor(R.color.blue);
         }
 
 
-        // تغيير شكل الزر المضغوط
         clickedButton.setBackgroundResource(R.drawable.catigories_btn_selected);
         clickedButton.setTextColor(R.color.white);
 
-        // تحديث الزر النشط
         activeButton = clickedButton;
 
 

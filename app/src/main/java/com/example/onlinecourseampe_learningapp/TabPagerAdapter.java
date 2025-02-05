@@ -15,9 +15,7 @@ public class TabPagerAdapter extends FragmentStateAdapter {
     private final String user;
 
 
-
-
-    public TabPagerAdapter(@NonNull FragmentActivity fragmentActivity, String teacherUserName, int courseId, String user,String courseDescription) {
+    public TabPagerAdapter(@NonNull FragmentActivity fragmentActivity, String teacherUserName, int courseId, String user, String courseDescription) {
         super(fragmentActivity);
         this.teacherUserName = teacherUserName;
         this.courseDescription = courseDescription;
@@ -35,9 +33,8 @@ public class TabPagerAdapter extends FragmentStateAdapter {
                 AboutFragment aboutFragment = new AboutFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("TEACHER_USER_NAME1", teacherUserName);
-                bundle.putString("courseDescription", courseDescription); // تمرير معرف الدورة
-                bundle.putString("STUDENT_USER", user); // تمرير معرف الدورة
-                Log.d("Adapter", "/////////////////////////////////////////////////////////// " + courseDescription);
+                bundle.putString("courseDescription", courseDescription);
+                bundle.putString("STUDENT_USER", user);
 
 
                 aboutFragment.setArguments(bundle);
@@ -46,12 +43,12 @@ public class TabPagerAdapter extends FragmentStateAdapter {
             case 1:
                 LessonsFragment lessonsFragment = new LessonsFragment();
                 Bundle bundle4 = new Bundle();
-                bundle4.putInt("COURSE_ID", courseId); // تمرير معرف الدورة
+                bundle4.putInt("COURSE_ID", courseId);
+                bundle4.putString("USER", user);
 
                 lessonsFragment.setArguments(bundle4);
                 return lessonsFragment;
             case 2:
-                // إنشاء ReviewsFragment وتمرير البيانات
                 ReviewsFragment reviewsFragment = new ReviewsFragment();
                 Bundle bundle2 = new Bundle();
                 bundle2.putInt("COURSE_ID1", courseId);
@@ -59,7 +56,6 @@ public class TabPagerAdapter extends FragmentStateAdapter {
                 reviewsFragment.setArguments(bundle2);
                 return reviewsFragment;
             default:
-                // AboutFragment
                 AboutFragment aboutFragment1 = new AboutFragment();
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("TEACHER_USER_NAME1", teacherUserName);
@@ -73,6 +69,6 @@ public class TabPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3; // عدد التابات
+        return 3;
     }
 }

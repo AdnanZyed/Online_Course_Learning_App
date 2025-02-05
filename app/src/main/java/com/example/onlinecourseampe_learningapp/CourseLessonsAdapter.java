@@ -1,5 +1,6 @@
 package com.example.onlinecourseampe_learningapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -11,20 +12,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class CourseLessonsAdapter extends RecyclerView.Adapter<CourseLessonsAdapter.LessonViewHolder> {
 
-    private final My_View_Model myViewModel;  // تعريف ViewModel
+    private final My_View_Model myViewModel;
     private final List<CourseLessons> lessons;
+    private final String user;
+    private final Context context;
 
-    // إضافة ViewModel كمُدخل في المُنشئ
-    public CourseLessonsAdapter(My_View_Model myViewModel, List<CourseLessons> lessons) {
+
+    public CourseLessonsAdapter(My_View_Model myViewModel, List<CourseLessons> lessons, String user, Context context) {
         this.myViewModel = myViewModel;
         this.lessons = lessons;
+        this.context = context;
+        this.user = user;
     }
 
     @NonNull
@@ -38,34 +43,47 @@ public class CourseLessonsAdapter extends RecyclerView.Adapter<CourseLessonsAdap
     public void onBindViewHolder(@NonNull LessonViewHolder holder, int position) {
         CourseLessons lesson = lessons.get(position);
 
-        // تعيين النصوص
         holder.mainText.setText(lesson.getL_name());
         holder.secondaryText.setText(lesson.getL_time() + "");
-        holder.numberBadge.setText(String.valueOf(lesson.getL_id()));
+        holder.numberBadge.setText(String.valueOf(position + 1));
 
-        // التحكم في تفعيل أيقونة Play بناءً على حالة الدرس
+
         if (lesson.isL_completed() || position == 0 || lessons.get(position - 1).isL_completed()) {
-            holder.iconPlay.setAlpha(1.0f); // تمكين الأيقونة
+
+
+            if (position == getItemCount()) {
+
+            }
+            holder.iconPlay.setAlpha(1.0f);
             holder.iconPlay.setEnabled(true);
 
             holder.iconPlay.setOnClickListener(v -> {
-                // التعامل مع الضغط
-                // تحديث حالة الدرس إلى مكتمل
 
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(lesson.getL_url()));
-
                 holder.itemView.getContext().startActivity(intent);
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                StudentLesson studentLesson1 = new StudentLesson(user, lesson.getL_id(), true);
+                myViewModel.insertStudentLesson(studentLesson1);
+
                 lesson.setL_completed(true);
-                myViewModel.updateCourseLesson(lesson); // تحديث الحالة في قاعدة البيانات
-                notifyItemChanged(position); // تحديث العنصر الحالي في القائمة
-                }, 2000); // تأخير 2 ثانية
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+
+
+                    myViewModel.updateCourseLesson(lesson);
+
+
+                    notifyItemChanged(position);
+                }, 2000);
             });
         } else {
-            holder.iconPlay.setAlpha(0.5f); // تعطيل الأيقونة
+            holder.iconPlay.setAlpha(0.5f);
             holder.iconPlay.setEnabled(false);
             holder.iconPlay.setOnClickListener(null);
+
+            lesson.setL_completed(false);
+
         }
+
+
     }
 
     @Override
@@ -79,6 +97,7 @@ public class CourseLessonsAdapter extends RecyclerView.Adapter<CourseLessonsAdap
 
         public LessonViewHolder(@NonNull View itemView) {
             super(itemView);
+
             mainText = itemView.findViewById(R.id.mainText);
             secondaryText = itemView.findViewById(R.id.secondaryText);
             numberBadge = itemView.findViewById(R.id.numberBadge);

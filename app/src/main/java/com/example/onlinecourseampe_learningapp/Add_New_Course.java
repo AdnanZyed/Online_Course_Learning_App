@@ -11,11 +11,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.squareup.picasso.Picasso;
@@ -24,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
 public class Add_New_Course extends AppCompatActivity {
     private static final int REQUEST_CODE_IMAGE_A = 1;
     private static final int REQUEST_CODE_IMAGE_C = 2;
@@ -59,10 +56,8 @@ public class Add_New_Course extends AppCompatActivity {
         iv_course_imageC = findViewById(R.id.iv_course_imageC);
         btn_select_imageC = findViewById(R.id.btn_select_imageC);
 
-        // إنشاء ViewModel
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
-        // مستمع الأحداث لكل زر
         btnSelectImage.setOnClickListener(v -> selectImage(REQUEST_CODE_IMAGE_A));
         btn_select_imageC.setOnClickListener(v -> selectImage(REQUEST_CODE_IMAGE_C));
         btnLoadImageFromUrl.setOnClickListener(v -> loadImageFromUrl(etImageUrl, ivCourseImage, true));
@@ -140,10 +135,14 @@ public class Add_New_Course extends AppCompatActivity {
             return;
         }
 
-        Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, courseImageBytesC, false, false, false, teacherUsername,null);
+        Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, courseImageBytesC, false, false, false, teacherUsername, null, 0, 0);
 
         myViewModel.insertCourse(course);
         Toast.makeText(this, "تم حفظ الكورس بنجاح", Toast.LENGTH_SHORT).show();
+        myViewModel.addNotification("Today's Special Offers", "You get a special promo today!", R.drawable.offered);
+        myViewModel.addNotification("New Category Courses!", "Now the 3D design course is available", R.drawable.offered1);
+
+
         finish();
     }
 }

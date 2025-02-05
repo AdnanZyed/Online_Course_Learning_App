@@ -19,8 +19,9 @@ public class ChatMessageActivity extends AppCompatActivity {
     private ImageView btnSendMessage;
     private ChatMessageAdapter chatAdapter;
 
-    private String currentUser = "aDNAN@1234"; // اسم المستخدم الحالي
-    private String otherUser = "aDNAN@123"; // اسم المستخدم الآخر
+    private String otherUser;
+    private String User;
+    private String name;
     private My_View_Model myViewModel;
     private ArrayList<Message> messages1 = new ArrayList<>();
 
@@ -29,38 +30,43 @@ public class ChatMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_message);
 
-        // تهيئة ViewModel
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
-
-        // الربط مع عناصر الواجهة
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
         etMessageInput = findViewById(R.id.etMessageInput);
         btnSendMessage = findViewById(R.id.btnSendMessage);
 
-        otherUser = getIntent().getStringExtra("otherUser"); // اسم المستخدم الآخر
-        ((TextView) findViewById(R.id.tvStudentNameC)).setText("aDNAN@123");
+        otherUser = getIntent().getStringExtra("studentUsername");
+        name = getIntent().getStringExtra("studentName");
+        User = getIntent().getStringExtra("USER");
+        String call = getIntent().getStringExtra("CALL");
 
-        // إعداد RecyclerView و Adapter
-        chatAdapter = new ChatMessageAdapter(messages1, "aDNAN@1234");
+        TextView textView = findViewById(R.id.tvStudentNameC);
+        textView.setText(name);
+        chatAdapter = new ChatMessageAdapter(messages1, User);
         recyclerViewMessages.setAdapter(chatAdapter);
         recyclerViewMessages.setLayoutManager(new LinearLayoutManager(this));
 
-        // مراقبة الرسائل من ViewModel
-        myViewModel.getMessagesBetweenUsers("aDNAN@1234", "aDNAN@123").observe(this, messages -> {
+        myViewModel.getMessagesBetweenUsers(User, otherUser).observe(this, messages -> {
             messages1.clear();
             messages1.addAll(messages);
             chatAdapter.updateMessages(messages);
-            recyclerViewMessages.scrollToPosition(messages.size() - 1); // تمرير لآخر رسالة
+            recyclerViewMessages.scrollToPosition(messages.size() - 1);
         });
+        if (call != null) {
 
-        // إرسال رسالة جديدة
+            long timestamp = System.currentTimeMillis();
+            Message message = new Message(User, otherUser, "call", timestamp);
+            myViewModel.insertMessage(message);
+
+        }
+
         btnSendMessage.setOnClickListener(v -> {
             String messageContent = etMessageInput.getText().toString().trim();
             if (!messageContent.isEmpty()) {
                 long timestamp = System.currentTimeMillis();
-                Message message = new Message("aDNAN@1234", "aDNAN@123", messageContent, timestamp);
-                myViewModel.insertMessage(message); // إضافة الرسالة إلى قاعدة البيانات
-                etMessageInput.setText(""); // إفراغ حقل الإدخال
+                Message message = new Message(User, otherUser, messageContent, timestamp);
+                myViewModel.insertMessage(message);
+                etMessageInput.setText("");
             }
         });
     }

@@ -12,9 +12,8 @@ import java.util.Arrays;
 import java.util.function.IntFunction;
 
 @Entity(tableName = "Student")
-public class Student{
-    //انا لست متأكدا مما اذا كان من الصحيح اضافة المفتاح الاساس لجدول الكورسات هنا كاجنبي للربط اذا كان هناك اي تعديل فعدله
-   // كل هذه البيانات يتم اضافتها عند الاشتراك ما عدا الصورة من البروفايل
+public class Student {
+
     @PrimaryKey
     @NonNull
     private String Student_user_name;

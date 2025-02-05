@@ -1,5 +1,8 @@
 package com.example.onlinecourseampe_learningapp;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -7,26 +10,41 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ViewPagerAdapterChat extends FragmentStateAdapter {
 
-    public ViewPagerAdapterChat(@NonNull FragmentActivity fragmentActivity) {
+    private final String user;
+
+    public ViewPagerAdapterChat(@NonNull FragmentActivity fragmentActivity, String user) {
         super(fragmentActivity);
+        this.user = user;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        // التحكم في الفراقمنت بناءً على التبويب
         switch (position) {
             case 0:
-                return new ChatFragment(); // فراقمنت الشات
+                ChatFragment chatFragment = new ChatFragment();
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("USER", user);
+
+                chatFragment.setArguments(bundle1);
+                return chatFragment;
             case 1:
-                return new CallFragment(); // فراقمنت الكال
+                CallFragment callFragment = new CallFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("USER", user);
+                callFragment.setArguments(bundle);
+                return callFragment;
             default:
-                return new ChatFragment(); // افتراضيًا
+                ChatFragment chatFragment1 = new ChatFragment();
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("USER", user);
+                chatFragment1.setArguments(bundle2);
+                return chatFragment1;
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2; // عدد التبويبات
+        return 2;
     }
 }

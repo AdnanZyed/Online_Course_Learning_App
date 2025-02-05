@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -29,7 +30,7 @@ public class CoursesFragment extends Fragment {
     private My_View_Model viewModel;
 
     private My_Database myDatabase;
-    String  students_u;
+    String students_u;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,25 +38,27 @@ public class CoursesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_courses, container, false);
 
+        ImageView imageView = view.findViewById(R.id.back_icon_enrollC);
         Bundle args = getArguments();
         if (args != null) {
-              students_u = args.getString("USER_NAME");
+            students_u = args.getString("USER_NAME");
 
 
         }
-        // استرجاع اسم الطالب
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // مراقبة البيانات من ViewModel
+            }
+        });
 
 
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         ViewPager2 viewPager = view.findViewById(R.id.view_pager);
 
-        // إعداد ViewPager مع Adapter
-        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity(),1,students_u);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity(), 1, students_u);
         viewPager.setAdapter(adapter);
 
-        // توصيل TabLayout مع ViewPager2
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:

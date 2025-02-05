@@ -23,39 +23,33 @@ public class Welcom_screen extends AppCompatActivity {
 
         ImageView logo = findViewById(R.id.logo);
 
-//        // تحميل الأنيميشن
-//
-//        // تشغيل الصوت
-       MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.welcome_sound); // تأكد من أن ملف الصوت في res/raw
-      mediaPlayer.start();
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.welcome_sound);
+        mediaPlayer.start();
 //
 //
-      Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         logo.startAnimation(fadeIn);
-        // بدأ التحميل تدريجياً (تحريك النص)
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateLoadingText();
             }
-        }, 500);  // التأخير الأولي
-        // تأخير لمدة 3 ثوانٍ قبل الانتقال إلى الشاشة الرئيسية
+        }, 500);
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(Welcom_screen.this, Main_Activity_part.class);
             startActivity(intent);
-            finish(); // إنهاء شاشة الترحيب
-        }, 3000); // المدة بالميلي ثانية
+            finish();
+        }, 3000);
     }
-        private void updateLoadingText() {
-            // تحديث النص لعرض تحميل النقاط
-            if (loadingStep < 3) {
-                loadingStep++;
-                loadingText.setText("Loading" + ".".repeat(loadingStep));
-                new Handler().postDelayed(this::updateLoadingText, 500); // تكرار التحديث بعد نصف ثانية
-            }
+
+    private void updateLoadingText() {
+        // تحديث النص لعرض تحميل النقاط
+        if (loadingStep < 3) {
+            loadingStep++;
+            loadingText.setText("Loading" + ".".repeat(loadingStep));
+            new Handler().postDelayed(this::updateLoadingText, 500);
         }
-
-
-
-
     }
+
+
+}

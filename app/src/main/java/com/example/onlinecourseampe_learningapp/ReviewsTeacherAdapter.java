@@ -16,24 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 
-
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
 public class ReviewsTeacherAdapter extends RecyclerView.Adapter<ReviewsTeacherAdapter.ReviewViewHolder> {
 
     private final List<Teacher_Reviews> reviewsList;
@@ -55,7 +37,6 @@ public class ReviewsTeacherAdapter extends RecyclerView.Adapter<ReviewsTeacherAd
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Teacher_Reviews review = reviewsList.get(position);
 
-        // تحويل الصورة من byte[] إلى Bitmap
         if (review.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(review.getImage(), 0, review.getImage().length);
             holder.imageView.setImageBitmap(bitmap);
@@ -64,7 +45,6 @@ public class ReviewsTeacherAdapter extends RecyclerView.Adapter<ReviewsTeacherAd
             holder.imageView.setImageResource(R.drawable.profile);
         }
 
-        // تعيين النصوص من الكائن
         holder.nameTextView.setText(review.getName());
         holder.commentTextView.setText(review.getComment());
 
@@ -73,18 +53,16 @@ public class ReviewsTeacherAdapter extends RecyclerView.Adapter<ReviewsTeacherAd
 
             if (review.isChecked()) {
                 review.setChecked(false);
-                review.setLove(currentLove - 1); // تحديث قيمة الإعجابات
+                review.setLove(currentLove - 1);
 
                 holder.imageView6.setBackgroundResource(R.drawable.heart);
-                //    holder.int_Love.setText(String.valueOf(review.getLove() -1));
 
                 notifyItemChanged(position);
-            }else {
+            } else {
                 review.setChecked(true);
-                review.setLove(currentLove + 1); // تحديث قيمة الإعجابات
+                review.setLove(currentLove + 1);
 
                 holder.imageView6.setBackgroundResource(R.drawable.heart_r);
-                //   holder.int_Love.setText(String.valueOf(review.getLove() +1));
                 notifyItemChanged(position);
 
             }
@@ -92,9 +70,8 @@ public class ReviewsTeacherAdapter extends RecyclerView.Adapter<ReviewsTeacherAd
             notifyItemChanged(position);
 
         });
-        holder.ratingSpinner.setSelection((int) review.getRating() - 1); // ضبط الـ Spinner بناءً على التقييم
+        holder.ratingSpinner.setSelection((int) review.getRating() - 1);
         holder.date.setText(review.getFormattedDate());
-        // ملاحظة: يمكن إضافة المزيد من التخصيصات مثل onClickListeners حسب الحاجة
     }
 
     @Override

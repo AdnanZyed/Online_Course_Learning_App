@@ -20,6 +20,7 @@
                 android:id="@+id/img_course"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -89,7 +90,6 @@
                 app:layout_constraintTop_toBottomOf="@id/course_name1" />
 
 
-
             <TextView
                 android:id="@+id/price_dep"
                 android:layout_width="wrap_content"
@@ -137,7 +137,7 @@
         android:layout_margin="30dp"
         android:background="@drawable/catigories_btn_selected"
         android:elevation="5dp"
-        android:text="Enroll Course - $99"
+        android:text="Enroll Course - $"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

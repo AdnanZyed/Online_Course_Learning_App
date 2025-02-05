@@ -8,20 +8,50 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class My_View_Model extends AndroidViewModel {
+    private LiveData<List<Notification>> allNotifications;
 
     private My_Repository repository;
+
+
     private final LiveData<List<Course_Reviews>> allReviews;
     private final LiveData<List<Teacher_Reviews>> allReviewsT;
+
 
     public My_View_Model(@NonNull Application application) {
         super(application);
         repository = new My_Repository(application);
-        allReviews = null; // سيتم تخصيصها عند استدعاء طريقة الجلب
-        allReviewsT = null; // سيتم تخصيصها عند استدعاء طريقة الجلب
+        allReviews = null;
+        allReviewsT = null;
+        allNotifications = repository.getAllNotifications();
 
+    }
+
+    public LiveData<List<Notification>> getAllNotifications() {
+        return allNotifications;
+    }
+
+    public void addNotification(String title, String message, int iconResId) {
+        repository.insert(new Notification(title, message, iconResId));
+    }
+
+    public void insertStudentLesson(StudentLesson studentLesson) {
+        repository.insertStudentLesson(studentLesson);
+    }
+
+    public LiveData<List<StudentLesson>> getCompletedLessonsForStudent(String studentUserName) {
+        return repository.getCompletedLessonsForStudent(studentUserName);
+    }
+
+    public void updateCompletionStatus(String studentUserName, int lessonId, boolean completed) {
+        repository.updateCompletionStatus(studentUserName, lessonId, completed);
+    }
+
+    public void deleteStudentLesson(String studentUserName, int lessonId) {
+        repository.deleteStudentLesson(studentUserName, lessonId);
     }
 
     public void insertMessage(Message message) {
@@ -39,25 +69,20 @@ public class My_View_Model extends AndroidViewModel {
     public LiveData<Message> getLastMessageForUser(String username) {
         return repository.getLastMessageForUser(username);
     }
-//    public LiveData<CourseLessonStats> getCourseLessonStats(int courseId) {
-//        return repository.getCourseLessonStats(courseId);
-//    }
+//
 
     public void insertCourseLesson(CourseLessons courseLesson) {
         repository.insertCourseLesson(courseLesson);
     }
 
-    // الحصول على العدد الكلي للدروس
     public LiveData<Integer> getTotalLessonsCount() {
         return repository.getTotalLessonsCount();
     }
 
-    // الحصول على عدد الدروس المكتملة
     public LiveData<Integer> getCompletedLessonsCount() {
         return repository.getCompletedLessonsCount();
     }
 
-    // الحصول على مجموع الدقائق
     public LiveData<Integer> getTotalLessonsTime() {
         return repository.getTotalLessonsTime();
     }
@@ -69,19 +94,19 @@ public class My_View_Model extends AndroidViewModel {
     public void deleteCourseLesson(CourseLessons courseLesson) {
         repository.deleteCourseLesson(courseLesson);
     }
+
     public LiveData<Integer> getTotalLessonsCountByCourseId(int courseId) {
         return repository.getTotalLessonsCountByCourseId(courseId);
     }
 
-    // دالة للحصول على عدد الدروس المكتملة
     public LiveData<Integer> getCompletedLessonsCountByCourseId(int courseId) {
         return repository.getCompletedLessonsCountByCourseId(courseId);
     }
 
-    // دالة للحصول على الوقت الكلي للدروس
     public LiveData<Integer> getTotalLessonsTimeByCourseId(int courseId) {
         return repository.getTotalLessonsTimeByCourseId(courseId);
     }
+
     public LiveData<List<CourseLessons>> getLessonsByCourseId(int courseId) {
         return repository.getLessonsByCourseId(courseId);
     }
@@ -89,22 +114,19 @@ public class My_View_Model extends AndroidViewModel {
     public void updateLessonCompletionStatus(int lessonId, boolean isCompleted) {
         repository.updateLessonCompletionStatus(lessonId, isCompleted);
     }
-    // إضافة مراجعة
+
     public void insertReview(Course_Reviews review) {
         repository.insertReview(review);
     }
 
-    // حذف مراجعة بناءً على اسم المستخدم
     public void deleteReviewByStudent(String studentUserName) {
         repository.deleteReviewByStudent(studentUserName);
     }
 
-    // تحديث مراجعة بناءً على اسم المستخدم
     public void updateReviewByStudent(String studentUserName, String newComment, float newRating) {
         repository.updateReviewByStudent(studentUserName, newComment, newRating);
     }
 
-    // جلب جميع المراجعات بناءً على معرف الدورة
     public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
         return repository.getAllReviewsByCourseId(courseId);
     }
@@ -114,22 +136,18 @@ public class My_View_Model extends AndroidViewModel {
         repository.insertReviewT(review);
     }
 
-    // حذف مراجعة بناءً على اسم المستخدم
     public void deleteReviewByStudentT(String studentUserName) {
         repository.deleteReviewByStudentT(studentUserName);
     }
 
-    // تحديث مراجعة بناءً على اسم المستخدم
     public void updateReviewByStudentT(String studentUserName, String newComment, float newRating) {
         repository.updateReviewByStudentT(studentUserName, newComment, newRating);
     }
 
-    // جلب جميع المراجعات بناءً على معرف الدورة
     public LiveData<List<Teacher_Reviews>> getAllReviewsByCourseIdT(String teacher) {
         return repository.getAllReviewsByCourseIdT(teacher);
     }
 
-    // دالة لحذف جميع الكورسات
 
     void insertCourse(Course course) {
         repository.insertCourse(course);
@@ -153,41 +171,50 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Course>> getAllCourse() {
         return repository.getAllCourse();
     }
-    // دالة لجلب الكورسات المفضلة باستخدام LiveData
+
     public LiveData<List<Course>> getBookmarkedCourses() {
-        return repository.getBookmarkedCourses();  // إرجاع LiveData
+        return repository.getBookmarkedCourses();
     }
+
     public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent(String studentUsername) {
         return repository.getBookmarkedCoursesByStudent(studentUsername);
     }
+
     public LiveData<List<Student_Course>> getisAddCartCoursesByStudent(String studentUsername) {
         return repository.getisAddCartCoursesByStudent(studentUsername);
     }
-    public LiveData<List<Student_Course>> getisAddCartCoursesByStudent1(String studentUsername,int courseId) {
-        return repository.getBookmarkedCoursesByStudent1(studentUsername,courseId);
+
+    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent1(String studentUsername, int courseId) {
+        return repository.getBookmarkedCoursesByStudent1(studentUsername, courseId);
 
     }
-    public LiveData<List<Student_Course>> getAddCartCoursesByStudent1(String studentUsername,int courseId) {
-        return repository.getAddCartCoursesByStudent1(studentUsername,courseId);
+
+    public LiveData<List<Student_Course>> getAddCartCoursesByStudent1(String studentUsername, int courseId) {
+        return repository.getAddCartCoursesByStudent1(studentUsername, courseId);
+
     }
+
+    public LiveData<List<Student_Course>> getisRatingCoursesByStudent1(String studentUsername, int courseId) {
+        return repository.getisRatingCoursesByStudent1(studentUsername, courseId);
+    }
+
     public LiveData<List<Student_Course>> getisRegisterCoursesByStudent1(String studentUsername) {
         return repository.getisRegisterCoursesByStudent1(studentUsername);
     }
 
-    // دالة لحذف سجل بناءً على الـ user و courseId و isBookmark و isAddCart
-    public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId, boolean isBookmark, boolean isAddCart) {
-        return repository.deleteStudentCourseByUserAndCourse(studentUsername, courseId, isBookmark, isAddCart);
+    public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId) {
+        return repository.deleteStudentCourseByUserAndCourse(studentUsername, courseId);
     }
 
     public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
         return repository.updateBookmarkStatusAndGetCourses(courseId, isBookmarked);
     }
+
     public LiveData<List<Course>> updateisAddCartStatusAndGetCourses(int courseId, boolean isAddCart) {
         return repository.updateisAddCartStatusAndGetCourses(courseId, isAddCart);
     }
 
 
-    // دالة لجلب الكورسات بناءً على التصنيف
     public LiveData<List<Course>> getCoursesByCategory(String category) {
         return repository.getCoursesByCategory(category);
     }
@@ -195,19 +222,38 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Course>> getAllCoursesById(int id) {
         return repository.getAllCoursesById(id);
     }
+
     public LiveData<List<Course>> getAllCoursesByIds(List<Integer> courseIds) {
-        return repository.getCoursesByIds(courseIds); // DAO يقوم بجلب الكورسات
+        return repository.getCoursesByIds(courseIds);
     }
 
     LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
         return repository.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
     }
-    // التحقق من وجود كائن مطابق
-    public LiveData<Boolean> isStudentCourseExists(String studentUsername, int courseId, boolean isBookmark, boolean isAddCart, boolean isRegister) {
+
+    public LiveData<Boolean> isStudentCourseExists(String studentUsername, int courseId, boolean isRegister) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            boolean exists = repository.isStudentCourseExists(studentUsername, courseId, isBookmark, isAddCart, isRegister);
-            result.postValue(exists); // تحديث LiveData بالقيمة
+            boolean exists = repository.isStudentCourseExists(studentUsername, courseId, isRegister);
+            result.postValue(exists);
+        });
+        return result;
+    }
+
+    public LiveData<Boolean> isStudentCourseExistsC(String studentUsername, int courseId, boolean isAddCart) {
+        MutableLiveData<Boolean> result = new MutableLiveData<>();
+        My_Database.databaseWriteExecutor.execute(() -> {
+            boolean exists = repository.isStudentCourseExists1(studentUsername, courseId, isAddCart);
+            result.postValue(exists);
+        });
+        return result;
+    }
+
+    public LiveData<Boolean> isStudentCourseExistsB(String studentUsername, int courseId, boolean isBookmark) {
+        MutableLiveData<Boolean> result = new MutableLiveData<>();
+        My_Database.databaseWriteExecutor.execute(() -> {
+            boolean exists = repository.isStudentCourseExistsB(studentUsername, courseId, isBookmark);
+            result.postValue(exists);
         });
         return result;
     }
@@ -216,12 +262,20 @@ public class My_View_Model extends AndroidViewModel {
         repository.insertStudentCourse(studentCourse);
     }
 
+    public void updateCourseStudent(Student_Course studentCourse) {
+        repository.updateCourseStudent(studentCourse);
+    }
+
     public LiveData<List<Student_Course>> getCoursesByStudent(String studentUsername) {
         return repository.getCoursesByStudent(studentUsername);
     }
 
     public LiveData<List<Student_Course>> getStudentsByCourse(int courseId) {
         return repository.getStudentsByCourse(courseId);
+    }
+
+    public LiveData<List<Student_Course>> getStudentsByCourseAndStudent(String user, int courseId) {
+        return repository.getStudentsByCourseAndStudent(user, courseId);
     }
 
     void insertStudent(Student student) {
@@ -251,14 +305,11 @@ public class My_View_Model extends AndroidViewModel {
     LiveData<List<Student>> getStudentByUsernameAndPassword(String username, String password) {
         return repository.getStudentByUsernameAndPassword(username, password);
     }
+
     LiveData<List<Student>> getAllStudentByUser(String student_user_name) {
 
         return repository.getAllStudentByUser(student_user_name);
     }
-
-
-
-
 
 
     void insertTeacher(Teacher teacher) {
@@ -286,14 +337,19 @@ public class My_View_Model extends AndroidViewModel {
     }
 
 
-    // دالة للبحث عن المعلمين بناءً على الاسم
     public LiveData<List<Teacher>> searchTeachers(String teacherName) {
         return repository.searchTeachers(teacherName);
     }
+
+    public LiveData<List<Course>> searchCourses(String courseName) {
+        return repository.searchCourses(courseName);
+    }
+
     LiveData<List<Teacher>> getAllTeacherByUser(String Teatur_USER_Name) {
 
         return repository.getAllTeacherByUser(Teatur_USER_Name);
     }
+
     public void insertStudentTeacher(Student_Teacher studentTeacher) {
         repository.insertStudentTeacher(studentTeacher);
     }

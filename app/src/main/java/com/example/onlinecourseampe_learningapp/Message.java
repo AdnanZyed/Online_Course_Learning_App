@@ -10,16 +10,16 @@ public class Message {
     private int messageId;
 
     @NonNull
-    private String senderUsername;  // اسم المستخدم المرسل
+    private String senderUsername;
 
     @NonNull
-    private String receiverUsername;  // اسم المستخدم المستقبل
+    private String receiverUsername;
 
     @NonNull
-    private String messageContent;  // نص الرسالة
+    private String messageContent;
 
     @NonNull
-    private long timestamp;  // وقت إرسال الرسالة
+    private long timestamp;
 
     public Message(@NonNull String senderUsername, @NonNull String receiverUsername, @NonNull String messageContent, long timestamp) {
         this.senderUsername = senderUsername;

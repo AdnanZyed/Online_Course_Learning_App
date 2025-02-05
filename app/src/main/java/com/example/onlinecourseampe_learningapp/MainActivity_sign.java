@@ -17,7 +17,6 @@ import java.io.ByteArrayOutputStream;
 
 public class MainActivity_sign extends AppCompatActivity {
     private My_View_Model myViewModel;
-
     private ActivityMainSignBinding binding;
 
     @Override
@@ -27,49 +26,40 @@ public class MainActivity_sign extends AppCompatActivity {
         setContentView(binding.getRoot());
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
-//        //  Handler handler = new Handler(Looper.getMainLooper());
-//        addSampleTeachers();
-//        addSampleCourses();
-//        addSampleLessones();
-//        addSampleStudents();
-////// الخطوة 1: التحقق من المعلمين
-//        handler.postDelayed(() -> {
-//            myViewModel.getAllTeacher().observe(this, teachers -> {
-//                if (teachers == null || teachers.isEmpty()) {
-//                    addSampleTeachers();
-//                }
-//            });
-//        }, 0); // تنفيذ فوري
-//
-//// الخطوة 2: التحقق من الدورات
-//        handler.postDelayed(() -> {
-//            myViewModel.getAllCourse().observe(this, courses -> {
-//                if (courses == null || courses.isEmpty()) {
-//                    addSampleCourses();
-//                }
-//            });
-//        }, 4000); // تأخير لمدة 2 ثانية
-//
-//// الخطوة 3: التحقق من الدروس
-//        handler.postDelayed(() -> {
-//            myViewModel.getTotalLessonsCount().observe(this, lessonCount -> {
-//                if (lessonCount == null || lessonCount == 0) {
-//                    addSampleLessones();
-//                }
-//            });
-//        }, 6000); // تأخير لمدة 4 ثوانٍ
-//
-//// الخطوة 4: التحقق من الطلاب
-//        handler.postDelayed(() -> {
-//            myViewModel.getAllStudent().observe(this, students -> {
-//                if (students == null || students.isEmpty()) {
-//                    addSampleStudents();
-//                }
-//            });
-//        }, 8000); // تأخير لمدة 6 ثوانٍ
+        Handler handler = new Handler(Looper.getMainLooper());
 
+        handler.postDelayed(() -> {
+            myViewModel.getAllTeacher().observe(this, teachers -> {
+                if (teachers == null || teachers.isEmpty()) {
+                    addSampleTeachers();
+                }
+            });
+        }, 0);
 
-// addSampleLessones();
+        handler.postDelayed(() -> {
+            myViewModel.getAllCourse().observe(this, courses -> {
+                if (courses == null || courses.isEmpty()) {
+                    addSampleCourses();
+                }
+            });
+        }, 4000);
+
+        handler.postDelayed(() -> {
+            myViewModel.getTotalLessonsCount().observe(this, lessonCount -> {
+                if (lessonCount == null || lessonCount == 0) {
+                    addSampleLessones();
+                }
+            });
+        }, 6000);
+
+        handler.postDelayed(() -> {
+            myViewModel.getAllStudent().observe(this, students -> {
+                if (students == null || students.isEmpty()) {
+                    addSampleStudents();
+                }
+            });
+        }, 8000);
+
         binding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +99,6 @@ public class MainActivity_sign extends AppCompatActivity {
         return stream.toByteArray();
     }
 
-    // إنشاء البيانات التجريبية وإدخالها
     private void addSampleLessones() {
 
         for (int dbId = 1; dbId <= 38; dbId++) {
@@ -136,149 +125,126 @@ public class MainActivity_sign extends AppCompatActivity {
 
         }
 
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم ثلاثي الأبعاد باستخدام Blender", "https://www.youtube.com/watch?v=VG8R7QGdGp8", 10, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تعلم أساسيات النمذجة في 3D Max", "https://www.youtube.com/watch?v=3Ic4kF3rdzQ", 12, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "كيفية إنشاء مشاهد واقعية في Maya", "https://www.youtube.com/watch?v=FvBqDqsmHzI", 8, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "إضاءة المشاهد ثلاثية الأبعاد في Cinema 4D", "https://www.youtube.com/watch?v=fsAxSxp88ZQ", 15, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الشخصيات في Blender", "https://www.youtube.com/watch?v=6dXM8Gocv6k", 13, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات ثلاثية الأبعاد في 3D Max", "https://www.youtube.com/watch?v=2U5M6vI6xzY", 14, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة مؤثرات خاصة في Maya", "https://www.youtube.com/watch?v=kYgYbEo7HTo", 11, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تصدير النماذج ثلاثية الأبعاد للألعاب", "https://www.youtube.com/watch?v=6MQyZyQDRh4", 9, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم الشخصيات ثلاثية الأبعاد", "https://www.youtube.com/watch?v=k1pS5lfH2kc", 12, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء في Cinema 4D", "https://www.youtube.com/watch?v=nl5mcYIu7Fk", 16, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الكاميرا في مشاهد 3D Max", "https://www.youtube.com/watch?v=6dFtkdZTkmE", 17, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة إضاءة واقعية في Blender", "https://www.youtube.com/watch?v=0RPylvtaHhE", 10, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم مواد واقعية في Maya", "https://www.youtube.com/watch?v=mrctuUwEryo", 8, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم المشاهد الداخلية في 3D Max", "https://www.youtube.com/watch?v=JlxWqg7xeQU", 14, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الشخصيات في Cinema 4D", "https://www.youtube.com/watch?v=0VZqzxbzXYY", 10, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة مؤثرات خاصة في Blender", "https://www.youtube.com/watch?v=a4kDk1s5de4", 13, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات طبيعية في Maya", "https://www.youtube.com/watch?v=pBiv8nq-XGA", 12, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء المتقدمة في 3D Max", "https://www.youtube.com/watch?v=HkVgOlgw9yA", 11, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الكائنات في Blender", "https://www.youtube.com/watch?v=c56y_AiEcrE", 10, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة لتقنيات الـ 3D في الألعاب", "https://www.youtube.com/watch?v=c7Bx6m0bxg8", 9, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "إضاءة الأجسام في Maya", "https://www.youtube.com/watch?v=VK9wZG_7L6s", 15, false, 2));
-//        myViewModel.insertCourseLesson(new CourseLessons(0, "تعلم استخدام الـ UV Mapping في Blender", "https://www.youtube.com/watch?v=FFG5nCUu3tk", 12, false, 2));
+
     }
 
     private void addSampleCourses() {
-        // تحويل الصورة من الموارد إلى Bitmap
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes = convertImageToByteArray(bitmap); // تحويل الصورة إلى Byte Array
+        byte[] imageBytes = convertImageToByteArray(bitmap);
         Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes1 = convertImageToByteArray(bitmap1); // تحويل الصورة إلى Byte Array
+        byte[] imageBytes1 = convertImageToByteArray(bitmap1);
         Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes2 = convertImageToByteArray(bitmap2); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes3 = convertImageToByteArray(bitmap3); // f الصورة إلى Byte Array
-        Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes4 = convertImageToByteArray(bitmap4); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes5 = convertImageToByteArray(bitmap5); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes6 = convertImageToByteArray(bitmap6); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes7 = convertImageToByteArray(bitmap7); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes8 = convertImageToByteArray(bitmap8); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes9 = convertImageToByteArray(bitmap9); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap10 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes10 = convertImageToByteArray(bitmap10); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes11 = convertImageToByteArray(bitmap11); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes12 = convertImageToByteArray(bitmap12); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap13 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes13 = convertImageToByteArray(bitmap13); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap14 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes14 = convertImageToByteArray(bitmap14); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap15 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes15 = convertImageToByteArray(bitmap15); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap16 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes16 = convertImageToByteArray(bitmap16); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap17 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes17 = convertImageToByteArray(bitmap17); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap18 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes18 = convertImageToByteArray(bitmap18); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap19 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes19 = convertImageToByteArray(bitmap19); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap20 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes20 = convertImageToByteArray(bitmap20); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap21 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes21 = convertImageToByteArray(bitmap21); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap22 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes22 = convertImageToByteArray(bitmap22); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap23 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes23 = convertImageToByteArray(bitmap23); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap24 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes24 = convertImageToByteArray(bitmap24); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap25 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes25 = convertImageToByteArray(bitmap25); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap26 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes26 = convertImageToByteArray(bitmap26); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap27 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes27 = convertImageToByteArray(bitmap27); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap28 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes28 = convertImageToByteArray(bitmap28); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap29 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes29 = convertImageToByteArray(bitmap29); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap30 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes30 = convertImageToByteArray(bitmap30); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap31 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes31 = convertImageToByteArray(bitmap31); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap32 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes32 = convertImageToByteArray(bitmap32); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap33 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes33 = convertImageToByteArray(bitmap33); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap34 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
-        byte[] imageBytes34 = convertImageToByteArray(bitmap34); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap35 = BitmapFactory.decodeResource(this.getResources(), R.drawable.f);
-        byte[] imageBytes35 = convertImageToByteArray(bitmap35); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap36 = BitmapFactory.decodeResource(this.getResources(), R.drawable.a);
-        byte[] imageBytes36 = convertImageToByteArray(bitmap36); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap37 = BitmapFactory.decodeResource(this.getResources(), R.drawable.s);
-        byte[] imageBytes37 = convertImageToByteArray(bitmap37); // تحويل الصورة إلى Byte Array
+        byte[] imageBytes2 = convertImageToByteArray(bitmap2);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i1);
+        byte[] imageBytes3 = convertImageToByteArray(bitmap3);
+        Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c1);
+        byte[] imageBytes4 = convertImageToByteArray(bitmap4);
+        Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c2);
+        byte[] imageBytes5 = convertImageToByteArray(bitmap5);
+        Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i3);
+        byte[] imageBytes6 = convertImageToByteArray(bitmap6);
+        Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i4);
+        byte[] imageBytes7 = convertImageToByteArray(bitmap7);
+        Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i2);
+        byte[] imageBytes8 = convertImageToByteArray(bitmap8);
+        Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c6);
+        byte[] imageBytes9 = convertImageToByteArray(bitmap9);
+        Bitmap bitmap10 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c7);
+        byte[] imageBytes10 = convertImageToByteArray(bitmap10);
+        Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c8);
+        byte[] imageBytes11 = convertImageToByteArray(bitmap11);
+        Bitmap bitmap12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c3);
+        byte[] imageBytes12 = convertImageToByteArray(bitmap12);
+        Bitmap bitmap13 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c4);
+        byte[] imageBytes13 = convertImageToByteArray(bitmap13);
+        Bitmap bitmap14 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c11);
+        byte[] imageBytes14 = convertImageToByteArray(bitmap14);
+        Bitmap bitmap15 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c12);
+        byte[] imageBytes15 = convertImageToByteArray(bitmap15);
+        Bitmap bitmap16 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c13);
+        byte[] imageBytes16 = convertImageToByteArray(bitmap16);
+        Bitmap bitmap17 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c14);
+        byte[] imageBytes17 = convertImageToByteArray(bitmap17);
+        Bitmap bitmap18 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c15);
+        byte[] imageBytes18 = convertImageToByteArray(bitmap18);
+        Bitmap bitmap19 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c16);
+        byte[] imageBytes19 = convertImageToByteArray(bitmap19);
+        Bitmap bitmap20 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c17);
+        byte[] imageBytes20 = convertImageToByteArray(bitmap20);
+        Bitmap bitmap21 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i5);
+        byte[] imageBytes21 = convertImageToByteArray(bitmap21);
+        Bitmap bitmap22 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c19);
+        byte[] imageBytes22 = convertImageToByteArray(bitmap22);
+        Bitmap bitmap23 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i6);
+        byte[] imageBytes23 = convertImageToByteArray(bitmap23);
+        Bitmap bitmap24 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c21);
+        byte[] imageBytes24 = convertImageToByteArray(bitmap24);
+        Bitmap bitmap25 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c22);
+        byte[] imageBytes25 = convertImageToByteArray(bitmap25);
+        Bitmap bitmap26 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c23);
+        byte[] imageBytes26 = convertImageToByteArray(bitmap26);
+        Bitmap bitmap27 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c24);
+        byte[] imageBytes27 = convertImageToByteArray(bitmap27);
+        Bitmap bitmap28 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c25);
+        byte[] imageBytes28 = convertImageToByteArray(bitmap28);
+        Bitmap bitmap29 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c26);
+        byte[] imageBytes29 = convertImageToByteArray(bitmap29);
+        Bitmap bitmap30 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c27);
+        byte[] imageBytes30 = convertImageToByteArray(bitmap30);
+        Bitmap bitmap31 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c28);
+        byte[] imageBytes31 = convertImageToByteArray(bitmap31);
+        Bitmap bitmap32 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i8);
+        byte[] imageBytes32 = convertImageToByteArray(bitmap32);
+        Bitmap bitmap33 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c30);
+        byte[] imageBytes33 = convertImageToByteArray(bitmap33);
+        Bitmap bitmap34 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c31);
+        byte[] imageBytes34 = convertImageToByteArray(bitmap34);
+        Bitmap bitmap35 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i7);
+        byte[] imageBytes35 = convertImageToByteArray(bitmap35);
+        Bitmap bitmap36 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c33);
+        byte[] imageBytes36 = convertImageToByteArray(bitmap36);
+        Bitmap bitmap37 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c34);
+        byte[] imageBytes37 = convertImageToByteArray(bitmap37);
 
-//        Student_Teacher studentTeacher = new Student_Teacher(0, "userStudent", "userTeacher");
 
-        Course course1 = new Course(0, "3D Design", imageBytes, 100, "3D Design", "This course covers the foundational principles and techniques of 3D design, including modeling, rendering, and animation.", "John Doe", null, false, false, false, "john_doe", null);
-        Course course2 = new Course(0, "3D Design", imageBytes1, 150, "3D Design", "Master Java programming with a focus on object-oriented design, advanced algorithms, and best practices.", "Jane Smith", null, false, false, false, "john_doe", null);
-        Course course3 = new Course(0, "Web Development", imageBytes2, 200, "3D Design", "Learn to build responsive and interactive websites using HTML, CSS, JavaScript, and modern frameworks.", "Alice Brown", null, false, false, false, "john_doe", null);
-        Course course4 = new Course(0, "Mobile Development", imageBytes3, 180, "3D Design", "Develop cross-platform mobile applications with a focus on performance, user experience, and scalability.", "Bob White", null, false, false, false, "john_doe", null);
-        Course course5 = new Course(0, "Data Science", imageBytes4, 250, "3D Design", "Dive into data science concepts, including data analysis, visualization, and machine learning techniques.", "Charlie Green", null, false, false, false, "john_doe", null);
-        Course course6 = new Course(0, "Machine Learning", imageBytes5, 220, "3D Design", "Understand machine learning fundamentals, including supervised and unsupervised learning, and model evaluation.", "Dave Black", null, false, false, false, "jane_smith", null);
-        Course course7 = new Course(0, "Blockchain Basics", imageBytes6, 300, "3D Design", "Explore blockchain technology, its use cases, and how it is revolutionizing industries.", "Eve Blue", null, false, false, false, "jane_smith", null);
-        Course course8 = new Course(0, "UI/UX Design", imageBytes7, 120, "3D Design", "Learn the principles of user interface and user experience design with hands-on projects.", "Frank Pink", null, false, false, false, "jane_smith", null);
-        Course course9 = new Course(0, "Cybersecurity", imageBytes8, 350, "3D Design", "Gain knowledge in cybersecurity, covering topics like ethical hacking, threat analysis, and mitigation strategies.", "Grace Yellow", null, false, false, false, "jane_smith", null);
-        Course course10 = new Course(0, "Cloud Computing", imageBytes9, 280, "3D Design", "Understand cloud computing services, deployment models, and the benefits of cloud infrastructure.", "Harry Red", null, false, false, false, "jane_smith", null);
-        Course course11 = new Course(0, "AI Fundamentals", imageBytes10, 230, "3D Design", "Learn the basics of artificial intelligence, covering neural networks, natural language processing, and applications.", "Ivy Green", null, false, false, false, "alice_brown", null);
-        Course course12 = new Course(0, "App Development", imageBytes11, 170, "3D Design", "Develop fully functional apps for Android and iOS using industry-standard tools and techniques.", "Jack White", null, false, false, false, "alice_brown", null);
-        Course course13 = new Course(0, "Game Development", imageBytes12, 210, "3D Design", "Learn how to design, develop, and deploy engaging games for various platforms.", "Kylie Blue", null, false, false, false, "alice_brown", null);
-        Course course14 = new Course(0, "Database Design", imageBytes13, 240, "3D Design", "Understand database design principles, normalization, and the use of SQL in managing databases.", "Leo Brown", null, false, false, false, "alice_brown", null);
-        Course course15 = new Course(0, "Digital Marketing", imageBytes14, 160, "Business", "Learn about digital marketing strategies, including SEO, social media marketing, and analytics.", "Mia Green", null, false, false, false, "alice_brown", null);
-        Course course16 = new Course(0, "Cloud Security", imageBytes15, 300, "Business", "Discover the essentials of cloud security, including securing cloud environments and managing risks effectively.", "Nathan Yellow", null, false, false, false, "bob_white", null);
-        Course course17 = new Course(0, "Network Fundamentals", imageBytes16, 130, "Business", "Understand the fundamentals of networking, including protocols, hardware, and troubleshooting techniques.", "Olivia White", null, false, false, false, "bob_white", null);
-        Course course18 = new Course(0, "Robotics", imageBytes17, 330, "Business", "Explore the world of robotics, covering automation, programming, and real-world applications.", "Paul Black", null, false, false, false, "bob_white", null);
-        Course course19 = new Course(0, "Full Stack Development", imageBytes18, 260, "Business", "Master full-stack development, covering frontend, backend, and database integration.", "Quinn Blue", null, false, false, false, "bob_white", null);
-        Course course20 = new Course(0, "Data Analytics", imageBytes19, 220, "Business", "Learn to extract insights from data, including statistical analysis and visualization tools.", "Rachel Green", null, false, false, false, "bob_white", null);
-        Course course21 = new Course(0, "Data Analytics", imageBytes20, 220, "Business", "Delve deeper into data analytics with advanced techniques for decision-making and strategy.", "Rachel Green", null, false, false, false, "bob_white", null);
-        Course course22 = new Course(0, "Data Analytics", imageBytes21, 220, "Business", "Explore big data concepts, tools, and frameworks to handle complex datasets efficiently.", "Rachel Green", null, false, false, false, "bob_white", null);
-        Course course23 = new Course(0, "Data Analytics", imageBytes22, 220, "Business", "Learn predictive analytics techniques to forecast trends and patterns in various domains.", "Rachel Green", null, false, false, false, "alice_brown", null);
-        Course course24 = new Course(0, "Data Analytics", imageBytes23, 220, "Business", "Get hands-on experience with data cleaning, wrangling, and visualization using modern tools.", "Rachel Green", null, false, false, false, "alice_brown", null);
-        Course course25 = new Course(0, "Data Analytics", imageBytes24, 220, "Art", "Analyze art market trends and gain insights into the intersection of art and data analytics.", "Rachel Green", null, false, false, false, "alice_brown", null);
-        Course course26 = new Course(0, "Data Analytics", imageBytes25, 220, "Art", "Learn how to apply data analytics techniques to understand artistic patterns and themes.", "Rachel Green", null, false, false, false, "alice_brown", null);
-        Course course27 = new Course(0, "Data Analytics", imageBytes26, 220, "Art", "Explore data visualization in the context of art to better present and interpret creative datasets.", "Rachel Green", null, false, false, false, "alice_brown", null);
-        Course course28 = new Course(0, "Data Analytics", imageBytes27, 220, "Art", "Learn statistical techniques and tools to analyze data in the art domain.", "Rachel Green", null, false, false, false, "alice_brown", null);
-        Course course29 = new Course(0, "Data Analytics", imageBytes28, 220, "Art", "Understand how data analytics can influence modern art and design decision-making processes.", "Rachel Green", null, false, false, false, "jane_smith", null);
-        Course course30 = new Course(0, "Data Analytics", imageBytes29, 220, "Art", "Dive into advanced data analytics methods tailored for art-related projects and markets.", "Rachel Green", null, false, false, false, "jane_smith", null);
-        Course course31 = new Course(0, "Data Analytics", imageBytes30, 220, "Art", "Discover how to leverage data analytics to enhance creativity and innovation in art.", "Rachel Green", null, false, false, false, "jane_smith", null);
-        Course course32 = new Course(0, "Data Analytics", imageBytes31, 220, "Programming", "Learn programming-focused data analytics, including Python libraries for data processing.", "Rachel Green", null, false, false, false, "jane_smith", null);
-        Course course33 = new Course(0, "Data Analytics", imageBytes32, 220, "Programming", "Master data analytics algorithms and implement them programmatically in your projects.", "Rachel Green", null, false, false, false, "jane_smith", null);
-        Course course34 = new Course(0, "Data Analytics", imageBytes33, 220, "Programming", "Understand advanced data processing and management techniques using coding skills.", "Rachel Green", null, false, false, false, "jane_smith", null);
-        Course course35 = new Course(0, "Data Analytics", imageBytes34, 220, "Programming", "Apply machine learning and data mining techniques to programming-oriented datasets.", "Rachel Green", null, false, false, false, "john_doe", null);
-        Course course36 = new Course(0, "Data Analytics", imageBytes35, 220, "Programming", "Dive into real-world programming problems and solve them using advanced analytics.", "Rachel Green", null, false, false, false, "john_doe", null);
-        Course course37 = new Course(0, "Data Analytics", imageBytes36, 220, "Programming", "Learn to programmatically visualize and analyze data for better decision-making.", "Rachel Green", null, false, false, false, "john_doe", null);
-        Course course38 = new Course(0, "Data Analytics", imageBytes37, 220, "Programming", "Explore cutting-edge data analytics tools and frameworks in the programming domain.", "Rachel Green", null, false, false, false, "john_doe", null);
+        Course course1 = new Course(0, "Modeling Basics", imageBytes, 100, "3D Design", "This course covers the foundational principles and techniques of 3D design, including modeling, rendering, and animation.", "John Doe", null, false, false, false, "john_doe", null, 0, 0);
+        Course course2 = new Course(0, "Advanced Animation", imageBytes1, 150, "3D Design", "Master Java programming with a focus on object-oriented design, advanced algorithms, and best practices.", "Jane Smith", null, false, false, false, "john_doe", null, 0, 0);
+        Course course3 = new Course(0, "3D Sculpting Techniques", imageBytes2, 200, "3D Design", "Learn to build responsive and interactive websites using HTML, CSS, JavaScript, and modern frameworks.", "Alice Brown", null, false, false, false, "john_doe", null, 0, 0);
+        Course course4 = new Course(0, "Lighting Scenes", imageBytes3, 180, "3D Design", "Develop cross-platform mobile applications with a focus on performance, user experience, and scalability.", "Bob White", null, false, false, false, "john_doe", null, 0, 0);
+        Course course5 = new Course(0, "Lighting Scenes", imageBytes4, 250, "3D Design", "Dive into data science concepts, including data analysis, visualization, and machine learning techniques.", "Charlie Green", null, false, false, false, "john_doe", null, 0, 0);
+        Course course6 = new Course(0, "3D Rendering Essentials", imageBytes5, 220, "3D Design", "Understand machine learning fundamentals, including supervised and unsupervised learning, and model evaluation.", "Dave Black", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course7 = new Course(0, "Character Modeling", imageBytes6, 300, "3D Design", "Explore blockchain technology, its use cases, and how it is revolutionizing industries.", "Eve Blue", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course8 = new Course(0, "Environmental 3D Design", imageBytes7, 120, "3D Design", "Learn the principles of user interface and user experience design with hands-on projects.", "Frank Pink", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course9 = new Course(0, "3D Printing and Prototyping", imageBytes8, 350, "3D Design", "Gain knowledge in cybersecurity, covering topics like ethical hacking, threat analysis, and mitigation strategies.", "Grace Yellow", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course10 = new Course(0, "Architectural Visualization", imageBytes9, 280, "3D Design", "Understand cloud computing services, deployment models, and the benefits of cloud infrastructure.", "Harry Red", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course11 = new Course(0, "3D Motion Graphics", imageBytes10, 230, "3D Design", "Learn the basics of artificial intelligence, covering neural networks, natural language processing, and applications.", "Ivy Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course12 = new Course(0, "Game Asset Creation in 3D", imageBytes11, 170, "3D Design", "Develop fully functional apps for Android and iOS using industry-standard tools and techniques.", "Jack White", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course13 = new Course(0, "VFX in 3D", imageBytes12, 210, "3D Design", "Learn how to design, develop, and deploy engaging games for various platforms.", "Kylie Blue", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course14 = new Course(0, "3D Animation for Advertising", imageBytes13, 240, "3D Design", "Understand database design principles, normalization, and the use of SQL in managing databases.", "Leo Brown", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course15 = new Course(0, "Digital Marketing", imageBytes14, 160, "Business", "Learn about digital marketing strategies, including SEO, social media marketing, and analytics.", "Mia Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course16 = new Course(0, "Cloud Security", imageBytes15, 300, "Business", "Discover the essentials of cloud security, including securing cloud environments and managing risks effectively.", "Nathan Yellow", null, false, false, false, "bob_white", null, 0, 0);
+        Course course17 = new Course(0, "Network Fundamentals", imageBytes16, 130, "Business", "Understand the fundamentals of networking, including protocols, hardware, and troubleshooting techniques.", "Olivia White", null, false, false, false, "bob_white", null, 0, 0);
+        Course course18 = new Course(0, "Robotics", imageBytes17, 330, "Business", "Explore the world of robotics, covering automation, programming, and real-world applications.", "Paul Black", null, false, false, false, "bob_white", null, 0, 0);
+        Course course19 = new Course(0, "Full Stack Development", imageBytes18, 260, "Business", "Master full-stack development, covering frontend, backend, and database integration.", "Quinn Blue", null, false, false, false, "bob_white", null, 0, 0);
+        Course course20 = new Course(0, "Business Fundamentals", imageBytes19, 220, "Business", "Learn to extract insights from data, including statistical analysis and visualization tools.", "Rachel Green", null, false, false, false, "bob_white", null, 0, 0);
+        Course course21 = new Course(0, "Growth and Expansion Strategies", imageBytes20, 220, "Business", "Delve deeper into data analytics with advanced techniques for decision-making and strategy.", "Rachel Green", null, false, false, false, "bob_white", null, 0, 0);
+        Course course22 = new Course(0, "Project Management: From Idea to Execution", imageBytes21, 220, "Business", "Explore big data concepts, tools, and frameworks to handle complex datasets efficiently.", "Rachel Green", null, false, false, false, "bob_white", null, 0, 0);
+        Course course23 = new Course(0, "Financial Analysis for Businesses", imageBytes22, 220, "Business", "Learn predictive analytics techniques to forecast trends and patterns in various domains.", "Rachel Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course24 = new Course(0, "Digital Marketing", imageBytes23, 220, "Business", "Get hands-on experience with data cleaning, wrangling, and visualization using modern tools.", "Rachel Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course25 = new Course(0, "Customer Relationship", imageBytes24, 220, "Art", "Analyze art market trends and gain insights into the intersection of art and data analytics.", "Rachel Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course26 = new Course(0, "Leadership", imageBytes25, 220, "Art", "Learn how to apply data analytics techniques to understand artistic patterns and themes.", "Rachel Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course27 = new Course(0, "Innovation", imageBytes26, 220, "Art", "Explore data visualization in the context of art to better present and interpret creative datasets.", "Rachel Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course28 = new Course(0, "Art History and Appreciation", imageBytes27, 220, "Art", "Learn statistical techniques and tools to analyze data in the art domain.", "Rachel Green", null, false, false, false, "alice_brown", null, 0, 0);
+        Course course29 = new Course(0, "Modern and Contemporary Art", imageBytes28, 220, "Art", "Understand how data analytics can influence modern art and design decision-making processes.", "Rachel Green", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course30 = new Course(0, "Digital Art and Media", imageBytes29, 220, "Art", "Dive into advanced data analytics methods tailored for art-related projects and markets.", "Rachel Green", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course31 = new Course(0, "Drawing Techniques", imageBytes30, 220, "Art", "Discover how to leverage data analytics to enhance creativity and innovation in art.", "Rachel Green", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course32 = new Course(0, "Programming with Python", imageBytes31, 220, "Programming", "Learn programming-focused data analytics, including Python libraries for data processing.", "Rachel Green", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course33 = new Course(0, "Data Algorithms", imageBytes32, 220, "Programming", "Master data analytics algorithms and implement them programmatically in your projects.", "Rachel Green", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course34 = new Course(0, "Web Development", imageBytes33, 220, "Programming", "Understand advanced data processing and management techniques using coding skills.", "Rachel Green", null, false, false, false, "jane_smith", null, 0, 0);
+        Course course35 = new Course(0, "Object-Oriented Java", imageBytes34, 220, "Programming", "Apply machine learning and data mining techniques to programming-oriented datasets.", "Rachel Green", null, false, false, false, "john_doe", null, 0, 0);
+        Course course36 = new Course(0, "Mobile App Development", imageBytes35, 220, "Programming", "Dive into real-world programming problems and solve them using advanced analytics.", "Rachel Green", null, false, false, false, "john_doe", null, 0, 0);
+        Course course37 = new Course(0, "Database Management", imageBytes36, 220, "Programming", "Learn to programmatically visualize and analyze data for better decision-making.", "Rachel Green", null, false, false, false, "john_doe", null, 0, 0);
+        Course course38 = new Course(0, "Functional Programming", imageBytes37, 220, "Programming", "Explore cutting-edge data analytics tools and frameworks in the programming domain.", "Rachel Green", null, false, false, false, "john_doe", null, 0, 0);
 
         myViewModel.insertCourse(course1);
         myViewModel.insertCourse(course2);
@@ -320,40 +286,19 @@ public class MainActivity_sign extends AppCompatActivity {
         myViewModel.insertCourse(course38);
     }
 
-//    private void addSampleCourses() {
-//        Course course1 = new Course(0, "Programming Basics", null, 100, "Programming", "Learn the basics of programming", "John Doe", null, false,"ahmad");
-//        // Course course2 = new Course(0, "3D Design", 150, "3D Design", "Create amazing 3D models", "Jane Smith");
-////        Course course3 = new Course(0, "3D Design", null, 150, "3D Design", "Create amazing 3D models", "Jane Smith", null);
-////        Course course4 = new Course(0, "3D Design", null, 150, "3D Design", "Create amazing 3D models", "Jane Smith", null);
-//
-//
-//        myViewModel.insertCourse(course1);
-////        myViewModel.insertCourse(course2);
-////        myViewModel.insertCourse(course3);
-////        myViewModel.insertCourse(course4);
-////        for(int i=0;i<=25;i++){
-//        // myViewModel.deleteCourse(course1);
-//
-//    }
 
-//    private void addSampleStudent() {
-//        Student student = new Student("adnan", "adnan123", 5108708, "Adnan", null);
-//        myViewModel.insertStudent(student);
-//
-//    }
 //
 
 
     private void addSampleTeachers() {
-        // تحويل الصورة من الموارد إلى Bitmap
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.unnamed);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.et1);
         byte[] imageBytes = convertImageToByteArray(bitmap);
-        Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.unnamed);
-        byte[] imageBytes1 = convertImageToByteArray(bitmap1); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.unnamed);
-        byte[] imageBytes2 = convertImageToByteArray(bitmap2); // تحويل الصورة إلى Byte Array
-        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.unnamed);
-        byte[] imageBytes3 = convertImageToByteArray(bitmap3); // تحويل الصورة إلى Byte Array
+        Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.img_6);
+        byte[] imageBytes1 = convertImageToByteArray(bitmap1);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.te9);
+        byte[] imageBytes2 = convertImageToByteArray(bitmap2);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.et4);
+        byte[] imageBytes3 = convertImageToByteArray(bitmap3);
 
 
         Teacher teacher1 = new Teacher("john_doe", "John Doe", "MSc in Computer Science", "password123", imageBytes);
@@ -369,9 +314,12 @@ public class MainActivity_sign extends AppCompatActivity {
 
     private void addSampleStudents() {
 
-// الطلاب مع المدرسين المتسلسلين
-        Student student1 = new Student("user_1", "password_1", 1234, 1231231211, "Student 1", null, "");
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.unnamed);
+        byte[] imageBytes = convertImageToByteArray(bitmap);
+        Student student1 = new Student("user_1", "password_1", 1234, 1231231211, "Student 1", imageBytes, "");
         myViewModel.insertStudent(student1);
+
+
         Student_Teacher studentTeacher1 = new Student_Teacher(0, "user_1", "bob_white");
         myViewModel.insertStudentTeacher(studentTeacher1);
 
@@ -621,46 +569,4 @@ public class MainActivity_sign extends AppCompatActivity {
         myViewModel.insertStudentTeacher(studentTeacher50);
 
     }
-//        for (int i = 1; i <= 50; i++) {
-//            // إنشاء بيانات الطالب
-//            String userName = "user_" + i; // اسم مستخدم فريد
-//            String password = "password_" + i; // كلمة مرور فريدة
-//            int phoneNumber = 1000000000 + i; // رقم هاتف فريد
-//            int cardNumber = 123 + i; // رقم بطاقة فريد
-//            String studentName = "Student " + i; // اسم الطالب
-//            byte[] image = null; // صورة افتراضية (يمكنك تحديثها لاحقًا)
-//
-//            // إنشاء الطالب
-//            Student student1 = new Student(userName, password, phoneNumber, cardNumber, studentName, image, "");
-//
-//            // إدراج الطالب باستخدام ViewModel
-//           // myViewModel.insertStudent(student1);
-//
-//            // تحديد اسم المدرس بناءً على توزيع معين
-//            String teacherUserName;
-//            if (i <= 12) {
-//                teacherUserName = "bob_white"; // أول 12 طالب مع المدرس الأول
-//            } else if (i <= 24) {
-//                teacherUserName = "jane_smith"; // من 13 إلى 24 مع المدرس الثاني
-//            } else if (i <= 36) {
-//                teacherUserName = "john_doe"; // من 25 إلى 36 مع المدرس الثالث
-//            } else {
-//                teacherUserName = "alice_brown"; // من 37 إلى 50 مع المدرس الرابع
-//            }
-//
-//            // إنشاء العلاقة بين الطالب والمدرس
-//            Student_Teacher studentTeacher = new Student_Teacher(0, userName, teacherUserName);
-//
-//            // إدراج العلاقة باستخدام ViewModel
-//                myViewModel.insertStudentTeacher(studentTeacher);
 }
-
-
-//        // ربط الطالب بالكورسات
-//        Student_Course studentCourse = new Student_Course(0, "userName", 0);
-//        myViewModel.insertStudentCourse(studentCourse);
-//
-//        // ربط الطالب بالمدرس
-//        Student_Teacher studentTeacher = new Student_Teacher(0, "userName", "teacherUsername");
-//        myViewModel.insertStudentTeacher(studentTeacher);
-

@@ -49,17 +49,13 @@ public class StudentsFragment extends Fragment {
 
         myViewModel.getStudentsByTeacher(teacherUserName).observe((LifecycleOwner) requireContext(), studentTeachers -> {
             if (studentTeachers != null && !studentTeachers.isEmpty()) {
-                // تنظيف القائمة القديمة قبل إضافة بيانات جديدة
                 studentsList1.clear();
 
-                // تكرار البيانات وإضافة Student_Teacher لكل طالب
                 for (Student_Teacher studentTeacher : studentTeachers) {
                     myViewModel.getAllStudentByUser(studentTeacher.getStudentUserName()).observe((LifecycleOwner) requireContext(), student2 -> {
                         if (student2 != null && !student2.isEmpty()) {
                             studentsList1.addAll(student2);
-                            Log.d("MainActivity_Main", "Updated Students List: " + studentsList1);
 
-                            // تحديث الـ RecyclerView بعد إضافة البيانات بالكامل
                             if (studentsList1.size() == studentTeachers.size()) {
                                 adapter = new StudentsAdapter(studentsList1, requireContext());
                                 recyclerView.setAdapter(adapter);

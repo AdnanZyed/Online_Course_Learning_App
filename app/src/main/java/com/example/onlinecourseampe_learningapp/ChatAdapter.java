@@ -9,18 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
     private final Context context;
+    private final String user;
     private List<Student> students = new ArrayList<>();
 
-    public ChatAdapter(Context context) {
+    public ChatAdapter(Context context, String user) {
         this.context = context;
+        this.user = user;
     }
 
     public void setStudents(List<Student> students) {
@@ -41,20 +45,24 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
         holder.studentName.setText(student.getS_name());
         if (student.getS_Image() != null) {
-            // تحويل الصورة من byte[] إلى Bitmap
             Bitmap bitmap = BitmapFactory.decodeByteArray(student.getS_Image(), 0, student.getS_Image().length);
             holder.studentImage.setImageBitmap(bitmap);
+        } else {
+
+            holder.studentImage.setImageResource(R.drawable.profile);
+
+
         }
         // مستمع الضغط على العنصر
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatMessageActivity.class);
             intent.putExtra("studentUsername", student.getStudent_user_name());
             intent.putExtra("studentName", student.getS_name());
+            intent.putExtra("USER", user);
             context.startActivity(intent);
         });
 
-        // هنا يمكنك جلب الرسالة الأخيرة للطالب
-        // يمكن استخدام ViewModel للحصول على آخر رسالة عبر LiveData
+
     }
 
     @Override

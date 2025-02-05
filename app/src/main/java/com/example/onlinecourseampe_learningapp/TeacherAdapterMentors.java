@@ -23,11 +23,12 @@ public class TeacherAdapterMentors extends RecyclerView.Adapter<TeacherAdapterMe
     private String user;
     private List<Teacher> teachersMonetorsList;
 
-    public TeacherAdapterMentors(Context context, List<Teacher> teacherList,String user) {
+    public TeacherAdapterMentors(Context context, List<Teacher> teacherList, String user) {
         this.context = context;
         this.user = user;
         this.teachersMonetorsList = teacherList;
     }
+
     public void setTeacher_MonetorsList(List<Teacher> teachers) {
         this.teachersMonetorsList = teachers;
         notifyDataSetChanged();
@@ -47,12 +48,11 @@ public class TeacherAdapterMentors extends RecyclerView.Adapter<TeacherAdapterMe
         holder.tvTeacherEducationAll.setText(teacher.getEducation());
         holder.chatAll.setImageResource(R.drawable.chat);
 
-        // تحويل الصورة المخزنة في قاعدة البيانات (byte[]) إلى Bitmap
         if (teacher.getImage_teatcher() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(teacher.getImage_teatcher(), 0, teacher.getImage_teatcher().length);
             holder.imgTeacherAll.setImageBitmap(bitmap);
         } else {
-            holder.imgTeacherAll.setImageResource(R.drawable.unnamed); // صورة افتراضية
+            holder.imgTeacherAll.setImageResource(R.drawable.unnamed);
         }
     }
 
@@ -61,9 +61,9 @@ public class TeacherAdapterMentors extends RecyclerView.Adapter<TeacherAdapterMe
         return teachersMonetorsList.size();
     }
 
-     class TeacherViewHolder extends RecyclerView.ViewHolder {
+    class TeacherViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgTeacherAll,chatAll;
+        ImageView imgTeacherAll, chatAll;
         TextView tvTeacherNameAll, tvTeacherEducationAll;
 
         public TeacherViewHolder(@NonNull View itemView) {
@@ -74,10 +74,10 @@ public class TeacherAdapterMentors extends RecyclerView.Adapter<TeacherAdapterMe
                     Teacher selectedTeacher = teachersMonetorsList.get(position);
                     Bundle bundle = new Bundle();
                     bundle.putString("TEACHER_NAME_TEXT_VIEW", selectedTeacher.getTeatur_name());
-                    bundle.putString("TEACHER_USER_NAME_TEXT_VIEW",selectedTeacher.getTeatur_USER_Name());
+                    bundle.putString("TEACHER_USER_NAME_TEXT_VIEW", selectedTeacher.getTeatur_USER_Name());
                     bundle.putString("EDUCATION_TEXT_VIEW", selectedTeacher.getEducation());
-                    bundle.putString("STUDENT_USER",user);
-                    bundle.putByteArray("BITMAP",selectedTeacher.getImage_teatcher());
+                    bundle.putString("STUDENT_USER", user);
+                    bundle.putByteArray("BITMAP", selectedTeacher.getImage_teatcher());
                     Intent intent = new Intent(context, TeacherProfileActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);

@@ -16,6 +16,5 @@ public class MainActivity_Forgot extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
     }
 }

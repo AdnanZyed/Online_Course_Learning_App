@@ -25,7 +25,7 @@ public class MainActivity_Admin extends AppCompatActivity {
         binding.Card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_Admin.this,Add_New_Course.class);
+                Intent intent = new Intent(MainActivity_Admin.this, Add_New_Course.class);
                 startActivity(intent);
             }
         });
@@ -33,11 +33,10 @@ public class MainActivity_Admin extends AppCompatActivity {
         binding.Card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_Admin.this,Delete_Course.class);
+                Intent intent = new Intent(MainActivity_Admin.this, Delete_Course.class);
                 startActivity(intent);
             }
         });
-
 
 
     }

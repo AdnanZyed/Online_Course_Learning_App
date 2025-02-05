@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,26 +28,23 @@ public class CourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_course, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_courses);
-        // loadCourses();
 
         user = getArguments().getString("USER_NAME_R");
-        //  loadCoursesByUserTeatcher("bob_white");
-        // إعداد RecyclerView
+
         courseAdapter = new CourseAdapter(requireContext(), new ArrayList<>(), user);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(courseAdapter);
 
-        // إعداد ViewModel
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
         loadCourses();
 
         return view;
     }
 
+
     public void loadCourses() {
 
 
-        // تحميل جميع الكورسات من قاعدة البيانات
         myViewModel.getAllCourse().observe(getViewLifecycleOwner(), courses -> {
             courseAdapter.setCourseList(courses);
             courseAdapter.setOnCourseClickListener(course -> {
@@ -58,7 +56,7 @@ public class CourseFragment extends Fragment {
                 intent.putExtra("TEACHER_USER_NAME", course.getTeacher_USER_Name());
                 intent.putExtra("COURSE_NAME", course.getCourse_NAME());
                 intent.putExtra("COURSE_DESCRIPTION", course.getDescription());
-
+                intent.putExtra("COURSE_CATEGORIES", course.getCategorie());
                 intent.putExtra("COURSE_PRICE", course.getPrice());
                 intent.putExtra("COURSE_IMAGE", course.getImage());
                 intent.putExtra("TEACHER_NAME", course.getTeacher_name());
@@ -73,7 +71,6 @@ public class CourseFragment extends Fragment {
     public void loadCoursesByUserTeatcher(String string) {
 
 
-        // تحميل جميع الكورسات من قاعدة البيانات
         myViewModel.getAllCoursesByTeacher_USER_Name(string).observe(getViewLifecycleOwner(), courses -> {
             courseAdapter.setCourseList(courses);
             courseAdapter.setOnCourseClickListener(course -> {
@@ -100,10 +97,7 @@ public class CourseFragment extends Fragment {
     public void loadCourses_Categorie_Art() {
 
 
-        // تحميل جميع الكورسات من قاعدة البيانات
-        // استدعاء الدالة مع التصنيف المطلوب
         myViewModel.getCoursesByCategory("Art").observe(getViewLifecycleOwner(), courses -> {
-            // تحديث RecyclerView أو أي عنصر واجهة مستخدم
 
             courseAdapter.setCourseList(courses);
 
@@ -131,10 +125,7 @@ public class CourseFragment extends Fragment {
     public void loadCourses_Categorie_Programming() {
 
 
-        // تحميل جميع الكورسات من قاعدة البيانات
-        // استدعاء الدالة مع التصنيف المطلوب
         myViewModel.getCoursesByCategory("Programming").observe(getViewLifecycleOwner(), courses -> {
-            // تحديث RecyclerView أو أي عنصر واجهة مستخدم
 
             courseAdapter.setCourseList(courses);
 
@@ -161,10 +152,7 @@ public class CourseFragment extends Fragment {
     public void loadCourses_Categorie_Business() {
 
 
-        // تحميل جميع الكورسات من قاعدة البيانات
-        // استدعاء الدالة مع التصنيف المطلوب
         myViewModel.getCoursesByCategory("Business").observe(getViewLifecycleOwner(), courses -> {
-            // تحديث RecyclerView أو أي عنصر واجهة مستخدم
 
             courseAdapter.setCourseList(courses);
 
@@ -191,10 +179,7 @@ public class CourseFragment extends Fragment {
     public void loadCourses_Categorie_3D_Design() {
 
 
-        // تحميل جميع الكورسات من قاعدة البيانات
-        // استدعاء الدالة مع التصنيف المطلوب
         myViewModel.getCoursesByCategory("3D Design").observe(getViewLifecycleOwner(), courses -> {
-            // تحديث RecyclerView أو أي عنصر واجهة مستخدم
 
             courseAdapter.setCourseList(courses);
 

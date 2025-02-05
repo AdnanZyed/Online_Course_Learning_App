@@ -7,13 +7,6 @@ import androidx.room.PrimaryKey;
 import java.util.Arrays;
 
 
-
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-
-import java.util.Arrays;
-
 @Entity(tableName = "Teacher_Reviews", foreignKeys = @ForeignKey(
         entity = Teacher.class,
         parentColumns = "Teatur_USER_Name",

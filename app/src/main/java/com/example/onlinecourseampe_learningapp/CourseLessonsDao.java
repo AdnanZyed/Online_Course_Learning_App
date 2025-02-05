@@ -17,6 +17,7 @@ public interface CourseLessonsDao {
 
     @Update
     void update(CourseLessons courseLesson);
+
     @Query("SELECT COUNT(*) FROM CourseLessons")
     int getTotalLessonsCount();
 
@@ -31,6 +32,8 @@ public interface CourseLessonsDao {
 
     @Query("SELECT COUNT(*) FROM CourseLessons WHERE Course_ID = :courseId AND l_completed = 1")
     int getCompletedLessonsCountByCourseId(int courseId);
+//    @Query("SELECT * FROM CourseLessons WHERE Course_ID = :courseId AND l_completed = 1")
+//    LiveData<List<CourseLessons>> getCompletedLessonsByCourseId(int courseId);
 
     @Query("SELECT SUM(l_time) FROM CourseLessons WHERE Course_ID = :courseId")
     int getTotalLessonsTimeByCourseId(int courseId);

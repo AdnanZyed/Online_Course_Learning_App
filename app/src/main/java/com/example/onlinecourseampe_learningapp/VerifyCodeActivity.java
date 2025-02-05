@@ -25,12 +25,10 @@ public class VerifyCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation_phone);
 
-        // Initialize Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         verificationCodeEditText = findViewById(R.id.verificationCodeEditText);
         btnVerify = findViewById(R.id.btnVerify);
 
-        // Get the verification ID from the intent
         mVerificationId = getIntent().getStringExtra("verificationId");
 
         btnVerify.setOnClickListener(v -> {
@@ -52,12 +50,10 @@ public class VerifyCodeActivity extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Verification successful, navigate to the next screen
                         Intent intent = new Intent(VerifyCodeActivity.this, ActivityMainSignIn.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // Verification failed
                         Toast.makeText(VerifyCodeActivity.this, "رمز التحقق غير صحيح", Toast.LENGTH_SHORT).show();
                     }
                 });

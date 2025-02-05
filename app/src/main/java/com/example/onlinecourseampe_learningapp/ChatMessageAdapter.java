@@ -21,6 +21,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.messages = messages;
         this.currentUser = currentUser;
     }
+
     public void updateMessages(List<Message> newMessages) {
         this.messages = newMessages;
         notifyDataSetChanged();

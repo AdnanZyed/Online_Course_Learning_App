@@ -26,7 +26,6 @@ public class Main_Activity_part extends AppCompatActivity {
         Button btnNext = findViewById(R.id.B_Next);
         LinearLayout dotsLayout = findViewById(R.id.dots);
 
-        // إعداد المقاطع
         List<Part_Item> items = new ArrayList<>();
         items.add(new Part_Item(R.drawable.step1, "We orovide the best learning course & great mentors!"));
         items.add(new Part_Item(R.drawable.step2, "learn anytime and anywhere easily and conveniently"));
@@ -35,17 +34,15 @@ public class Main_Activity_part extends AppCompatActivity {
         adapter = new Part_Adapter(items);
         viewPager.setAdapter(adapter);
 
-        // إضافة النقاط السفلية
         setupDotsIndicator(items.size(), dotsLayout);
 
-        // التحكم بزر "التالي"
         btnNext.setOnClickListener(v -> {
             if (viewPager.getCurrentItem() < items.size() - 1) {
                 viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
             } else {
-                Intent intent=new Intent(this,MainActivity_sign.class);
+                Intent intent = new Intent(this, MainActivity_sign.class);
                 startActivity(intent);
-                 finish();
+                finish();
             }
         });
     }
@@ -56,10 +53,9 @@ public class Main_Activity_part extends AppCompatActivity {
             dot.setBackgroundResource(R.drawable.dot_selector);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(16, 16);
             params.setMargins(8, 0, 8, 0);
-            dot.setSelected(i == 0); // النقطة الأولى مُفعّلة افتراضيًا
+            dot.setSelected(i == 0);
             dotsLayout.addView(dot, params);
 
-            final int index = i;
             viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override
                 public void onPageSelected(int position) {

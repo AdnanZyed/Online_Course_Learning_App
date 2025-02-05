@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherViewHolder> {
@@ -29,7 +28,8 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         this.teachersList = teachers;
         notifyDataSetChanged();
     }
-    public TeacherAdapter(Context context, List<Teacher> teachersList,String user) {
+
+    public TeacherAdapter(Context context, List<Teacher> teachersList, String user) {
         this.context = context;
         this.teachersList = teachersList;
         this.user = user;
@@ -64,8 +64,8 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         return teachersList != null ? teachersList.size() : 0;
     }
 
-     class TeacherViewHolder extends RecyclerView.ViewHolder {
-        TextView  tvTeatur_name;
+    class TeacherViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTeatur_name;
 
         ImageView imageView;
 
@@ -80,10 +80,10 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
                     Teacher selectedTeacher = teachersList.get(position);
                     Bundle bundle = new Bundle();
                     bundle.putString("TEACHER_NAME_TEXT_VIEW", selectedTeacher.getTeatur_name());
-                    bundle.putString("TEACHER_USER_NAME_TEXT_VIEW",selectedTeacher.getTeatur_USER_Name());
+                    bundle.putString("TEACHER_USER_NAME_TEXT_VIEW", selectedTeacher.getTeatur_USER_Name());
                     bundle.putString("EDUCATION_TEXT_VIEW", selectedTeacher.getEducation());
-                    bundle.putString("STUDENT_USER",user);
-                    bundle.putByteArray("BITMAP",selectedTeacher.getImage_teatcher());
+                    bundle.putString("STUDENT_USER", user);
+                    bundle.putByteArray("BITMAP", selectedTeacher.getImage_teatcher());
                     Intent intent = new Intent(context, TeacherProfileActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);

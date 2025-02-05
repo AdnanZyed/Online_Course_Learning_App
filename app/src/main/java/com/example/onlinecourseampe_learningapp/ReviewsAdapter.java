@@ -38,7 +38,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Course_Reviews review = reviewsList.get(position);
 
-        // تحويل الصورة من byte[] إلى Bitmap
         if (review.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(review.getImage(), 0, review.getImage().length);
             holder.imageView.setImageBitmap(bitmap);
@@ -47,7 +46,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
             holder.imageView.setImageResource(R.drawable.profile);
         }
 
-        // تعيين النصوص من الكائن
         holder.nameTextView.setText(review.getName());
         holder.commentTextView.setText(review.getComment());
 
@@ -56,18 +54,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
 
             if (review.isChecked()) {
                 review.setChecked(false);
-                review.setLove(currentLove - 1); // تحديث قيمة الإعجابات
-
+                review.setLove(currentLove - 1);
                 holder.imageView6.setBackgroundResource(R.drawable.heart);
-            //    holder.int_Love.setText(String.valueOf(review.getLove() -1));
 
                 notifyItemChanged(position);
-            }else {
+            } else {
                 review.setChecked(true);
-                review.setLove(currentLove + 1); // تحديث قيمة الإعجابات
-
+                review.setLove(currentLove + 1);
                 holder.imageView6.setBackgroundResource(R.drawable.heart_r);
-             //   holder.int_Love.setText(String.valueOf(review.getLove() +1));
                 notifyItemChanged(position);
 
             }
@@ -75,9 +69,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
             notifyItemChanged(position);
 
         });
-        holder.ratingSpinner.setSelection((int) review.getRating() - 1); // ضبط الـ Spinner بناءً على التقييم
+        holder.ratingSpinner.setSelection((int) review.getRating() - 1);
         holder.date.setText(review.getFormattedDate());
-        // ملاحظة: يمكن إضافة المزيد من التخصيصات مثل onClickListeners حسب الحاجة
     }
 
     @Override

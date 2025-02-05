@@ -1,17 +1,13 @@
 package com.example.onlinecourseampe_learningapp;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.LifecycleOwner;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,35 +29,39 @@ public class BookmarkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bookmark);
 
         recyclerView = findViewById(R.id.recycler_view);
+        ImageView imageView = findViewById(R.id.back_icon_enrollB);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
         user = getIntent().getStringExtra("USER");
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // مراقبة الـ LiveData للكورسات المحفوظة
+                onBackPressed();
+            }
+        });
         myViewModel.getBookmarkedCoursesByStudent(user).observe(this, bookmarkedCourses -> {
             if (bookmarkedCourses != null && !bookmarkedCourses.isEmpty()) {
-                studentsList1.clear(); // تأكد من مسح القائمة قبل إضافة العناصر الجديدة
+                studentsList1.clear();
 
-                // عملية غير متزامنة للحصول على جميع الكورسات المرتبطة بـ Student_Course
                 for (Student_Course studentCourse : bookmarkedCourses) {
                     myViewModel.getAllCoursesById(studentCourse.getCourse_ID()).observe(this, courses -> {
                         if (courses != null && !courses.isEmpty()) {
-                            studentsList1.addAll(courses); // إضافة الكورسات إلى القائمة
+                            studentsList1.addAll(courses);
 
-                            // بعد تحديث الـ studentsList1، تأكد من أن واجهة المستخدم تتحدث
                             runOnUiThread(() -> {
                                 adapter = new CourseAdapter(this, studentsList1, user);
-                                recyclerView.setAdapter(adapter); // تعيين الـ Adapter
+                                recyclerView.setAdapter(adapter);
                             });
                         }
                     });
                 }
 
             } else {
-                // عرض رسالة في حال عدم وجود كورسات محفوظة
                 Toast.makeText(this, "لا توجد كورسات محفوظة!", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 }

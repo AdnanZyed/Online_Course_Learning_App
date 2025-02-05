@@ -1,7 +1,11 @@
 package com.example.onlinecourseampe_learningapp;
+
+import android.media.Rating;
+
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
 import java.util.Arrays;
 
 @Entity(tableName = "Course", foreignKeys = @ForeignKey(
@@ -14,26 +18,24 @@ import java.util.Arrays;
 public class Course {
     @PrimaryKey(autoGenerate = true)
     private int Course_ID;
-    //هذه البيانات يتم ادخالها من حساب الادمن بحيث يستطيع ايضا عندا يقوم بالتسجيل كادمن ان يحذف كورسات او يضيف او يعدل من خلال الاي دي كما يتم عرض جميع الكورسات للطلاب او مجموعة معينة من الكورسات بناءا على التصنيف وهنا كل كورس يدرسه مدرس معين يعني اريد ربط الكورس بمدرس بناءا على انه كل كورس له تصنيف معين مثلا ديزاين برمجة وكل مدرس له تصنيف معين ايضا
-    private String Course_NAME;//اسم الكورس
+    private String Course_NAME;
 
-    private byte[] Image; //صورة شهادة الكورس
-    private int Price;//سعر الكورس
-    private String Categorie; //الكورس ينضم لاي تصنيف عند العرض
-    private String Description;//وصف الكورس
-    private String Teacher_name; //اسم مدرس الكورس
-    private byte[] profilePicture; //صورة الكورس
-    private boolean isBookmarked; // متغير الإشارة المرجعية
+    private byte[] Image;
+    private int Price;
+    private String Categorie;
+    private String Description;
+    private String Teacher_name;
+    private byte[] profilePicture;
+    private boolean isBookmarked;
     private boolean isAddCart;
-    private boolean isCompleted; // متغير الإشارة المرجعية
-    private String Teacher_USER_Name;  // الإشارة إلى المدرس عن طريق اسم المستخدم
-    private byte[] bookmarkIcon; //صورة الكورس
+    private boolean isCompleted;
+    private String Teacher_USER_Name;
+    private byte[] bookmarkIcon;
+    private double rating;
+    private int reviews;
 
 
-    //private String Student_user_name;
-
-
-    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isAddCart, boolean isCompleted, String teacher_USER_Name, byte[] bookmarkIcon) {
+    public Course(int course_ID, String course_NAME, byte[] image, int price, String categorie, String description, String teacher_name, byte[] profilePicture, boolean isBookmarked, boolean isAddCart, boolean isCompleted, String teacher_USER_Name, byte[] bookmarkIcon, double rating, int reviews) {
         Course_ID = course_ID;
         Course_NAME = course_NAME;
         Image = image;
@@ -47,9 +49,27 @@ public class Course {
         this.isCompleted = isCompleted;
         Teacher_USER_Name = teacher_USER_Name;
         this.bookmarkIcon = bookmarkIcon;
+        this.rating = rating;
+        this.reviews = reviews;
     }
 
     public Course() {
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
     }
 
     public byte[] getBookmarkIcon() {
@@ -96,7 +116,7 @@ public class Course {
         return Course_NAME;
     }
 
-    public void setCourse_NAME( String course_NAME) {
+    public void setCourse_NAME(String course_NAME) {
         Course_NAME = course_NAME;
     }
 
@@ -149,7 +169,6 @@ public class Course {
         this.profilePicture = profilePicture;
     }
 
-    // Getters and setters
     public boolean isBookmarked() {
         return isBookmarked;
     }
@@ -157,14 +176,6 @@ public class Course {
     public void setBookmarked(boolean bookmarked) {
         isBookmarked = bookmarked;
     }
-
-//    public String getStudent_user_name() {
-//        return Student_user_name;
-//    }
-//
-//    public void setStudent_user_name(String student_user_name) {
-//        Student_user_name = student_user_name;
-//    }
 
 
     @Override
@@ -183,6 +194,8 @@ public class Course {
                 ", isCompleted=" + isCompleted +
                 ", Teacher_USER_Name='" + Teacher_USER_Name + '\'' +
                 ", bookmarkIcon=" + Arrays.toString(bookmarkIcon) +
+                ", rating=" + rating +
+                ", reviews=" + reviews +
                 '}';
     }
 }

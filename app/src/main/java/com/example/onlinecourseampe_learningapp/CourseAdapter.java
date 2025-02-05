@@ -1,13 +1,20 @@
 package com.example.onlinecourseampe_learningapp;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,10 +52,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Course course = courseList.get(position);
         holder.tvCourseName.setText(course.getCourse_NAME());
-        holder.tvCategorie.setText(course.getTeacher_name());
+        holder.tvCategorie.setText(course.getCategorie());
         holder.tvPrice.setText(String.format("$%d", course.getPrice()));
 
-        // تحميل الصورة
         byte[] imageBytes = course.getImage();
         if (imageBytes != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
@@ -57,57 +63,63 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             holder.ivCourseImage.setImageResource(R.drawable.sample_course_image);
         }
 
-        viewModel.getisAddCartCoursesByStudent1(user, course.getCourse_ID()).observe((AppCompatActivity) context, studentCourses -> {
+        viewModel.getBookmarkedCoursesByStudent1(user, course.getCourse_ID()).observe((AppCompatActivity) context, studentCourses -> {
 
 
-            if (studentCourses.isEmpty()||studentCourses==null) {
+            if (studentCourses.isEmpty() || studentCourses == null) {
                 holder.BookmarkIcon.setImageResource(R.drawable.bookmark);
             } else {
                 holder.BookmarkIcon.setImageResource(R.drawable.bookmarked);
             }
         });
 
-        // تحديث حالة الإشارة المرجعية
+
+        holder.BookmarkIcon.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
 
 
-        // التعامل مع الضغط على أيقونة الإشارة المرجعية
-        holder.BookmarkIcon.setOnClickListener(v -> {
-            // تحقق إذا كانت الدالة تبدأ بعملية استعلام
-            viewModel.getisAddCartCoursesByStudent1(user, course.getCourse_ID()).observe((AppCompatActivity) context, studentCourses -> {
-                viewModel.isStudentCourseExists(user,course.getCourse_ID(),true,false,false).observe((AppCompatActivity) context, isHad -> {
-                if (!isHad) {
+                showCustomDialog(course, course.getImage(), course.getCourse_NAME(), course.getCategorie(), course.getPrice());
 
-                    // إذا لم يتم العثور على الكورس في قاعدة البيانات (بمعنى أنه ليس مضافًا للمفضلة)
-                    if (studentCourses.isEmpty()) {
-                        // إضافة الكورس إلى المفضلة
 
-                        Student_Course studentCourse = new Student_Course(0, user, course.getCourse_ID(), true, false, false);
-                        viewModel.insertStudentCourse(studentCourse);
-                        holder.BookmarkIcon.setImageResource(R.drawable.bookmarked); // تحديث الأيقونة
-
-                        // تحديث حالة الكورس
-                        //course.setBookmarked(true);
-                        //   holder.BookmarkIcon.setImageResource(R.drawable.bookmarked); // تحديث الأيقونة
-                        // خروج من الدالة بعد إضافة الكورس
-                        return;
-                    }
-                }
-                // إذا كان الكورس موجودًا بالفعل في المفضلة
-                if (!studentCourses.isEmpty()) {
-                    // حذف الكورس من المفضلة
-                 //   viewModel.deleteStudentCourseByUserAndCourse(user, course.getCourse_ID(), true, false);
-
-                    // تحديث حالة الكورس
-                    //course.setBookmarked(false);
-                    holder.BookmarkIcon.setImageResource(R.drawable.bookmark); // تحديث الأيقونة
-                    // خروج من الدالة بعد حذف الكورس
-                    return;
-                }
-
-                // إذا لم يتحقق أي شرط، لا شيء يحدث.
-            });});
+                return true;
+            }
         });
+        holder.BookmarkIcon.setOnClickListener(v -> {
+            viewModel.isStudentCourseExistsC(user, course.getCourse_ID(), true).observe((AppCompatActivity) context, isHadc -> {
+                viewModel.isStudentCourseExistsB(user, course.getCourse_ID(), true).observe((AppCompatActivity) context, isHadb -> {
+                    viewModel.isStudentCourseExists(user, course.getCourse_ID(), true).observe((AppCompatActivity) context, isHad -> {
+                        if (!isHadb && !isHad && !isHadc) {
 
+
+                            Student_Course studentCourse = new Student_Course(user, course.getCourse_ID(), true, false, false, 0);
+                            viewModel.insertStudentCourse(studentCourse);
+                            holder.BookmarkIcon.setImageResource(R.drawable.bookmarked);
+
+
+                        } else if (isHad || isHadc) {
+                            Student_Course studentCourse = new Student_Course(user, course.getCourse_ID(), true, isHad, isHadc, 0);
+
+                            viewModel.updateCourseStudent(studentCourse);
+
+                            holder.BookmarkIcon.setImageResource(R.drawable.bookmarked);
+
+
+                        } else if (isHadb) {
+                            Student_Course studentCourse = new Student_Course(user, course.getCourse_ID(), false, isHad, isHadc, 0);
+
+                            viewModel.updateCourseStudent(studentCourse);
+
+                            holder.BookmarkIcon.setImageResource(R.drawable.bookmark);
+
+
+                        }
+
+
+                    });
+                });
+            });
+        });
 
 
         // التعامل مع الضغط على العنصر بالكامل
@@ -123,9 +135,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return courseList.size();
     }
 
+    public Course getCourseAt(int position) {
+        return courseList.get(position);
+    }
+
     public void setCourseList(List<Course> courseList) {
         this.courseList = courseList;
-        notifyDataSetChanged(); // تأكد من تحديث الـ RecyclerView عند تعديل البيانات
+        notifyDataSetChanged();
     }
 
     public interface OnCourseClickListener {
@@ -146,4 +162,63 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             cartIcon = itemView.findViewById(R.id.cart);
         }
     }
+
+    private void showCustomDialog(Course course, byte[] image, String name, String catigories, int prise) {
+        // إنشاء الـ Dialog
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog);
+        dialog.setCancelable(true);
+
+
+        // إعداد عناصر الـ Dialog
+        TextView mainText = dialog.findViewById(R.id.dialog_main_text1);
+        Button viewCourseButton = dialog.findViewById(R.id.btn_view_course1);
+        Button cancelButton = dialog.findViewById(R.id.btn_cancel1);
+        ImageView iv_course_image = dialog.findViewById(R.id.iv_course_imageD);
+        TextView tv_categorie = dialog.findViewById(R.id.tv_categorieD);
+        TextView tv_course_name = dialog.findViewById(R.id.tv_course_nameD);
+        TextView tv_price = dialog.findViewById(R.id.tv_priceD);
+
+        byte[] imageBytes = image;
+        if (imageBytes != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            iv_course_image.setImageBitmap(bitmap);
+            tv_categorie.setText(catigories);
+            tv_course_name.setText(name);
+            tv_price.setText(prise + "");
+            // تخصيص النصوص والصورة
+            mainText.setText("Remove from Bookmark?");
+
+
+            viewCourseButton.setOnClickListener(v -> {
+
+                viewModel.deleteStudentCourseByUserAndCourse(user, course.getCourse_ID());
+
+                dialog.dismiss();
+            });
+
+            Window window = dialog.getWindow();
+            if (window != null) {
+                WindowManager.LayoutParams params = window.getAttributes();
+                params.gravity = Gravity.BOTTOM;
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                window.setAttributes(params);
+                window.setBackgroundDrawableResource(android.R.color.transparent);
+                window.setBackgroundDrawableResource(R.drawable.rounded_dialog_background);
+
+            }
+
+
+            cancelButton.setOnClickListener(v -> {
+                dialog.dismiss();
+            });
+
+            dialog.show();
+        }
+
+    }
+
+
 }

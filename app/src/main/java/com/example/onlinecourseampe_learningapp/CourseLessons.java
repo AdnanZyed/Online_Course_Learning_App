@@ -4,13 +4,16 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.net.URL;
 @Entity(tableName = "CourseLessons", foreignKeys = @ForeignKey(
         entity = Course.class,
         parentColumns = "Course_ID",
         childColumns = "Course_ID",
+
         onDelete = ForeignKey.CASCADE
-))
+
+)
+
+)
 public class CourseLessons {
 
     @PrimaryKey(autoGenerate = true)

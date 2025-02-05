@@ -3,20 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="5dp"
+
     android:layout_margin="20dp"
     android:background="@drawable/shape"
     android:orientation="vertical"
     android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/iv_course_imageR"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/sample_course_image"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/iv_teacher_image5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="8dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+
+
+        <ImageView
+            android:id="@+id/iv_course_imageR"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:shapeAppearanceOverlay="@style/RoundedImage"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_course_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
+
 
 
     <TextView
@@ -28,7 +49,7 @@
 
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_course_imageR"
+        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image5"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -40,7 +61,7 @@
         android:text="Time"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_course_imageR"
+        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image5"
         app:layout_constraintTop_toBottomOf="@id/tv_course_nameR" />
 
     <TextView
@@ -80,15 +101,16 @@
     <ProgressBar
         android:id="@+id/progressBarR"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="170dp"
+        android:layout_width="140dp"
         android:layout_height="12dp"
         android:layout_marginTop="24dp"
         android:max="100"
         android:progress="0"
+
         android:progressDrawable="@drawable/custom_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toEndOf="@+id/iv_course_imageR"
+        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image5"
         app:layout_constraintTop_toBottomOf="@+id/time_courseR"
         app:layout_goneMarginTop="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

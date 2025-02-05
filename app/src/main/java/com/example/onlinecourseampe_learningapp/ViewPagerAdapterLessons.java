@@ -9,13 +9,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ViewPagerAdapterLessons extends FragmentStateAdapter {
 
-    private final int courseId; // تعريف متغير courseId
-//    private final String user; // تعريف متغير courseId
+    private final int courseId;
+    private final String user;
 
-    // تعديل المُنشئ لقبول courseId
-    public ViewPagerAdapterLessons(@NonNull FragmentActivity fragmentActivity, int courseId) {
+    public ViewPagerAdapterLessons(@NonNull FragmentActivity fragmentActivity, int courseId, String user) {
         super(fragmentActivity);
-        this.courseId = courseId; // تخزين courseId في المتغير
+        this.courseId = courseId;
+        this.user = user;
     }
 
     @NonNull
@@ -23,17 +23,17 @@ public class ViewPagerAdapterLessons extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                    LessonsFragment lessonsFragment = new LessonsFragment();
+                LessonsFragment lessonsFragment = new LessonsFragment();
                 Bundle bundle1 = new Bundle();
-                bundle1.putInt("COURSE_ID", courseId); // إضافة الـ courseId إلى الـ Bundle
-                lessonsFragment.setArguments(bundle1); // تمرير الـ Bundle إلى الفراجمنت
+                bundle1.putInt("COURSE_ID", courseId);
+                bundle1.putString("USER", user);
+                lessonsFragment.setArguments(bundle1);
                 return lessonsFragment;
             case 1:
-                // الصفحة الثانية مع إرسال courseId
                 CertificatesFragment certificatesFragment = new CertificatesFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("COURSE_ID", courseId); // إضافة الـ courseId إلى الـ Bundle
-                certificatesFragment.setArguments(bundle); // تمرير الـ Bundle إلى الفراجمنت
+                bundle.putInt("COURSE_ID", courseId);
+                certificatesFragment.setArguments(bundle);
                 return certificatesFragment;
             default:
                 return new LessonsFragment();
@@ -42,6 +42,6 @@ public class ViewPagerAdapterLessons extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2; // عدد الصفحات
+        return 2;
     }
 }

@@ -35,34 +35,42 @@ public class Sign_up extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String mVerificationId;
     private String student_name_user;
-    Student student;
-    String ePasswordIn;
-    String PhoneIn;
-    LiveData<List<Student>> studentU;
+    private Student student;
+    private String ePasswordIn;
+    private String PhoneIn;
+    private LiveData<List<Student>> studentU;
     private ActivitySignUpBinding activitySignUpBinding;
     private My_View_Model myViewModel;
-    String nameIn;
-    String eUserIn;
+    private String nameIn;
+    private String eUserIn;
+
+    private SharedPreferences sharedPreferences;
+
+    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
+
         activitySignUpBinding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(activitySignUpBinding.getRoot());
 
-        myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
-//        mAuth = FirebaseAuth.getInstance();
-//        phoneEditText = findViewById(R.id.Phone);
-//        btnSignUp = findViewById(R.id.Sign_up);
+        editor = sharedPreferences.edit();
+        boolean isRemembered = sharedPreferences.getBoolean("rememberMe1", false);
+        if (isRemembered) {
+            activitySignUpBinding.eUser.setText(sharedPreferences.getString("username1", ""));
+            activitySignUpBinding.ePassword.setText(sharedPreferences.getString("password1", ""));
+            activitySignUpBinding.name.setText(sharedPreferences.getString("name1", ""));
+            activitySignUpBinding.Phone.setText(sharedPreferences.getString("phone1", ""));
+            activitySignUpBinding.checkBox.setChecked(true);
+        }
 
-
-//        My_Database db = My_Database.getDatabase(this);
-//        Student_Dao student_dao = db.studentDao();
-
-        // زر التسجيل
         activitySignUpBinding.SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,12 +80,31 @@ public class Sign_up extends AppCompatActivity {
                 nameIn = activitySignUpBinding.name.getText().toString().trim();
                 studentU = myViewModel.getAllStudentByUser(eUserIn);
 //
-//                if (studentU!=null) {
-//                    activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه بالفعل");
-//                    return;
-//                }
+//
 
-                // التحقق من الحقول الفارغة
+
+                activitySignUpBinding.eUser.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shape_password);
+                        } else {
+                            activitySignUpBinding.eUser.setBackgroundResource(R.drawable.edittext_background);
+                        }
+                    }
+                });
+                activitySignUpBinding.ePassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            activitySignUpBinding.ePassword.setBackgroundResource(R.drawable.shape_password);
+                        } else {
+                            activitySignUpBinding.ePassword.setBackgroundResource(R.drawable.edittext_background);
+                        }
+                    }
+                });
+
+
                 if (eUserIn.isEmpty()) {
                     activitySignUpBinding.eUser.setError("اسم المستخدم مطلوب");
                     return;
@@ -88,44 +115,36 @@ public class Sign_up extends AppCompatActivity {
                     return;
                 }
 
-                // التحقق من طول اسم المستخدم
                 if (eUserIn.length() < 3 || eUserIn.length() > 30) {
                     activitySignUpBinding.eUser.setError("اسم المستخدم يجب أن يكون بين 3 و 20 حرفًا");
                     return;
                 }
 
-                // التحقق من الحروف المسموح بها في اسم المستخدم
                 if (!eUserIn.matches("^[a-zA-Z0-9@#$%^&+=!_]+$")) {
                     activitySignUpBinding.eUser.setError("اسم المستخدم يجب أن يحتوي فقط على حروف وأرقام");
                     return;
                 }
 
-                // التحقق من طول كلمة المرور
                 if (ePasswordIn.length() < 8) {
                     activitySignUpBinding.ePassword.setError("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
                     return;
                 }
 
-                // التحقق من قوة كلمة المرور
                 String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
                 if (!ePasswordIn.matches(passwordPattern)) {
                     activitySignUpBinding.ePassword.setError("كلمة المرور يجب أن تحتوي على حرف كبير وصغير ورقم ورمز خاص");
                     return;
                 }
 
-                // التحقق من الحقل الفارغ
                 if (nameIn.isEmpty()) {
                     activitySignUpBinding.name.setError("الاسم مطلوب");
                     return;
                 }
 
-                // التحقق إذا كان الحقل فارغًا
                 if (PhoneIn.isEmpty()) {
                     activitySignUpBinding.Phone.setError("رقم الهاتف مطلوب");
                     return;
                 }
-
-                // التحقق من أن الرقم يحتوي على أرقام فقط
 
 
                 if (!PhoneIn.matches("^[0-9]+$")) {
@@ -133,33 +152,27 @@ public class Sign_up extends AppCompatActivity {
                     return;
                 }
 
-                // التحقق من طول الرقم (مثال: يجب أن يكون الرقم مكونًا من 10 أرقام)
                 if (PhoneIn.length() != 10) {
                     activitySignUpBinding.Phone.setError("رقم الهاتف يجب أن يتكون من 10 أرقام");
                     return;
                 }
-                // التحقق من عدم وجود مستخدم بنفس اسم المستخدم
                 myViewModel.getAllStudentByUser(eUserIn).observe(Sign_up.this, students -> {
                     if (students == null || students.isEmpty()) {
-                        // إنشاء كائن طالب جديد وإضافته إلى قاعدة البيانات
                         int phoneIn = Integer.parseInt(PhoneIn);
-                        student = new Student(eUserIn, ePasswordIn,phoneIn, 1234, nameIn, null,"");
+                        student = new Student(eUserIn, ePasswordIn, phoneIn, 1234, nameIn, null, "");
                         myViewModel.insertStudent(student);
 
 
-                       // editor.apply(); // حفظ التعديلات
-
-                        // الانتقال إلى MainActivity_Main
                         Intent intent = new Intent(Sign_up.this, MainActivity_Main.class);
                         intent.putExtra("USER_NAME2", eUserIn);
-                        startActivity(intent);
 
-//                      Intent intent1 = new Intent(Sign_up.this, EnrollCodeActivity.class);
-//                      intent1.putExtra("USER_NAME1", eUserIn);
+                        startActivity(intent);
+                        myViewModel.addNotification("Account Setup Successful!", "Your account has been created!", R.drawable.created);
+
+
 
 
                     } else {
-                        // إذا كان اسم المستخدم موجودًا مسبقًا
                         activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقا");
                     }
                 });
@@ -169,7 +182,6 @@ public class Sign_up extends AppCompatActivity {
 
         });
 
-        // زر الرجوع
         activitySignUpBinding.bsckSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +189,6 @@ public class Sign_up extends AppCompatActivity {
             }
         });
 
-        // الانتقال إلى تسجيل الدخول
         activitySignUpBinding.SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,58 +197,44 @@ public class Sign_up extends AppCompatActivity {
             }
         });
 
+        activitySignUpBinding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                String username2 = activitySignUpBinding.eUser.getText().toString();
+                String password2 = activitySignUpBinding.ePassword.getText().toString();
+                String phone2 = activitySignUpBinding.ePassword.getText().toString();
+                String name2 = activitySignUpBinding.ePassword.getText().toString();
+
+                if (!username2.isEmpty() && !password2.isEmpty() && !phone2.isEmpty() && !name2.isEmpty()) {
+                    editor.putBoolean("rememberMe1", true);
+                    editor.putString("username1", username2);
+                    editor.putString("password1", password2);
+                    editor.putString("phone1", phone2);
+                    editor.putString("name1", name2);
+                    editor.apply();
+                } else {
+                    activitySignUpBinding.checkBox.setChecked(false);
+                }
+            } else {
+                editor.clear();
+                editor.apply();
+            }
+        });
 
         activitySignUpBinding.icEyeOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // التحقق إذا كانت كلمة المرور مرئية أم مخفية
                 if (activitySignUpBinding.ePassword.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
-                    // إظهار كلمة المرور
                     activitySignUpBinding.ePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    activitySignUpBinding.icEyeOff.setBackgroundResource(R.drawable.ic_eye); // تغيير الأيقونة إلى "إظهار"
+                    activitySignUpBinding.icEyeOff.setBackgroundResource(R.drawable.ic_eye);
                 } else {
-                    // إخفاء كلمة المرور
                     activitySignUpBinding.ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    activitySignUpBinding.icEyeOff.setBackgroundResource(R.drawable.ic_eye_off); // تغيير الأيقونة إلى "إخفاء"
+                    activitySignUpBinding.icEyeOff.setBackgroundResource(R.drawable.ic_eye_off);
                 }
 
-                // إعادة تعيين المؤشر إلى آخر مكان في النص
                 activitySignUpBinding.ePassword.setSelection(activitySignUpBinding.ePassword.getText().length());
             }
         });
 
-//
-//        private void sendVerificationCode (String phoneNumber){
-//            PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-//                    .setPhoneNumber(phoneNumber) // رقم الهاتف
-//                    .setTimeout(60L, TimeUnit.SECONDS)
-//                    .setActivity(this)
-//                    .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-//                        @Override
-//                        public void onVerificationCompleted(PhoneAuthCredential credential) {
-//                            // عندما يتم التحقق تلقائيًا
-//                        }
-//
-//                        @Override
-//                        public void onVerificationFailed(FirebaseException e) {
-//                            Toast.makeText(Sign_up.this, "فشل التحقق: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                        @Override
-//                        public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
-//                            super.onCodeSent(verificationId, token);
-//                            mVerificationId = verificationId;
-//                            mResendToken = token;
-//
-//                            // الانتقال إلى واجهة إدخال الرمز
-//                            Intent intent = new Intent(Sign_up.this, ActivityMainSignIn.class);
-//                            intent.putExtra("verificationId", verificationId);
-//                            startActivity(intent);
-//                        }
-//                    }).build();
-//            PhoneAuthProvider.verifyPhoneNumber(options);
-//
-//        }
     }
 
     private void sendVerificationCode(String phoneNumber) {
@@ -248,7 +245,6 @@ public class Sign_up extends AppCompatActivity {
                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential credential) {
-                        // عندما يتم التحقق تلقائيًا
                     }
 
                     @Override
@@ -262,7 +258,6 @@ public class Sign_up extends AppCompatActivity {
                         mVerificationId = verificationId;
                         mResendToken = token;
 
-                        // الانتقال إلى واجهة إدخال الرمز
                         Intent intent = new Intent(Sign_up.this, VerifyCodeActivity.class);
                         intent.putExtra("verificationId", verificationId);
                         startActivity(intent);

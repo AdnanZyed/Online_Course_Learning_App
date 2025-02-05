@@ -38,13 +38,12 @@ public class AboutFragment extends Fragment {
 
         String teacherUserName = getArguments().getString("TEACHER_USER_NAME1");
         String CourseDescription = getArguments().getString("courseDescription");
-         StudentUser = getArguments().getString("STUDENT_USER");
+        StudentUser = getArguments().getString("STUDENT_USER");
 
         Message = view.findViewById(R.id.message_btn);
         description = view.findViewById(R.id.description);
 
         description.setText(CourseDescription);
-        Log.d("AboutFragment", "/////////////////////////////////////////////////////////// " + CourseDescription+teacherUserName);
 
 
         Bundle bundle = new Bundle();
@@ -65,26 +64,10 @@ public class AboutFragment extends Fragment {
                 teacherImageView.setImageBitmap(bitmap);
 
 
-//                // عرض الصورة إذا كانت موجودة
-//                if (teacherdata.getImage_teatcher() != null) {
-//                    // تحويل الصورة إلى byte[]
-//
-//
-
-
-                // تحويل الصورة إلى byte[]
-//                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-//                    byte[] bitmapBytes = byteArrayOutputStream.toByteArray();
-//                    bundle.putByteArray("BITMAP", bitmapBytes);
-
-                //  }
-
                 bundle.putString("TEACHER_NAME_TEXT_VIEW", teacherdata.getTeatur_name());
                 bundle.putString("TEACHER_USER_NAME_TEXT_VIEW", teacherdata.getTeatur_USER_Name());
                 bundle.putString("EDUCATION_TEXT_VIEW", teacherdata.getEducation());
-                bundle.putString("STUDENT_USER",StudentUser);
-                Log.d("AboutFragment", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + StudentUser);
+                bundle.putString("STUDENT_USER", StudentUser);
 
                 bundle.putByteArray("BITMAP", teacherdata.getImage_teatcher());
             }

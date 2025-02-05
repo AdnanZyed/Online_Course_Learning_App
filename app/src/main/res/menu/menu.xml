@@ -11,7 +11,7 @@
         android:icon="@drawable/baseline_cours_books_24"/>
     <item
         android:id="@+id/inbox"
-        android:title="Message"
+        android:title="Inbox"
         android:icon="@drawable/baseline_message_24"/>
     <item
         android:id="@+id/cart"

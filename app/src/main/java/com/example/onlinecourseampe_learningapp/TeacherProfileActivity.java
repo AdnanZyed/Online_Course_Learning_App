@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
         ViewPager2 Pager = findViewById(R.id.Pager);
 
         ImageView imageView = findViewById(R.id.imag_profile);
+        ImageView imageView2 = findViewById(R.id.back_icon);
         TextView Name = findViewById(R.id.teacher_name);
         TextView coursesCount = findViewById(R.id.textView1);
         TextView studentsCount = findViewById(R.id.textView2);
@@ -48,7 +50,7 @@ public class TeacherProfileActivity extends AppCompatActivity {
         if (bundle != null) {
             name = bundle.getString("TEACHER_NAME_TEXT_VIEW");
             username = bundle.getString("TEACHER_USER_NAME_TEXT_VIEW");
-             education = bundle.getString("EDUCATION_TEXT_VIEW");
+            education = bundle.getString("EDUCATION_TEXT_VIEW");
             studentUser = bundle.getString("STUDENT_USER");
 
 
@@ -79,18 +81,18 @@ public class TeacherProfileActivity extends AppCompatActivity {
             String coursesSizeS = coursesSize + "";
             coursesCount.setText(coursesSizeS);
         });
-//        myViewModel.getAllReviewsByCourseId(username).observe(this, reviews -> {
-//            int reviewsSize = reviews.size();
-//            String reviewsSizeS = reviewsSize + "";
-//            reviewsCount.setText(reviewsSizeS);
-//        });
 
 
-        // إعداد الـ ViewPager مع الـ Adapter
-        Tab_profile_Adapter adapter = new Tab_profile_Adapter(this,username,studentUser);
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onBackPressed();
+            }
+        });
+        Tab_profile_Adapter adapter = new Tab_profile_Adapter(this, username, studentUser);
         Pager.setAdapter(adapter);
 
-        // ربط TabLayout مع ViewPager2
         new TabLayoutMediator(tab, Pager, (tabL, position) -> {
             switch (position) {
                 case 0:

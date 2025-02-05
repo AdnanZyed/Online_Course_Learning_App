@@ -1,14 +1,11 @@
 package com.example.onlinecourseampe_learningapp;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import com.example.onlinecourseampe_learningapp.Student;
-import com.example.onlinecourseampe_learningapp.Teacher;
 
 @Entity(
         tableName = "Student_Teacher",
@@ -27,8 +24,8 @@ import com.example.onlinecourseampe_learningapp.Teacher;
                 )
         },
         indices = {
-                @Index(value = "teacherUserName"), // إضافة فهرس هنا
-                @Index(value = "studentUserName") // إضافة فهرس آخر
+                @Index(value = "teacherUserName"),
+                @Index(value = "studentUserName")
         }
 )
 public class Student_Teacher {

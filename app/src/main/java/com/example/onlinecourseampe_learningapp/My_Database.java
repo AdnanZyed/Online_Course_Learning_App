@@ -12,9 +12,12 @@ import androidx.room.TypeConverters;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class, Course.class, Teacher.class, Student_Course.class, Student_Teacher.class, Course_Reviews.class, CourseLessons.class, Message.class,Teacher_Reviews.class}, version = 4, exportSchema = false)
+@Database(entities = {Student.class, Course.class, Teacher.class, Student_Course.class, Student_Teacher.class, Course_Reviews.class, CourseLessons.class, Message.class, Teacher_Reviews.class, StudentLesson.class, Notification.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class My_Database extends RoomDatabase {
+    public abstract StudentLessonDao studentLessonDao();
+
+    public abstract NotificationDao notificationDao();
 
     public abstract Course_Dao courseDao();
 
@@ -32,6 +35,7 @@ public abstract class My_Database extends RoomDatabase {
     public abstract Student_Teacher_Dao studentTeacherDao();
 
     public abstract CourseReviewsDao courseReviewsDao();
+
     public abstract TeacherReviewsDao teacherReviewsDao();
 
 
@@ -40,9 +44,6 @@ public abstract class My_Database extends RoomDatabase {
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(4);
 
 
-    //    public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("PRAGMA foreign_keys=ON;");
-//    }
     static My_Database getDatabase(final Context context) {
 
         if (INSTANCE == null) {

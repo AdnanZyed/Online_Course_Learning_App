@@ -3,12 +3,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="?attr/selectableItemBackground">
+    android:layout_margin="10dp"
+    android:background="@drawable/shape">
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="10dp" />
 
     <LinearLayout
@@ -22,7 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="عنوان الإشعار"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -31,6 +34,6 @@
             android:layout_height="wrap_content"
             android:text="نص الإشعار"
             android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 </LinearLayout>

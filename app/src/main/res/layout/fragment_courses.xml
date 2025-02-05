@@ -11,7 +11,7 @@
 
 
         <ImageView
-            android:id="@+id/back_icon_enroll"
+            android:id="@+id/back_icon_enrollC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -34,14 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="serif"
-            android:text="Enroll Course"
+            android:text="My Courses"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/back_icon_enroll"
-            app:layout_constraintStart_toEndOf="@id/back_icon_enroll"
-            app:layout_constraintTop_toTopOf="@+id/back_icon_enroll" />
+            app:layout_constraintBottom_toBottomOf="@+id/back_icon_enrollC"
+            app:layout_constraintStart_toEndOf="@id/back_icon_enrollC"
+            app:layout_constraintTop_toTopOf="@+id/back_icon_enrollC" />
 
         <!-- TabLayout -->
         <com.google.android.material.tabs.TabLayout
