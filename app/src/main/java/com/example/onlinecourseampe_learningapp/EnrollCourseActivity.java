@@ -30,7 +30,6 @@ public class EnrollCourseActivity extends AppCompatActivity {
         coursed = getIntent().getIntExtra("COURSE_ID", -1);
 
         btn_buy.setText("Enroll Course - $" + price);
-        Log.d("MainActivity_Main", "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + price);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

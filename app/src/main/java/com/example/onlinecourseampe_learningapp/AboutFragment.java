@@ -51,7 +51,6 @@ public class AboutFragment extends Fragment {
         myViewModel.getAllTeacherByUser(teacherUserName).observe(getViewLifecycleOwner(), teacher -> {
 
             if (teacher != null) {
-                // عرض البيانات في الواجهة
                 TextView teacherNameTextView = view.findViewById(R.id.teacher_name1);
                 TextView educationTextView = view.findViewById(R.id.teacher_magor);
                 ImageView teacherImageView = view.findViewById(R.id.imageView4);

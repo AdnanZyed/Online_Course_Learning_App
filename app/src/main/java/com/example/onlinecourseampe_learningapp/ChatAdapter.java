@@ -53,7 +53,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
 
         }
-        // مستمع الضغط على العنصر
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatMessageActivity.class);
             intent.putExtra("studentUsername", student.getStudent_user_name());

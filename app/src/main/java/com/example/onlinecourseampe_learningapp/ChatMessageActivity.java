@@ -55,7 +55,7 @@ public class ChatMessageActivity extends AppCompatActivity {
         if (call != null) {
 
             long timestamp = System.currentTimeMillis();
-            Message message = new Message(User, otherUser, "call", timestamp);
+            Message message = new Message(User, otherUser, "Voice call\n", timestamp);
             myViewModel.insertMessage(message);
 
         }

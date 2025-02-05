@@ -38,7 +38,6 @@ public class Add_New_Course extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_course);
 
-        // ربط العناصر
         etCourseName = findViewById(R.id.et_course_nameA);
         etDescription = findViewById(R.id.et_course_descriptionA);
         etPrice = findViewById(R.id.et_priceA);

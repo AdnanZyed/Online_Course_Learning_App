@@ -32,7 +32,6 @@ public interface Course_Dao {
     @Query("UPDATE Course SET isBookmarked = :isBookmarked WHERE Course_ID = :courseId")
     void updateBookmarkStatus(int courseId, boolean isBookmarked);
 
-    // الاستعلام الجديد للبحث عن الكورس بناءً على الاسم
     @Query("SELECT * FROM Course WHERE Course_NAME LIKE :courseName")
     LiveData<List<Course>> getCourseByName(String courseName);
 

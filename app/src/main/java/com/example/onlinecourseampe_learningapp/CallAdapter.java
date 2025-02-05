@@ -56,7 +56,6 @@ public class CallAdapter extends RecyclerView.Adapter<CallAdapter.ChatViewHolder
 
 
         }
-        // مستمع الضغط على العنصر
         holder.callImage.setOnClickListener(v -> {
             Intent intent = new Intent(context, CallActivity.class);
             intent.putExtra("studentUsername", student.getStudent_user_name());

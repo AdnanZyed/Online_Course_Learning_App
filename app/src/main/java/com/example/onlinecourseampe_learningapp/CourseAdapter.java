@@ -122,7 +122,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         });
 
 
-        // التعامل مع الضغط على العنصر بالكامل
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onCourseClick(course);
@@ -164,14 +163,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     private void showCustomDialog(Course course, byte[] image, String name, String catigories, int prise) {
-        // إنشاء الـ Dialog
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog);
         dialog.setCancelable(true);
 
 
-        // إعداد عناصر الـ Dialog
         TextView mainText = dialog.findViewById(R.id.dialog_main_text1);
         Button viewCourseButton = dialog.findViewById(R.id.btn_view_course1);
         Button cancelButton = dialog.findViewById(R.id.btn_cancel1);
@@ -187,7 +184,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             tv_categorie.setText(catigories);
             tv_course_name.setText(name);
             tv_price.setText(prise + "");
-            // تخصيص النصوص والصورة
             mainText.setText("Remove from Bookmark?");
 
 
