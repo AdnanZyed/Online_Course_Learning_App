@@ -25,7 +25,7 @@ public class MainActivity_sign extends AppCompatActivity {
         binding = ActivityMainSignBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
-//
+////
 //        addSampleTeachers();
 //        addSampleCourses();
 //        addSampleStudents();

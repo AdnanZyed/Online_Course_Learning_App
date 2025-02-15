@@ -59,6 +59,45 @@ public class Sign_up extends AppCompatActivity {
         setContentView(activitySignUpBinding.getRoot());
 
 
+        activitySignUpBinding.eUser.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shap_selected);
+                activitySignUpBinding.ePassword.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.Phone.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.name.setBackgroundResource(R.drawable.shape_non_selected);
+
+            }
+        });
+
+        activitySignUpBinding.ePassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.ePassword.setBackgroundResource(R.drawable.shap_selected);
+                activitySignUpBinding.Phone.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.name.setBackgroundResource(R.drawable.shape_non_selected);
+
+            }
+        });  activitySignUpBinding.Phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.ePassword.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.Phone.setBackgroundResource(R.drawable.shap_selected);
+                activitySignUpBinding.name.setBackgroundResource(R.drawable.shape_non_selected);
+
+            }
+        });  activitySignUpBinding.name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.ePassword.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.Phone.setBackgroundResource(R.drawable.shape_non_selected);
+                activitySignUpBinding.name.setBackgroundResource(R.drawable.shap_selected);
+
+            }
+        });
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
         editor = sharedPreferences.edit();

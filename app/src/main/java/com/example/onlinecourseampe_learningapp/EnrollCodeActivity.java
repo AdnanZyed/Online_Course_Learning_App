@@ -139,6 +139,11 @@ public class EnrollCodeActivity extends AppCompatActivity {
                             myViewModel.insertStudentCourse(studentCourse);
                             Student_Teacher studentTeacher = new Student_Teacher(0, userName, teacher_USER_Name);
                             myViewModel.insertStudentTeacher(studentTeacher);
+                            Intent intent=new Intent(EnrollCodeActivity.this,LessonsActivity.class);
+                            intent.putExtra("COURSE_ID",courseId);
+                            intent.putExtra("USER",userName);
+
+                            startActivity(intent);
                             Toast.makeText(this, "تم الشراء بنجاح .", Toast.LENGTH_SHORT).show();
                             myViewModel.addNotification("Payment Successful!", "You have made a course payment", R.drawable.connected_card);
 

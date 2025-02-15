@@ -21,28 +21,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.squareup.picasso.Picasso;
-
-import org.jetbrains.annotations.Nullable;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
 public class UpdateCourse extends AppCompatActivity {
     private static final int REQUEST_CODE_IMAGE_A = 1;
     private static final int REQUEST_CODE_IMAGE_C = 2;

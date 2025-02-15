@@ -63,6 +63,22 @@ public class ActivityMainSignIn extends AppCompatActivity {
             }
         });
 
+        binding.eUserIn.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                binding.eUserIn.setBackgroundResource(R.drawable.shap_selected);
+                binding.ePasswordIn.setBackgroundResource(R.drawable.shape_non_selected);
+
+            }
+        }); binding.ePasswordIn.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                binding.ePasswordIn.setBackgroundResource(R.drawable.shap_selected);
+                binding.eUserIn.setBackgroundResource(R.drawable.shape_non_selected);
+
+            }
+        });
+
 
         binding.SignIn.setOnClickListener(new View.OnClickListener() {
 
@@ -91,7 +107,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
 
                 }
                 myViewModel.getAllStudentByUser(EUserIn).observe(ActivityMainSignIn.this, students -> {
-                    if (students != null && !students.isEmpty()) {
+                    if (students != null && !students.isEmpty()&&EUserIn.equals("admin") &&EPasswordIn.equals("admin")) {
                         Student student = students.get(0);
                         student_name_user = student.getStudent_user_name().toString();
                         student_password = student.getStudent_Password().toString();

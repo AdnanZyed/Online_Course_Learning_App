@@ -35,7 +35,6 @@ public class ForgetPassword1 extends AppCompatActivity {
         createNotificationChannel();
         requestNotificationPermission();
 
-        Toast.makeText(this, "a", Toast.LENGTH_SHORT).show();
         Button s = findViewById(R.id.Sign_in1);
 
         imageView.setOnClickListener(new View.OnClickListener() {

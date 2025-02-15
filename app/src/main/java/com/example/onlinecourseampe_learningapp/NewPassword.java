@@ -39,6 +39,25 @@ public class NewPassword extends AppCompatActivity {
         ImageView eye1 = findViewById(R.id.ic_eye_off11);
 
         imageView=findViewById(R.id.back_in11);
+
+        pass1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                pass1.setBackgroundResource(R.drawable.shap_selected);
+                pass2.setBackgroundResource(R.drawable.shape_non_selected);
+
+            }
+        });
+
+        pass2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                pass1.setBackgroundResource(R.drawable.shape_non_selected);
+                pass2.setBackgroundResource(R.drawable.shap_selected);
+
+            }
+        });
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

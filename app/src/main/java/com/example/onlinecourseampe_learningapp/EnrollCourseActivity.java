@@ -1,5 +1,6 @@
 package com.example.onlinecourseampe_learningapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +15,11 @@ public class EnrollCourseActivity extends AppCompatActivity {
     private My_View_Model myViewModel;
     String userName;
     int price;
+    private boolean is;
+    private boolean is2;
     int coursed;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +29,28 @@ public class EnrollCourseActivity extends AppCompatActivity {
         Button btn_cart = findViewById(R.id.add_cart);
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
+
         userName = getIntent().getStringExtra("USER");
         price = getIntent().getIntExtra("PRICE", -1);
         coursed = getIntent().getIntExtra("COURSE_ID", -1);
+//        myViewModel.isStudentCourseExists(userName, coursed, true).observe((EnrollCourseActivity.this), isHad -> {
+//            is = isHad;
+//        });
+        myViewModel.isStudentCourseExistsC(userName, coursed, true).observe((EnrollCourseActivity.this), isHadc -> {
+            if (isHadc) {
+                btn_cart.setBackgroundResource(R.drawable.delete_btn);
+                btn_cart.setTextColor(R.color.white);
+                btn_cart.setText("Delete Card");
+            }
+
+
+        });
+//        if (is) {
+//            btn_cart.setVisibility(View.GONE);
+//            btn_buy.setVisibility(View.GONE);
+//
+//        }
+
 
         btn_buy.setText("Enroll Course - $" + price);
 
@@ -50,6 +73,7 @@ public class EnrollCourseActivity extends AppCompatActivity {
         });
 
         btn_cart.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
@@ -60,14 +84,20 @@ public class EnrollCourseActivity extends AppCompatActivity {
                             if (!isHadc && !isHadb && !isHad) {
                                 Student_Course studentCourse = new Student_Course(userName, coursed, false, false, true, 0);
                                 myViewModel.insertStudentCourse(studentCourse);
-                            } else if (isHadb) {
+                                btn_cart.setBackgroundResource(R.drawable.delete_btn);
+                                btn_cart.setTextColor(R.color.white);
+                                btn_cart.setText("Delete Card");
+                            } else if (isHadb && !isHadc) {
                                 Student_Course studentCourse = new Student_Course(userName, coursed, true, false, true, 0);
-
+                                btn_cart.setBackgroundResource(R.drawable.delete_btn);
+                                btn_cart.setTextColor(R.color.white);
+                                btn_cart.setText("Delete Card");
                                 myViewModel.updateCourseStudent(studentCourse);
-                            } else {
-
-                                Log.d("MainActivity_Main", "jl hqhtji hgn hgsgm lsfrh " + price);
-
+                            } else if (isHadc&&!isHadb&&!isHad) {
+                                myViewModel.deleteStudentCourseByUserAndCourse(userName,coursed);
+                                btn_cart.setBackgroundResource(R.drawable.btn_cart);
+                                btn_cart.setTextColor(R.color.blue);
+                                btn_cart.setText("Add New Card");
 
                             }
 

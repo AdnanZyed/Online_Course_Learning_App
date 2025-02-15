@@ -30,7 +30,6 @@ public class Main_Activity_part extends AppCompatActivity {
         items.add(new Part_Item(R.drawable.step1, "We orovide the best learning course & great mentors!"));
         items.add(new Part_Item(R.drawable.step2, "learn anytime and anywhere easily and conveniently"));
         items.add(new Part_Item(R.drawable.step3, "Let's improve your skills together with Elera right now!"));
-
         adapter = new Part_Adapter(items);
         viewPager.setAdapter(adapter);
 

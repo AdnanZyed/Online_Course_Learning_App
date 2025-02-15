@@ -83,16 +83,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- شاشة المشاركة (بعد الترحيب) -->
+        </activity>
         <activity
             android:name=".Main_Activity_part"
-            android:exported="true" /> <!-- شاشة تسجيل الدخول -->
+            android:exported="true" />
         <activity
             android:name=".MainActivity_sign"
-            android:exported="false" /> <!-- شاشة الاشتراك -->
+            android:exported="false" />
         <activity
             android:name=".Sign_up"
-            android:exported="false" /> <!-- شاشة تسجيل الدخول البديلة -->
+            android:exported="false" />
         <activity android:name=".ActivityMainSignIn" />
     </application>
 
