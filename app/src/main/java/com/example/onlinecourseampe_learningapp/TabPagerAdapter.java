@@ -45,6 +45,7 @@ public class TabPagerAdapter extends FragmentStateAdapter {
                 Bundle bundle4 = new Bundle();
                 bundle4.putInt("COURSE_ID", courseId);
                 bundle4.putString("USER", user);
+                bundle4.putString("LOCK", user);
 
                 lessonsFragment.setArguments(bundle4);
                 return lessonsFragment;

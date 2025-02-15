@@ -107,7 +107,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
 
                 }
                 myViewModel.getAllStudentByUser(EUserIn).observe(ActivityMainSignIn.this, students -> {
-                    if (students != null && !students.isEmpty()&&EUserIn.equals("admin") &&EPasswordIn.equals("admin")) {
+                    if (students != null && !students.isEmpty()) {
                         Student student = students.get(0);
                         student_name_user = student.getStudent_user_name().toString();
                         student_password = student.getStudent_Password().toString();
@@ -128,7 +128,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
                         }
                     } else {
 
-                        Toast.makeText(ActivityMainSignIn.this, "اسم المستخدم أو كلمة المرور غير صحيحة", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityMainSignIn.this, "اسم المستخدم أو كلمة المرور غير صحيح", Toast.LENGTH_SHORT).show();
 
 
                     }

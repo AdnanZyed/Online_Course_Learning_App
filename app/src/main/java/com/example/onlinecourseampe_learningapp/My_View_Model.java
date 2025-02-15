@@ -204,6 +204,9 @@ public class My_View_Model extends AndroidViewModel {
 
     public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId) {
         return repository.deleteStudentCourseByUserAndCourse(studentUsername, courseId);
+
+    }   public LiveData<Void> delete1StudentCourseByUserAndCourse(String studentUsername, int courseId) {
+        return repository.delete1StudentCourseByUserAndCourse(studentUsername, courseId);
     }
 
     public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
@@ -260,6 +263,8 @@ public class My_View_Model extends AndroidViewModel {
 
     public void insertStudentCourse(Student_Course studentCourse) {
         repository.insertStudentCourse(studentCourse);
+    } public void deleteStudentCourse(Student_Course studentCourse) {
+        repository.deleteStudentCourse(studentCourse);
     }
 
     public void updateCourseStudent(Student_Course studentCourse) {

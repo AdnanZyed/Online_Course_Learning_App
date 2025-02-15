@@ -23,16 +23,19 @@ public interface Student_Course_Dao {
     int isStudentCourseExistsB(String studentUsername, int courseId, boolean isBookmark);
 
     @Update
-    Void updateCourseStudent(Student_Course studentCourse);
+    void updateCourseStudent(Student_Course studentCourse);
 
     @Insert
-    Void insertStudentCourse(Student_Course studentCourse);
+    void insertStudentCourse(Student_Course studentCourse);
 
     @Delete
     void deleteStudentCourse(Student_Course studentCourse);
 
     @Query("UPDATE StudentCourse SET isBookmark = 0 WHERE Student_user_name = :studentUsername AND Course_ID = :courseId AND isBookmark= 1")
     void deleteStudentCourseByUserAndCourse(String studentUsername, int courseId);
+
+    @Query("DELETE FROM StudentCourse WHERE Student_user_name = :studentUsername AND Course_ID = :courseId AND isBookmark= 1")
+    void delete1StudentCourseByUserAndCourse(String studentUsername, int courseId);
 
     @Query("UPDATE Course SET isBookmarked = :isBookmarked WHERE Course_ID = :courseId")
     void updateBookmarkStatus(int courseId, boolean isBookmarked);

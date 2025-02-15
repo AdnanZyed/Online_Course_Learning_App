@@ -39,6 +39,7 @@ public class LessonsFragment extends Fragment {
     int currentRating = 0;
 
     String user;
+    String lock;
     int i;
 
     @Override
@@ -50,6 +51,7 @@ public class LessonsFragment extends Fragment {
 
             coursId = getArguments().getInt("COURSE_ID");
             user = getArguments().getString("USER");
+            lock = getArguments().getString("LOCK");
 
         }
         RecyclerView recyclerView = view.findViewById(R.id.rv_lessons);
@@ -97,7 +99,7 @@ public class LessonsFragment extends Fragment {
         myViewModel.getLessonsByCourseId(coursId).observe(getViewLifecycleOwner(), lessons -> {
 
 
-            CourseLessonsAdapter adapter = new CourseLessonsAdapter(myViewModel, lessons, user, requireContext());
+            CourseLessonsAdapter adapter = new CourseLessonsAdapter(myViewModel, lessons, user, requireContext(),lock);
             recyclerView.setAdapter(adapter);
 
         });

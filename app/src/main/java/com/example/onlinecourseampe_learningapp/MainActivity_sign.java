@@ -25,7 +25,7 @@ public class MainActivity_sign extends AppCompatActivity {
         binding = ActivityMainSignBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
-////
+
 //        addSampleTeachers();
 //        addSampleCourses();
 //        addSampleStudents();
@@ -139,17 +139,17 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes1 = convertImageToByteArray(bitmap1);
         Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.d);
         byte[] imageBytes2 = convertImageToByteArray(bitmap2);
-        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i10);
+        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y1);
         byte[] imageBytes3 = convertImageToByteArray(bitmap3);
         Bitmap bitmap4 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c1);
         byte[] imageBytes4 = convertImageToByteArray(bitmap4);
-        Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c2);
+        Bitmap bitmap5 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y2);
         byte[] imageBytes5 = convertImageToByteArray(bitmap5);
-        Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i3);
+        Bitmap bitmap6 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y4);
         byte[] imageBytes6 = convertImageToByteArray(bitmap6);
-        Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i4);
+        Bitmap bitmap7 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y5);
         byte[] imageBytes7 = convertImageToByteArray(bitmap7);
-        Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i2);
+        Bitmap bitmap8 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y6);
         byte[] imageBytes8 = convertImageToByteArray(bitmap8);
         Bitmap bitmap9 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c6);
         byte[] imageBytes9 = convertImageToByteArray(bitmap9);
@@ -157,7 +157,7 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes10 = convertImageToByteArray(bitmap10);
         Bitmap bitmap11 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c8);
         byte[] imageBytes11 = convertImageToByteArray(bitmap11);
-        Bitmap bitmap12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c3);
+        Bitmap bitmap12 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y7);
         byte[] imageBytes12 = convertImageToByteArray(bitmap12);
         Bitmap bitmap13 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c4);
         byte[] imageBytes13 = convertImageToByteArray(bitmap13);
@@ -171,7 +171,7 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes17 = convertImageToByteArray(bitmap17);
         Bitmap bitmap18 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c15);
         byte[] imageBytes18 = convertImageToByteArray(bitmap18);
-        Bitmap bitmap19 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c16);
+        Bitmap bitmap19 = BitmapFactory.decodeResource(this.getResources(), R.drawable.y8);
         byte[] imageBytes19 = convertImageToByteArray(bitmap19);
         Bitmap bitmap20 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c17);
         byte[] imageBytes20 = convertImageToByteArray(bitmap20);
@@ -189,7 +189,7 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes26 = convertImageToByteArray(bitmap26);
         Bitmap bitmap27 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c24);
         byte[] imageBytes27 = convertImageToByteArray(bitmap27);
-        Bitmap bitmap28 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c25);
+        Bitmap bitmap28 = BitmapFactory.decodeResource(this.getResources(), R.drawable.i10);
         byte[] imageBytes28 = convertImageToByteArray(bitmap28);
         Bitmap bitmap29 = BitmapFactory.decodeResource(this.getResources(), R.drawable.c26);
         byte[] imageBytes29 = convertImageToByteArray(bitmap29);

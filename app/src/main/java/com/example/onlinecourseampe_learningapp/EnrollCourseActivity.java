@@ -93,8 +93,10 @@ public class EnrollCourseActivity extends AppCompatActivity {
                                 btn_cart.setTextColor(R.color.white);
                                 btn_cart.setText("Delete Card");
                                 myViewModel.updateCourseStudent(studentCourse);
-                            } else if (isHadc&&!isHadb&&!isHad) {
-                                myViewModel.deleteStudentCourseByUserAndCourse(userName,coursed);
+                            } else if (isHadc && !isHadb && !isHad) {
+
+                                Student_Course studentCourse = new Student_Course(userName, coursed, false, false, false, 0);
+                                myViewModel.deleteStudentCourse(studentCourse);
                                 btn_cart.setBackgroundResource(R.drawable.btn_cart);
                                 btn_cart.setTextColor(R.color.blue);
                                 btn_cart.setText("Add New Card");

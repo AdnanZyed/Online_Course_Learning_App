@@ -14,13 +14,13 @@ import java.util.List;
 
 public interface Teacher_Dao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    Void insertTeacher(Teacher teacher);
+    void insertTeacher(Teacher teacher);
 
     @Update
-    Void updateTeacher(Teacher teacher);
+    void updateTeacher(Teacher teacher);
 
     @Delete
-    Void deleteTeacher(Teacher teacher);
+    void deleteTeacher(Teacher teacher);
 
     @Query("SELECT * FROM Teacher WHERE Teatur_name LIKE :teaturName")
     LiveData<List<Teacher>> getTeacherByName(String teaturName);

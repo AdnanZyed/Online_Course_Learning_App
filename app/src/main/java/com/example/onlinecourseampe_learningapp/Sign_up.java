@@ -3,12 +3,8 @@ package com.example.onlinecourseampe_learningapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +21,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +33,7 @@ public class Sign_up extends AppCompatActivity {
     private String mVerificationId;
     private String student_name_user;
     private Student student;
+    private ArrayList<Student> students1;
     private String ePasswordIn;
     private String PhoneIn;
     private LiveData<List<Student>> studentU;
@@ -79,7 +77,8 @@ public class Sign_up extends AppCompatActivity {
                 activitySignUpBinding.name.setBackgroundResource(R.drawable.shape_non_selected);
 
             }
-        });  activitySignUpBinding.Phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        });
+        activitySignUpBinding.Phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shape_non_selected);
@@ -88,7 +87,8 @@ public class Sign_up extends AppCompatActivity {
                 activitySignUpBinding.name.setBackgroundResource(R.drawable.shape_non_selected);
 
             }
-        });  activitySignUpBinding.name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        });
+        activitySignUpBinding.name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 activitySignUpBinding.eUser.setBackgroundResource(R.drawable.shape_non_selected);
@@ -195,12 +195,11 @@ public class Sign_up extends AppCompatActivity {
                     activitySignUpBinding.Phone.setError("رقم الهاتف يجب أن يتكون من 10 أرقام");
                     return;
                 }
+
                 myViewModel.getAllStudentByUser(eUserIn).observe(Sign_up.this, students -> {
 
-                    if (students != null) {
-                        Log.d("DEBUG", "عدد المستخدمين بنفس الاسم: " + students.size()); // لمعرفة هل هناك بيانات أم لا
-                    }
-                    if (students == null || students.isEmpty()) {
+
+                    if ( students.isEmpty()) {
                         int phoneIn = Integer.parseInt(PhoneIn);
                         student = new Student(eUserIn, ePasswordIn, phoneIn, 1234, nameIn, null, "");
                         myViewModel.insertStudent(student);
@@ -213,11 +212,15 @@ public class Sign_up extends AppCompatActivity {
                         myViewModel.addNotification("Account Setup Successful!", "Your account has been created!", R.drawable.created);
 
 
-                    } else {
+                    }
+                   else {
                         activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقام");
+
                     }
 
+
                 });
+
             }
 
 

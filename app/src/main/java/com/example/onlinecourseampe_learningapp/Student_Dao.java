@@ -15,10 +15,10 @@ import java.util.List;
 
 public interface Student_Dao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    Void insertStudent(Student student);
+    void insertStudent(Student student);
 
     @Update
-    Void updateStudent(Student student);
+    void updateStudent(Student student);
 
     @Query("SELECT * FROM Student WHERE Student_user_name != :currentUsername")
     LiveData<List<Student>> getAllStudentsExcept(String currentUsername);

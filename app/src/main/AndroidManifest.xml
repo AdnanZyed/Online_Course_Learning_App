@@ -36,6 +36,10 @@
             android:name=".ChatMessageActivity"
             android:exported="false" />
         <activity
+            android:name=".UpdateCourse"
+            android:exported="false" />
+
+        <activity
             android:name=".LessonsActivity"
             android:exported="false" />
         <activity

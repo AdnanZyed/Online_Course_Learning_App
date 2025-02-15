@@ -342,6 +342,10 @@ public class My_Repository {
         My_Database.databaseWriteExecutor.execute(() -> {
             studentCourseDao.insertStudentCourse(studentCourse);
         });
+    } public void deleteStudentCourse(Student_Course studentCourse) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            studentCourseDao.deleteStudentCourse(studentCourse);
+        });
     }
 
     public void updateCourseStudent(Student_Course studentCourse) {
@@ -355,6 +359,15 @@ public class My_Repository {
 
         executorService.execute(() -> {
             studentCourseDao.deleteStudentCourseByUserAndCourse(studentUsername, courseId);
+            result.postValue(null);
+        });
+        return result;
+
+    }    public LiveData<Void> delete1StudentCourseByUserAndCourse(String studentUsername, int courseId) {
+        MutableLiveData<Void> result = new MutableLiveData<>();
+
+        executorService.execute(() -> {
+            studentCourseDao.delete1StudentCourseByUserAndCourse(studentUsername, courseId);
             result.postValue(null);
         });
         return result;
