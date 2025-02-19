@@ -40,7 +40,7 @@ public class MainActivity_Admin extends AppCompatActivity {
         binding.Card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_Admin.this, UpdateCourse.class);
+                Intent intent = new Intent(MainActivity_Admin.this, UpdateCourse1.class);
                 startActivity(intent);
             }
         });

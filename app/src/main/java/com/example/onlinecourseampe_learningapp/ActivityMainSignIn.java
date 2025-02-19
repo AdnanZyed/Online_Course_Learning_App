@@ -56,7 +56,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
 
                     }
                     else {
-                        Toast.makeText(ActivityMainSignIn.this, "هذا المستخدم غير موجود", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityMainSignIn.this, "This user does not exist!", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -90,13 +90,13 @@ public class ActivityMainSignIn extends AppCompatActivity {
 
 
                 if (EUserIn.isEmpty()) {
-                    binding.eUserIn.setError("الرجاء إدخال اسم المستخدم");
+                    binding.eUserIn.setError("Please enter your username!");
                     binding.eUserIn.requestFocus();
                     return;
                 }
 
                 if (EPasswordIn.isEmpty()) {
-                    binding.ePasswordIn.setError("الرجاء إدخال كلمة المرور");
+                    binding.ePasswordIn.setError("Please enter password");
                     binding.ePasswordIn.requestFocus();
                     return;
                 }
@@ -122,13 +122,13 @@ public class ActivityMainSignIn extends AppCompatActivity {
                             startActivity(intent);
                         } else {
 
-                            Toast.makeText(ActivityMainSignIn.this, "اسم المستخدم أو كلمة المرور غير صحيحة", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityMainSignIn.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
 
 
                         }
                     } else {
 
-                        Toast.makeText(ActivityMainSignIn.this, "اسم المستخدم أو كلمة المرور غير صحيح", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityMainSignIn.this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
 
 
                     }

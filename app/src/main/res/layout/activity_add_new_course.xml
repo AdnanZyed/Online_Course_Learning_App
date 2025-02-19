@@ -90,9 +90,9 @@
                 android:id="@+id/btn_load_image_from_urlA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
                 android:text="Load Image from URL"
-                android:textColor="@color/white"
+                android:background="@drawable/btn_add"
+                android:textColor="@color/blue"
                 android:layout_marginTop="15dp" />
 
             <ImageView
@@ -107,10 +107,9 @@
                 android:id="@+id/btn_select_imageA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
                 android:text="Choose Image from Gallery"
-                android:textColor="@color/white"
-                android:layout_marginTop="8dp" />
+                android:background="@drawable/btn_add"
+                android:textColor="@color/blue"                android:layout_marginTop="8dp" />
             <EditText
                 android:id="@+id/et_image_urlC"
                 android:layout_width="match_parent"
@@ -127,9 +126,8 @@
                 android:id="@+id/btn_load_image_from_urlC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
-                android:text="Load Image from URL"
-                android:textColor="@color/white"
+                android:background="@drawable/btn_add"
+                android:textColor="@color/blue"                android:text="Load Image from URL"
                 android:layout_marginTop="15dp" />
 
             <ImageView
@@ -146,9 +144,8 @@
                 android:id="@+id/btn_select_imageC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
-                android:text="Choose Image from Gallery"
-                android:textColor="@color/white"
+                android:background="@drawable/btn_add"
+                android:textColor="@color/blue"                android:text="Choose Image from Gallery"
                 android:layout_marginTop="8dp" />
 
             <Button

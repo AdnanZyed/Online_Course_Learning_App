@@ -2,6 +2,7 @@ package com.example.onlinecourseampe_learningapp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,10 +31,10 @@ public class UpdateCourse extends AppCompatActivity {
     private ImageView ivCourseImage, iv_course_imageC;
     private Button btnSelectImage, btn_select_imageC, btnSaveCourse, btnLoadImageFromUrl, btn_load_image_from_urlC;
     private byte[] courseImageBytes;
-    private  String NAME;
-    private  byte[] Image;
+    private String NAME;
+    private byte[] Image;
     private String Price;
-    private   String Categorie;
+    private String Categorie;
     private String Description;
     private byte[] Picture;
     private String USER_Name;
@@ -65,12 +66,39 @@ public class UpdateCourse extends AppCompatActivity {
 
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
+        Intent intent = getIntent();
+        courseId1.setText(intent.getIntExtra("ID", -1) + "");
+        etPrice.setText(intent.getIntExtra("Price", -1) + "");
+       // spCategory.setTextAlignment(Integer.parseInt(intent.getStringExtra("Categorie")));
+
+
+        etCourseName.setText(intent.getStringExtra("NAME"));
+        etTeacherUsername.setText(intent.getStringExtra("USER_Name"));
+        etDescription.setText(intent.getStringExtra("Description"));
+
+
+        iv_course_imageC.setImageResource(R.drawable.certificate);
+
+
+        byte[] byteArray1 =  intent.getByteArrayExtra("Image");
+
+
+        if (byteArray1 != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray1, 0, byteArray1.length);
+
+            ivCourseImage.setImageBitmap(bitmap);
+        }
+
+
+
+
         btnSelectImage.setOnClickListener(v -> selectImage(REQUEST_CODE_IMAGE_A));
         btn_select_imageC.setOnClickListener(v -> selectImage(REQUEST_CODE_IMAGE_C));
         btnLoadImageFromUrl.setOnClickListener(v -> loadImageFromUrl(etImageUrl, ivCourseImage, true));
         btn_load_image_from_urlC.setOnClickListener(v -> loadImageFromUrl(et_image_urlC, iv_course_imageC, false));
         btnSaveCourse.setOnClickListener(v -> saveCourse());
     }
+
 
     private void selectImage(int requestCode) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -80,7 +108,7 @@ public class UpdateCourse extends AppCompatActivity {
     private void loadImageFromUrl(EditText urlField, ImageView imageView, boolean isMainImage) {
         String imageUrl = urlField.getText().toString().trim();
         if (imageUrl.isEmpty()) {
-            Toast.makeText(this, "يرجى إدخال رابط الصورة", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter the image link", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -102,7 +130,7 @@ public class UpdateCourse extends AppCompatActivity {
 
                     @Override
                     public void onError(Exception e) {
-                        Toast.makeText(UpdateCourse.this, "فشل تحميل الصورة", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateCourse.this, "Image failed to load", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -136,13 +164,13 @@ public class UpdateCourse extends AppCompatActivity {
         myViewModel.getAllCoursesById(Integer.parseInt(course_Id)).observe(UpdateCourse.this, courses -> {
 
 
-             NAME = courses.get(0).getCourse_NAME();
-             Image = courses.get(0).getImage();
-             Price = courses.get(0).getPrice()+"";
-             Categorie = courses.get(0).getCategorie();
-             Description = courses.get(0).getDescription();
-             Picture = courses.get(0).getProfilePicture();
-             USER_Name = courses.get(0).getTeacher_USER_Name();
+            NAME = courses.get(0).getCourse_NAME();
+            Image = courses.get(0).getImage();
+            Price = courses.get(0).getPrice() + "";
+            Categorie = courses.get(0).getCategorie();
+            Description = courses.get(0).getDescription();
+            Picture = courses.get(0).getProfilePicture();
+            USER_Name = courses.get(0).getTeacher_USER_Name();
 
 
         });
@@ -150,48 +178,49 @@ public class UpdateCourse extends AppCompatActivity {
 
         String courseName = etCourseName.getText().toString().trim();
 
-        if (courseImageBytes == null){
+        if (courseImageBytes == null) {
 
-            courseImageBytes=Image;
-        }   if (courseImageBytesC == null){
+            courseImageBytes = Image;
+        }
+        if (courseImageBytesC == null) {
 
-            courseImageBytesC=Picture;
+            courseImageBytesC = Picture;
         }
         if (courseName.isEmpty()) {
-            courseName =NAME;
+            courseName = NAME;
 
         }
         String description = etDescription.getText().toString().trim();
 
         if (description.isEmpty()) {
-            description =Description;
+            description = Description;
 
         }
         String price = etPrice.getText().toString().trim();
         if (price.isEmpty()) {
-            price =Price;
+            price = Price;
 
         }
 
         String category = spCategory.getSelectedItem().toString();
         if (category.isEmpty()) {
-            category =Categorie;
+            category = Categorie;
 
         }
         String teacherUsername = etTeacherUsername.getText().toString().trim();
         if (teacherUsername.isEmpty()) {
-            teacherUsername =USER_Name;
+            teacherUsername = USER_Name;
 
         }
         if (course_Id.isEmpty()) {
-            Toast.makeText(this, "يرجى إدخال ID الكورس ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your course ID ", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Course course = new Course(Integer.parseInt(course_Id), courseName, courseImageBytes, Integer.parseInt(price), category, description, null, courseImageBytesC, false, false, false, teacherUsername, null, 0, 0);
 
         myViewModel.updateCourse(course);
-        Toast.makeText(this, "تم حفظ الكورس بنجاح", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "The course has been saved successfully", Toast.LENGTH_SHORT).show();
         myViewModel.addNotification("Today's Special Offers", "You get a special promo today!", R.drawable.offered);
         myViewModel.addNotification("New Category Courses!", "Now the 3D design course is available", R.drawable.offered1);
 

@@ -145,54 +145,54 @@ public class Sign_up extends AppCompatActivity {
 
 
                 if (eUserIn.isEmpty()) {
-                    activitySignUpBinding.eUser.setError("اسم المستخدم مطلوب");
+                    activitySignUpBinding.eUser.setError("Username required");
                     return;
                 }
 
                 if (ePasswordIn.isEmpty()) {
-                    activitySignUpBinding.ePassword.setError("كلمة المرور مطلوبة");
+                    activitySignUpBinding.ePassword.setError("Password required");
                     return;
                 }
 
                 if (eUserIn.length() < 3 || eUserIn.length() > 30) {
-                    activitySignUpBinding.eUser.setError("اسم المستخدم يجب أن يكون بين 3 و 20 حرفًا");
+                    activitySignUpBinding.eUser.setError("Username must be between 3 and 20 characters");
                     return;
                 }
 
                 if (!eUserIn.matches("^[a-zA-Z0-9@#$%^&+=!_]+$")) {
-                    activitySignUpBinding.eUser.setError("اسم المستخدم يجب أن يحتوي فقط على حروف وأرقام");
+                    activitySignUpBinding.eUser.setError("The user name must contain only letters and numbers");
                     return;
                 }
 
                 if (ePasswordIn.length() < 8) {
-                    activitySignUpBinding.ePassword.setError("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
+                    activitySignUpBinding.ePassword.setError("Password must be at least 8 characters");
                     return;
                 }
 
                 String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
                 if (!ePasswordIn.matches(passwordPattern)) {
-                    activitySignUpBinding.ePassword.setError("كلمة المرور يجب أن تحتوي على حرف كبير وصغير ورقم ورمز خاص");
+                    activitySignUpBinding.ePassword.setError("The password must contain an uppercase and lowercase letter, a number, and a special symbol\n");
                     return;
                 }
 
                 if (nameIn.isEmpty()) {
-                    activitySignUpBinding.name.setError("الاسم مطلوب");
+                    activitySignUpBinding.name.setError("Name required");
                     return;
                 }
 
                 if (PhoneIn.isEmpty()) {
-                    activitySignUpBinding.Phone.setError("رقم الهاتف مطلوب");
+                    activitySignUpBinding.Phone.setError("Phone number required");
                     return;
                 }
 
 
                 if (!PhoneIn.matches("^[0-9]+$")) {
-                    activitySignUpBinding.Phone.setError("الرجاء إدخال رقم هاتف صحيح");
+                    activitySignUpBinding.Phone.setError("Please enter a valid phone number");
                     return;
                 }
 
                 if (PhoneIn.length() != 10) {
-                    activitySignUpBinding.Phone.setError("رقم الهاتف يجب أن يتكون من 10 أرقام");
+                    activitySignUpBinding.Phone.setError("The phone number must consist of 10 digits");
                     return;
                 }
 
@@ -214,7 +214,7 @@ public class Sign_up extends AppCompatActivity {
 
                     }
                    else {
-                        activitySignUpBinding.eUser.setError("اسم المستخدم تم استخدامه مسبقام");
+                        activitySignUpBinding.eUser.setError("The username has already been used");
 
                     }
 
@@ -295,7 +295,7 @@ public class Sign_up extends AppCompatActivity {
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(Sign_up.this, "فشل التحقق: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Sign_up.this, "Verification failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

@@ -1,8 +1,11 @@
 package com.example.onlinecourseampe_learningapp;
 
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -66,7 +69,6 @@ public class StudentsProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_students_profile, container, false);
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
@@ -82,6 +84,19 @@ public class StudentsProfileFragment extends Fragment {
         BtnEditName = view.findViewById(R.id.btnEditName);
         BtnEditBio = view.findViewById(R.id.btnEditBio);
         user = getArguments().getString("USER_NAME");
+
+        ImageView signOutButton = view.findViewById(R.id.sign_out);
+        signOutButton.setOnClickListener(v -> {
+            SharedPreferences preferences = requireActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.apply();
+
+            Intent intent = new Intent(requireActivity(), ActivityMainSignIn.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         myViewModel.getisRegisterCoursesByStudent1(user).observe(getViewLifecycleOwner(), studentCourses -> {
             List<Integer> courseIds = new ArrayList<>();

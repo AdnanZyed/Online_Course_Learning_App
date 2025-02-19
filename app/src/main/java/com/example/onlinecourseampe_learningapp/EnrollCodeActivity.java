@@ -95,10 +95,10 @@ public class EnrollCodeActivity extends AppCompatActivity {
                         myViewModel.addNotification("Credit Card Connected!", "Credit Card has been linked!", R.drawable.connected_card);
 
                     } else {
-                        Toast.makeText(this, "الرقم لا يتطابق " + otpCode, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "The number does not match" + otpCode, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(this, "لم يتم العثور على بيانات الطالب.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No student data found.", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -144,7 +144,7 @@ public class EnrollCodeActivity extends AppCompatActivity {
                             intent.putExtra("USER",userName);
 
                             startActivity(intent);
-                            Toast.makeText(this, "تم الشراء بنجاح .", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Purchase completed successfully.", Toast.LENGTH_SHORT).show();
                             myViewModel.addNotification("Payment Successful!", "You have made a course payment", R.drawable.connected_card);
 
 
@@ -174,7 +174,7 @@ public class EnrollCodeActivity extends AppCompatActivity {
         if (window != null) {
             WindowManager.LayoutParams params = window.getAttributes();
             window.setAttributes(params);
-            window.setBackgroundDrawableResource(android.R.color.transparent); // إزالة الخلفية الافتراضية
+            window.setBackgroundDrawableResource(android.R.color.transparent);
             window.setBackgroundDrawableResource(R.drawable.rounded_dialog_background);
 
         }

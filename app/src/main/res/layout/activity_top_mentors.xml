@@ -84,15 +84,17 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="match_parent"
-        android:visibility="gone"
 
+        android:visibility="gone"
         android:layout_height="320dp"
         android:background="@drawable/img_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.157" />
 
     <TextView
         android:id="@+id/found"
@@ -114,7 +116,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:visibility="gone"
 
         android:padding="20dp"
         android:text="Sorry, the keyword you entered cannot be
@@ -123,6 +124,7 @@ another keyword."
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/found" />

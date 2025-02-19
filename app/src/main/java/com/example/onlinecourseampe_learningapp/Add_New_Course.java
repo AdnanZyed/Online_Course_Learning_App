@@ -72,7 +72,7 @@ public class Add_New_Course extends AppCompatActivity {
     private void loadImageFromUrl(EditText urlField, ImageView imageView, boolean isMainImage) {
         String imageUrl = urlField.getText().toString().trim();
         if (imageUrl.isEmpty()) {
-            Toast.makeText(this, "يرجى إدخال رابط الصورة", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter the image link", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -94,7 +94,7 @@ public class Add_New_Course extends AppCompatActivity {
 
                     @Override
                     public void onError(Exception e) {
-                        Toast.makeText(Add_New_Course.this, "فشل تحميل الصورة", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Add_New_Course.this, "Image failed to load", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -130,14 +130,14 @@ public class Add_New_Course extends AppCompatActivity {
         String teacherUsername = etTeacherUsername.getText().toString().trim();
 
         if (courseName.isEmpty() || description.isEmpty() || teacherUsername.isEmpty() || courseImageBytes == null) {
-            Toast.makeText(this, "يرجى إدخال جميع الحقول", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Course course = new Course(0, courseName, courseImageBytes, price, category, description, null, courseImageBytesC, false, false, false, teacherUsername, null, 0, 0);
 
         myViewModel.insertCourse(course);
-        Toast.makeText(this, "تم حفظ الكورس بنجاح", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "The course has been saved successfully", Toast.LENGTH_SHORT).show();
         myViewModel.addNotification("Today's Special Offers", "You get a special promo today!", R.drawable.offered);
         myViewModel.addNotification("New Category Courses!", "Now the 3D design course is available", R.drawable.offered1);
 

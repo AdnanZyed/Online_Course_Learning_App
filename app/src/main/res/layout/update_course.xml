@@ -18,13 +18,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- اسم الكورس -->
-            <EditText
+            <TextView
                 android:id="@+id/course_id"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/edittext_background"
-                android:hint="Enter Course Id"
+                android:hint="Course Id"
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
@@ -41,7 +40,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
-            <!-- وصف الكورس -->
             <EditText
                 android:id="@+id/et_course_descriptionA1"
                 android:layout_width="match_parent"
@@ -56,7 +54,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
-            <!-- التصنيف -->
             <Spinner
                 android:id="@+id/sp_categoryA1"
                 android:layout_width="match_parent"
@@ -66,7 +63,6 @@
                 android:entries="@array/categories_array"
                 android:padding="12dp" />
 
-            <!-- سعر الكورس -->
             <EditText
                 android:id="@+id/et_priceA1"
                 android:layout_width="match_parent"
@@ -79,7 +75,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
-            <!-- اسم المستخدم للمدرس -->
             <EditText
                 android:id="@+id/et_teacher_usernameA1"
                 android:layout_width="match_parent"
@@ -91,7 +86,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
-            <!-- رابط صورة الكورس -->
             <EditText
                 android:id="@+id/et_image_urlA1"
                 android:layout_width="match_parent"
@@ -104,17 +98,15 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
-            <!-- زر تحميل الصورة من الإنترنت -->
             <Button
                 android:id="@+id/btn_load_image_from_urlA1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_update"
+                android:background="@drawable/update_btn"
+                android:textColor="#25750C"
                 android:text="Load Image from URL"
-                android:textColor="@color/white"
                 android:layout_marginTop="15dp" />
 
-            <!-- صورة الكورس -->
             <ImageView
                 android:id="@+id/iv_course_imageA1"
                 android:layout_width="match_parent"
@@ -127,10 +119,9 @@
                 android:id="@+id/btn_select_imageA1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_update"
                 android:text="Choose Image from Gallery"
-                android:textColor="@color/white"
-                android:layout_marginTop="8dp" />
+                android:background="@drawable/update_btn"
+                android:textColor="#25750C"                android:layout_marginTop="8dp" />
             <EditText
                 android:id="@+id/et_image_urlC1"
                 android:layout_width="match_parent"
@@ -143,17 +134,14 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
-            <!-- زر تحميل الصورة من الإنترنت -->
             <Button
                 android:id="@+id/btn_load_image_from_urlC1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_update"
                 android:text="Load Image from URL"
-                android:textColor="@color/white"
-                android:layout_marginTop="15dp" />
+                android:background="@drawable/update_btn"
+                android:textColor="#25750C"                android:layout_marginTop="15dp" />
 
-            <!-- صورة الكورس -->
             <ImageView
                 android:id="@+id/iv_course_imageC1"
                 android:layout_width="match_parent"
@@ -163,18 +151,15 @@
                 android:contentDescription="Course Image"
                 android:scaleType="centerCrop" />
 
-            <!-- اختيار صورة من المعرض -->
 
             <Button
                 android:id="@+id/btn_select_imageC1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_update"
                 android:text="Choose Image from Gallery"
-                android:textColor="@color/white"
-                android:layout_marginTop="8dp" />
+                android:background="@drawable/update_btn"
+                android:textColor="#25750C"                android:layout_marginTop="8dp" />
 
-            <!-- زر الحفظ -->
             <Button
                 android:id="@+id/btn_save_courseA1"
                 android:layout_width="match_parent"

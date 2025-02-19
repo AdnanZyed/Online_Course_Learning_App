@@ -34,7 +34,7 @@ public class VerifyCodeActivity extends AppCompatActivity {
         btnVerify.setOnClickListener(v -> {
             String code = verificationCodeEditText.getText().toString().trim();
             if (TextUtils.isEmpty(code)) {
-                verificationCodeEditText.setError("يرجى إدخال رمز التحقق");
+                verificationCodeEditText.setError("Please send verification code");
                 return;
             }
             verifyCode(code);
@@ -54,7 +54,7 @@ public class VerifyCodeActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(VerifyCodeActivity.this, "رمز التحقق غير صحيح", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VerifyCodeActivity.this, "The verification code is invalid", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

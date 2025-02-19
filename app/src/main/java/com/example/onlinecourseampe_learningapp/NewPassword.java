@@ -99,23 +99,23 @@ public class NewPassword extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (pass1.getText().toString().isEmpty()) {
-                    pass1.setError("كلمة المرور مطلوبة");
+                    pass1.setError("Password required");
                     return;
                 }
                 if (pass1.length() < 8) {
-                    pass1.setError("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
+                    pass1.setError("Password must be at least 8 characters");
                     return;
                 }
 
                 // التحقق من قوة كلمة المرور
                 String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
                 if (!pass1.getText().toString().matches(passwordPattern)) {
-                    pass1.setError("كلمة المرور يجب أن تحتوي على حرف كبير وصغير ورقم ورمز خاص");
+                    pass1.setError("The password must contain an uppercase and lowercase letter, a number, and a special symbol\n");
                     return;
                 }
                 if (!pass1.getText().toString().equals(pass2.getText().toString())) {
 
-                    Toast.makeText(NewPassword.this, "الادخالين غي متساويين", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewPassword.this, "The two entries are not equal", Toast.LENGTH_SHORT).show();
 
                 } else {
                     myViewModel.getAllStudentByUser(userName).observe((NewPassword.this), students -> {
@@ -124,7 +124,7 @@ public class NewPassword extends AppCompatActivity {
 
                         myViewModel.updateStudent(student);
 //
-                        Toast.makeText(NewPassword.this, "لقد حصلت على كلمة مرور جديدة", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewPassword.this, "You've got a new password", Toast.LENGTH_SHORT).show();
 //
                         Intent intent = new Intent(NewPassword.this, ActivityMainSignIn.class);
                         startActivity(intent);

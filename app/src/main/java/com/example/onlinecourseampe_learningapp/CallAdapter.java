@@ -47,7 +47,6 @@ public class CallAdapter extends RecyclerView.Adapter<CallAdapter.ChatViewHolder
 
         holder.studentName.setText(student.getS_name());
         if (student.getS_Image() != null) {
-            // تحويل الصورة من byte[] إلى Bitmap
             Bitmap bitmap = BitmapFactory.decodeByteArray(student.getS_Image(), 0, student.getS_Image().length);
             holder.studentImage.setImageBitmap(bitmap);
         } else {
@@ -63,7 +62,6 @@ public class CallAdapter extends RecyclerView.Adapter<CallAdapter.ChatViewHolder
             intent.putExtra("USER", user);
             intent.putExtra("studentImage", student.getS_Image());
 
-            Toast.makeText(context, student.getStudent_user_name(), Toast.LENGTH_SHORT).show();
             context.startActivity(intent);
         });
 

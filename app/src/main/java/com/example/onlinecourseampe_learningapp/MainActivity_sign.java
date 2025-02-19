@@ -26,43 +26,35 @@ public class MainActivity_sign extends AppCompatActivity {
         setContentView(binding.getRoot());
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
-//        addSampleTeachers();
-//        addSampleCourses();
-//        addSampleStudents();
-//        addSampleLessones();
-//        Handler handler = new Handler(Looper.getMainLooper());
-//
-//      //  handler.postDelayed(() -> {
+//                    addSampleTeachers();
+//                    addSampleCourses();
+//                    addSampleLessones();
+//                    addSampleStudents();
+
 //            myViewModel.getAllTeacher().observe(this, teachers -> {
 //                if (teachers == null || teachers.isEmpty()) {
 //                    addSampleTeachers();
 //                }
 //            });
-//     //   }, 0);
 //
-//     //   handler.postDelayed(() -> {
 //            myViewModel.getAllCourse().observe(this, courses -> {
 //                if (courses == null || courses.isEmpty()) {
 //                    addSampleCourses();
 //                }
 //            });
-//    //    }, 0);
 //
-//     //   handler.postDelayed(() -> {
+//
 //            myViewModel.getTotalLessonsCount().observe(this, lessonCount -> {
 //                if (lessonCount == null || lessonCount == 0) {
 //                    addSampleLessones();
 //                }
 //            });
-//    //    }, 0);
 //
-//    //    handler.postDelayed(() -> {
 //            myViewModel.getAllStudent().observe(this, students -> {
 //                if (students == null || students.isEmpty()) {
 //                    addSampleStudents();
 //                }
 //            });
-//    //    }, 0);
 
         binding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,24 +98,24 @@ public class MainActivity_sign extends AppCompatActivity {
     private void addSampleLessones() {
 
         for (int dbId = 1; dbId <= 38; dbId++) {
-            myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم ثلاثي الأبعاد باستخدام Blender", "https://www.youtube.com/watch?v=VG8R7QGdGp8", 10, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "تعلم أساسيات النمذجة في 3D Max", "https://www.youtube.com/watch?v=3Ic4kF3rdzQ", 12, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "كيفية إنشاء مشاهد واقعية في Maya", "https://www.youtube.com/watch?v=FvBqDqsmHzI", 8, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "إضاءة المشاهد ثلاثية الأبعاد في Cinema 4D", "https://www.youtube.com/watch?v=fsAxSxp88ZQ", 15, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم ثلاثي الأبعاد", "https://www.youtube.com/watch?v=VG8R7QGdGp8", 10, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "تعلم أساسيات النمذجة 3D Max", "https://www.youtube.com/watch?v=3Ic4kF3rdzQ", 12, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "إنشاء مشاهد واقعية في Maya", "https://www.youtube.com/watch?v=FvBqDqsmHzI", 8, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "إضاءة المشاهد   في Cinema 4D", "https://www.youtube.com/watch?v=fsAxSxp88ZQ", 15, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الشخصيات في Blender", "https://www.youtube.com/watch?v=6dXM8Gocv6k", 13, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات ثلاثية الأبعاد في 3D Max", "https://www.youtube.com/watch?v=2U5M6vI6xzY", 14, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات ثلاثية 3D Max", "https://www.youtube.com/watch?v=2U5M6vI6xzY", 14, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة مؤثرات خاصة في Maya", "https://www.youtube.com/watch?v=kYgYbEo7HTo", 11, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "تصدير النماذج ثلاثية الأبعاد للألعاب", "https://www.youtube.com/watch?v=6MQyZyQDRh4", 9, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم الشخصيات ثلاثية الأبعاد", "https://www.youtube.com/watch?v=k1pS5lfH2kc", 12, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "تصدير النماذج للألعاب", "https://www.youtube.com/watch?v=6MQyZyQDRh4", 9, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم الشخصيات", "https://www.youtube.com/watch?v=k1pS5lfH2kc", 12, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء في Cinema 4D", "https://www.youtube.com/watch?v=nl5mcYIu7Fk", 16, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الكاميرا في مشاهد 3D Max", "https://www.youtube.com/watch?v=6dFtkdZTkmE", 17, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة إضاءة واقعية في Blender", "https://www.youtube.com/watch?v=0RPylvtaHhE", 10, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم مواد واقعية في Maya", "https://www.youtube.com/watch?v=mrctuUwEryo", 8, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة في تصميم المشاهد الداخلية في 3D Max", "https://www.youtube.com/watch?v=JlxWqg7xeQU", 14, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "المشاهد الداخلية في 3D Max", "https://www.youtube.com/watch?v=JlxWqg7xeQU", 14, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الشخصيات في Cinema 4D", "https://www.youtube.com/watch?v=0VZqzxbzXYY", 10, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "إضافة مؤثرات خاصة في Blender", "https://www.youtube.com/watch?v=a4kDk1s5de4", 13, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تصميم بيئات طبيعية في Maya", "https://www.youtube.com/watch?v=pBiv8nq-XGA", 12, false, dbId));
-            myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء المتقدمة في 3D Max", "https://www.youtube.com/watch?v=HkVgOlgw9yA", 11, false, dbId));
+            myViewModel.insertCourseLesson(new CourseLessons(0, "تقنيات الإكساء في 3D Max", "https://www.youtube.com/watch?v=HkVgOlgw9yA", 11, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "تحريك الكائنات في Blender", "https://www.youtube.com/watch?v=c56y_AiEcrE", 10, false, dbId));
             myViewModel.insertCourseLesson(new CourseLessons(0, "مقدمة لتقنيات الـ 3D في الألعاب", "https://www.youtube.com/watch?v=c7Bx6m0bxg8", 9, false, dbId));
 
@@ -291,7 +283,6 @@ public class MainActivity_sign extends AppCompatActivity {
     }
 
 
-//
 
 
     private void addSampleTeachers() {
@@ -299,7 +290,7 @@ public class MainActivity_sign extends AppCompatActivity {
         byte[] imageBytes = convertImageToByteArray(bitmap);
         Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.img_6);
         byte[] imageBytes1 = convertImageToByteArray(bitmap1);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.te9);
+        Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.et3);
         byte[] imageBytes2 = convertImageToByteArray(bitmap2);
         Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.et4);
         byte[] imageBytes3 = convertImageToByteArray(bitmap3);

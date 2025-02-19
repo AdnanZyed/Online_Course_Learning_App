@@ -38,6 +38,9 @@
         <activity
             android:name=".UpdateCourse"
             android:exported="false" />
+        <activity
+            android:name=".UpdateCourse1"
+            android:exported="false" />
 
         <activity
             android:name=".LessonsActivity"

@@ -7,9 +7,17 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="20dp">
+
+    <ImageView
+        android:id="@+id/sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@drawable/sign_out"
+        android:layout_margin="60dp" />
     <androidx.cardview.widget.CardView
 
-        android:id="@+id/iv_teacher_image7"
+        android:id="@+id/iv_teacher_image7P"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_margin="8dp"

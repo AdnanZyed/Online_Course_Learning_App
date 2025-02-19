@@ -52,7 +52,7 @@ public class BookmarkActivity extends AppCompatActivity {
                 }
 
             } else {
-                Toast.makeText(this, "لا توجد كورسات محفوظة!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No saved courses!", Toast.LENGTH_SHORT).show();
             }
 
         });

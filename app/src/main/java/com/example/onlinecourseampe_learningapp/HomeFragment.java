@@ -6,12 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
@@ -27,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
     private List<Button> buttons = new ArrayList<>();
     private Button activeButton = null;
     Button btnAll;
@@ -89,6 +87,7 @@ public class HomeFragment extends Fragment {
         fragment2.setArguments(bundle);
         targetFragment.setArguments(bundle);
 
+
         btnAll = rootView.findViewById(R.id.btn_all);
         Iv_notification = rootView.findViewById(R.id.iv_notification);
         iv_S = rootView.findViewById(R.id.iv_s);
@@ -117,6 +116,7 @@ public class HomeFragment extends Fragment {
         buttons.add(btn3DDesign);
         buttons.add(btnBusiness);
         buttons.add(btnArt);
+
         Button defaultButton = btnAll;
         defaultButton.setBackgroundResource(R.drawable.catigories_btn_selected);
         defaultButton.setTextColor(R.color.white);
@@ -336,12 +336,12 @@ public class HomeFragment extends Fragment {
     private void onButtonClicked(Button clickedButton) {
         for (Button button : buttons) {
             button.setBackgroundResource(R.drawable.catigories_btn);
-            button.setTextColor(R.color.blue);
+            button.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue));
         }
 
 
         clickedButton.setBackgroundResource(R.drawable.catigories_btn_selected);
-        clickedButton.setTextColor(R.color.white);
+        clickedButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
 
         activeButton = clickedButton;
 
