@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ChatMessageActivity extends AppCompatActivity {
-
     private RecyclerView recyclerViewMessages;
     private EditText etMessageInput;
     private ImageView btnSendMessage;
@@ -34,13 +33,14 @@ public class ChatMessageActivity extends AppCompatActivity {
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
         etMessageInput = findViewById(R.id.etMessageInput);
         btnSendMessage = findViewById(R.id.btnSendMessage);
+        TextView textView = findViewById(R.id.tvStudentNameC);
+
 
         otherUser = getIntent().getStringExtra("studentUsername");
         name = getIntent().getStringExtra("studentName");
         User = getIntent().getStringExtra("USER");
         String call = getIntent().getStringExtra("CALL");
 
-        TextView textView = findViewById(R.id.tvStudentNameC);
         textView.setText(name);
         chatAdapter = new ChatMessageAdapter(messages1, User);
         recyclerViewMessages.setAdapter(chatAdapter);
@@ -53,11 +53,9 @@ public class ChatMessageActivity extends AppCompatActivity {
             recyclerViewMessages.scrollToPosition(messages.size() - 1);
         });
         if (call != null) {
-
             long timestamp = System.currentTimeMillis();
-            Message message = new Message(User, otherUser, "Voice call\n", timestamp);
+            Message message = new Message(User, otherUser, "Voice call", timestamp);
             myViewModel.insertMessage(message);
-
         }
 
         btnSendMessage.setOnClickListener(v -> {

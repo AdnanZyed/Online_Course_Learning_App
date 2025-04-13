@@ -23,10 +23,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/edittext_background"
-                android:hint="Course Id"
+                android:text="Course Id"
                 android:padding="12dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray" />
+                android:textColor="@color/gray"
+                />
 
 
             <EditText

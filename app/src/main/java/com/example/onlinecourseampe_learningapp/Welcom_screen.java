@@ -19,14 +19,13 @@ public class Welcom_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcom_screen);
-        loadingText = findViewById(R.id.loading_text);
 
+        loadingText = findViewById(R.id.loading_text);
         ImageView logo = findViewById(R.id.logo);
 
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.welcome_sound);
         mediaPlayer.start();
-//
-//
+
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         logo.startAnimation(fadeIn);
         new Handler().postDelayed(new Runnable() {
@@ -43,7 +42,6 @@ public class Welcom_screen extends AppCompatActivity {
     }
 
     private void updateLoadingText() {
-        // تحديث النص لعرض تحميل النقاط
         if (loadingStep < 3) {
             loadingStep++;
             loadingText.setText("Loading" + ".".repeat(loadingStep));

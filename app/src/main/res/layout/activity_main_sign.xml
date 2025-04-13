@@ -5,6 +5,7 @@
     android:id="@+id/main_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/l_green"
     tools:context=".MainActivity_sign">
 
 
@@ -119,7 +120,7 @@
         android:id="@+id/step4"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:background="@drawable/step4"
+        android:background="@drawable/g_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +133,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:text="Lets's  you in"
-        android:textColor="@color/black"
+        android:textColor="@color/green"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_next"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/green"
         android:elevation="20dp"
         android:text="Sign in with password"
         android:textColor="#FFFFFF"
@@ -208,7 +209,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign up"
-        android:textColor="@color/blue"
+        android:textColor="@color/green"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/have_account"
         app:layout_constraintStart_toEndOf="@+id/have_account"

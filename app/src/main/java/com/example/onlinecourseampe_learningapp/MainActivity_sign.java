@@ -285,28 +285,6 @@ public class MainActivity_sign extends AppCompatActivity {
 
 
 
-    private void addSampleTeachers() {
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.et1);
-        byte[] imageBytes = convertImageToByteArray(bitmap);
-        Bitmap bitmap1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.img_6);
-        byte[] imageBytes1 = convertImageToByteArray(bitmap1);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.et3);
-        byte[] imageBytes2 = convertImageToByteArray(bitmap2);
-        Bitmap bitmap3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.et4);
-        byte[] imageBytes3 = convertImageToByteArray(bitmap3);
-
-
-        Teacher teacher1 = new Teacher("john_doe", "John Doe", "MSc in Computer Science", "password123", imageBytes);
-        Teacher teacher2 = new Teacher("jane_smith", "Jane Smith", "PhD in Software Engineering", "password123", imageBytes2);
-        Teacher teacher3 = new Teacher("alice_brown", "Alice Brown", "MSc in Web Development", "password123", imageBytes3);
-        Teacher teacher4 = new Teacher("bob_white", "Bob White", "BSc in Mobile Computing", "password123", imageBytes1);
-
-        myViewModel.insertTeacher(teacher1);
-        myViewModel.insertTeacher(teacher2);
-        myViewModel.insertTeacher(teacher3);
-        myViewModel.insertTeacher(teacher4);
-    }
-
     private void addSampleStudents() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.unnamed);

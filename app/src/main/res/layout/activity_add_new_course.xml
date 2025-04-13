@@ -32,13 +32,13 @@
                 android:id="@+id/et_course_descriptionA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_background"
+                android:gravity="top"
                 android:hint="Write a Detailed Course Description"
+                android:inputType="textMultiLine"
                 android:lines="4"
                 android:padding="12dp"
-                android:gravity="top"
-                android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
@@ -46,8 +46,8 @@
                 android:id="@+id/sp_categoryA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/spinner_background"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/spinner_background"
                 android:entries="@array/categories_array"
                 android:padding="12dp" />
 
@@ -55,11 +55,11 @@
                 android:id="@+id/et_priceA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_background"
                 android:hint="Course Pric"
-                android:padding="12dp"
                 android:inputType="numberDecimal"
+                android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
@@ -67,8 +67,8 @@
                 android:id="@+id/et_teacher_usernameA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_background"
                 android:hint="Teacher's Username"
                 android:padding="12dp"
                 android:textColor="@color/black"
@@ -78,11 +78,11 @@
                 android:id="@+id/et_image_urlA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_background"
                 android:hint="Enter Image URL For Course"
-                android:padding="12dp"
                 android:inputType="textUri"
+                android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
@@ -90,10 +90,10 @@
                 android:id="@+id/btn_load_image_from_urlA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Load Image from URL"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/btn_add"
-                android:textColor="@color/blue"
-                android:layout_marginTop="15dp" />
+                android:text="Load Image from URL"
+                android:textColor="@color/blue" />
 
             <ImageView
                 android:id="@+id/iv_course_imageA"
@@ -103,22 +103,25 @@
                 android:background="@drawable/image_background"
                 android:contentDescription="Course Image"
                 android:scaleType="centerCrop" />
+
             <Button
                 android:id="@+id/btn_select_imageA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose Image from Gallery"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/btn_add"
-                android:textColor="@color/blue"                android:layout_marginTop="8dp" />
+                android:text="Choose Image from Gallery"
+                android:textColor="@color/blue" />
+
             <EditText
                 android:id="@+id/et_image_urlC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_background"
                 android:hint="Enter Image URL For Certificate"
-                android:padding="12dp"
                 android:inputType="textUri"
+                android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray" />
 
@@ -126,9 +129,10 @@
                 android:id="@+id/btn_load_image_from_urlC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/btn_add"
-                android:textColor="@color/blue"                android:text="Load Image from URL"
-                android:layout_marginTop="15dp" />
+                android:text="Load Image from URL"
+                android:textColor="@color/blue" />
 
             <ImageView
                 android:id="@+id/iv_course_imageC"
@@ -144,18 +148,19 @@
                 android:id="@+id/btn_select_imageC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/btn_add"
-                android:textColor="@color/blue"                android:text="Choose Image from Gallery"
-                android:layout_marginTop="8dp" />
+                android:text="Choose Image from Gallery"
+                android:textColor="@color/blue" />
 
             <Button
                 android:id="@+id/btn_save_courseA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/button_background"
                 android:text="Save Course"
-                android:textColor="@color/white"
-                android:layout_marginTop="16dp" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

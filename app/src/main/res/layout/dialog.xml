@@ -131,7 +131,7 @@
         android:background="@drawable/shape_di"
         android:elevation="10dp"
         android:text="Cancle"
-        android:textColor="@color/blue"
+        android:textColor="@color/green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2D" />
 </androidx.constraintlayout.widget.ConstraintLayout>

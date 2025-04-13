@@ -99,9 +99,10 @@ public class Sign_up extends AppCompatActivity {
             }
         });
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-
         editor = sharedPreferences.edit();
+
         boolean isRemembered = sharedPreferences.getBoolean("rememberMe1", false);
+
         if (isRemembered) {
             activitySignUpBinding.eUser.setText(sharedPreferences.getString("username1", ""));
             activitySignUpBinding.ePassword.setText(sharedPreferences.getString("password1", ""));
@@ -118,8 +119,7 @@ public class Sign_up extends AppCompatActivity {
                 PhoneIn = activitySignUpBinding.Phone.getText().toString().trim();
                 nameIn = activitySignUpBinding.name.getText().toString().trim();
                 studentU = myViewModel.getAllStudentByUser(eUserIn);
-//
-//
+
 
 
                 activitySignUpBinding.eUser.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -283,33 +283,6 @@ public class Sign_up extends AppCompatActivity {
 
     }
 
-    private void sendVerificationCode(String phoneNumber) {
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                .setPhoneNumber(phoneNumber) // رقم الهاتف
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential credential) {
-                    }
 
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(Sign_up.this, "Verification failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
-                        super.onCodeSent(verificationId, token);
-                        mVerificationId = verificationId;
-                        mResendToken = token;
-
-                        Intent intent = new Intent(Sign_up.this, VerifyCodeActivity.class);
-                        intent.putExtra("verificationId", verificationId);
-                        startActivity(intent);
-                    }
-                }).build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }
 }
 

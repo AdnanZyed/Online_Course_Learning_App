@@ -86,7 +86,7 @@ public class UpdateCourse1 extends AppCompatActivity {
 
                 if (dX > 0) {
                     float iconMargin = (itemView.getHeight() - trashIcon.getHeight()) / 2;
-                    float iconLeft = itemView.getLeft() + 140;
+                    float iconLeft = itemView.getLeft() + 100;
                     float iconTop = itemView.getTop() + iconMargin;
 
                     c.drawBitmap(trashIcon, iconLeft, iconTop, null);

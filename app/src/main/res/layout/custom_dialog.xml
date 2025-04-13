@@ -26,7 +26,7 @@
         android:layout_marginBottom="8dp"
         android:text="Main Title"
 
-        android:textColor="@color/blue"
+        android:textColor="@color/green"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/dialog_image"

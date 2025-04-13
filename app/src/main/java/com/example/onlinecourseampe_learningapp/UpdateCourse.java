@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +27,14 @@ public class UpdateCourse extends AppCompatActivity {
     private static final int REQUEST_CODE_IMAGE_A = 1;
     private static final int REQUEST_CODE_IMAGE_C = 2;
 
-    private EditText etCourseName, courseId1, etDescription, etPrice, etTeacherUsername, etImageUrl, et_image_urlC;
+    private EditText etCourseName, etDescription, etPrice, etTeacherUsername, etImageUrl, et_image_urlC;
     private Spinner spCategory;
     private ImageView ivCourseImage, iv_course_imageC;
     private Button btnSelectImage, btn_select_imageC, btnSaveCourse, btnLoadImageFromUrl, btn_load_image_from_urlC;
     private byte[] courseImageBytes;
     private String NAME;
     private byte[] Image;
+    private TextView courseId1;
     private String Price;
     private String Categorie;
     private String Description;

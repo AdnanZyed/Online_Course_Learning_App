@@ -36,7 +36,7 @@ public class MainActivity_Main extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_main);
 
-        showCustomNav = getIntent().getBooleanExtra("SHOW_CUSTOM_NAVIGATION", false);
+        //  showCustomNav = getIntent().getBooleanExtra("SHOW_CUSTOM_NAVIGATION", false);
 
         Intent intent = getIntent();
         userName = intent.getStringExtra("USER_NAME2");
@@ -44,43 +44,37 @@ public class MainActivity_Main extends AppCompatActivity
         HomeFragment homeFragment = new HomeFragment();
         CoursesFragment coursesFragment1 = new CoursesFragment();
 
-        Bundle bundle = new Bundle();
 
-        bundle.putString("USER_NAME", userName);
-
+//        if (showCustomNav) {
+//            coursesFragment.setArguments(bundle);
 //
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.flFragment, coursesFragment1)
+//                    .commit();
+//
+//            bottomNavigationView = findViewById(R.id.bottomNavigationView);
+//            bottomNavigationView.setOnNavigationItemSelectedListener(this);
+//            bottomNavigationView.setSelectedItemId(R.id.courses1);
+//        } else {
+        Bundle bundle = new Bundle();
+        bundle.putString("USER_NAME", userName);
+        homeFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flFragment, homeFragment)
+                .commit();
 
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.home1);
 
-        if (showCustomNav) {
-            coursesFragment.setArguments(bundle);
+        //  }
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flFragment, coursesFragment1)
-                    .commit();
-
-            bottomNavigationView = findViewById(R.id.bottomNavigationView);
-            bottomNavigationView.setOnNavigationItemSelectedListener(this);
-            bottomNavigationView.setSelectedItemId(R.id.courses1);
-        } else {
-            homeFragment.setArguments(bundle);
-
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.flFragment, homeFragment)
-                    .commit();
-
-            bottomNavigationView = findViewById(R.id.bottomNavigationView);
-            bottomNavigationView.setOnNavigationItemSelectedListener(this);
-            bottomNavigationView.setSelectedItemId(R.id.home1);
-
-        }
-
-        Intent intent1 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
-        intent1.putExtra("USER_NAME12", userName);
-
-
-        Intent intent2 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
-        intent2.putExtra("USER_NAME14", userName);
+//        Intent intent1 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
+//        intent1.putExtra("USER_NAME12", userName);
+//
+//
+//        Intent intent2 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
+//        intent2.putExtra("USER_NAME14", userName);
 
 
     }
@@ -155,13 +149,13 @@ public class MainActivity_Main extends AppCompatActivity
                     .replace(R.id.flFragment, homeFragment)
                     .commit();
             activeFragment = homeFragment;
-            if (showCustomNav) {
-                bottomNavigationView.setSelectedItemId(R.id.courses1);
-            } else {
-
-                bottomNavigationView.setSelectedItemId(R.id.home1);
-
-            }
+//            if (showCustomNav) {
+//                bottomNavigationView.setSelectedItemId(R.id.courses1);
+//            } else {
+//
+//                bottomNavigationView.setSelectedItemId(R.id.home1);
+//
+//            }
         } else {
             super.onBackPressed();
         }

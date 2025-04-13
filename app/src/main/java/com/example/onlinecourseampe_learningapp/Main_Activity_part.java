@@ -27,9 +27,9 @@ public class Main_Activity_part extends AppCompatActivity {
         LinearLayout dotsLayout = findViewById(R.id.dots);
 
         List<Part_Item> items = new ArrayList<>();
-        items.add(new Part_Item(R.drawable.step1, "We orovide the best learning course & great mentors!"));
-        items.add(new Part_Item(R.drawable.step2, "learn anytime and anywhere easily and conveniently"));
-        items.add(new Part_Item(R.drawable.step3, "Let's improve your skills together with Elera right now!"));
+        items.add(new Part_Item(R.drawable.f1, " اختيار المحاصيل الأنسب لبيئتك وموسمك، مع تقليل التكاليف والجهد باستخدام بيانات حية وخبرات مزارعين آخرين."));
+        items.add(new Part_Item(R.drawable.f2, "تجربة زراعية مبتكرة مع تطبيق يتتبع تقدم المحاصيل ويوفر لك أفضل الأوقات للزراعة والحصاد لتحسين إنتاجك بسهولة.\""));
+        items.add(new Part_Item(R.drawable.f3, "تطبيق ذكي يساعدك في اختيار المحاصيل المثالية بناءً على البيئة والموسم، مع واجهة سهلة وتحديثات مستمرة من خبراء الزراعة"));
         adapter = new Part_Adapter(items);
         viewPager.setAdapter(adapter);
 
@@ -50,8 +50,10 @@ public class Main_Activity_part extends AppCompatActivity {
         for (int i = 0; i < size; i++) {
             View dot = new View(this);
             dot.setBackgroundResource(R.drawable.dot_selector);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(16, 16);
             params.setMargins(8, 0, 8, 0);
+
             dot.setSelected(i == 0);
             dotsLayout.addView(dot, params);
 

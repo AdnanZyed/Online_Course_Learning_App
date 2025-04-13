@@ -11,9 +11,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/logo2"
+        android:icon="@mipmap/img"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo2"
+        android:roundIcon="@mipmap/img"
         android:supportsRtl="true"
         android:theme="@style/Theme.onlinecourseampe_learningapp"
         tools:targetApi="31">
@@ -81,7 +81,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity_Forgot"
-            android:exported="false" /> <!-- شاشة الترحيب هي أول شاشة -->
+            android:exported="false" />
         <activity
             android:name=".Welcom_screen"
             android:exported="true">

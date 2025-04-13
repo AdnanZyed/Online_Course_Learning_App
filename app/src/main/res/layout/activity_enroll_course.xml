@@ -251,7 +251,7 @@
         android:background="@drawable/btn_cart"
         android:elevation="0dp"
         android:text="Add New Card"
-        android:textColor="@color/blue"
+        android:textColor="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/bt_buy2"
         app:layout_constraintEnd_toEndOf="parent"
 

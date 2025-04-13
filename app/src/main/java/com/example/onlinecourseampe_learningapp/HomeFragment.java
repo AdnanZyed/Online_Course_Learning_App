@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,11 +39,10 @@ public class HomeFragment extends Fragment {
     Button btnBusiness;
     Button btnArt;
     TextView tv_Seeall;
-
-
     TextView tv_Seeall2;
     TextView tv_Welcom;
     TextView tv_Name;
+    EditText e_searsh;
     ImageView Iv_notification;
     ImageView Iv_Bookmark;
     String students_u;
@@ -70,9 +69,7 @@ public class HomeFragment extends Fragment {
 
 
         ViewPager2 viewPager2 = rootView.findViewById(R.id.viewPager2);
-        if (viewPager2 == null) {
-            Log.e("HomeFragment", "viewPager2 is null!");
-        }
+
 
         List<Integer> images = Arrays.asList(R.drawable.ad1, R.drawable.ad2, R.drawable.ad3);
         ImageAdapter adapter = new ImageAdapter(images);
@@ -82,15 +79,12 @@ public class HomeFragment extends Fragment {
         bundle = new Bundle();
         bundle.putString("USER_NAME_R", students_u);
 
-        Fragment targetFragment = new ReviewsFragment();
-        Fragment fragment2 = new CourseFragment();
-        fragment2.setArguments(bundle);
-        targetFragment.setArguments(bundle);
 
 
         btnAll = rootView.findViewById(R.id.btn_all);
         Iv_notification = rootView.findViewById(R.id.iv_notification);
         iv_S = rootView.findViewById(R.id.iv_s);
+        e_searsh = rootView.findViewById(R.id.et_searsh);
         Iv_Bookmark = rootView.findViewById(R.id.iv_Bookmark);
         tv_Seeall = rootView.findViewById(R.id.tv_seeall);
         tv_Seeall2 = rootView.findViewById(R.id.tv_seeall2);
@@ -124,6 +118,7 @@ public class HomeFragment extends Fragment {
             button.setOnClickListener(v -> onButtonClicked(button));
         }
 
+
         myViewModel.getAllStudentByUser(students_u).observe(getViewLifecycleOwner(), students -> {
             if (students != null && !students.isEmpty()) {
 
@@ -149,7 +144,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        e_searsh.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                e_searsh.setBackgroundResource(R.drawable.shap_selected);
 
+            }});
         iv_S.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -336,7 +336,7 @@ public class HomeFragment extends Fragment {
     private void onButtonClicked(Button clickedButton) {
         for (Button button : buttons) {
             button.setBackgroundResource(R.drawable.catigories_btn);
-            button.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue));
+            button.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
         }
 
 

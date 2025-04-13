@@ -224,7 +224,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_next"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/green"
         android:drawableStart="@drawable/chat1"
         android:elevation="20dp"
         android:textStyle="bold"
@@ -248,7 +248,7 @@
         android:layout_marginEnd="20dp"
         android:paddingEnd="30dp"
         android:text="Website"
-        android:textColor="#335ef7"
+        android:textColor="@color/green"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons" />
@@ -262,8 +262,8 @@
         android:outlineSpotShadowColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/meassage"
-        app:tabIndicatorColor="@color/blue"
-        app:tabSelectedTextColor="@color/blue"
+        app:tabIndicatorColor="@color/green"
+        app:tabSelectedTextColor="@color/green"
         app:tabTextColor="@color/gray" />
 
     <androidx.viewpager2.widget.ViewPager2

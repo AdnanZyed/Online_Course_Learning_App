@@ -98,7 +98,7 @@ public class EnrollCourseActivity extends AppCompatActivity {
                                 Student_Course studentCourse = new Student_Course(userName, coursed, false, false, false, 0);
                                 myViewModel.deleteStudentCourse(studentCourse);
                                 btn_cart.setBackgroundResource(R.drawable.btn_cart);
-                                btn_cart.setTextColor(R.color.blue);
+                                btn_cart.setTextColor(R.color.green);
                                 btn_cart.setText("Add New Card");
 
                             }

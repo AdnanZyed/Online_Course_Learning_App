@@ -12,7 +12,7 @@ import androidx.room.TypeConverters;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class, Course.class, Teacher.class, Student_Course.class, Student_Teacher.class, Course_Reviews.class, CourseLessons.class, Message.class, Teacher_Reviews.class, StudentLesson.class, Notification.class}, version = 2, exportSchema = false)
+@Database(entities = {Student.class, Course.class, Teacher.class, Student_Course.class, Student_Teacher.class, Course_Reviews.class, CourseLessons.class, Message.class, Teacher_Reviews.class, StudentLesson.class, Notification.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class My_Database extends RoomDatabase {
     public abstract StudentLessonDao studentLessonDao();

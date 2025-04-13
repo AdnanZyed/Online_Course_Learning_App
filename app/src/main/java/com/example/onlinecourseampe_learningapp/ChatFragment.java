@@ -24,11 +24,12 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
         chatViewModel = new ViewModelProvider(this).get(My_View_Model.class);
+        currentUsername = getArguments().getString("USER");
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewChat);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        currentUsername = getArguments().getString("USER");
+
 
         chatAdapter = new ChatAdapter(requireContext(), currentUsername);
         recyclerView.setAdapter(chatAdapter);

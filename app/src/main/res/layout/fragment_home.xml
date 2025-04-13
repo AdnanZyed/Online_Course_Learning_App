@@ -99,7 +99,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:layout_margin="15dp"
-        android:background="@drawable/shape_password"
+        android:background="@drawable/shape_non_selected"
         android:drawableEnd="@drawable/control"
         android:hint="Searsh"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,6 @@
 
 
     </EditText>
-        <!-- ViewPager داخل صندوق أزرق -->
             <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager2"
             android:layout_width="match_parent"
@@ -147,7 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="See All"
-        android:textColor="@color/blue"
+        android:textColor="@color/green"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -184,7 +183,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="See All"
-        android:textColor="@color/blue"
+        android:textColor="@color/green"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -215,7 +214,7 @@
                 android:background="@drawable/catigories_btn"
                 android:text="All"
 
-                android:textColor="@color/blue" />
+                android:textColor="@color/green" />
 
 
 
@@ -228,7 +227,7 @@
                 android:background="@drawable/catigories_btn"
                 android:text="Business"
 
-                android:textColor="@color/blue" />
+                android:textColor="@color/green" />
             <Button
                 android:id="@+id/btn_3d_design"
                 android:layout_width="wrap_content"
@@ -238,7 +237,7 @@
 
                 android:text="3D Design"
 
-                android:textColor="@color/blue" />
+                android:textColor="@color/green" />
             <Button
                 android:id="@+id/btn_art"
                 android:layout_width="wrap_content"
@@ -247,7 +246,7 @@
                 android:background="@drawable/catigories_btn"
 
                 android:text="Art"
-                android:textColor="@color/blue" />
+                android:textColor="@color/green" />
 
             <Button
                 android:id="@+id/btn_programming"
@@ -258,7 +257,7 @@
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
                 android:text="Programming"
-                android:textColor="@color/blue" />
+                android:textColor="@color/green" />
 
         </LinearLayout>
 
