@@ -25,6 +25,42 @@ import java.util.List;
 public class AboutFragment extends Fragment {
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     My_View_Model myViewModel;
     ImageView Message;
     TextView description;
