@@ -10,11 +10,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.onlinecourseampe_learningapp.databinding.ActivityMainAdminBinding;
-import com.example.onlinecourseampe_learningapp.databinding.ActivityMainBinding;
+import com.example.onlineSeasonampe_learningapp.databinding.ActivityMainAdminBinding;
+
 
 public class MainActivity_Admin extends AppCompatActivity {
-    private ActivityMainAdminBinding binding;
+     ActivityMainAdminBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity_Admin extends AppCompatActivity {
         binding.Card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_Admin.this, Add_New_Course.class);
+                Intent intent = new Intent(MainActivity_Admin.this, Add_New_Season.class);
                 startActivity(intent);
             }
         });
@@ -33,14 +33,14 @@ public class MainActivity_Admin extends AppCompatActivity {
         binding.Card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_Admin.this, Delete_Course.class);
+                Intent intent = new Intent(MainActivity_Admin.this, Delete_Season.class);
                 startActivity(intent);
             }
         });
         binding.Card3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity_Admin.this, UpdateCourse1.class);
+                Intent intent = new Intent(MainActivity_Admin.this, UpdateSeason1.class);
                 startActivity(intent);
             }
         });

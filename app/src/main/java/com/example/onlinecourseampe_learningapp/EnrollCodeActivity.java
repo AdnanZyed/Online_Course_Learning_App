@@ -21,12 +21,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 public class EnrollCodeActivity extends AppCompatActivity {
     EditText otpDigit1, otpDigit2, otpDigit3, otpDigit4;
     String userName;
     int card_num;
-    String teacher_USER_Name;
-    int courseId;
+    String expert_USER_Name;
+    int seasonId;
     int otpCodeInt;
     int price;
     private My_View_Model myViewModel;
@@ -52,10 +54,10 @@ public class EnrollCodeActivity extends AppCompatActivity {
 
         Button continueButton = findViewById(R.id.bt_buy1);
         userName = getIntent().getStringExtra("USER");
-        courseId = getIntent().getIntExtra("COURSE_ID", -1);
+        seasonId = getIntent().getIntExtra("COURSE_ID", -1);
         price = getIntent().getIntExtra("PRICE", -1);
 
-        continueButton.setText("Enroll Course - $" + price);
+        continueButton.setText("Enroll Season - $" + price);
 //
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +85,9 @@ public class EnrollCodeActivity extends AppCompatActivity {
                 Toast.makeText(this, "OTP Code must be 4 digits.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            myViewModel.getAllStudentByUser(userName).observe(this, students -> {
-                if (students != null && !students.isEmpty()) {
-                    card_num = students.get(0).getCard_Number();
+            myViewModel.getAllFarmerByUser(userName).observe(this, farmers -> {
+                if (farmers != null && !farmers.isEmpty()) {
+                    card_num = farmers.get(0).getCard_Number();
 
                     if (otpCodeInt == card_num) {
 
@@ -98,7 +100,7 @@ public class EnrollCodeActivity extends AppCompatActivity {
                         Toast.makeText(this, "The number does not match" + otpCode, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(this, "No student data found.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No farmer data found.", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -116,42 +118,42 @@ public class EnrollCodeActivity extends AppCompatActivity {
         ImageView dialogImage = dialog.findViewById(R.id.dialog_image);
         TextView mainText = dialog.findViewById(R.id.dialog_main_text);
         TextView secondaryText = dialog.findViewById(R.id.dialog_secondary_text);
-        Button viewCourseButton = dialog.findViewById(R.id.btn_view_course);
+        Button viewSeasonButton = dialog.findViewById(R.id.btn_view_Season);
         Button cancelButton = dialog.findViewById(R.id.btn_cancel);
 
-        mainText.setText("Enroll Course Successful!");
-        secondaryText.setText("You have successfully made payment and enrolled the course");
+        mainText.setText("Enroll Season Successful!");
+        secondaryText.setText("You have successfully made payment and enrolled the season");
         dialogImage.setImageResource(R.drawable.img_2);
 
 
-        myViewModel.getAllCoursesById(courseId).observe(this, courses -> {
-            teacher_USER_Name = courses.get(0).getTeacher_USER_Name();
+        myViewModel.getAllSeasonsById(seasonId).observe(this, seasons -> {
+            expert_USER_Name = seasons.get(0).getExpert_USER_Name();
 
 
         });
-        viewCourseButton.setOnClickListener(v -> {
+        viewSeasonButton.setOnClickListener(v -> {
 
-            myViewModel.isStudentCourseExists(userName, courseId, true).observe((this), isHad -> {
-                myViewModel.isStudentCourseExistsC(userName, courseId, true).observe((this), isHadC -> {
-                    myViewModel.isStudentCourseExistsB(userName, courseId, true).observe((this), isHadb -> {
+            myViewModel.isFarmerSeasonExists(userName, seasonId, true).observe((this), isHad -> {
+                myViewModel.isFarmerSeasonExistsC(userName, seasonId, true).observe((this), isHadC -> {
+                    myViewModel.isFarmerSeasonExistsB(userName, seasonId, true).observe((this), isHadb -> {
                         if (!isHadC && !isHadb) {
-                            Student_Course studentCourse = new Student_Course(userName, courseId, isHadb, true, false, 0);
-                            myViewModel.insertStudentCourse(studentCourse);
-                            Student_Teacher studentTeacher = new Student_Teacher(0, userName, teacher_USER_Name);
-                            myViewModel.insertStudentTeacher(studentTeacher);
-                            Intent intent=new Intent(EnrollCodeActivity.this,LessonsActivity.class);
-                            intent.putExtra("COURSE_ID",courseId);
+                            Farmer_Seasons farmerSeason = new Farmer_Seasons(userName, seasonId, isHadb, true, false, 0);
+                            myViewModel.insertFarmerSeason(farmerSeason);
+                            Farmer_Expert farmerExpert = new Farmer_Expert(0, userName, expert_USER_Name);
+                            myViewModel.insertFarmerExpert(farmerExpert);
+                            Intent intent=new Intent(EnrollCodeActivity.this,StepsActivity.class);
+                            intent.putExtra("COURSE_ID",seasonId);
                             intent.putExtra("USER",userName);
 
                             startActivity(intent);
                             Toast.makeText(this, "Purchase completed successfully.", Toast.LENGTH_SHORT).show();
-                            myViewModel.addNotification("Payment Successful!", "You have made a course payment", R.drawable.connected_card);
+                            myViewModel.addNotification("Payment Successful!", "You have made a season payment", R.drawable.connected_card);
 
 
                         } else if (isHadC || isHadb) {
-                            Student_Course studentCourse = new Student_Course(userName, courseId, isHadb, true, false, 0);
-                            myViewModel.updateCourseStudent(studentCourse);
-                            myViewModel.addNotification("Payment Successful!", "You have made a course payment", R.drawable.connected_card);
+                            Farmer_Seasons farmerSeason = new Farmer_Seasons(userName, seasonId, isHadb, true, false, 0);
+                            myViewModel.updateSeasonFarmer(farmerSeason);
+                            myViewModel.addNotification("Payment Successful!", "You have made a season payment", R.drawable.connected_card);
 
                         }
 

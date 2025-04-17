@@ -18,6 +18,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.Random;
 
 public class ForgetPassword1 extends AppCompatActivity {

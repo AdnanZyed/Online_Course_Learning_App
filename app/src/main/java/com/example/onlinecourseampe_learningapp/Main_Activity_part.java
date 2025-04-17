@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,9 @@ public class Main_Activity_part extends AppCompatActivity {
         LinearLayout dotsLayout = findViewById(R.id.dots);
 
         List<Part_Item> items = new ArrayList<>();
-        items.add(new Part_Item(R.drawable.f1, " اختيار المحاصيل الأنسب لبيئتك وموسمك، مع تقليل التكاليف والجهد باستخدام بيانات حية وخبرات مزارعين آخرين."));
-        items.add(new Part_Item(R.drawable.f2, "تجربة زراعية مبتكرة مع تطبيق يتتبع تقدم المحاصيل ويوفر لك أفضل الأوقات للزراعة والحصاد لتحسين إنتاجك بسهولة.\""));
-        items.add(new Part_Item(R.drawable.f3, "تطبيق ذكي يساعدك في اختيار المحاصيل المثالية بناءً على البيئة والموسم، مع واجهة سهلة وتحديثات مستمرة من خبراء الزراعة"));
+        items.add(new Part_Item(R.drawable.f, " اختيار المحاصيل الأنسب لبيئتك وموسمك، مع تقليل التكاليف والجهد باستخدام بيانات حية وخبرات مزارعين آخرين."));
+        items.add(new Part_Item(R.drawable.f, "تجربة زراعية مبتكرة مع تطبيق يتتبع تقدم المحاصيل ويوفر لك أفضل الأوقات للزراعة والحصاد لتحسين إنتاجك بسهولة.\""));
+        items.add(new Part_Item(R.drawable.f, "تطبيق ذكي يساعدك في اختيار المحاصيل المثالية بناءً على البيئة والموسم، مع واجهة سهلة وتحديثات مستمرة من خبراء الزراعة"));
         adapter = new Part_Adapter(items);
         viewPager.setAdapter(adapter);
 

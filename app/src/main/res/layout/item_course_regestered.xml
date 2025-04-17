@@ -12,7 +12,7 @@
 
     <androidx.cardview.widget.CardView
 
-        android:id="@+id/iv_teacher_image5"
+        android:id="@+id/iv_expert_image5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
@@ -25,7 +25,7 @@
 
 
         <ImageView
-            android:id="@+id/iv_course_imageR"
+            android:id="@+id/iv_Season_imageR"
             android:layout_width="130dp"
             android:layout_height="130dp"
             app:shapeAppearanceOverlay="@style/RoundedImage"
@@ -41,31 +41,31 @@
 
 
     <TextView
-        android:id="@+id/tv_course_nameR"
+        android:id="@+id/tv_Season_nameR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="Course NameR"
+        android:text="Season NameR"
 
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image5"
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image5"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/time_courseR"
+        android:id="@+id/time_SeasonR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="Time"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image5"
-        app:layout_constraintTop_toBottomOf="@id/tv_course_nameR" />
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image5"
+        app:layout_constraintTop_toBottomOf="@id/tv_Season_nameR" />
 
     <TextView
-        android:id="@+id/lessons_numR"
+        android:id="@+id/steps_numR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -82,12 +82,12 @@
         android:text="/"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/numlessonR"
-        app:layout_constraintEnd_toStartOf="@+id/numlessonR"
-        app:layout_constraintTop_toTopOf="@+id/numlessonR" />
+        app:layout_constraintBottom_toBottomOf="@+id/numstepR"
+        app:layout_constraintEnd_toStartOf="@+id/numstepR"
+        app:layout_constraintTop_toTopOf="@+id/numstepR" />
 
     <TextView
-        android:id="@+id/numlessonR"
+        android:id="@+id/numstepR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -109,7 +109,7 @@
         android:progressDrawable="@drawable/custom_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image5"
-        app:layout_constraintTop_toBottomOf="@+id/time_courseR"
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image5"
+        app:layout_constraintTop_toBottomOf="@+id/time_SeasonR"
         app:layout_goneMarginTop="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

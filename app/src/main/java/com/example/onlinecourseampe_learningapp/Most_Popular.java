@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +33,15 @@ public class Most_Popular extends AppCompatActivity {
     private TextView textMentor1;
     private EditText eSearsh1;
     private String searchQuery1;
-    private CourseAdapter courseAdapter1;
-    private List<Course> teacherList1;
+    private SeasonAdapter seasonAdapter1;
+    private List<Season> expertList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_most_popular);
 
-        recyclerView1 = findViewById(R.id.rv_teachers1);
+        recyclerView1 = findViewById(R.id.rv_experts1);
         t_sory1 = findViewById(R.id.sorry1);
         t_found1 = findViewById(R.id.found1);
         imageFound1 = findViewById(R.id.imageView81);
@@ -59,9 +61,9 @@ public class Most_Popular extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 searchQuery1 = eSearsh1.getText().toString().trim();
                 if (searchQuery1 != null && !searchQuery1.isEmpty()) {
-                    searchCourses(searchQuery1);
+                    searchSeasons(searchQuery1);
                 } else {
-                    loadCourses();
+                    loadSeasons();
                 }
             }
 
@@ -76,14 +78,14 @@ public class Most_Popular extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        courseAdapter1 = new CourseAdapter(this, new ArrayList<>(), user);
+        seasonAdapter1 = new SeasonAdapter(this,new ArrayList<>(), user);
         myViewModel1 = new ViewModelProvider(this).get(My_View_Model.class);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView1.setLayoutManager(layoutManager);
-        recyclerView1.setAdapter(courseAdapter1);
+        recyclerView1.setAdapter(seasonAdapter1);
 
-        loadCourses();
+        loadSeasons();
 
         searchIcon1.setOnClickListener(v -> {
             searchIcon1.setVisibility(View.GONE);
@@ -96,14 +98,14 @@ public class Most_Popular extends AppCompatActivity {
             eSearsh1.setVisibility(View.GONE);
             searchIcon1.setVisibility(View.VISIBLE);
             textMentor1.setVisibility(View.VISIBLE);
-            loadCourses();
+            loadSeasons();
         });
     }
 
-    private void searchCourses(String query) {
-        myViewModel1.searchCourses(query).observe(this, courses -> {
-            if (courses != null && !courses.isEmpty()) {
-                courseAdapter1.setCourseList(courses);
+    private void searchSeasons(String query) {
+        myViewModel1.searchSeasons(query).observe(this, seasons -> {
+            if (seasons != null && !seasons.isEmpty()) {
+                seasonAdapter1.setSeasonList(seasons);
                 recyclerView1.setVisibility(View.VISIBLE);
                 t_sory1.setVisibility(View.GONE);
                 t_found1.setVisibility(View.GONE);
@@ -117,10 +119,10 @@ public class Most_Popular extends AppCompatActivity {
         });
     }
 
-    public void loadCourses() {
-        myViewModel1.getAllCourse().observe(this, courses -> {
-            if (courses != null && !courses.isEmpty()) {
-                courseAdapter1.setCourseList(courses);
+    public void loadSeasons() {
+        myViewModel1.getAllSeason().observe(this, seasons -> {
+            if (seasons != null && !seasons.isEmpty()) {
+                seasonAdapter1.setSeasonList(seasons);
                 recyclerView1.setVisibility(View.VISIBLE);
                 t_sory1.setVisibility(View.GONE);
                 t_found1.setVisibility(View.GONE);

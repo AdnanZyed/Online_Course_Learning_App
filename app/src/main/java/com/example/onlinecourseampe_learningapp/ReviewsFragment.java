@@ -24,12 +24,14 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReviewsFragment extends Fragment {
     private My_View_Model myViewModel;
-    String student_name;
+    String farmer_name;
     byte[] bytes;
     ImageView imageView;
     RecyclerView recyclerView;
@@ -54,7 +56,7 @@ public class ReviewsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_reviews, container, false);
         myViewModel = new ViewModelProvider(requireActivity()).get(My_View_Model.class);
-        imageView = view.findViewById(R.id.image_student);
+        imageView = view.findViewById(R.id.image_farmer);
         edit_Comment = view.findViewById(R.id.edit_comment);
         total_Comments = view.findViewById(R.id.total_comments);
         total_Rating = view.findViewById(R.id.total_rating);
@@ -64,18 +66,18 @@ public class ReviewsFragment extends Fragment {
 
 
         Bundle bundle1 = getArguments();
-        int courseInt = bundle1.getInt("COURSE_ID1");
+        int seasonInt = bundle1.getInt("COURSE_ID1");
         String user = bundle1.getString("USER_ST");
 
 
-        myViewModel.getAllStudentByUser(user).observe(getViewLifecycleOwner(), students -> {
+        myViewModel.getAllFarmerByUser(user).observe(getViewLifecycleOwner(), farmers -> {
 
-            if (!students.isEmpty() && students != null) {
-                Student student = students.get(0);
-                student_name = student.getS_name().toString();
+            if (!farmers.isEmpty() && farmers != null) {
+                Farmer farmer = farmers.get(0);
+                farmer_name = farmer.getS_name().toString();
 
 
-                bytes = student.getS_Image();
+                bytes = farmer.getS_Image();
                 if (bytes != null) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     imageView.setImageBitmap(bitmap);
@@ -85,14 +87,14 @@ public class ReviewsFragment extends Fragment {
             }
 
         });
-        myViewModel.getStudentsByCourseAndStudent(user, courseInt).observe((LifecycleOwner) requireContext(), studentCourses -> {
-            if (!studentCourses.isEmpty() && studentCourses != null) {
+        myViewModel.getFarmersBySeasonAndFarmer(user, seasonInt).observe((LifecycleOwner) requireContext(), farmerSeasons -> {
+            if (!farmerSeasons.isEmpty() && farmerSeasons != null) {
 
-                rating = studentCourses.get(0).getRating();
+                rating = farmerSeasons.get(0).getRating();
             }
 
         });
-        myViewModel.getAllReviewsByCourseId(courseInt).observe(requireActivity(), reviews -> {
+        myViewModel.getAllReviewsBySeasonId(seasonInt).observe(requireActivity(), reviews -> {
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -140,9 +142,9 @@ public class ReviewsFragment extends Fragment {
                 String formattedDate = now.format(formatter);
 
 
-                Course_Reviews review = new Course_Reviews(0, bytes, student_name, user,
+                Season_Reviews review = new Season_Reviews(0, bytes, farmer_name, user,
                         edit_Comment.getText().toString(),
-                        formattedDate, 0, courseInt, rating, false);
+                        formattedDate, 0, seasonInt, rating, false);
                 myViewModel.insertReview(review);
 
                 edit_Comment.setText(null);

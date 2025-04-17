@@ -14,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.onlinecourseampe_learningapp.databinding.ActivitySignUpBinding;
+import com.example.onlineSeasonampe_learningapp.R;
+import com.example.onlineSeasonampe_learningapp.databinding.ActivitySignUpBinding;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -31,12 +32,12 @@ public class Sign_up extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String mVerificationId;
-    private String student_name_user;
-    private Student student;
-    private ArrayList<Student> students1;
+    private String farmer_name_user;
+    private Farmer farmer;
+    private ArrayList<Farmer> farmers1;
     private String ePasswordIn;
     private String PhoneIn;
-    private LiveData<List<Student>> studentU;
+    private LiveData<List<Farmer>> farmerU;
     private ActivitySignUpBinding activitySignUpBinding;
     private My_View_Model myViewModel;
     private String nameIn;
@@ -118,7 +119,7 @@ public class Sign_up extends AppCompatActivity {
                 ePasswordIn = activitySignUpBinding.ePassword.getText().toString().trim();
                 PhoneIn = activitySignUpBinding.Phone.getText().toString().trim();
                 nameIn = activitySignUpBinding.name.getText().toString().trim();
-                studentU = myViewModel.getAllStudentByUser(eUserIn);
+                farmerU = myViewModel.getAllFarmerByUser(eUserIn);
 
 
 
@@ -196,13 +197,13 @@ public class Sign_up extends AppCompatActivity {
                     return;
                 }
 
-                myViewModel.getAllStudentByUser(eUserIn).observe(Sign_up.this, students -> {
+                myViewModel.getAllFarmerByUser(eUserIn).observe(Sign_up.this, farmers -> {
 
 
-                    if ( students.isEmpty()) {
+                    if ( farmers.isEmpty()) {
                         int phoneIn = Integer.parseInt(PhoneIn);
-                        student = new Student(eUserIn, ePasswordIn, phoneIn, 1234, nameIn, null, "");
-                        myViewModel.insertStudent(student);
+                        farmer = new Farmer(eUserIn, ePasswordIn, phoneIn, 1234, nameIn, null, "");
+                        myViewModel.insertFarmer(farmer);
 
 
                         Intent intent = new Intent(Sign_up.this, MainActivity_Main.class);

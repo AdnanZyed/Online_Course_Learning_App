@@ -1,6 +1,5 @@
 package com.example.onlinecourseampe_learningapp;
 
-
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
@@ -12,39 +11,39 @@ import java.util.concurrent.Executors;
 
 public class My_Repository {
 
-    private StudentLessonDao studentLessonDao;
+    private FarmerStepDao farmerStepDao;
 
-    private Student_Course_Dao studentCourseDao;
-    private Student_Teacher_Dao studentTeacherDao;
-    private Teacher_Dao teacherDao;
-    private Student_Dao studentDao;
-    private Course_Dao courseDao;
-    private CourseReviewsDao courseReviewsDao;
-    private TeacherReviewsDao teacherReviewsDao;
-    private CourseLessonsDao courseLessonsDao;
+    private Farmer_Season_Dao farmerSeasonDao;
+    private Farmer_Expert_Dao farmerExpertDao;
+    private Expert_Dao expertDao;
+    private Farmer_Dao farmerDao;
+    private Season_Dao seasonDao;
+    private SeasonReviewsDao seasonReviewsDao;
+    private ExpertReviewsDao expertReviewsDao;
+    private SeasonStepsDao seasonStepsDao;
     private final NotificationDao notificationDao;
     private final LiveData<List<Notification>> allNotifications;
     private final MessageDao messageDao;
     private final ExecutorService executorService;
 
-    private LiveData<List<Teacher>> AllTeacher;
-    private LiveData<List<Student>> AllStudents;
-    private LiveData<List<Course>> AllCourse;
+    private LiveData<List<Expert>> AllExpert;
+    private LiveData<List<Farmer>> AllFarmers;
+    private LiveData<List<Season>> AllSeason;
 
 
     My_Repository(Application application) {
         My_Database db = My_Database.getDatabase(application);
-        studentDao = db.studentDao();
-        courseDao = db.courseDao();
-        teacherDao = db.teacherDao();
-        courseReviewsDao = db.courseReviewsDao();
-        teacherReviewsDao = db.teacherReviewsDao();
-        studentCourseDao = db.studentCourseDao();
-        studentTeacherDao = db.studentTeacherDao();
-        courseLessonsDao = db.courseLessonsDao();
+        farmerDao = db.farmerDao();
+        seasonDao = db.seasonDao();
+        expertDao = db.expertDao();
+        seasonReviewsDao = db.seasonReviewsDao();
+        expertReviewsDao = db.expertReviewsDao();
+        farmerSeasonDao = db.farmerSeasonDao();
+        farmerExpertDao = db.farmerExpertDao();
+        seasonStepsDao = db.seasonStepsDao();
         messageDao = db.messageDao();
         executorService = Executors.newSingleThreadExecutor();
-        this.studentLessonDao = db.studentLessonDao();
+        this.farmerStepDao = db.farmerStepDao();
         notificationDao = db.notificationDao();
         allNotifications = notificationDao.getAllNotifications();
 
@@ -59,26 +58,26 @@ public class My_Repository {
         executorService.execute(() -> notificationDao.insert(notification));
     }
 
-    public void insertStudentLesson(StudentLesson studentLesson) {
+    public void insertFarmerStep(FarmerStep farmerStep) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentLessonDao.insertStudentLesson(studentLesson);
+            farmerStepDao.insertFarmerStep(farmerStep);
         });
     }
 
-    public void deleteStudentLesson(String studentUserName, int lessonId) {
+    public void deleteFarmerStep(String farmerUserName, int stepId) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentLessonDao.deleteStudentLesson(studentUserName, lessonId);
+            farmerStepDao.deleteFarmerStep(farmerUserName, stepId);
         });
     }
 
-    public void updateCompletionStatus(String studentUserName, int lessonId, boolean completed) {
+    public void updateCompletionStatus(String farmerUserName, int stepId, boolean completed) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentLessonDao.updateCompletionStatus(studentUserName, lessonId, completed);
+            farmerStepDao.updateCompletionStatus(farmerUserName, stepId, completed);
         });
     }
 
-    public LiveData<List<StudentLesson>> getCompletedLessonsForStudent(String studentUserName) {
-        return studentLessonDao.getCompletedLessonsForStudent(studentUserName);
+    public LiveData<List<FarmerStep>> getCompletedStepsForFarmer(String farmerUserName) {
+        return farmerStepDao.getCompletedStepsForFarmer(farmerUserName);
     }
 
 
@@ -94,397 +93,397 @@ public class My_Repository {
         return messageDao.getLastMessageForUser(username);
     }
 
-    public LiveData<List<Student>> getAllStudentsExceptCurrent(String currentUsername) {
-        return studentDao.getAllStudentsExcept(currentUsername);
+    public LiveData<List<Farmer>> getAllFarmersExceptCurrent(String currentUsername) {
+        return farmerDao.getAllFarmersExcept(currentUsername);
     }
 
-    public LiveData<Integer> getTotalLessonsCountByCourseId(int courseId) {
+    public LiveData<Integer> getTotalStepsCountBySeasonId(int seasonId) {
         MutableLiveData<Integer> result = new MutableLiveData<>();
         Executors.newSingleThreadExecutor().execute(() -> {
-            int count = courseLessonsDao.getTotalLessonsCountByCourseId(courseId);
+            int count = seasonStepsDao.getTotalStepsCountBySeasonId(seasonId);
             result.postValue(count);
         });
         return result;
     }
 
-    public LiveData<Integer> getCompletedLessonsCountByCourseId(int courseId) {
+    public LiveData<Integer> getCompletedStepsCountBySeasonId(int seasonId) {
         MutableLiveData<Integer> result = new MutableLiveData<>();
         Executors.newSingleThreadExecutor().execute(() -> {
-            int count = courseLessonsDao.getCompletedLessonsCountByCourseId(courseId);
+            int count = seasonStepsDao.getCompletedStepsCountBySeasonId(seasonId);
             result.postValue(count);
         });
         return result;
     }
 
-    public LiveData<Integer> getTotalLessonsTimeByCourseId(int courseId) {
+    public LiveData<Integer> getTotalStepsTimeBySeasonId(int seasonId) {
         MutableLiveData<Integer> result = new MutableLiveData<>();
         Executors.newSingleThreadExecutor().execute(() -> {
-            int totalTime = courseLessonsDao.getTotalLessonsTimeByCourseId(courseId);
+            int totalTime = seasonStepsDao.getTotalStepsTimeBySeasonId(seasonId);
             result.postValue(totalTime);
         });
         return result;
     }
 
-    public void insertCourseLesson(CourseLessons courseLesson) {
+    public void insertSeasonStep(SeasonStep seasonStep) {
         My_Database.databaseWriteExecutor.execute(() -> {
 
-            courseLessonsDao.insert(courseLesson);
+            seasonStepsDao.insert(seasonStep);
 
         });
 
     }
 
 
-    public void updateCourseLesson(CourseLessons courseLesson) {
+    public void updateSeasonStep(SeasonStep seasonStep) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            courseLessonsDao.update(courseLesson);
+            seasonStepsDao.update(seasonStep);
 
         });
 
 
     }
 
-    public LiveData<Integer> getTotalLessonsCount() {
-        MutableLiveData<Integer> totalLessonsCount = new MutableLiveData<>();
+    public LiveData<Integer> getTotalStepsCount() {
+        MutableLiveData<Integer> totalStepsCount = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            totalLessonsCount.postValue(courseLessonsDao.getTotalLessonsCount());
+            totalStepsCount.postValue(seasonStepsDao.getTotalStepsCount());
         });
-        return totalLessonsCount;
+        return totalStepsCount;
     }
 
-    public LiveData<Integer> getCompletedLessonsCount() {
-        MutableLiveData<Integer> completedLessonsCount = new MutableLiveData<>();
+    public LiveData<Integer> getCompletedStepsCount() {
+        MutableLiveData<Integer> completedStepsCount = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            completedLessonsCount.postValue(courseLessonsDao.getCompletedLessonsCount());
+            completedStepsCount.postValue(seasonStepsDao.getCompletedStepsCount());
         });
-        return completedLessonsCount;
+        return completedStepsCount;
     }
 
-    public LiveData<Integer> getTotalLessonsTime() {
-        MutableLiveData<Integer> totalLessonsTime = new MutableLiveData<>();
+    public LiveData<Integer> getTotalStepsTime() {
+        MutableLiveData<Integer> totalStepsTime = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            totalLessonsTime.postValue(courseLessonsDao.getTotalLessonsTime());
+            totalStepsTime.postValue(seasonStepsDao.getTotalStepsTime());
         });
-        return totalLessonsTime;
+        return totalStepsTime;
     }
 
 
-    public void deleteCourseLesson(CourseLessons courseLesson) {
+    public void deleteSeasonStep(SeasonStep seasonStep) {
         My_Database.databaseWriteExecutor.execute(() -> {
 
-            courseLessonsDao.delete(courseLesson);
-        });
-    }
-
-    public LiveData<List<CourseLessons>> getLessonsByCourseId(int courseId) {
-        return courseLessonsDao.getLessonsByCourseId(courseId);
-    }
-
-    public void updateLessonCompletionStatus(int lessonId, boolean isCompleted) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-
-            courseLessonsDao.updateLessonCompletionStatus(lessonId, isCompleted);
-        });
-
-    }
-
-    void insertReview(Course_Reviews review) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-            courseReviewsDao.insertReview(review);
+            seasonStepsDao.delete(seasonStep);
         });
     }
 
-    void updateReviewByStudent(String studentUserName, String newComment, float newRating) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-            courseReviewsDao.updateReviewByStudent(studentUserName, newComment, newRating);
-        });
+    public LiveData<List<SeasonStep>> getStepsBySeasonId(int seasonId) {
+        return seasonStepsDao.getStepsBySeasonId(seasonId);
     }
 
-    void deleteReviewByStudent(String studentUserName) {
+    public void updateStepCompletionStatus(int stepId, boolean isCompleted) {
         My_Database.databaseWriteExecutor.execute(() -> {
 
-            courseReviewsDao.deleteReviewByStudent(studentUserName);
-        });
-    }
-
-    public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
-        return courseReviewsDao.getAllReviewsByCourseId(courseId);
-    }
-
-
-    void insertReviewT(Teacher_Reviews review) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-            teacherReviewsDao.insertReviewT(review);
-        });
-    }
-
-
-    void updateReviewByStudentT(String studentUserName, String newComment, float newRating) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-            teacherReviewsDao.updateReviewByStudentT(studentUserName, newComment, newRating);
-        });
-    }
-
-    void deleteReviewByStudentT(String studentUserName) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-
-            teacherReviewsDao.deleteReviewByStudentT(studentUserName);
-        });
-    }
-
-    public LiveData<List<Teacher_Reviews>> getAllReviewsByCourseIdT(String teacher) {
-        return teacherReviewsDao.getAllReviewsByCourseIdT(teacher);
-    }
-
-    void updateCourse(Course course) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-            courseDao.updateCourse(course);
-
-
-        });
-
-
-    }
-
-    void insertCourse(Course course) {
-        My_Database.databaseWriteExecutor.execute(() -> {
-            courseDao.insertCourse(course);
-
-
+            seasonStepsDao.updateStepCompletionStatus(stepId, isCompleted);
         });
 
     }
 
-
-    void deleteCourse(Course course) {
+    void insertReview(Season_Reviews review) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            courseDao.deleteCourse(course);
+            seasonReviewsDao.insertReview(review);
+        });
+    }
+
+    void updateReviewByFarmer(String farmerUserName, String newComment, float newRating) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            seasonReviewsDao.updateReviewByFarmer(farmerUserName, newComment, newRating);
+        });
+    }
+
+    void deleteReviewByFarmer(String farmerUserName) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+
+            seasonReviewsDao.deleteReviewByFarmer(farmerUserName);
+        });
+    }
+
+    public LiveData<List<Season_Reviews>> getAllReviewsBySeasonId(int seasonId) {
+        return seasonReviewsDao.getAllReviewsBySeasonId(seasonId);
+    }
+
+
+    void insertReviewT(Expert_Reviews review) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            expertReviewsDao.insertReviewT(review);
+        });
+    }
+
+
+    void updateReviewByFarmerT(String farmerUserName, String newComment, float newRating) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            expertReviewsDao.updateReviewByFarmerT(farmerUserName, newComment, newRating);
+        });
+    }
+
+    void deleteReviewByFarmerT(String farmerUserName) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+
+            expertReviewsDao.deleteReviewByFarmerT(farmerUserName);
+        });
+    }
+
+    public LiveData<List<Expert_Reviews>> getAllReviewsBySeasonIdT(String expert) {
+        return expertReviewsDao.getAllReviewsBySeasonIdT(expert);
+    }
+
+    void updateSeason(Season season) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            seasonDao.updateSeason(season);
+
+
+        });
+
+
+    }
+
+    void insertSeason(Season season) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            seasonDao.insertSeason(season);
 
 
         });
 
     }
 
-    public LiveData<List<Course>> getBookmarkedCourses() {
-        return courseDao.getBookmarkedCourses();
-    }
 
-    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent(String studentUsername) {
-        return studentCourseDao.getBookmarkedCoursesByStudent(studentUsername);
-    }
-
-    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent1(String studentUsername, int courseId) {
-        return studentCourseDao.getBookmarkedCoursesByStudent1(studentUsername, courseId);
-
-    }
-
-    public LiveData<List<Student_Course>> getAddCartCoursesByStudent1(String studentUsername, int courseId) {
-        return studentCourseDao.getisAddCartCoursesByStudent1(studentUsername, courseId);
-    }
-
-    public LiveData<List<Student_Course>> getisRatingCoursesByStudent1(String studentUsername, int courseId) {
-        return studentCourseDao.getisRatingCoursesByStudent1(studentUsername, courseId);
-    }
-
-    public LiveData<List<Student_Course>> getisRegisterCoursesByStudent1(String studentUsername) {
-        return studentCourseDao.getisRegisterCoursesByStudent1(studentUsername);
-    }
-
-    public LiveData<List<Student_Course>> getisAddCartCoursesByStudent(String studentUsername) {
-        return studentCourseDao.getisAddCartCoursesByStudent(studentUsername);
-    }
-
-    public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
-        courseDao.updateBookmarkStatus(courseId, isBookmarked);
-        return courseDao.getAllCourse();
-    }
-
-    public LiveData<List<Course>> updateisAddCartStatusAndGetCourses(int courseId, boolean isAddCart) {
-        courseDao.updateBookmarkStatus(courseId, isAddCart);
-        return courseDao.getAllCourse();
-    }
-
-
-    LiveData<List<Course>> getAllCourse() {
-        return courseDao.getAllCourse();
-    }
-
-    LiveData<List<Course>> getAllCoursesById(int id) {
-
-
-        return courseDao.getAllCoursesById(id);
-    }
-
-    LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
-
-
-        return courseDao.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
-    }
-
-
-    public LiveData<List<Course>> getCoursesByCategory(String category) {
-        return courseDao.getCoursesByCategory(category);
-    }
-
-    public boolean isStudentCourseExists(String studentUsername, int courseId, boolean isRegister) {
-        return studentCourseDao.isStudentCourseExists(studentUsername, courseId, isRegister) > 0;
-    }
-
-    public boolean isStudentCourseExists1(String studentUsername, int courseId, boolean isAddCart) {
-        return studentCourseDao.isStudentCourseExists1(studentUsername, courseId, isAddCart) > 0;
-    }
-
-    public boolean isStudentCourseExistsB(String studentUsername, int courseId, boolean isBookmark) {
-        return studentCourseDao.isStudentCourseExistsB(studentUsername, courseId, isBookmark) > 0;
-    }
-
-    public void insertStudentCourse(Student_Course studentCourse) {
+    void deleteSeason(Season season) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentCourseDao.insertStudentCourse(studentCourse);
+            seasonDao.deleteSeason(season);
+
+
         });
-    } public void deleteStudentCourse(Student_Course studentCourse) {
+
+    }
+
+    public LiveData<List<Season>> getBookmarkedSeasons() {
+        return seasonDao.getBookmarkedSeasons();
+    }
+
+    public LiveData<List<Farmer_Seasons>> getBookmarkedSeasonsByFarmer(String farmerUsername) {
+        return farmerSeasonDao.getBookmarkedSeasonsByFarmer(farmerUsername);
+    }
+
+    public LiveData<List<Farmer_Seasons>> getBookmarkedSeasonsByFarmer1(String farmerUsername, int seasonId) {
+        return farmerSeasonDao.getBookmarkedSeasonsByFarmer1(farmerUsername, seasonId);
+
+    }
+
+    public LiveData<List<Farmer_Seasons>> getAddCartSeasonsByFarmer1(String farmerUsername, int seasonId) {
+        return farmerSeasonDao.getisAddCartSeasonsByFarmer1(farmerUsername, seasonId);
+    }
+
+    public LiveData<List<Farmer_Seasons>> getisRatingSeasonsByFarmer1(String farmerUsername, int seasonId) {
+        return farmerSeasonDao.getisRatingSeasonsByFarmer1(farmerUsername, seasonId);
+    }
+
+    public LiveData<List<Farmer_Seasons>> getisRegisterSeasonsByFarmer1(String farmerUsername) {
+        return farmerSeasonDao.getisRegisterSeasonsByFarmer1(farmerUsername);
+    }
+
+    public LiveData<List<Farmer_Seasons>> getisAddCartSeasonsByFarmer(String farmerUsername) {
+        return farmerSeasonDao.getisAddCartSeasonsByFarmer(farmerUsername);
+    }
+
+    public LiveData<List<Season>> updateBookmarkStatusAndGetSeasons(int seasonId, boolean isBookmarked) {
+        seasonDao.updateBookmarkStatus(seasonId, isBookmarked);
+        return seasonDao.getAllSeason();
+    }
+
+    public LiveData<List<Season>> updateisAddCartStatusAndGetSeasons(int seasonId, boolean isAddCart) {
+        seasonDao.updateBookmarkStatus(seasonId, isAddCart);
+        return seasonDao.getAllSeason();
+    }
+
+
+    LiveData<List<Season>> getAllSeason() {
+        return seasonDao.getAllSeason();
+    }
+
+    LiveData<List<Season>> getAllSeasonsById(int id) {
+
+
+        return seasonDao.getAllSeasonsById(id);
+    }
+
+    LiveData<List<Season>> getAllSeasonsByExpert_USER_Name(String Expert_USER_Name) {
+
+
+        return seasonDao.getAllSeasonsByExpert_USER_Name(Expert_USER_Name);
+    }
+
+
+    public LiveData<List<Season>> getSeasonsByCategory(String category) {
+        return seasonDao.getSeasonByCategory(category);
+    }
+
+    public boolean isFarmerSeasonExists(String farmerUsername, int seasonId, boolean isRegister) {
+        return farmerSeasonDao.isFarmerSeasonExists(farmerUsername, seasonId, isRegister) > 0;
+    }
+
+    public boolean isFarmerSeasonExists1(String farmerUsername, int seasonId, boolean isAddCart) {
+        return farmerSeasonDao.isFarmerSeasonExists1(farmerUsername, seasonId, isAddCart) > 0;
+    }
+
+    public boolean isFarmerSeasonExistsB(String farmerUsername, int seasonId, boolean isBookmark) {
+        return farmerSeasonDao.isFarmerSeasonExistsB(farmerUsername, seasonId, isBookmark) > 0;
+    }
+
+    public void insertFarmerSeason(Farmer_Seasons farmerSeason) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentCourseDao.deleteStudentCourse(studentCourse);
+            farmerSeasonDao.insertFarmerSeason(farmerSeason);
+        });
+    } public void deleteFarmerSeason(Farmer_Seasons farmerSeason) {
+        My_Database.databaseWriteExecutor.execute(() -> {
+            farmerSeasonDao.deleteFarmerSeason(farmerSeason);
         });
     }
 
-    public void updateCourseStudent(Student_Course studentCourse) {
+    public void updateSeasonFarmer(Farmer_Seasons farmerSeason) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentCourseDao.updateCourseStudent(studentCourse);
+            farmerSeasonDao.updateSeasonFarmer(farmerSeason);
         });
     }
 
-    public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId) {
+    public LiveData<Void> deleteFarmerSeasonByUserAndSeason(String farmerUsername, int seasonId) {
         MutableLiveData<Void> result = new MutableLiveData<>();
 
         executorService.execute(() -> {
-            studentCourseDao.deleteStudentCourseByUserAndCourse(studentUsername, courseId);
+            farmerSeasonDao.deleteFarmerSeasonByUserAndSeason(farmerUsername, seasonId);
             result.postValue(null);
         });
         return result;
 
-    }    public LiveData<Void> delete1StudentCourseByUserAndCourse(String studentUsername, int courseId) {
+    }    public LiveData<Void> delete1FarmerSeasonByUserAndSeason(String farmerUsername, int seasonId) {
         MutableLiveData<Void> result = new MutableLiveData<>();
 
         executorService.execute(() -> {
-            studentCourseDao.delete1StudentCourseByUserAndCourse(studentUsername, courseId);
+            farmerSeasonDao.delete1FarmerSeasonByUserAndSeason(farmerUsername, seasonId);
             result.postValue(null);
         });
         return result;
 
     }
 
-    public LiveData<List<Student_Course>> getCoursesByStudent(String studentUsername) {
-        return studentCourseDao.getCoursesByStudent(studentUsername);
+    public LiveData<List<Farmer_Seasons>> getSeasonsByFarmer(String farmerUsername) {
+        return farmerSeasonDao.getSeasonsByFarmer(farmerUsername);
     }
 
-    public LiveData<List<Student_Course>> getStudentsByCourse(int courseId) {
-        return studentCourseDao.getStudentsByCourse(courseId);
+    public LiveData<List<Farmer_Seasons>> getFarmersBySeason(int seasonId) {
+        return farmerSeasonDao.getFarmersBySeason(seasonId);
     }
 
-    public LiveData<List<Student_Course>> getStudentsByCourseAndStudent(String user, int courseId) {
-        return studentCourseDao.getStudentsByCourseAndStudent(user, courseId);
+    public LiveData<List<Farmer_Seasons>> getFarmersBySeasonAndFarmer(String user, int seasonId) {
+        return farmerSeasonDao.getFarmersBySeasonAndFarmer(user, seasonId);
     }
 
-    public LiveData<List<Course>> getCoursesByIds(List<Integer> courseIds) {
-        return courseDao.getCoursesByIds(courseIds);
+    public LiveData<List<Season>> getSesonsByIds(List<Integer> seasonIds) {
+        return seasonDao.getSeasonsByIds(seasonIds);
     }
 
-    void insertStudent(Student student) {
+    void insertFarmer(Farmer farmer) {
         My_Database.databaseWriteExecutor.execute(() -> {
 
-            studentDao.insertStudent(student);
+            farmerDao.insertFarmer(farmer);
 
 
         });
     }
 
-    void updateStudent(Student student) {
+    void updateFarmer(Farmer farmer) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentDao.updateStudent(student);
+            farmerDao.updateFarmer(farmer);
 
 
         });
     }
 
-    void deleteStudent(Student student) {
+    void deleteFarmer(Farmer farmer) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentDao.deleteStudent(student);
+            farmerDao.deleteFarmer(farmer);
 
 
         });
     }
 
-    LiveData<List<Student>> getAllStudent() {
+    LiveData<List<Farmer>> getAllFarmer() {
 
-        return studentDao.getAllStudents();
+        return farmerDao.getAllFarmers();
     }
 
-    LiveData<List<Student>> getStudentByUsernameAndPassword(String username, String password) {
-        return studentDao.getStudentByUsernameAndPassword(username, password);
+    LiveData<List<Farmer>> getFarmerByUsernameAndPassword(String username, String password) {
+        return farmerDao.getFarmerByUsernameAndPassword(username, password);
     }
 
-    LiveData<List<Student>> getAllStudentByUser(String student_user_name) {
+    LiveData<List<Farmer>> getAllFarmerByUser(String farmer_user_name) {
 
-        return studentDao.getAllStudentsByUser(student_user_name);
+        return farmerDao.getAllFarmersByUser(farmer_user_name);
     }
 
 
-    void insertTeacher(Teacher teacher) {
+    void insertExpert(Expert expert) {
         My_Database.databaseWriteExecutor.execute(() -> {
 
-            teacherDao.insertTeacher(teacher);
+            expertDao.insertExpert(expert);
 
 
         });
     }
 
-    void updateTeacher(Teacher teacher) {
+    void updateExpert(Expert expert) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            teacherDao.updateTeacher(teacher);
+            expertDao.updateExpert(expert);
 
 
         });
     }
 
-    void deleteTeacher(Teacher teacher) {
+    void deleteExpert(Expert expert) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            teacherDao.deleteTeacher(teacher);
+            expertDao.deleteExpert(expert);
 
 
         });
     }
 
-    LiveData<List<Teacher>> getAllTeacher() {
+    LiveData<List<Expert>> getAllExpert() {
 
-        return teacherDao.getAllTeachers();
+        return expertDao.getAllExperts();
     }
 
-    public LiveData<List<Teacher>> searchTeachers(String teacherName) {
-        return teacherDao.getTeacherByName("%" + teacherName + "%");
+    public LiveData<List<Expert>> searchExperts(String expertName) {
+        return expertDao.getExpertByName("%" + expertName + "%");
     }
 
-    public LiveData<List<Course>> searchCourses(String courseName) {
-        return courseDao.getCourseName("%" + courseName + "%");
+    public LiveData<List<Season>> searchSeasons(String seasonName) {
+        return seasonDao.getSeasonName("%" + seasonName + "%");
     }
 
-    LiveData<List<Teacher>> getAllTeacherByUser(String Teatur_USER_Name) {
+    LiveData<List<Expert>> getAllExpertByUser(String Teatur_USER_Name) {
 
-        return teacherDao.getAllTeachersByUser(Teatur_USER_Name);
+        return expertDao.getAllExpertsByUser(Teatur_USER_Name);
     }
 
-    public void insertStudentTeacher(Student_Teacher studentTeacher) {
+    public void insertFarmerExpert(Farmer_Expert farmerExpert) {
         My_Database.databaseWriteExecutor.execute(() -> {
-            studentTeacherDao.insertStudentTeacher(studentTeacher);
+            farmerExpertDao.insertFarmerExpert(farmerExpert);
         });
     }
 
-    public LiveData<List<Student_Teacher>> getTeachersByStudent(String studentUsername) {
-        return studentTeacherDao.getTeachersByStudent(studentUsername);
+    public LiveData<List<Farmer_Expert>> getExpertsByFarmer(String farmerUsername) {
+        return farmerExpertDao.getExpertsByFarmer(farmerUsername);
     }
 
-    public LiveData<List<Student_Teacher>> getStudentsByTeacher(String teacherUsername) {
-        return studentTeacherDao.getStudentsByTeacher(teacherUsername);
+    public LiveData<List<Farmer_Expert>> getFarmersByExpert(String expertUsername) {
+        return farmerExpertDao.getFarmersByExpert(expertUsername);
     }
 
 }

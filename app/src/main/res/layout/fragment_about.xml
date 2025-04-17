@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/iv_teacher_image13"
+        android:id="@+id/iv_expert_image13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
@@ -47,26 +47,26 @@
 
 
     <TextView
-        android:id="@+id/teacher_name1"
+        android:id="@+id/expert_name1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Teacher Name"
+        android:text="Expert Name"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image13"
-        app:layout_constraintTop_toTopOf="@+id/iv_teacher_image13" />
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image13"
+        app:layout_constraintTop_toTopOf="@+id/iv_expert_image13" />
 
     <TextView
-        android:id="@+id/teacher_magor"
+        android:id="@+id/expert_magor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Teacher magor"
+        android:text="Expert magor"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image13"
-        app:layout_constraintTop_toBottomOf="@+id/teacher_name1" />
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image13"
+        app:layout_constraintTop_toBottomOf="@+id/expert_name1" />
 
     <ImageView
         android:id="@+id/message_btn"
@@ -75,21 +75,21 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/chat"
 
-        app:layout_constraintBottom_toBottomOf="@+id/teacher_magor"
+        app:layout_constraintBottom_toBottomOf="@+id/expert_magor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/teacher_name1" />
+        app:layout_constraintTop_toTopOf="@+id/expert_name1" />
 
     <TextView
-        android:id="@+id/about_course"
+        android:id="@+id/about_Season"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:text="About Course"
+        android:text="About Season"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_teacher_image13" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_expert_image13" />
 
     <TextView
         android:id="@+id/description"
@@ -99,7 +99,7 @@
         android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_course"
+        app:layout_constraintTop_toBottomOf="@+id/about_Season"
 
 
         />

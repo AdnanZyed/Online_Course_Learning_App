@@ -10,12 +10,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class Tab_profile_Adapter
         extends FragmentStateAdapter {
-    private final String teacherUserName;
+    private final String expertUserName;
     private final String user;
 
-    public Tab_profile_Adapter(@NonNull FragmentActivity fragmentActivity, String teacherUserName, String user) {
+    public Tab_profile_Adapter(@NonNull FragmentActivity fragmentActivity, String expertUserName, String user) {
         super(fragmentActivity);
-        this.teacherUserName = teacherUserName;
+        this.expertUserName = expertUserName;
         this.user = user;
     }
 
@@ -27,31 +27,31 @@ public class Tab_profile_Adapter
             case 0:
 
                 // AboutFragment
-                CoursesProfileFragment coursesProfileFragment = new CoursesProfileFragment();
+                SeasonsProfileFragment seasonsProfileFragment = new SeasonsProfileFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("TEACHER_USER_NAME1", teacherUserName);
-                coursesProfileFragment.setArguments(bundle);
-                return coursesProfileFragment;
+                bundle.putString("TEACHER_USER_NAME1", expertUserName);
+                seasonsProfileFragment.setArguments(bundle);
+                return seasonsProfileFragment;
 
             case 1:
-                StudentsFragment studentsFragment = new StudentsFragment();
+                FarmersFragment farmersFragment = new FarmersFragment();
                 Bundle bundle2 = new Bundle();
-                bundle2.putString("TEACHER_USER_NAME1", teacherUserName);
-                studentsFragment.setArguments(bundle2);
-                return studentsFragment;
+                bundle2.putString("TEACHER_USER_NAME1", expertUserName);
+                farmersFragment.setArguments(bundle2);
+                return farmersFragment;
             case 2:
-                ReviewsTeacherFragment reviewsTeacherFragment = new ReviewsTeacherFragment();
+                ReviewsExpertFragment reviewsExpertFragment = new ReviewsExpertFragment();
                 Bundle bundle3 = new Bundle();
-                bundle3.putString("TEACHER_USER_NAME1", teacherUserName);
+                bundle3.putString("TEACHER_USER_NAME1", expertUserName);
                 bundle3.putString("STUDENT_USER_NAME1", user);
-                reviewsTeacherFragment.setArguments(bundle3);
-                return reviewsTeacherFragment;
+                reviewsExpertFragment.setArguments(bundle3);
+                return reviewsExpertFragment;
             default:
-                CoursesProfileFragment coursesProfileFragment1 = new CoursesProfileFragment();
+                SeasonsProfileFragment seasonsProfileFragment1 = new SeasonsProfileFragment();
                 Bundle bundle1 = new Bundle();
-                bundle1.putString("TEACHER_USER_NAME1", teacherUserName);
-                coursesProfileFragment1.setArguments(bundle1);
-                return coursesProfileFragment1;
+                bundle1.putString("TEACHER_USER_NAME1", expertUserName);
+                seasonsProfileFragment1.setArguments(bundle1);
+                return seasonsProfileFragment1;
         }
     }
 

@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialog_main_text1">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/iv_teacher_image10"
+            android:id="@+id/iv_expert_image10"
             android:layout_width="130dp"
             android:layout_height="130dp"
             app:cardCornerRadius="20dp"
@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/iv_course_imageD"
+                android:id="@+id/iv_Season_imageD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -69,20 +69,20 @@
             android:layout_margin="15dp"
             android:text="Categorie"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_teacher_image10"
+            app:layout_constraintStart_toEndOf="@+id/iv_expert_image10"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/tv_course_nameD"
+            android:id="@+id/tv_Season_nameD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Course Name"
+            android:text="Season Name"
 
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_teacher_image10"
+            app:layout_constraintStart_toEndOf="@+id/iv_expert_image10"
             app:layout_constraintTop_toBottomOf="@id/tv_categorieD"
             tools:layout_editor_absoluteY="10dp" />
 
@@ -95,8 +95,8 @@
             android:text="Price"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_teacher_image10"
-            app:layout_constraintTop_toBottomOf="@id/tv_course_nameD" />
+            app:layout_constraintStart_toEndOf="@+id/iv_expert_image10"
+            app:layout_constraintTop_toBottomOf="@id/tv_Season_nameD" />
 
         <ImageView
             android:id="@+id/bookmarkIconD"
@@ -110,7 +110,7 @@
 
 
     <Button
-        android:id="@+id/btn_view_course1"
+        android:id="@+id/btn_view_Season1"
         android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -11,11 +12,11 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/img"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/img"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.onlinecourseampe_learningapp"
+        android:theme="@style/Theme.onlineSeasonampe_learningapp"
         tools:targetApi="31">
         <activity
             android:name=".CallActivity"
@@ -36,27 +37,27 @@
             android:name=".ChatMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateCourse"
+            android:name=".UpdateSeason"
             android:exported="false" />
         <activity
-            android:name=".UpdateCourse1"
+            android:name=".UpdateSeason1"
             android:exported="false" />
 
         <activity
-            android:name=".LessonsActivity"
+            android:name=".StepsActivity"
             android:exported="false" />
         <activity
             android:name=".EnrollCodeActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".EnrollCourseActivity"
+            android:name=".EnrollSeasonActivity"
             android:exported="false" />
         <activity
-            android:name=".TeacherProfileActivity"
+            android:name=".ExpertProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".CourseDetailsActivity"
+            android:name=".SeasonDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".BookmarkActivity"
@@ -68,10 +69,10 @@
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".Delete_Course"
+            android:name=".Delete_Season"
             android:exported="false" />
         <activity
-            android:name=".Add_New_Course"
+            android:name=".Add_New_Season"
             android:exported="false" />
         <activity
             android:name=".MainActivity_Admin"

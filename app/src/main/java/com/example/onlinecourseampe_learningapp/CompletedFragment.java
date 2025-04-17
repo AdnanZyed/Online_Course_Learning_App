@@ -2,7 +2,6 @@ package com.example.onlinecourseampe_learningapp;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,8 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -22,8 +22,8 @@ public class CompletedFragment extends Fragment {
     private My_View_Model viewModel;
     private String user;
     private int coursId;
-    private List<Course> ongoingCourses = new ArrayList<>();
-    private CoursesAdapter adapter;
+    private List<Season> ongoingSeasons = new ArrayList<>();
+    private SeasonsAdapter adapter;
 
     public CompletedFragment() {
     }
@@ -41,34 +41,34 @@ public class CompletedFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
-        adapter = new CoursesAdapter(ongoingCourses, requireContext(), user);
+        adapter = new SeasonsAdapter(ongoingSeasons, requireContext(), user);
         recyclerView.setAdapter(adapter);
 
-        loadOngoingCourses();
+        loadOngoingSeasons();
 
         return view;
     }
 
-    private void loadOngoingCourses() {
-        viewModel.getisRegisterCoursesByStudent1(user).observe(getViewLifecycleOwner(), studentCourses -> {
-            List<Integer> courseIds = new ArrayList<>();
-            for (Student_Course sc : studentCourses) {
-                courseIds.add(sc.getCourse_ID());
+    private void loadOngoingSeasons() {
+        viewModel.getisRegisterSeasonsByFarmer1(user).observe(getViewLifecycleOwner(), farmerSeasons -> {
+            List<Integer> seasonIds = new ArrayList<>();
+            for (Farmer_Seasons sc : farmerSeasons) {
+                seasonIds.add(sc.getSeason_ID());
             }
 
-            viewModel.getAllCoursesByIds(courseIds).observe(getViewLifecycleOwner(), courses -> {
-                List<Course> tempOngoingCourses = new ArrayList<>();
+            viewModel.getAllSeasonsByIds(seasonIds).observe(getViewLifecycleOwner(), seasons -> {
+                List<Season> tempOngoingSeasons = new ArrayList<>();
 
-                for (Course course : courses) {
-                    viewModel.getTotalLessonsCountByCourseId(course.getCourse_ID()).observe(getViewLifecycleOwner(), totalLessons -> {
-                        viewModel.getCompletedLessonsCountByCourseId(course.getCourse_ID()).observe(getViewLifecycleOwner(), completedLessons -> {
-                            if (completedLessons == totalLessons) {
-                                tempOngoingCourses.add(course);
+                for (Season season : seasons) {
+                    viewModel.getTotalStepsCountBySeasonId(season.getSeason_ID()).observe(getViewLifecycleOwner(), totalSteps -> {
+                        viewModel.getCompletedStepsCountBySeasonId(season.getSeason_ID()).observe(getViewLifecycleOwner(), completedSteps -> {
+                            if (completedSteps == totalSteps) {
+                                tempOngoingSeasons.add(season);
                             }
 
-                            if (tempOngoingCourses.size() > 0) {
-                                ongoingCourses.clear();
-                                ongoingCourses.addAll(tempOngoingCourses);
+                            if (tempOngoingSeasons.size() > 0) {
+                                ongoingSeasons.clear();
+                                ongoingSeasons.addAll(tempOngoingSeasons);
                                 adapter.notifyDataSetChanged();
                             }
                         });
@@ -81,6 +81,6 @@ public class CompletedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadOngoingCourses();
+        loadOngoingSeasons();
     }
 }

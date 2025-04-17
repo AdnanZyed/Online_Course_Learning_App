@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.onlineSeasonampe_learningapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -21,10 +22,10 @@ public class MainActivity_Main extends AppCompatActivity
     boolean showCustomNav;
     String userName;
 
-    StudentsProfileFragment prophileFragment = new StudentsProfileFragment();
-    CoursesFragment coursesFragment = new CoursesFragment();
+    FarmersProfileFragment prophileFragment = new FarmersProfileFragment();
+    SeasonsFragment seasonsFragment = new SeasonsFragment();
     CartFragment cartFragment = new CartFragment();
-    CourseFragment fragment = (CourseFragment) getSupportFragmentManager()
+    SeasonFragment fragment = (SeasonFragment) getSupportFragmentManager()
             .findFragmentById(R.id.flFragment);
     Fragment activeFragment = homeFragment;
 
@@ -42,19 +43,19 @@ public class MainActivity_Main extends AppCompatActivity
         userName = intent.getStringExtra("USER_NAME2");
 
         HomeFragment homeFragment = new HomeFragment();
-        CoursesFragment coursesFragment1 = new CoursesFragment();
+        SeasonsFragment seasonsFragment1 = new SeasonsFragment();
 
 
 //        if (showCustomNav) {
-//            coursesFragment.setArguments(bundle);
+//            seasonsFragment.setArguments(bundle);
 //
 //            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.flFragment, coursesFragment1)
+//                    .replace(R.id.flFragment, seasonsFragment1)
 //                    .commit();
 //
 //            bottomNavigationView = findViewById(R.id.bottomNavigationView);
 //            bottomNavigationView.setOnNavigationItemSelectedListener(this);
-//            bottomNavigationView.setSelectedItemId(R.id.courses1);
+//            bottomNavigationView.setSelectedItemId(R.id.seasons1);
 //        } else {
         Bundle bundle = new Bundle();
         bundle.putString("USER_NAME", userName);
@@ -69,11 +70,11 @@ public class MainActivity_Main extends AppCompatActivity
 
         //  }
 
-//        Intent intent1 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
+//        Intent intent1 = new Intent(MainActivity_Main.this, SeasonDetailsActivity.class);
 //        intent1.putExtra("USER_NAME12", userName);
 //
 //
-//        Intent intent2 = new Intent(MainActivity_Main.this, CourseDetailsActivity.class);
+//        Intent intent2 = new Intent(MainActivity_Main.this, SeasonDetailsActivity.class);
 //        intent2.putExtra("USER_NAME14", userName);
 
 
@@ -105,12 +106,12 @@ public class MainActivity_Main extends AppCompatActivity
 
                 break;
 
-            case R.id.courses1:
+            case R.id.Seasons1:
                 Bundle bundle1 = new Bundle();
 
                 bundle1.putString("USER_NAME", userName);
-                coursesFragment.setArguments(bundle1);
-                selectedFragment = coursesFragment;
+                seasonsFragment.setArguments(bundle1);
+                selectedFragment = seasonsFragment;
 
                 break;
             case R.id.cart:
@@ -150,7 +151,7 @@ public class MainActivity_Main extends AppCompatActivity
                     .commit();
             activeFragment = homeFragment;
 //            if (showCustomNav) {
-//                bottomNavigationView.setSelectedItemId(R.id.courses1);
+//                bottomNavigationView.setSelectedItemId(R.id.seasons1);
 //            } else {
 //
 //                bottomNavigationView.setSelectedItemId(R.id.home1);

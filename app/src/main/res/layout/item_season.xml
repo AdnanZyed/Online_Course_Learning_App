@@ -1,0 +1,87 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:background="@drawable/shape"
+    android:padding="20dp">
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/iv_expert_image6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+
+
+        <ImageView
+            android:id="@+id/iv_Season_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:shapeAppearanceOverlay="@style/RoundedImage"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_course_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
+
+
+
+    <TextView
+        android:id="@+id/tv_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Categorie"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_Season_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Season Name"
+
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image6"
+        app:layout_constraintTop_toBottomOf="@id/tv_categorie"
+        tools:layout_editor_absoluteY="10dp" />
+
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Price"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image6"
+        app:layout_constraintTop_toBottomOf="@id/tv_Season_name" />
+
+    <ImageView
+        android:id="@+id/bookmarkIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bookmark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEBEB"
-    tools:context=".ReviewsTeacherFragment">
+    tools:context=".ReviewsExpertFragment">
 
     <androidx.cardview.widget.CardView
 
-        android:id="@+id/iv_teacher_image7"
+        android:id="@+id/iv_expert_image7"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_margin="20dp"
@@ -20,7 +20,7 @@
 
 
         <ImageView
-            android:id="@+id/image_student"
+            android:id="@+id/image_farmer"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:scaleType="centerCrop"
@@ -51,11 +51,11 @@
         android:hint="اضافة تعليق"
 
 
-        app:layout_constraintBottom_toBottomOf="@+id/iv_teacher_image7"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_expert_image7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.101"
-        app:layout_constraintStart_toEndOf="@+id/iv_teacher_image7"
-        app:layout_constraintTop_toTopOf="@+id/iv_teacher_image7" />
+        app:layout_constraintStart_toEndOf="@+id/iv_expert_image7"
+        app:layout_constraintTop_toTopOf="@+id/iv_expert_image7" />
 
 <!--    <Spinner-->
 <!--        android:id="@+id/rating"-->

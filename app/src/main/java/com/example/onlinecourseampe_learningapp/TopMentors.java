@@ -20,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,15 +36,15 @@ public class TopMentors extends AppCompatActivity {
     private TextView textMentor;
     private EditText eSearsh;
     private String searchQuery;
-    private TeacherAdapterMentors teacherAdapter;
-    private List<Teacher> teacherList;
+    private ExpertAdapterMentors expertAdapter;
+    private List<Expert> expertList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_mentors);
 
-        recyclerView = findViewById(R.id.rv_teachers);
+        recyclerView = findViewById(R.id.rv_experts);
         t_sory = findViewById(R.id.sorry);
         t_found = findViewById(R.id.found);
         imageFound = findViewById(R.id.imageView8);
@@ -62,9 +64,9 @@ public class TopMentors extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 searchQuery = eSearsh.getText().toString().trim();
                 if (searchQuery != null && !searchQuery.isEmpty()) {
-                    searchTeachers(searchQuery);
+                    searchExperts(searchQuery);
                 } else {
-                    loadTeacher1();
+                    loadExpert1();
                 }
             }
 
@@ -80,14 +82,14 @@ public class TopMentors extends AppCompatActivity {
             }
         });
 
-        teacherAdapter = new TeacherAdapterMentors(this, new ArrayList<>(), user);
+        expertAdapter = new ExpertAdapterMentors(this, new ArrayList<>(), user);
         myViewModel = new ViewModelProvider(this).get(My_View_Model.class);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(teacherAdapter);
+        recyclerView.setAdapter(expertAdapter);
 
-        loadTeacher1();
+        loadExpert1();
 
         searchIcon.setOnClickListener(v -> {
             searchIcon.setVisibility(View.GONE);
@@ -100,14 +102,14 @@ public class TopMentors extends AppCompatActivity {
             eSearsh.setVisibility(View.GONE);
             searchIcon.setVisibility(View.VISIBLE);
             textMentor.setVisibility(View.VISIBLE);
-            loadTeacher1();
+            loadExpert1();
         });
     }
 
-    private void searchTeachers(String query) {
-        myViewModel.searchTeachers(query).observe(this, teachers -> {
-            if (teachers != null && !teachers.isEmpty()) {
-                teacherAdapter.setTeacher_MonetorsList(teachers);
+    private void searchExperts(String query) {
+        myViewModel.searchExperts(query).observe(this, experts -> {
+            if (experts != null && !experts.isEmpty()) {
+                expertAdapter.setExpert_MonetorsList(experts);
                 recyclerView.setVisibility(View.VISIBLE);
                 t_sory.setVisibility(View.GONE);
                 t_found.setVisibility(View.GONE);
@@ -121,10 +123,10 @@ public class TopMentors extends AppCompatActivity {
         });
     }
 
-    public void loadTeacher1() {
-        myViewModel.getAllTeacher().observe(this, teachers -> {
-            if (teachers != null && !teachers.isEmpty()) {
-                teacherAdapter.setTeacher_MonetorsList(teachers);
+    public void loadExpert1() {
+        myViewModel.getAllExpert().observe(this, experts -> {
+            if (experts != null && !experts.isEmpty()) {
+                expertAdapter.setExpert_MonetorsList(experts);
                 recyclerView.setVisibility(View.VISIBLE);
                 t_sory.setVisibility(View.GONE);
                 t_found.setVisibility(View.GONE);

@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 public class ChatFragment extends Fragment {
 
     private My_View_Model chatViewModel;
@@ -35,8 +37,8 @@ public class ChatFragment extends Fragment {
         recyclerView.setAdapter(chatAdapter);
 
 
-        chatViewModel.getAllStudentsExceptCurrent(currentUsername).observe(getViewLifecycleOwner(), students -> {
-            chatAdapter.setStudents(students);
+        chatViewModel.getAllFarmersExceptCurrent(currentUsername).observe(getViewLifecycleOwner(), farmers -> {
+            chatAdapter.setFarmers(farmers);
         });
 
         return view;

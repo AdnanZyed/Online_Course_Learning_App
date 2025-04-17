@@ -1,4 +1,6 @@
 package com.example.onlinecourseampe_learningapp;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,13 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 public class BookmarkActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    CourseAdapter adapter;
+    SeasonsAdapter adapter;
     String user;
-    private List<Course> studentsList1 = new ArrayList<>();
+    private List<SeasonStep> farmersList1 = new ArrayList<>();
 
     My_View_Model myViewModel;
 
@@ -34,17 +39,17 @@ public class BookmarkActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        myViewModel.getBookmarkedCoursesByStudent(user).observe(this, bookmarkedCourses -> {
-            if (bookmarkedCourses != null && !bookmarkedCourses.isEmpty()) {
-                studentsList1.clear();
+        myViewModel.getBookmarkedSeasonByFarmer(user).observe(this, bookmarkedSeasons -> {
+            if (bookmarkedSeasons != null && !bookmarkedSeasons.isEmpty()) {
+                farmersList1.clear();
 
-                for (Student_Course studentCourse : bookmarkedCourses) {
-                    myViewModel.getAllCoursesById(studentCourse.getCourse_ID()).observe(this, courses -> {
-                        if (courses != null && !courses.isEmpty()) {
-                            studentsList1.addAll(courses);
+                for (Farmer_Seasons farmerSeasons : bookmarkedSeasons) {
+                    myViewModel.getStepsBySeasonId(farmerSeasons.getSeason_ID()).observe(this, seasons -> {
+                        if (seasons != null && !seasons.isEmpty()) {
+                            farmersList1.addAll(seasons);
 
                             runOnUiThread(() -> {
-                                adapter = new CourseAdapter(this, studentsList1, user);
+                                adapter = new SeasonsAdapter((List<Season>) this, (Context) farmersList1, user);
                                 recyclerView.setAdapter(adapter);
                             });
                         }
@@ -52,7 +57,7 @@ public class BookmarkActivity extends AppCompatActivity {
                 }
 
             } else {
-                Toast.makeText(this, "No saved courses!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No saved season!", Toast.LENGTH_SHORT).show();
             }
 
         });

@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 public class CertificatesFragment extends Fragment {
 
-    private int courseId;
+    private int seasonId;
     private My_View_Model viewModel;
 
 
@@ -28,10 +30,10 @@ public class CertificatesFragment extends Fragment {
 
 
         if (getArguments() != null) {
-            courseId = getArguments().getInt("COURSE_ID", -1);
+            seasonId = getArguments().getInt("COURSE_ID", -1);
         }
-        viewModel.getAllCoursesById(courseId).observe(getViewLifecycleOwner(), Courses -> {
-            byte[] bitmapBytes = Courses.get(0).getProfilePicture();
+        viewModel.getAllSeasonsById(seasonId).observe(getViewLifecycleOwner(), Seasons -> {
+            byte[] bitmapBytes = Seasons.get(0).getProfilePicture();
             if (bitmapBytes != null) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
                 imageView.setImageBitmap(bitmap);

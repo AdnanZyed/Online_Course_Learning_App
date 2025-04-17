@@ -13,13 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.onlineSeasonampe_learningapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class InboxFragment extends Fragment {
 
 
-    String students_u;
+    String farmers_u;
 
     public InboxFragment() {
     }
@@ -34,12 +35,12 @@ public class InboxFragment extends Fragment {
         ViewPager2 viewPager = view.findViewById(R.id.viewPager_chat);
         Bundle args = getArguments();
         if (args != null) {
-            students_u = args.getString("USER_NAME");
+            farmers_u = args.getString("USER_NAME");
 
 
         }
 
-        ViewPagerAdapterChat adapter = new ViewPagerAdapterChat(requireActivity(), students_u);
+        ViewPagerAdapterChat adapter = new ViewPagerAdapterChat(requireActivity(), farmers_u);
         viewPager.setAdapter(adapter);
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {

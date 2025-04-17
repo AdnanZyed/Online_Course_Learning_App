@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,8 +35,8 @@ public class HomeFragment extends Fragment {
     Button btn3DDesign;
     Bundle args;
     Bundle bundle;
-    RecyclerView teacherRecyclerView;
-    TeacherAdapter teacherAdapter;
+    RecyclerView expertRecyclerView;
+    ExpertAdapter expertAdapter;
     Button btnProgramming;
     Button btnBusiness;
     Button btnArt;
@@ -45,7 +47,7 @@ public class HomeFragment extends Fragment {
     EditText e_searsh;
     ImageView Iv_notification;
     ImageView Iv_Bookmark;
-    String students_u;
+    String farmers_u;
     ImageView iv_S;
     String bio;
 
@@ -62,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         args = getArguments();
         if (args != null) {
-            students_u = args.getString("USER_NAME");
+            farmers_u = args.getString("USER_NAME");
 
 
         }
@@ -77,7 +79,7 @@ public class HomeFragment extends Fragment {
         viewPager2.setAdapter(adapter);
 
         bundle = new Bundle();
-        bundle.putString("USER_NAME_R", students_u);
+        bundle.putString("USER_NAME_R", farmers_u);
 
 
 
@@ -92,15 +94,15 @@ public class HomeFragment extends Fragment {
         tv_Welcom = rootView.findViewById(R.id.tv_welcom);
         btn3DDesign = rootView.findViewById(R.id.btn_3d_design);
         btnProgramming = rootView.findViewById(R.id.btn_programming);
-        teacherRecyclerView = rootView.findViewById(R.id.rv_t);
+        expertRecyclerView = rootView.findViewById(R.id.rv_t);
         btnBusiness = rootView.findViewById(R.id.btn_business);
         btnArt = rootView.findViewById(R.id.btn_art);
-        CourseFragment fragment = (CourseFragment) getParentFragmentManager()
+        SeasonFragment fragment = (SeasonFragment) getParentFragmentManager()
                 .findFragmentById(R.id.fram_corse);
 
 
         if (fragment != null) {
-            fragment.loadCourses();
+            fragment.loadSeasons();
             onButtonClicked(btnAll);
         }
 
@@ -119,12 +121,12 @@ public class HomeFragment extends Fragment {
         }
 
 
-        myViewModel.getAllStudentByUser(students_u).observe(getViewLifecycleOwner(), students -> {
-            if (students != null && !students.isEmpty()) {
+        myViewModel.getAllFarmerByUser(farmers_u).observe(getViewLifecycleOwner(), farmers -> {
+            if (farmers != null && !farmers.isEmpty()) {
 
-                Student student = students.get(0);
-                String student_name = student.getS_name().toString();
-                bio = student.getBio().toString();
+                Farmer farmer = farmers.get(0);
+                String farmer_name = farmer.getS_name().toString();
+                bio = farmer.getBio().toString();
                 if (bio.isEmpty()) {
                     tv_Welcom.setText("Welcom");
 
@@ -132,7 +134,7 @@ public class HomeFragment extends Fragment {
                 } else {
                     tv_Welcom.setText(bio);
                 }
-                byte[] bytes = student.getS_Image();
+                byte[] bytes = farmer.getS_Image();
                 if (bytes != null) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     iv_S.setImageBitmap(bitmap);
@@ -140,7 +142,7 @@ public class HomeFragment extends Fragment {
                     iv_S.setImageResource(R.drawable.profile);
                 }
 
-                tv_Name.setText(student_name);
+                tv_Name.setText(farmer_name);
             }
         });
 
@@ -153,9 +155,9 @@ public class HomeFragment extends Fragment {
         iv_S.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StudentsProfileFragment fragment = new StudentsProfileFragment();
+                FarmersProfileFragment fragment = new FarmersProfileFragment();
                 Bundle args = new Bundle();
-                args.putString("USER_NAME_R", students_u);
+                args.putString("USER_NAME_R", farmers_u);
                 fragment.setArguments(args);
 
 
@@ -181,7 +183,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(requireContext(), BookmarkActivity.class);
-                intent.putExtra("USER", students_u);
+                intent.putExtra("USER", farmers_u);
 
                 startActivity(intent);
             }
@@ -189,14 +191,14 @@ public class HomeFragment extends Fragment {
 
 
         if (savedInstanceState == null) {
-            CourseFragment courseFragment = new CourseFragment();
+            SeasonFragment seasonFragment = new SeasonFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("USER_NAME_R", students_u);
-            courseFragment.setArguments(bundle);
+            bundle.putString("USER_NAME_R", farmers_u);
+            seasonFragment.setArguments(bundle);
 
             getParentFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fram_corse, courseFragment)
+                    .replace(R.id.fram_corse, seasonFragment)
                     .commit();
             onButtonClicked(btnAll);
 
@@ -206,11 +208,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                CourseFragment fragment = (CourseFragment) getFragmentManager()
+                SeasonFragment fragment = (SeasonFragment) getFragmentManager()
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses();
+                    fragment.loadSeasons();
                     onButtonClicked(btnAll);
 
 
@@ -222,11 +224,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
 
-                CourseFragment fragment = (CourseFragment) getFragmentManager()
+                SeasonFragment fragment = (SeasonFragment) getFragmentManager()
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_Art();
+                    fragment.loadSeasons_Categorie_Art();
                     onButtonClicked(btnArt);
 
 
@@ -240,11 +242,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
 
-                CourseFragment fragment = (CourseFragment) getFragmentManager()
+                SeasonFragment fragment = (SeasonFragment) getFragmentManager()
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_Business();
+                    fragment.loadSeasons_Categorie_Business();
                     onButtonClicked(btnBusiness);
 
 
@@ -258,11 +260,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
 
-                CourseFragment fragment = (CourseFragment) getFragmentManager()
+                SeasonFragment fragment = (SeasonFragment) getFragmentManager()
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_Programming();
+                    fragment.loadSeasons_Categorie_Programming();
                     onButtonClicked(btnProgramming);
 
 
@@ -276,11 +278,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
 
-                CourseFragment fragment = (CourseFragment) getFragmentManager()
+                SeasonFragment fragment = (SeasonFragment) getFragmentManager()
                         .findFragmentById(R.id.fram_corse);
 
                 if (fragment != null) {
-                    fragment.loadCourses_Categorie_3D_Design();
+                    fragment.loadSeasons_Categorie_3D_Design();
                     onButtonClicked(btn3DDesign);
 
 
@@ -294,7 +296,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireContext(), TopMentors.class);
-                intent.putExtra("STUDENT_USER", students_u);
+                intent.putExtra("STUDENT_USER", farmers_u);
                 startActivity(intent);
             }
         });
@@ -302,31 +304,31 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireContext(), Most_Popular.class);
-                intent.putExtra("USER", students_u);
+                intent.putExtra("USER", farmers_u);
 
                 startActivity(intent);
             }
         });
 
 
-        loadTeacher();
+        loadExpert();
 
 
         return rootView;
     }
 
-    public void loadTeacher() {
-        myViewModel.getAllTeacher().observe(getViewLifecycleOwner(), teachers -> {
+    public void loadExpert() {
+        myViewModel.getAllExpert().observe(getViewLifecycleOwner(), experts -> {
             LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-            teacherAdapter = new TeacherAdapter(requireContext(), new ArrayList<>(), students_u);
+            expertAdapter = new ExpertAdapter(requireContext(), new ArrayList<>(), farmers_u);
 
-            teacherRecyclerView.setLayoutManager(layoutManager);
+            expertRecyclerView.setLayoutManager(layoutManager);
 
 
-            teacherAdapter.setTeacherList(teachers);
-            teacherRecyclerView.setAdapter(teacherAdapter);
+            expertAdapter.setExpertList(experts);
+            expertRecyclerView.setAdapter(expertAdapter);
 
         });
     }

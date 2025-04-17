@@ -1,4 +1,4 @@
-package com.example.onlinecourseampe_learningapp;
+package com.example.onlineSeasonampe_learningapp;
 
 import org.junit.Test;
 

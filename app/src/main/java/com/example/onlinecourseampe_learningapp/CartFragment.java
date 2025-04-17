@@ -12,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartFragment extends Fragment {
     RecyclerView recyclerView;
-    String students_u;
+    String farmers_u;
 
     My_View_Model myViewModel;
 
@@ -33,28 +35,28 @@ public class CartFragment extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            students_u = args.getString("USER_NAME");
+            farmers_u = args.getString("USER_NAME");
         }
 
         recyclerView = view.findViewById(R.id.recycler_view_Cart);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
-        myViewModel.getisAddCartCoursesByStudent(students_u).observe((LifecycleOwner) getViewLifecycleOwner(), AddCart -> {
+        myViewModel.getisAddCartSeasonsByFarmer(farmers_u).observe((LifecycleOwner) getViewLifecycleOwner(), AddCart -> {
 
 
-            List<Integer> courseIds = new ArrayList<>();
-            for (Student_Course sc : AddCart) {
+            List<Integer> seasonIds = new ArrayList<>();
+            for (Farmer_Seasons sc : AddCart) {
                 if (!sc.isAddCart() || !sc.isRegister()) {
-                    courseIds.add(sc.getCourse_ID());
+                    seasonIds.add(sc.getSeason_ID());
 
 
                 }
             }
 
-            myViewModel.getAllCoursesByIds(courseIds).observe(getViewLifecycleOwner(), courses -> {
+            myViewModel.getAllSeasonsByIds(seasonIds).observe(getViewLifecycleOwner(), seasons -> {
 
-                CourseAdapter adapter = new CourseAdapter(requireContext(), courses, students_u);
+                SeasonsAdapter adapter = new SeasonsAdapter(seasons, requireContext(), farmers_u);
                 recyclerView.setAdapter(adapter);
 
             });

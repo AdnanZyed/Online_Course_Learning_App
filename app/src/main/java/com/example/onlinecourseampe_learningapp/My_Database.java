@@ -1,6 +1,5 @@
 package com.example.onlinecourseampe_learningapp;
 
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -12,31 +11,31 @@ import androidx.room.TypeConverters;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Student.class, Course.class, Teacher.class, Student_Course.class, Student_Teacher.class, Course_Reviews.class, CourseLessons.class, Message.class, Teacher_Reviews.class, StudentLesson.class, Notification.class}, version = 1, exportSchema = false)
+@Database(entities = {Farmer.class, Season.class, Expert.class, Farmer_Seasons.class, Farmer_Expert.class, Season_Reviews.class, SeasonStep.class, Message.class, Expert_Reviews.class, FarmerStep.class, Notification.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class My_Database extends RoomDatabase {
-    public abstract StudentLessonDao studentLessonDao();
+    public abstract FarmerStepDao farmerStepDao();
 
     public abstract NotificationDao notificationDao();
 
-    public abstract Course_Dao courseDao();
+    public abstract Season_Dao seasonDao();
 
     public abstract MessageDao messageDao();
 
-    public abstract Student_Dao studentDao();
+    public abstract Farmer_Dao farmerDao();
 
-    public abstract Teacher_Dao teacherDao();
+    public abstract Expert_Dao expertDao();
 
-    public abstract CourseLessonsDao courseLessonsDao();
+    public abstract SeasonStepsDao seasonStepsDao();
 
 
-    public abstract Student_Course_Dao studentCourseDao();
+    public abstract Farmer_Season_Dao farmerSeasonDao();
 
-    public abstract Student_Teacher_Dao studentTeacherDao();
+    public abstract Farmer_Expert_Dao farmerExpertDao();
 
-    public abstract CourseReviewsDao courseReviewsDao();
+    public abstract SeasonReviewsDao seasonReviewsDao();
 
-    public abstract TeacherReviewsDao teacherReviewsDao();
+    public abstract ExpertReviewsDao expertReviewsDao();
 
 
     private static volatile My_Database INSTANCE;

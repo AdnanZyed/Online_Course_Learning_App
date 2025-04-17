@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Online Course &amp; E-Learning App"
+rootProject.name = "Online Season &amp; E-Learning App"
 include ':app'

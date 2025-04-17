@@ -1,6 +1,5 @@
 package com.example.onlinecourseampe_learningapp;
 
-
 import android.app.Application;
 
 import androidx.annotation.NonNull;
@@ -17,8 +16,8 @@ public class My_View_Model extends AndroidViewModel {
     private My_Repository repository;
 
 
-    private final LiveData<List<Course_Reviews>> allReviews;
-    private final LiveData<List<Teacher_Reviews>> allReviewsT;
+    private final LiveData<List<Season_Reviews>> allReviews;
+    private final LiveData<List<Expert_Reviews>> allReviewsT;
 
 
     public My_View_Model(@NonNull Application application) {
@@ -38,20 +37,20 @@ public class My_View_Model extends AndroidViewModel {
         repository.insert(new Notification(title, message, iconResId));
     }
 
-    public void insertStudentLesson(StudentLesson studentLesson) {
-        repository.insertStudentLesson(studentLesson);
+    public void insertFarmerStep(FarmerStep farmerStep) {
+        repository.insertFarmerStep(farmerStep);
     }
 
-    public LiveData<List<StudentLesson>> getCompletedLessonsForStudent(String studentUserName) {
-        return repository.getCompletedLessonsForStudent(studentUserName);
+    public LiveData<List<FarmerStep>> getCompletedStepsForFarmer(String farmerUserName) {
+        return repository.getCompletedStepsForFarmer(farmerUserName);
     }
 
-    public void updateCompletionStatus(String studentUserName, int lessonId, boolean completed) {
-        repository.updateCompletionStatus(studentUserName, lessonId, completed);
+    public void updateCompletionStatus(String farmerUserName, int stepId, boolean completed) {
+        repository.updateCompletionStatus(farmerUserName, stepId, completed);
     }
 
-    public void deleteStudentLesson(String studentUserName, int lessonId) {
-        repository.deleteStudentLesson(studentUserName, lessonId);
+    public void deleteFarmerStep(String farmerUserName, int stepId) {
+        repository.deleteFarmerStep(farmerUserName, stepId);
     }
 
     public void insertMessage(Message message) {
@@ -62,8 +61,8 @@ public class My_View_Model extends AndroidViewModel {
         return repository.getMessagesBetweenUsers(currentUser, otherUser);
     }
 
-    public LiveData<List<Student>> getAllStudentsExceptCurrent(String currentUsername) {
-        return repository.getAllStudentsExceptCurrent(currentUsername);
+    public LiveData<List<Farmer>> getAllFarmersExceptCurrent(String currentUsername) {
+        return repository.getAllFarmersExceptCurrent(currentUsername);
     }
 
     public LiveData<Message> getLastMessageForUser(String username) {
@@ -71,300 +70,300 @@ public class My_View_Model extends AndroidViewModel {
     }
 //
 
-    public void insertCourseLesson(CourseLessons courseLesson) {
-        repository.insertCourseLesson(courseLesson);
+    public void insertSeasonStep(SeasonStep seasonStep) {
+        repository.insertSeasonStep(seasonStep);
     }
 
-    public LiveData<Integer> getTotalLessonsCount() {
-        return repository.getTotalLessonsCount();
+    public LiveData<Integer> getTotalStepsCount() {
+        return repository.getTotalStepsCount();
     }
 
-    public LiveData<Integer> getCompletedLessonsCount() {
-        return repository.getCompletedLessonsCount();
+    public LiveData<Integer> getCompletedStepsCount() {
+        return repository.getCompletedStepsCount();
     }
 
-    public LiveData<Integer> getTotalLessonsTime() {
-        return repository.getTotalLessonsTime();
+    public LiveData<Integer> getTotalStepsTime() {
+        return repository.getTotalStepsTime();
     }
 
-    public void updateCourseLesson(CourseLessons courseLesson) {
-        repository.updateCourseLesson(courseLesson);
+    public void updateSeasonStep(SeasonStep seasonStep) {
+        repository.updateSeasonStep(seasonStep);
     }
 
-    public void deleteCourseLesson(CourseLessons courseLesson) {
-        repository.deleteCourseLesson(courseLesson);
+    public void deleteSeasonStep(SeasonStep seasonStep) {
+        repository.deleteSeasonStep(seasonStep);
     }
 
-    public LiveData<Integer> getTotalLessonsCountByCourseId(int courseId) {
-        return repository.getTotalLessonsCountByCourseId(courseId);
+    public LiveData<Integer> getTotalStepsCountBySeasonId(int seasonId) {
+        return repository.getTotalStepsCountBySeasonId(seasonId);
     }
 
-    public LiveData<Integer> getCompletedLessonsCountByCourseId(int courseId) {
-        return repository.getCompletedLessonsCountByCourseId(courseId);
+    public LiveData<Integer> getCompletedStepsCountBySeasonId(int seasonId) {
+        return repository.getCompletedStepsCountBySeasonId(seasonId);
     }
 
-    public LiveData<Integer> getTotalLessonsTimeByCourseId(int courseId) {
-        return repository.getTotalLessonsTimeByCourseId(courseId);
+    public LiveData<Integer> getTotalStepsTimeBySeasonId(int seasonId) {
+        return repository.getTotalStepsTimeBySeasonId(seasonId);
     }
 
-    public LiveData<List<CourseLessons>> getLessonsByCourseId(int courseId) {
-        return repository.getLessonsByCourseId(courseId);
+    public LiveData<List<SeasonStep>> getStepsBySeasonId(int seasonId) {
+        return repository.getStepsBySeasonId(seasonId);
     }
 
-    public void updateLessonCompletionStatus(int lessonId, boolean isCompleted) {
-        repository.updateLessonCompletionStatus(lessonId, isCompleted);
+    public void updateStepCompletionStatus(int stepId, boolean isCompleted) {
+        repository.updateStepCompletionStatus(stepId, isCompleted);
     }
 
-    public void insertReview(Course_Reviews review) {
+    public void insertReview(Season_Reviews review) {
         repository.insertReview(review);
     }
 
-    public void deleteReviewByStudent(String studentUserName) {
-        repository.deleteReviewByStudent(studentUserName);
+    public void deleteReviewByFarmer(String farmerUserName) {
+        repository.deleteReviewByFarmer(farmerUserName);
     }
 
-    public void updateReviewByStudent(String studentUserName, String newComment, float newRating) {
-        repository.updateReviewByStudent(studentUserName, newComment, newRating);
+    public void updateReviewByFarmer(String farmerUserName, String newComment, float newRating) {
+        repository.updateReviewByFarmer(farmerUserName, newComment, newRating);
     }
 
-    public LiveData<List<Course_Reviews>> getAllReviewsByCourseId(int courseId) {
-        return repository.getAllReviewsByCourseId(courseId);
+    public LiveData<List<Season_Reviews>> getAllReviewsBySeasonId(int seasonId) {
+        return repository.getAllReviewsBySeasonId(seasonId);
     }
 
 
-    public void insertReviewT(Teacher_Reviews review) {
+    public void insertReviewT(Expert_Reviews review) {
         repository.insertReviewT(review);
     }
 
-    public void deleteReviewByStudentT(String studentUserName) {
-        repository.deleteReviewByStudentT(studentUserName);
+    public void deleteReviewByFarmerT(String farmerUserName) {
+        repository.deleteReviewByFarmerT(farmerUserName);
     }
 
-    public void updateReviewByStudentT(String studentUserName, String newComment, float newRating) {
-        repository.updateReviewByStudentT(studentUserName, newComment, newRating);
+    public void updateReviewByFarmerT(String farmerUserName, String newComment, float newRating) {
+        repository.updateReviewByFarmerT(farmerUserName, newComment, newRating);
     }
 
-    public LiveData<List<Teacher_Reviews>> getAllReviewsByCourseIdT(String teacher) {
-        return repository.getAllReviewsByCourseIdT(teacher);
+    public LiveData<List<Expert_Reviews>> getAllReviewsBySeasonIdT(String expert) {
+        return repository.getAllReviewsBySeasonIdT(expert);
     }
 
 
-    void insertCourse(Course course) {
-        repository.insertCourse(course);
-
-
-    }
-
-    void updateCourse(Course course) {
-        repository.updateCourse(course);
+    void insertSeason(Season season) {
+        repository.insertSeason(season);
 
 
     }
 
-    void deleteCourse(Course course) {
-        repository.deleteCourse(course);
+    void updateSeason(Season season) {
+        repository.updateSeason(season);
+
+
+    }
+
+    void deleteSeason(Season season) {
+        repository.deleteSeason(season);
 
 
     }
 
 
-    LiveData<List<Course>> getAllCourse() {
-        return repository.getAllCourse();
+    LiveData<List<Season>> getAllSeason() {
+        return repository.getAllSeason();
     }
 
-    public LiveData<List<Course>> getBookmarkedCourses() {
-        return repository.getBookmarkedCourses();
+    public LiveData<List<Season>> getBookmarkedSeasons() {
+        return repository.getBookmarkedSeasons();
     }
 
-    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent(String studentUsername) {
-        return repository.getBookmarkedCoursesByStudent(studentUsername);
+    public LiveData<List<Farmer_Seasons>> getBookmarkedSeasonByFarmer(String farmerUsername) {
+        return repository.getBookmarkedSeasonsByFarmer(farmerUsername);
     }
 
-    public LiveData<List<Student_Course>> getisAddCartCoursesByStudent(String studentUsername) {
-        return repository.getisAddCartCoursesByStudent(studentUsername);
+    public LiveData<List<Farmer_Seasons>> getisAddCartSeasonsByFarmer(String farmerUsername) {
+        return repository.getisAddCartSeasonsByFarmer(farmerUsername);
     }
 
-    public LiveData<List<Student_Course>> getBookmarkedCoursesByStudent1(String studentUsername, int courseId) {
-        return repository.getBookmarkedCoursesByStudent1(studentUsername, courseId);
-
-    }
-
-    public LiveData<List<Student_Course>> getAddCartCoursesByStudent1(String studentUsername, int courseId) {
-        return repository.getAddCartCoursesByStudent1(studentUsername, courseId);
+    public LiveData<List<Farmer_Seasons>> getBookmarkedSeasonsByFarmer1(String farmerUsername, int seasonId) {
+        return repository.getBookmarkedSeasonsByFarmer1(farmerUsername, seasonId);
 
     }
 
-    public LiveData<List<Student_Course>> getisRatingCoursesByStudent1(String studentUsername, int courseId) {
-        return repository.getisRatingCoursesByStudent1(studentUsername, courseId);
+    public LiveData<List<Farmer_Seasons>> getAddCartSeasonsByFarmer1(String farmerUsername, int seasonId) {
+        return repository.getAddCartSeasonsByFarmer1(farmerUsername, seasonId);
+
     }
 
-    public LiveData<List<Student_Course>> getisRegisterCoursesByStudent1(String studentUsername) {
-        return repository.getisRegisterCoursesByStudent1(studentUsername);
+    public LiveData<List<Farmer_Seasons>> getisRatingSeasonsByFarmer1(String farmerUsername, int seasonId) {
+        return repository.getisRatingSeasonsByFarmer1(farmerUsername, seasonId);
     }
 
-    public LiveData<Void> deleteStudentCourseByUserAndCourse(String studentUsername, int courseId) {
-        return repository.deleteStudentCourseByUserAndCourse(studentUsername, courseId);
-
-    }   public LiveData<Void> delete1StudentCourseByUserAndCourse(String studentUsername, int courseId) {
-        return repository.delete1StudentCourseByUserAndCourse(studentUsername, courseId);
+    public LiveData<List<Farmer_Seasons>> getisRegisterSeasonsByFarmer1(String farmerUsername) {
+        return repository.getisRegisterSeasonsByFarmer1(farmerUsername);
     }
 
-    public LiveData<List<Course>> updateBookmarkStatusAndGetCourses(int courseId, boolean isBookmarked) {
-        return repository.updateBookmarkStatusAndGetCourses(courseId, isBookmarked);
+    public LiveData<Void> deleteFarmerSeasonByUserAndSeason(String farmerUsername, int seasonId) {
+        return repository.deleteFarmerSeasonByUserAndSeason(farmerUsername, seasonId);
+
+    }   public LiveData<Void> delete1FarmerSeasonByUserAndSeason(String farmerUsername, int seasonId) {
+        return repository.delete1FarmerSeasonByUserAndSeason(farmerUsername, seasonId);
     }
 
-    public LiveData<List<Course>> updateisAddCartStatusAndGetCourses(int courseId, boolean isAddCart) {
-        return repository.updateisAddCartStatusAndGetCourses(courseId, isAddCart);
+    public LiveData<List<Season>> updateBookmarkStatusAndGetSeasons(int seasonId, boolean isBookmarked) {
+        return repository.updateBookmarkStatusAndGetSeasons(seasonId, isBookmarked);
+    }
+
+    public LiveData<List<Season>> updateisAddCartStatusAndGetSeasons(int seasonId, boolean isAddCart) {
+        return repository.updateisAddCartStatusAndGetSeasons(seasonId, isAddCart);
     }
 
 
-    public LiveData<List<Course>> getCoursesByCategory(String category) {
-        return repository.getCoursesByCategory(category);
+    public LiveData<List<Season>> getSeasonsByCategory(String category) {
+        return repository.getSeasonsByCategory(category);
     }
 
-    LiveData<List<Course>> getAllCoursesById(int id) {
-        return repository.getAllCoursesById(id);
+    LiveData<List<Season>> getAllSeasonsById(int id) {
+        return repository.getAllSeasonsById(id);
     }
 
-    public LiveData<List<Course>> getAllCoursesByIds(List<Integer> courseIds) {
-        return repository.getCoursesByIds(courseIds);
+    public LiveData<List<Season>> getAllSeasonsByIds(List<Integer> seasonIds) {
+        return repository.getSesonsByIds(seasonIds);
     }
 
-    LiveData<List<Course>> getAllCoursesByTeacher_USER_Name(String Teacher_USER_Name) {
-        return repository.getAllCoursesByTeacher_USER_Name(Teacher_USER_Name);
+    LiveData<List<Season>> getAllseasonsByExpert_USER_Name(String Expert_USER_Name) {
+        return repository.getAllSeasonsByExpert_USER_Name(Expert_USER_Name);
     }
 
-    public LiveData<Boolean> isStudentCourseExists(String studentUsername, int courseId, boolean isRegister) {
+    public LiveData<Boolean> isFarmerSeasonExists(String farmerUsername, int seasonId, boolean isRegister) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            boolean exists = repository.isStudentCourseExists(studentUsername, courseId, isRegister);
+            boolean exists = repository.isFarmerSeasonExists(farmerUsername, seasonId, isRegister);
             result.postValue(exists);
         });
         return result;
     }
 
-    public LiveData<Boolean> isStudentCourseExistsC(String studentUsername, int courseId, boolean isAddCart) {
+    public LiveData<Boolean> isFarmerSeasonExistsC(String farmerUsername, int seasonId, boolean isAddCart) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            boolean exists = repository.isStudentCourseExists1(studentUsername, courseId, isAddCart);
+            boolean exists = repository.isFarmerSeasonExists1(farmerUsername, seasonId, isAddCart);
             result.postValue(exists);
         });
         return result;
     }
 
-    public LiveData<Boolean> isStudentCourseExistsB(String studentUsername, int courseId, boolean isBookmark) {
+    public LiveData<Boolean> isFarmerSeasonExistsB(String farmerUsername, int seasonId, boolean isBookmark) {
         MutableLiveData<Boolean> result = new MutableLiveData<>();
         My_Database.databaseWriteExecutor.execute(() -> {
-            boolean exists = repository.isStudentCourseExistsB(studentUsername, courseId, isBookmark);
+            boolean exists = repository.isFarmerSeasonExistsB(farmerUsername, seasonId, isBookmark);
             result.postValue(exists);
         });
         return result;
     }
 
-    public void insertStudentCourse(Student_Course studentCourse) {
-        repository.insertStudentCourse(studentCourse);
-    } public void deleteStudentCourse(Student_Course studentCourse) {
-        repository.deleteStudentCourse(studentCourse);
+    public void insertFarmerSeason(Farmer_Seasons farmerSeason) {
+        repository.insertFarmerSeason(farmerSeason);
+    } public void deleteFarmerSeason(Farmer_Seasons farmerSeason) {
+        repository.deleteFarmerSeason(farmerSeason);
     }
 
-    public void updateCourseStudent(Student_Course studentCourse) {
-        repository.updateCourseStudent(studentCourse);
+    public void updateSeasonFarmer(Farmer_Seasons farmerSeason) {
+        repository.updateSeasonFarmer(farmerSeason);
     }
 
-    public LiveData<List<Student_Course>> getCoursesByStudent(String studentUsername) {
-        return repository.getCoursesByStudent(studentUsername);
+    public LiveData<List<Farmer_Seasons>> getSeasonsByFarmer(String farmerUsername) {
+        return repository.getSeasonsByFarmer(farmerUsername);
     }
 
-    public LiveData<List<Student_Course>> getStudentsByCourse(int courseId) {
-        return repository.getStudentsByCourse(courseId);
+    public LiveData<List<Farmer_Seasons>> getFarmersBySeason(int seasonId) {
+        return repository.getFarmersBySeason(seasonId);
     }
 
-    public LiveData<List<Student_Course>> getStudentsByCourseAndStudent(String user, int courseId) {
-        return repository.getStudentsByCourseAndStudent(user, courseId);
+    public LiveData<List<Farmer_Seasons>> getFarmersBySeasonAndFarmer(String user, int seasonId) {
+        return repository.getFarmersBySeasonAndFarmer(user, seasonId);
     }
 
-    void insertStudent(Student student) {
+    void insertFarmer(Farmer farmer) {
 
-        repository.insertStudent(student);
-
-
-    }
-
-    void updateStudent(Student student) {
-        repository.updateStudent(student);
+        repository.insertFarmer(farmer);
 
 
     }
 
-    void deleteStudent(Student student) {
-        repository.deleteStudent(student);
+    void updateFarmer(Farmer farmer) {
+        repository.updateFarmer(farmer);
 
 
     }
 
-    LiveData<List<Student>> getAllStudent() {
-
-        return repository.getAllStudent();
-    }
-
-    LiveData<List<Student>> getStudentByUsernameAndPassword(String username, String password) {
-        return repository.getStudentByUsernameAndPassword(username, password);
-    }
-
-    LiveData<List<Student>> getAllStudentByUser(String student_user_name) {
-
-        return repository.getAllStudentByUser(student_user_name);
-    }
-
-
-    void insertTeacher(Teacher teacher) {
-
-        repository.insertTeacher(teacher);
+    void deleteFarmer(Farmer farmer) {
+        repository.deleteFarmer(farmer);
 
 
     }
 
-    void updateTeacher(Teacher teacher) {
-        repository.updateTeacher(teacher);
+    LiveData<List<Farmer>> getAllFarmer() {
+
+        return repository.getAllFarmer();
+    }
+
+    LiveData<List<Farmer>> getFarmerByUsernameAndPassword(String username, String password) {
+        return repository.getFarmerByUsernameAndPassword(username, password);
+    }
+
+    LiveData<List<Farmer>> getAllFarmerByUser(String farmer_user_name) {
+
+        return repository.getAllFarmerByUser(farmer_user_name);
+    }
+
+
+    void insertExpert(Expert expert) {
+
+        repository.insertExpert(expert);
 
 
     }
 
-    void deleteTeacher(Teacher teacher) {
-        repository.deleteTeacher(teacher);
+    void updateExpert(Expert expert) {
+        repository.updateExpert(expert);
 
 
     }
 
-    LiveData<List<Teacher>> getAllTeacher() {
+    void deleteExpert(Expert expert) {
+        repository.deleteExpert(expert);
 
-        return repository.getAllTeacher();
+
+    }
+
+    LiveData<List<Expert>> getAllExpert() {
+
+        return repository.getAllExpert();
     }
 
 
-    public LiveData<List<Teacher>> searchTeachers(String teacherName) {
-        return repository.searchTeachers(teacherName);
+    public LiveData<List<Expert>> searchExperts(String expertName) {
+        return repository.searchExperts(expertName);
     }
 
-    public LiveData<List<Course>> searchCourses(String courseName) {
-        return repository.searchCourses(courseName);
+    public LiveData<List<Season>> searchSeasons(String seasonName) {
+        return repository.searchSeasons(seasonName);
     }
 
-    LiveData<List<Teacher>> getAllTeacherByUser(String Teatur_USER_Name) {
+    LiveData<List<Expert>> getAllExpertByUser(String Teatur_USER_Name) {
 
-        return repository.getAllTeacherByUser(Teatur_USER_Name);
+        return repository.getAllExpertByUser(Teatur_USER_Name);
     }
 
-    public void insertStudentTeacher(Student_Teacher studentTeacher) {
-        repository.insertStudentTeacher(studentTeacher);
+    public void insertFarmerExpert(Farmer_Expert farmerExpert) {
+        repository.insertFarmerExpert(farmerExpert);
     }
 
-    public LiveData<List<Student_Teacher>> getTeachersByStudent(String studentUsername) {
-        return repository.getTeachersByStudent(studentUsername);
+    public LiveData<List<Farmer_Expert>> getExpertsByFarmer(String farmerUsername) {
+        return repository.getExpertsByFarmer(farmerUsername);
     }
 
-    public LiveData<List<Student_Teacher>> getStudentsByTeacher(String teacherUsername) {
-        return repository.getStudentsByTeacher(teacherUsername);
+    public LiveData<List<Farmer_Expert>> getFarmersByExpert(String expertUsername) {
+        return repository.getFarmersByExpert(expertUsername);
     }
 
 }

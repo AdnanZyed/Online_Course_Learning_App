@@ -1,6 +1,5 @@
 package com.example.onlinecourseampe_learningapp;
 
-
 import androidx.room.TypeConverter;
 
 import java.net.MalformedURLException;

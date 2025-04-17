@@ -1,4 +1,3 @@
-
 package com.example.onlinecourseampe_learningapp;
 
 import android.content.Intent;
@@ -11,22 +10,24 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.onlinecourseampe_learningapp.databinding.ActivityMainBinding;
+import com.example.onlineSeasonampe_learningapp.R;
+import com.example.onlineSeasonampe_learningapp.databinding.ActivityMainSignInBinding;
+
 
 public class ActivityMainSignIn extends AppCompatActivity {
-    private ActivityMainBinding binding;
+    ActivityMainSignInBinding binding;
     String EUserIn;
     String EPasswordIn;
     My_View_Model myViewModel;
-    String student_name_user;
-    String student_password;
+    String farmer_name_user;
+    String farmer_password;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainSignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
@@ -47,8 +48,8 @@ public class ActivityMainSignIn extends AppCompatActivity {
         binding.Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myViewModel.getAllStudentByUser(binding.eUserIn.getText().toString()).observe(ActivityMainSignIn.this, students -> {
-                    if (students != null && !students.isEmpty() && !binding.eUserIn.getText().toString().isEmpty() && binding.eUserIn.getText().toString() != null && binding.eUserIn.getText().toString() != "") {
+                myViewModel.getAllFarmerByUser(binding.eUserIn.getText().toString()).observe(ActivityMainSignIn.this, farmers -> {
+                    if (farmers != null && !farmers.isEmpty() && !binding.eUserIn.getText().toString().isEmpty() && binding.eUserIn.getText().toString() != null && binding.eUserIn.getText().toString() != "") {
 
                         Intent intent = new Intent(ActivityMainSignIn.this, ForgetPassword1.class);
                         intent.putExtra("USER", binding.eUserIn.getText().toString());
@@ -81,6 +82,7 @@ public class ActivityMainSignIn extends AppCompatActivity {
         });
 
 
+
         binding.SignIn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -107,14 +109,14 @@ public class ActivityMainSignIn extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-                myViewModel.getAllStudentByUser(EUserIn).observe(ActivityMainSignIn.this, students -> {
-                    if (students != null && !students.isEmpty()) {
-                        Student student = students.get(0);
-                        student_name_user = student.getStudent_user_name().toString();
-                        student_password = student.getStudent_Password().toString();
+                myViewModel.getAllFarmerByUser(EUserIn).observe(ActivityMainSignIn.this, farmers -> {
+                    if (farmers != null && !farmers.isEmpty()) {
+                        Farmer farmer = farmers.get(0);
+                        farmer_name_user = farmer.getFarmer_user_name().toString();
+                        farmer_password = farmer.getFarmer_Password().toString();
 
 
-                        if (EUserIn.equals(student_name_user) && EPasswordIn.equals(student_password)) {
+                        if (EUserIn.equals(farmer_name_user) && EPasswordIn.equals(farmer_password)) {
 
 
                             Intent intent = new Intent(ActivityMainSignIn.this, MainActivity_Main.class);

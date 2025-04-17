@@ -1,6 +1,5 @@
 package com.example.onlinecourseampe_learningapp;
 
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,14 +14,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.List;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder> {
 
-    private final List<Course_Reviews> reviewsList;
+    private final List<Season_Reviews> reviewsList;
     private final Context context;
 
-    public ReviewsAdapter(Context context, List<Course_Reviews> reviewsList) {
+    public ReviewsAdapter(Context context, List<Season_Reviews> reviewsList) {
         this.context = context;
         this.reviewsList = reviewsList;
     }
@@ -30,13 +31,13 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewVi
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_course_reviwes, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_season_reviwes, parent, false);
         return new ReviewViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
-        Course_Reviews review = reviewsList.get(position);
+        Season_Reviews review = reviewsList.get(position);
 
         if (review.getImage() != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(review.getImage(), 0, review.getImage().length);

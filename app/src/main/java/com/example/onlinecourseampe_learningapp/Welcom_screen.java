@@ -1,3 +1,4 @@
+
 package com.example.onlinecourseampe_learningapp;
 
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.onlineSeasonampe_learningapp.R;
 
 public class Welcom_screen extends AppCompatActivity {
     private int loadingStep = 0;

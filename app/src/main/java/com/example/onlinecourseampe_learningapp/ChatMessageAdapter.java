@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.List;
 
 public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

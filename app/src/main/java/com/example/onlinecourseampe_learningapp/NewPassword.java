@@ -17,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 public class NewPassword extends AppCompatActivity {
     EditText pass1;
     EditText pass2;
@@ -118,11 +120,11 @@ public class NewPassword extends AppCompatActivity {
                     Toast.makeText(NewPassword.this, "The two entries are not equal", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    myViewModel.getAllStudentByUser(userName).observe((NewPassword.this), students -> {
+                    myViewModel.getAllFarmerByUser(userName).observe((NewPassword.this), farmers -> {
 
-                        Student student = new Student(userName, pass1.getText().toString(), students.get(0).getPhone_nomber(), students.get(0).getCard_Number(), students.get(0).getS_name().toString(), students.get(0).getS_Image(), students.get(0).getBio());
+                        Farmer farmer = new Farmer(userName, pass1.getText().toString(), farmers.get(0).getPhone_nomber(), farmers.get(0).getCard_Number(), farmers.get(0).getS_name().toString(), farmers.get(0).getS_Image(), farmers.get(0).getBio());
 
-                        myViewModel.updateStudent(student);
+                        myViewModel.updateFarmer(farmer);
 //
                         Toast.makeText(NewPassword.this, "You've got a new password", Toast.LENGTH_SHORT).show();
 //

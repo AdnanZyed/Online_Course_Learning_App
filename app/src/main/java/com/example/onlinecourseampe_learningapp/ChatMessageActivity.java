@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 import java.util.ArrayList;
 
 public class ChatMessageActivity extends AppCompatActivity {
@@ -33,11 +35,11 @@ public class ChatMessageActivity extends AppCompatActivity {
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages);
         etMessageInput = findViewById(R.id.etMessageInput);
         btnSendMessage = findViewById(R.id.btnSendMessage);
-        TextView textView = findViewById(R.id.tvStudentNameC);
+        TextView textView = findViewById(R.id.tvFarmerNameC);
 
 
-        otherUser = getIntent().getStringExtra("studentUsername");
-        name = getIntent().getStringExtra("studentName");
+        otherUser = getIntent().getStringExtra("farmerUsername");
+        name = getIntent().getStringExtra("farmerName");
         User = getIntent().getStringExtra("USER");
         String call = getIntent().getStringExtra("CALL");
 

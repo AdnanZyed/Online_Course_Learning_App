@@ -41,12 +41,12 @@
             />
 
         <TextView
-            android:id="@+id/tvStudentNameC"
+            android:id="@+id/tvFarmerNameC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="50dp"
-            android:text="Student Name"
+            android:text="Farmer Name"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"

@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.onlineSeasonampe_learningapp.R;
+
 
 public class CallActivity extends AppCompatActivity {
 
@@ -26,7 +28,7 @@ public class CallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_call);
         ImageView imageView = findViewById(R.id.otherImage);
         ImageView imageView1 = findViewById(R.id.back_icon2);
-        TextView studentName = findViewById(R.id.studentName);
+        TextView farmerName = findViewById(R.id.farmerName);
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,10 +36,10 @@ public class CallActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        otherUser = getIntent().getStringExtra("studentUsername");
-        name = getIntent().getStringExtra("studentName");
+        otherUser = getIntent().getStringExtra("farmerUsername");
+        name = getIntent().getStringExtra("farmerName");
         User = getIntent().getStringExtra("USER");
-        image = getIntent().getByteArrayExtra("studentImage");
+        image = getIntent().getByteArrayExtra("farmerImage");
 
         if (image != null) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
@@ -46,14 +48,14 @@ public class CallActivity extends AppCompatActivity {
         } else {
             imageView.setImageResource(R.drawable.profile);
         }
-        studentName.setText(name);
+        farmerName.setText(name);
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CallActivity.this, ChatMessageActivity.class);
-                intent.putExtra("studentUsername", otherUser);
-                intent.putExtra("studentName", name);
+                intent.putExtra("farmerUsername", otherUser);
+                intent.putExtra("farmerName", name);
                 intent.putExtra("USER", User);
                 intent.putExtra("CALL", "CALL");
 

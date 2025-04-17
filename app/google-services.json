@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "613911930182",
-    "project_id": "online-course-19c55",
-    "storage_bucket": "online-course-19c55.firebasestorage.app"
+    "project_id": "online-Season-19c55",
+    "storage_bucket": "online-Season-19c55.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:613911930182:android:cfb3bbcd9d802967ad7147",
         "android_client_info": {
-          "package_name": "com.example.onlinecourseampe_learningapp"
+          "package_name": "com.example.onlineSeasonampe_learningapp"
         }
       },
       "oauth_client": [],

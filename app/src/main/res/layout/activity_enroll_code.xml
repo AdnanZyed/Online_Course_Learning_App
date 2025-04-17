@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:fontFamily="serif"
-        android:text="Enroll Course"
+        android:text="Enroll Season"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
